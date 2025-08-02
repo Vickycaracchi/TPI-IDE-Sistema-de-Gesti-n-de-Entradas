@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Cesar-RV511\\Desktop\\IDE\\VictoriaCaracchi\\proyecto\\TPI-IDE-Sistema-de-Gesti-n-de-Entradas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2173DFB0-F62E-4767-8E50-9F58F918DA05}|Domain.Model\\Domain.Model.csproj|c:\\users\\cesar-rv511\\desktop\\ide\\victoriacaracchi\\proyecto\\tpi-ide-sistema-de-gesti-n-de-entradas\\domain.model\\evento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2173DFB0-F62E-4767-8E50-9F58F918DA05}|Domain.Model\\Domain.Model.csproj|solutionrelative:domain.model\\evento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Evento.cs",
+              "DocumentMoniker": "C:\\Users\\Cesar-RV511\\Desktop\\IDE\\VictoriaCaracchi\\proyecto\\TPI-IDE-Sistema-de-Gesti-n-de-Entradas\\Domain.Model\\Evento.cs",
+              "RelativeDocumentMoniker": "Domain.Model\\Evento.cs",
+              "ToolTip": "C:\\Users\\Cesar-RV511\\Desktop\\IDE\\VictoriaCaracchi\\proyecto\\TPI-IDE-Sistema-de-Gesti-n-de-Entradas\\Domain.Model\\Evento.cs",
+              "RelativeToolTip": "Domain.Model\\Evento.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-02T19:38:05.847Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
