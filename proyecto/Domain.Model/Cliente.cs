@@ -57,7 +57,7 @@ namespace Domain.Model
         public void SetNumeroTelefono(string numeroTelefono)
         {
             if (string.IsNullOrWhiteSpace(numeroTelefono))
-                throw new ArgumentException("El anúmero de teléfono no puede ser nulo o vacío.", nameof(numeroTelefono));
+                throw new ArgumentException("El número de teléfono no puede ser nulo o vacío.", nameof(numeroTelefono));
             NumeroTelefono = numeroTelefono;
         }
 

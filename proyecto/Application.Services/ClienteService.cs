@@ -1,21 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Domain.Model;
+﻿using Domain.Model;
 using Data;
+using DTOs;
 
 namespace Application.Services
 {
     public class ClienteService
     {
-        public void Add(Cliente cliente)
+        public ClienteDTO Add(ClienteDTO dto)
         {
-            cliente.SetId(GetNextId());
+            // Validar que el email no esté duplicado
+            if (ClientesInMemory.Clientes.Any(c => c.Email.Equals(dto.Email, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new ArgumentException($"Ya existe un cliente con el Email '{dto.Email}'.");
+            }
+
+            var id = GetNextId();
+
+            Cliente cliente = new Cliente(id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono , dto.FechaNac, dto.Instagram);
 
             ClientesInMemory.Clientes.Add(cliente);
+
+            dto.Id = cliente.Id;
+
+            return dto;
         }
 
         public bool Delete(int id)
@@ -34,30 +41,56 @@ namespace Application.Services
             }
         }
 
-        public Cliente Get(int id)
+        public ClienteDTO Get(int id)
         {
-            //Deberia devolver un objeto cloneado 
-            return ClientesInMemory.Clientes.Find(x => x.Id == id);
+            Cliente? cliente = ClientesInMemory.Clientes.Find(x => x.Id == id);
+
+            if (cliente == null)
+                return null;
+
+            return new ClienteDTO
+            {
+                Id = cliente.Id,
+                Email = cliente.Email,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                NumeroTelefono = cliente.NumeroTelefono,
+                FechaNac = cliente.FechaNac,
+                Instagram = cliente.Instagram
+            };
         }
 
-        public IEnumerable<Cliente> GetAll()
+        public IEnumerable<ClienteDTO> GetAll()
         {
-            //Devuelvo una lista nueva cada vez que se llama a GetAll
-            //pero idealmente deberia implementar un Deep Clone
-            return ClientesInMemory.Clientes.ToList();
+            return ClientesInMemory.Clientes.Select(cliente => new ClienteDTO
+            {
+                Id = cliente.Id,
+                Email = cliente.Email,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                NumeroTelefono = cliente.NumeroTelefono,
+                FechaNac = cliente.FechaNac,
+                Instagram = cliente.Instagram
+            }).ToList();
         }
 
-        public bool Update(Cliente cliente)
+        public bool Update(ClienteDTO dto)
         {
-            Cliente? clienteToUpdate = ClientesInMemory.Clientes.Find(x => x.Id == cliente.Id);
+            Cliente? clienteToUpdate = ClientesInMemory.Clientes.Find(x => x.Id == dto.Id);
 
             if (clienteToUpdate != null)
             {
-                clienteToUpdate.SetEmail(cliente.Email);
-                clienteToUpdate.SetNombre(cliente.Nombre);
-                clienteToUpdate.SetApellido(cliente.Apellido);
-                clienteToUpdate.SetNumeroTelefono(cliente.NumeroTelefono);
-                clienteToUpdate.SetInstagram(cliente.Instagram);
+                // Validar que el email no esté duplicado (excluyendo el cliente actual)
+                if (ClientesInMemory.Clientes.Any(c => c.Id != dto.Id && c.Email.Equals(dto.Email, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new ArgumentException($"Ya existe otro cliente con el Email '{dto.Email}'.");
+                }
+
+                clienteToUpdate.SetNombre(dto.Nombre);
+                clienteToUpdate.SetApellido(dto.Apellido);
+                clienteToUpdate.SetEmail(dto.Email);
+                clienteToUpdate.SetNumeroTelefono(dto.NumeroTelefono);
+                clienteToUpdate.SetInstagram(dto.Instagram);
 
                 return true;
             }

@@ -9,12 +9,12 @@ namespace DTOs
 {
     public class ClienteDTO
     {
-        public int Id { get; private set; }
-        public string Email { get; private set; }
-        public string Nombre { get; private set; }
-        public string Apellido { get; private set; }
-        public string NumeroTelefono { get; private set; }
-        public DateTime FechaNac { get; private set; }
-        public string Instagram { get; private set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string NumeroTelefono { get; set; }
+        public DateTime FechaNac { get; set; }
+        public string Instagram { get; set; }
     }
 }

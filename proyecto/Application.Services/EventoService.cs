@@ -1,21 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Domain.Model;
+﻿using Domain.Model;
 using Data;
+using DTOs;
 
 namespace Application.Services
 {
     public class EventoService
     {
-        public void Add(Evento evento)
+        public EventoDTO Add(EventoDTO dto)
         {
-            evento.SetId(GetNextId());
+            // Validar que el nombre no esté duplicado
+            if (EventosInMemory.Eventos.Any(e => e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new ArgumentException($"Ya existe un evento con el Nombre '{dto.Nombre}'.");
+            }
+
+            var id = GetNextId();
+
+            Evento evento = new Evento(id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
 
             EventosInMemory.Eventos.Add(evento);
+
+            dto.Id = evento.Id;
+
+            return dto;
         }
 
         public bool Delete(int id)
@@ -34,29 +41,51 @@ namespace Application.Services
             }
         }
 
-        public Evento Get(int id)
+        public EventoDTO Get(int id)
         {
-            //Deberia devolver un objeto cloneado 
-            return EventosInMemory.Eventos.Find(x => x.Id == id);
+            Evento? evento = EventosInMemory.Eventos.Find(x => x.Id == id);
+
+            if (evento == null)
+                return null;
+
+            return new EventoDTO
+            {
+                Id = evento.Id,
+                Nombre = evento.Nombre,
+                Desc = evento.Desc,
+                Fecha = evento.Fecha,
+                Lugar = evento.Lugar
+            };
         }
 
-        public IEnumerable<Evento> GetAll()
+        public IEnumerable<EventoDTO> GetAll()
         {
-            //Devuelvo una lista nueva cada vez que se llama a GetAll
-            //pero idealmente deberia implementar un Deep Clone
-            return EventosInMemory.Eventos.ToList();
+            return EventosInMemory.Eventos.Select(evento => new EventoDTO
+            {
+                Id = evento.Id,
+                Nombre = evento.Nombre,
+                Desc = evento.Desc,
+                Fecha = evento.Fecha,
+                Lugar = evento.Lugar
+            }).ToList();
         }
 
-        public bool Update(Evento evento)
+        public bool Update(EventoDTO dto)
         {
-            Evento? eventoToUpdate = EventosInMemory.Eventos.Find(x => x.Id == evento.Id);
+            Evento? eventoToUpdate = EventosInMemory.Eventos.Find(x => x.Id == dto.Id);
 
             if (eventoToUpdate != null)
             {
-                eventoToUpdate.SetNombre(evento.Nombre);
-                eventoToUpdate.SetDesc(evento.Desc);
-                eventoToUpdate.SetFecha(evento.Fecha);
-                eventoToUpdate.SetLugar(evento.Lugar);
+                // Validar que el nombre no esté duplicado
+                if (EventosInMemory.Eventos.Any(e => e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new ArgumentException($"Ya existe un evento con el Nombre '{dto.Nombre}'.");
+                }
+
+                eventoToUpdate.SetNombre(dto.Nombre);
+                eventoToUpdate.SetDesc(dto.Desc);
+                eventoToUpdate.SetFecha(dto.Fecha);
+                eventoToUpdate.SetLugar(dto.Lugar);
 
                 return true;
             }
@@ -66,6 +95,7 @@ namespace Application.Services
             }
         }
 
+        //No es ThreadSafe pero sirve para el proposito del ejemplo        
         private static int GetNextId()
         {
             int nextId;

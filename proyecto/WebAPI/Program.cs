@@ -30,14 +30,16 @@ app.UseHttpsRedirection();
 app.MapGet("/clientes/{id}", (int id) =>
 {
     ClienteService clienteService = new ClienteService();
+
     ClienteDTO dto = clienteService.Get(id);
+
     if (dto == null)
     {
         return Results.NotFound();
     }
 
     return Results.Ok(dto);
-});
+})
 .WithName("GetCliente")
 .Produces<ClienteDTO>(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status404NotFound)
@@ -45,7 +47,7 @@ app.MapGet("/clientes/{id}", (int id) =>
 
 app.MapGet("/clientes", () =>
 {
-    ClienteService clienteService = new ClienteService();
+    var clienteService = new ClienteService();
 
     var dtos = clienteService.GetAll();
 
@@ -69,7 +71,7 @@ app.MapPost("/clientes", (ClienteDTO dto) =>
     {
         return Results.BadRequest(new { error = ex.Message });
     }
-});
+})
 .WithName("AddCliente")
 .Produces<ClienteDTO>(StatusCodes.Status201Created)
 .Produces(StatusCodes.Status400BadRequest)
@@ -94,7 +96,7 @@ app.MapPut("/clientes", (ClienteDTO dto) =>
     {
         return Results.BadRequest(new { error = ex.Message });
     }
-});
+})
 .WithName("UpdateCliente")
 .Produces(StatusCodes.Status404NotFound)
 .Produces(StatusCodes.Status400BadRequest)
@@ -102,7 +104,7 @@ app.MapPut("/clientes", (ClienteDTO dto) =>
 
 app.MapDelete("/clientes/{id}", (int id) =>
 {
-    ClienteService service = new ClienteService();
+    ClienteService clienteService = new ClienteService();
     var deleted = clienteService.Delete(id);
 
     if (!deleted)
@@ -111,7 +113,7 @@ app.MapDelete("/clientes/{id}", (int id) =>
     }
 
     return Results.NoContent();
-});
+})
 .WithName("DeleteCliente")
 .Produces(StatusCodes.Status204NoContent)
 .Produces(StatusCodes.Status404NotFound)
@@ -125,14 +127,14 @@ app.MapDelete("/clientes/{id}", (int id) =>
 app.MapGet("/eventos/{id}", (int id) =>
 {
     EventoService eventoService = new EventoService();
-    EventoDTO dto = eventoService.GetById(id);
+    EventoDTO dto = eventoService.Get(id);
     if (dto == null)
     {
         return Results.NotFound();
     }
 
     return Results.Ok(dto);
-});
+})
 .WithName("GetEvento")
 .Produces<EventoDTO>(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status404NotFound)
@@ -165,7 +167,7 @@ app.MapPost("/eventos", (EventoDTO dto) =>
     {
         return Results.BadRequest(new { error = ex.Message });
     }
-});
+})
 .WithName("AddEvento")
 .Produces<EventoDTO>(StatusCodes.Status201Created)
 .Produces(StatusCodes.Status400BadRequest)
@@ -190,8 +192,7 @@ app.MapPut("/eventos", (EventoDTO dto) =>
     {
         return Results.BadRequest(new { error = ex.Message });
     }
-});
-
+})
 .WithName("UpdateEvento")
 .Produces(StatusCodes.Status404NotFound)
 .Produces(StatusCodes.Status400BadRequest)
@@ -209,7 +210,7 @@ app.MapDelete("/eventos/{id}", (int id) =>
     }
 
     return Results.NoContent();
-});
+})
 .WithName("DeleteEvento")
 .Produces(StatusCodes.Status204NoContent)
 .Produces(StatusCodes.Status404NotFound)
