@@ -43,6 +43,7 @@
             eventosDataGridView.RowHeadersWidth = 51;
             eventosDataGridView.Size = new Size(632, 264);
             eventosDataGridView.TabIndex = 0;
+            eventosDataGridView.CellContentClick += eventosDataGridView_CellContentClick;
             // 
             // eliminarButtonEvento
             // 

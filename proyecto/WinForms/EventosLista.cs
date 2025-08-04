@@ -18,7 +18,7 @@ namespace WinForms
         {
             InitializeComponent();
         }
-        private void Eventos_Load(object sender, EventArgs e)
+        private void EventosLista_Load(object sender, EventArgs e)
         {
             this.GetAllAndLoad();
         }
@@ -123,7 +123,7 @@ namespace WinForms
             }
             return null;
         }
-        private void EventosLista_Load(object sender, EventArgs e)
+        private void eventosDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

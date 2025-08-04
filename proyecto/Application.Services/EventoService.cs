@@ -77,7 +77,7 @@ namespace Application.Services
             if (eventoToUpdate != null)
             {
                 // Validar que el nombre no esté duplicado
-                if (EventosInMemory.Eventos.Any(e => e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
+                if (EventosInMemory.Eventos.Any(e => e.Id != dto.Id && e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
                 {
                     throw new ArgumentException($"Ya existe un evento con el Nombre '{dto.Nombre}'.");
                 }

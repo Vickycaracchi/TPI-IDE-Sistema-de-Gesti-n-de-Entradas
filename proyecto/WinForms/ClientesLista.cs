@@ -18,7 +18,7 @@ namespace WinForms
         {
             InitializeComponent();
         }
-        private void Clientes_Load(object sender, EventArgs e)
+        private void ClientesLista_Load(object sender, EventArgs e)
         {
             this.GetAllAndLoad();
         }
@@ -123,12 +123,6 @@ namespace WinForms
             }
             return null;
         }
-
-        private void ClientesLista_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void clientesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
