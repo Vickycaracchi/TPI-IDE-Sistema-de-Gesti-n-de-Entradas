@@ -40,11 +40,16 @@ namespace WinForms
         {
             try
             {
+                var selected = this.SelectedItem();
+                if (selected == null)
+                {
+                    MessageBox.Show("Seleccione un cliente para modificar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 ClienteDetalle clienteDetalle = new ClienteDetalle();
 
-                int id = this.SelectedItem().Id;
-
-                ClienteDTO cliente = await ClienteApiClient.GetAsync(id);
+                ClienteDTO cliente = await ClienteApiClient.GetAsync(selected.Id);
 
                 clienteDetalle.Mode = FormMode.Update;
                 clienteDetalle.Cliente = cliente;
@@ -63,13 +68,18 @@ namespace WinForms
         {
             try
             {
-                int id = this.SelectedItem().Id;
+                var selected = this.SelectedItem();
+                if (selected == null)
+                {
+                    MessageBox.Show("Seleccione un cliente para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-                var result = MessageBox.Show($"¿Está seguro que desea eliminar el cliente con Id {id}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show($"¿Está seguro que desea eliminar el cliente con Id {selected.Id}?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    await ClienteApiClient.DeleteAsync(id);
+                    await ClienteApiClient.DeleteAsync(selected.Id);
                     this.GetAllAndLoad();
                 }
             }
@@ -78,6 +88,7 @@ namespace WinForms
                 MessageBox.Show($"Error al eliminar cliente: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private async void GetAllAndLoad()
         {
             try
@@ -106,14 +117,19 @@ namespace WinForms
         }
         private ClienteDTO SelectedItem()
         {
-            ClienteDTO cliente;
-
-            cliente = (ClienteDTO)clientesDataGridView.SelectedRows[0].DataBoundItem;
-
-            return cliente;
+            if (clientesDataGridView.SelectedRows.Count > 0)
+            {
+                return (ClienteDTO)clientesDataGridView.SelectedRows[0].DataBoundItem;
+            }
+            return null;
         }
 
         private void ClientesLista_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clientesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

@@ -43,6 +43,7 @@
             clientesDataGridView.RowHeadersWidth = 51;
             clientesDataGridView.Size = new Size(748, 306);
             clientesDataGridView.TabIndex = 0;
+            clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
             // eliminarButton
             // 
