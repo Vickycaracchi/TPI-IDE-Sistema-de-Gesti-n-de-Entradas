@@ -99,20 +99,20 @@ namespace WinForms
                 if (this.clientesDataGridView.Rows.Count > 0)
                 {
                     this.clientesDataGridView.Rows[0].Selected = true;
-                    this.eliminarButton.Enabled = true;
-                    this.modificarButton.Enabled = true;
+                    this.eliminarButtonCliente.Enabled = true;
+                    this.modificarButtonCliente.Enabled = true;
                 }
                 else
                 {
-                    this.eliminarButton.Enabled = false;
-                    this.modificarButton.Enabled = false;
+                    this.eliminarButtonCliente.Enabled = false;
+                    this.modificarButtonCliente.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar la lista de clientes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.eliminarButton.Enabled = false;
-                this.modificarButton.Enabled = false;
+                this.eliminarButtonCliente.Enabled = false;
+                this.modificarButtonCliente.Enabled = false;
             }
         }
         private ClienteDTO SelectedItem()

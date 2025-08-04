@@ -52,10 +52,10 @@ namespace WinForms
             {
                 try
                 {
-                    this.Evento.Nombre = NombreTextBox.Text;
-                    this.Evento.Desc = DescTextBox.Text;
-                    this.Evento.Fecha = DateTime.Parse(FechaTextBox.Text);
-                    this.Evento.Lugar = LugarTextBox.Text;
+                    this.Evento.Nombre = nombreTextBox.Text;
+                    this.Evento.Desc = descTextBox.Text;
+                    this.Evento.Fecha = DateTime.Parse(fechaTextBox.Text);
+                    this.Evento.Lugar = lugarTextBox.Text;
 
 
 
@@ -79,10 +79,10 @@ namespace WinForms
         private void SetEvento()
         {
 
-            this.NombreTextBox.Text = this.Evento.Nombre;
-            this.DescTextBox.Text = this.Evento.Desc;
-            this.FechaTextBox.Text = this.Evento.Fecha.ToString();
-            this.LugarTextBox.Text = this.Evento.Lugar;
+            this.nombreTextBox.Text = this.Evento.Nombre;
+            this.descTextBox.Text = this.Evento.Desc;
+            this.fechaTextBox.Text = this.Evento.Fecha.ToString();
+            this.lugarTextBox.Text = this.Evento.Lugar;
         }
 
         private void SetFormMode(FormMode value)
@@ -94,19 +94,19 @@ namespace WinForms
         {
             bool isValid = true;
 
-            errorProvider.SetError(NombreTextBox, string.Empty);
-            errorProvider.SetError(LugarTextBox, string.Empty);
+            errorProvider.SetError(nombreTextBox, string.Empty);
+            errorProvider.SetError(lugarTextBox, string.Empty);
 
-            if (this.NombreTextBox.Text == string.Empty)
+            if (this.nombreTextBox.Text == string.Empty)
             {
                 isValid = false;
-                errorProvider.SetError(NombreTextBox, "El Nombre es Requerido");
+                errorProvider.SetError(nombreTextBox, "El Nombre es Requerido");
             }
 
-            if (this.LugarTextBox.Text == string.Empty)
+            if (this.lugarTextBox.Text == string.Empty)
             {
                 isValid = false;
-                errorProvider.SetError(LugarTextBox, "El Lugar es Requerido");
+                errorProvider.SetError(lugarTextBox, "El Lugar es Requerido");
             }
 
 
@@ -124,8 +124,33 @@ namespace WinForms
 
         }
 
+        private async void enviarFormularioEvento(object sender, EventArgs e)
+        {
+            if (this.ValidateEvento())
+            {
+                try
+                {
+                    this.Evento.Nombre = nombreTextBox.Text;
+                    this.Evento.Desc = descTextBox.Text;
+                    this.Evento.Fecha = DateTime.Parse(fechaTextBox.Text);
+                    this.Evento.Lugar = lugarTextBox.Text;
 
+                    if (this.Mode == FormMode.Update)
+                    {
+                        await EventoApiClient.UpdateAsync(this.Evento);
+                    }
+                    else
+                    {
+                        await EventoApiClient.AddAsync(this.Evento);
+                    }
 
-
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

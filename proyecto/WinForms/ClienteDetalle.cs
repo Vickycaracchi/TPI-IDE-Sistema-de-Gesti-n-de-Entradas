@@ -55,7 +55,7 @@ namespace WinForms
         {
             mode = value;
         }
-        private async void enviarFormulario(object sender, EventArgs e)
+        private async void enviarFormularioCliente(object sender, EventArgs e)
         {
             if (this.ValidateCliente())
             {

@@ -16,5 +16,11 @@
     <Compile Update="EventoDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="EventosLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

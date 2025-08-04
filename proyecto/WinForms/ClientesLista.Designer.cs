@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             clientesDataGridView = new DataGridView();
-            eliminarButton = new Button();
-            modificarButton = new Button();
-            agregarButton = new Button();
+            eliminarButtonCliente = new Button();
+            modificarButtonCliente = new Button();
+            agregarButtonCliente = new Button();
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -45,44 +45,44 @@
             clientesDataGridView.TabIndex = 0;
             clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
-            // eliminarButton
+            // eliminarButtonCliente
             // 
-            eliminarButton.Location = new Point(23, 355);
-            eliminarButton.Name = "eliminarButton";
-            eliminarButton.Size = new Size(163, 50);
-            eliminarButton.TabIndex = 1;
-            eliminarButton.Text = "Eliminar";
-            eliminarButton.UseVisualStyleBackColor = true;
-            eliminarButton.Click += eliminarButton_Click;
+            eliminarButtonCliente.Location = new Point(23, 355);
+            eliminarButtonCliente.Name = "eliminarButtonCliente";
+            eliminarButtonCliente.Size = new Size(163, 50);
+            eliminarButtonCliente.TabIndex = 1;
+            eliminarButtonCliente.Text = "Eliminar";
+            eliminarButtonCliente.UseVisualStyleBackColor = true;
+            eliminarButtonCliente.Click += eliminarButton_Click;
             // 
-            // modificarButton
+            // modificarButtonCliente
             // 
-            modificarButton.Location = new Point(223, 355);
-            modificarButton.Name = "modificarButton";
-            modificarButton.Size = new Size(163, 50);
-            modificarButton.TabIndex = 2;
-            modificarButton.Text = "Modificar";
-            modificarButton.UseVisualStyleBackColor = true;
-            modificarButton.Click += modificarButton_Click;
+            modificarButtonCliente.Location = new Point(223, 355);
+            modificarButtonCliente.Name = "modificarButtonCliente";
+            modificarButtonCliente.Size = new Size(163, 50);
+            modificarButtonCliente.TabIndex = 2;
+            modificarButtonCliente.Text = "Modificar";
+            modificarButtonCliente.UseVisualStyleBackColor = true;
+            modificarButtonCliente.Click += modificarButton_Click;
             // 
-            // agregarButton
+            // agregarButtonCliente
             // 
-            agregarButton.Location = new Point(426, 355);
-            agregarButton.Name = "agregarButton";
-            agregarButton.Size = new Size(163, 50);
-            agregarButton.TabIndex = 3;
-            agregarButton.Text = "Agregar";
-            agregarButton.UseVisualStyleBackColor = true;
-            agregarButton.Click += agregarButton_Click;
+            agregarButtonCliente.Location = new Point(426, 355);
+            agregarButtonCliente.Name = "agregarButtonCliente";
+            agregarButtonCliente.Size = new Size(163, 50);
+            agregarButtonCliente.TabIndex = 3;
+            agregarButtonCliente.Text = "Agregar";
+            agregarButtonCliente.UseVisualStyleBackColor = true;
+            agregarButtonCliente.Click += agregarButton_Click;
             // 
             // ClientesLista
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(agregarButton);
-            Controls.Add(modificarButton);
-            Controls.Add(eliminarButton);
+            Controls.Add(agregarButtonCliente);
+            Controls.Add(modificarButtonCliente);
+            Controls.Add(eliminarButtonCliente);
             Controls.Add(clientesDataGridView);
             Name = "ClientesLista";
             Text = "Form1";
@@ -94,8 +94,8 @@
         #endregion
 
         private DataGridView clientesDataGridView;
-        private Button eliminarButton;
-        private Button modificarButton;
-        private Button agregarButton;
+        private Button eliminarButtonCliente;
+        private Button modificarButtonCliente;
+        private Button agregarButtonCliente;
     }
 }

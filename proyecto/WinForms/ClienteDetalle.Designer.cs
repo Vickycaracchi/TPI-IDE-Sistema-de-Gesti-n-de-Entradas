@@ -158,7 +158,7 @@
             button1.TabIndex = 12;
             button1.Text = "Enviar";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += enviarFormulario;
+            button1.Click += enviarFormularioCliente;
             // 
             // errorProvider
             // 

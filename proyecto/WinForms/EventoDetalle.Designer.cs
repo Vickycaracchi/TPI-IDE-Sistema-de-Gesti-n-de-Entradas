@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            NombreTextBox = new TextBox();
-            DescTextBox = new TextBox();
-            FechaTextBox = new TextBox();
-            LugarTextBox = new TextBox();
+            nombreTextBox = new TextBox();
+            descTextBox = new TextBox();
+            fechaTextBox = new TextBox();
+            lugarTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -42,37 +42,37 @@
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
-            // NombreTextBox
+            // nombreTextBox
             // 
-            NombreTextBox.Location = new Point(161, 33);
-            NombreTextBox.Margin = new Padding(3, 4, 3, 4);
-            NombreTextBox.Name = "NombreTextBox";
-            NombreTextBox.Size = new Size(114, 27);
-            NombreTextBox.TabIndex = 0;
+            nombreTextBox.Location = new Point(161, 33);
+            nombreTextBox.Margin = new Padding(3, 4, 3, 4);
+            nombreTextBox.Name = "nombreTextBox";
+            nombreTextBox.Size = new Size(114, 27);
+            nombreTextBox.TabIndex = 0;
             // 
-            // DescTextBox
+            // descTextBox
             // 
-            DescTextBox.Location = new Point(161, 96);
-            DescTextBox.Margin = new Padding(3, 4, 3, 4);
-            DescTextBox.Name = "DescTextBox";
-            DescTextBox.Size = new Size(114, 27);
-            DescTextBox.TabIndex = 1;
+            descTextBox.Location = new Point(161, 96);
+            descTextBox.Margin = new Padding(3, 4, 3, 4);
+            descTextBox.Name = "descTextBox";
+            descTextBox.Size = new Size(114, 27);
+            descTextBox.TabIndex = 1;
             // 
-            // FechaTextBox
+            // fechaTextBox
             // 
-            FechaTextBox.Location = new Point(161, 159);
-            FechaTextBox.Margin = new Padding(3, 4, 3, 4);
-            FechaTextBox.Name = "FechaTextBox";
-            FechaTextBox.Size = new Size(114, 27);
-            FechaTextBox.TabIndex = 2;
+            fechaTextBox.Location = new Point(161, 159);
+            fechaTextBox.Margin = new Padding(3, 4, 3, 4);
+            fechaTextBox.Name = "fechaTextBox";
+            fechaTextBox.Size = new Size(114, 27);
+            fechaTextBox.TabIndex = 2;
             // 
-            // LugarTextBox
+            // lugarTextBox
             // 
-            LugarTextBox.Location = new Point(161, 224);
-            LugarTextBox.Margin = new Padding(3, 4, 3, 4);
-            LugarTextBox.Name = "LugarTextBox";
-            LugarTextBox.Size = new Size(114, 27);
-            LugarTextBox.TabIndex = 3;
+            lugarTextBox.Location = new Point(161, 224);
+            lugarTextBox.Margin = new Padding(3, 4, 3, 4);
+            lugarTextBox.Name = "lugarTextBox";
+            lugarTextBox.Size = new Size(114, 27);
+            lugarTextBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -120,6 +120,7 @@
             button1.TabIndex = 8;
             button1.Text = "Enviar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += enviarFormularioEvento;
             // 
             // errorProvider
             // 
@@ -135,10 +136,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(LugarTextBox);
-            Controls.Add(FechaTextBox);
-            Controls.Add(DescTextBox);
-            Controls.Add(NombreTextBox);
+            Controls.Add(lugarTextBox);
+            Controls.Add(fechaTextBox);
+            Controls.Add(descTextBox);
+            Controls.Add(nombreTextBox);
             Margin = new Padding(3, 4, 3, 4);
             Name = "EventoDetalle";
             Text = "EventoDetalle";
@@ -149,10 +150,10 @@
 
         #endregion
 
-        private TextBox NombreTextBox;
-        private TextBox DescTextBox;
-        private TextBox FechaTextBox;
-        private TextBox LugarTextBox;
+        private TextBox nombreTextBox;
+        private TextBox descTextBox;
+        private TextBox fechaTextBox;
+        private TextBox lugarTextBox;
         private Label label1;
         private Label label2;
         private Label label3;
