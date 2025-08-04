@@ -88,7 +88,7 @@ namespace WinForms
         }
         private void SetCliente()
         {
-            //this.idTextBox.Text = this.Cliente.Id.ToString();
+            this.idTextBox.Text = this.Cliente.Id.ToString();
             this.emailTextBox.Text = this.Cliente.Email;
             this.nombreTextBox.Text = this.Cliente.Nombre;
             this.apellidoTextBox.Text = this.Cliente.Apellido;
@@ -163,6 +163,11 @@ namespace WinForms
         }
 
         private void emailTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClienteDetalle_Load(object sender, EventArgs e)
         {
 
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             NombreTextBox = new TextBox();
             DescTextBox = new TextBox();
             FechaTextBox = new TextBox();
@@ -37,43 +38,48 @@
             label3 = new Label();
             label4 = new Label();
             button1 = new Button();
+            errorProvider = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // NombreTextBox
             // 
-            NombreTextBox.Location = new Point(141, 25);
+            NombreTextBox.Location = new Point(161, 33);
+            NombreTextBox.Margin = new Padding(3, 4, 3, 4);
             NombreTextBox.Name = "NombreTextBox";
-            NombreTextBox.Size = new Size(100, 23);
+            NombreTextBox.Size = new Size(114, 27);
             NombreTextBox.TabIndex = 0;
-            NombreTextBox.TextChanged += textBox1_TextChanged;
             // 
             // DescTextBox
             // 
-            DescTextBox.Location = new Point(141, 72);
+            DescTextBox.Location = new Point(161, 96);
+            DescTextBox.Margin = new Padding(3, 4, 3, 4);
             DescTextBox.Name = "DescTextBox";
-            DescTextBox.Size = new Size(100, 23);
+            DescTextBox.Size = new Size(114, 27);
             DescTextBox.TabIndex = 1;
             // 
             // FechaTextBox
             // 
-            FechaTextBox.Location = new Point(141, 119);
+            FechaTextBox.Location = new Point(161, 159);
+            FechaTextBox.Margin = new Padding(3, 4, 3, 4);
             FechaTextBox.Name = "FechaTextBox";
-            FechaTextBox.Size = new Size(100, 23);
+            FechaTextBox.Size = new Size(114, 27);
             FechaTextBox.TabIndex = 2;
             // 
             // LugarTextBox
             // 
-            LugarTextBox.Location = new Point(141, 168);
+            LugarTextBox.Location = new Point(161, 224);
+            LugarTextBox.Margin = new Padding(3, 4, 3, 4);
             LugarTextBox.Name = "LugarTextBox";
-            LugarTextBox.Size = new Size(100, 23);
+            LugarTextBox.Size = new Size(114, 27);
             LugarTextBox.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(60, 28);
+            label1.Location = new Point(69, 37);
             label1.Name = "label1";
-            label1.Size = new Size(51, 15);
+            label1.Size = new Size(64, 20);
             label1.TabIndex = 4;
             label1.Text = "Nombre";
             label1.Click += label1_Click;
@@ -81,44 +87,49 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(60, 75);
+            label2.Location = new Point(69, 100);
             label2.Name = "label2";
-            label2.Size = new Size(69, 15);
+            label2.Size = new Size(87, 20);
             label2.TabIndex = 5;
             label2.Text = "Descripcion";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(60, 122);
+            label3.Location = new Point(69, 163);
             label3.Name = "label3";
-            label3.Size = new Size(38, 15);
+            label3.Size = new Size(47, 20);
             label3.TabIndex = 6;
             label3.Text = "Fecha";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(60, 176);
+            label4.Location = new Point(69, 235);
             label4.Name = "label4";
-            label4.Size = new Size(37, 15);
+            label4.Size = new Size(46, 20);
             label4.TabIndex = 7;
             label4.Text = "Lugar";
             // 
             // button1
             // 
-            button1.Location = new Point(223, 222);
+            button1.Location = new Point(255, 296);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(86, 31);
             button1.TabIndex = 8;
             button1.Text = "Enviar";
             button1.UseVisualStyleBackColor = true;
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
             // EventoDetalle
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -128,8 +139,10 @@
             Controls.Add(FechaTextBox);
             Controls.Add(DescTextBox);
             Controls.Add(NombreTextBox);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "EventoDetalle";
             Text = "EventoDetalle";
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,5 +158,6 @@
         private Label label3;
         private Label label4;
         private Button button1;
+        private ErrorProvider errorProvider;
     }
 }

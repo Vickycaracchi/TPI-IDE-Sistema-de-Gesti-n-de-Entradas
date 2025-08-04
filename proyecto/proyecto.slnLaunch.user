@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Test2",
+    "Projects": [
+      {
+        "Path": "WebAPI\\WebAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "WinForms\\WinForms.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

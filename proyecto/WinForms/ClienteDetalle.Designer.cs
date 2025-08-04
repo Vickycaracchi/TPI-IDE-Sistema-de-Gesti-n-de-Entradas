@@ -43,13 +43,15 @@
             instagramTextBox = new TextBox();
             button1 = new Button();
             errorProvider = new ErrorProvider(components);
+            idTextBox = new TextBox();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(242, 125);
+            label1.Location = new Point(52, 112);
             label1.Name = "label1";
             label1.Size = new Size(64, 20);
             label1.TabIndex = 0;
@@ -58,16 +60,16 @@
             // 
             // nombreTextBox
             // 
-            nombreTextBox.Location = new Point(441, 122);
+            nombreTextBox.Location = new Point(251, 109);
             nombreTextBox.Name = "nombreTextBox";
-            nombreTextBox.Size = new Size(125, 27);
+            nombreTextBox.Size = new Size(326, 27);
             nombreTextBox.TabIndex = 1;
             nombreTextBox.TextChanged += textBox1_TextChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(242, 172);
+            label2.Location = new Point(52, 159);
             label2.Name = "label2";
             label2.Size = new Size(66, 20);
             label2.TabIndex = 2;
@@ -77,7 +79,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(242, 282);
+            label3.Location = new Point(52, 269);
             label3.Name = "label3";
             label3.Size = new Size(146, 20);
             label3.TabIndex = 3;
@@ -87,7 +89,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(242, 79);
+            label4.Location = new Point(52, 66);
             label4.Name = "label4";
             label4.Size = new Size(46, 20);
             label4.TabIndex = 4;
@@ -96,7 +98,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(242, 221);
+            label5.Location = new Point(52, 208);
             label5.Name = "label5";
             label5.Size = new Size(144, 20);
             label5.TabIndex = 5;
@@ -106,7 +108,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(242, 338);
+            label6.Location = new Point(52, 325);
             label6.Name = "label6";
             label6.Size = new Size(75, 20);
             label6.TabIndex = 6;
@@ -114,43 +116,43 @@
             // 
             // apellidoTextBox
             // 
-            apellidoTextBox.Location = new Point(441, 169);
+            apellidoTextBox.Location = new Point(251, 156);
             apellidoTextBox.Name = "apellidoTextBox";
-            apellidoTextBox.Size = new Size(125, 27);
+            apellidoTextBox.Size = new Size(326, 27);
             apellidoTextBox.TabIndex = 7;
             // 
             // fechaNacTextBox
             // 
-            fechaNacTextBox.Location = new Point(441, 275);
+            fechaNacTextBox.Location = new Point(251, 262);
             fechaNacTextBox.Name = "fechaNacTextBox";
-            fechaNacTextBox.Size = new Size(125, 27);
+            fechaNacTextBox.Size = new Size(326, 27);
             fechaNacTextBox.TabIndex = 8;
             // 
             // emailTextBox
             // 
-            emailTextBox.Location = new Point(441, 72);
+            emailTextBox.Location = new Point(251, 59);
             emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new Size(125, 27);
+            emailTextBox.Size = new Size(326, 27);
             emailTextBox.TabIndex = 9;
             emailTextBox.TextChanged += emailTextBox_TextChanged;
             // 
             // numeroTelefonoTextBox
             // 
-            numeroTelefonoTextBox.Location = new Point(441, 214);
+            numeroTelefonoTextBox.Location = new Point(251, 201);
             numeroTelefonoTextBox.Name = "numeroTelefonoTextBox";
-            numeroTelefonoTextBox.Size = new Size(125, 27);
+            numeroTelefonoTextBox.Size = new Size(326, 27);
             numeroTelefonoTextBox.TabIndex = 10;
             // 
             // instagramTextBox
             // 
-            instagramTextBox.Location = new Point(441, 335);
+            instagramTextBox.Location = new Point(251, 322);
             instagramTextBox.Name = "instagramTextBox";
-            instagramTextBox.Size = new Size(125, 27);
+            instagramTextBox.Size = new Size(326, 27);
             instagramTextBox.TabIndex = 11;
             // 
             // button1
             // 
-            button1.Location = new Point(441, 385);
+            button1.Location = new Point(251, 372);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 12;
@@ -162,11 +164,29 @@
             // 
             errorProvider.ContainerControl = this;
             // 
+            // idTextBox
+            // 
+            idTextBox.Location = new Point(251, 12);
+            idTextBox.Name = "idTextBox";
+            idTextBox.Size = new Size(326, 27);
+            idTextBox.TabIndex = 14;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(52, 19);
+            label7.Name = "label7";
+            label7.Size = new Size(22, 20);
+            label7.TabIndex = 13;
+            label7.Text = "Id";
+            // 
             // ClienteDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1361, 503);
+            ClientSize = new Size(668, 405);
+            Controls.Add(idTextBox);
+            Controls.Add(label7);
             Controls.Add(button1);
             Controls.Add(instagramTextBox);
             Controls.Add(numeroTelefonoTextBox);
@@ -182,6 +202,7 @@
             Controls.Add(label1);
             Name = "ClienteDetalle";
             Text = "ClienteDetalle";
+            Load += ClienteDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -203,5 +224,7 @@
         private TextBox instagramTextBox;
         private Button button1;
         private ErrorProvider errorProvider;
+        private TextBox idTextBox;
+        private Label label7;
     }
 }
