@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             nombreTextBox = new TextBox();
             descTextBox = new TextBox();
-            fechaTextBox = new TextBox();
             lugarTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -39,6 +38,7 @@
             label4 = new Label();
             button1 = new Button();
             errorProvider = new ErrorProvider(components);
+            fechaPicker = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -57,14 +57,6 @@
             descTextBox.Name = "descTextBox";
             descTextBox.Size = new Size(114, 27);
             descTextBox.TabIndex = 1;
-            // 
-            // fechaTextBox
-            // 
-            fechaTextBox.Location = new Point(161, 159);
-            fechaTextBox.Margin = new Padding(3, 4, 3, 4);
-            fechaTextBox.Name = "fechaTextBox";
-            fechaTextBox.Size = new Size(114, 27);
-            fechaTextBox.TabIndex = 2;
             // 
             // lugarTextBox
             // 
@@ -126,18 +118,26 @@
             // 
             errorProvider.ContainerControl = this;
             // 
+            // fechaPicker
+            // 
+            fechaPicker.Location = new Point(161, 163);
+            fechaPicker.Name = "fechaPicker";
+            fechaPicker.Size = new Size(250, 27);
+            fechaPicker.TabIndex = 9;
+            fechaPicker.Value = new DateTime(2025, 1, 1, 12, 0, 0, 0);
+            // 
             // EventoDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(fechaPicker);
             Controls.Add(button1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(lugarTextBox);
-            Controls.Add(fechaTextBox);
             Controls.Add(descTextBox);
             Controls.Add(nombreTextBox);
             Margin = new Padding(3, 4, 3, 4);
@@ -152,7 +152,6 @@
 
         private TextBox nombreTextBox;
         private TextBox descTextBox;
-        private TextBox fechaTextBox;
         private TextBox lugarTextBox;
         private Label label1;
         private Label label2;
@@ -160,5 +159,6 @@
         private Label label4;
         private Button button1;
         private ErrorProvider errorProvider;
+        private DateTimePicker fechaPicker;
     }
 }

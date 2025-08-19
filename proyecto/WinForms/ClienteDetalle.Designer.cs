@@ -37,7 +37,6 @@
             label5 = new Label();
             label6 = new Label();
             apellidoTextBox = new TextBox();
-            fechaNacTextBox = new TextBox();
             emailTextBox = new TextBox();
             numeroTelefonoTextBox = new TextBox();
             instagramTextBox = new TextBox();
@@ -45,6 +44,7 @@
             errorProvider = new ErrorProvider(components);
             idTextBox = new TextBox();
             label7 = new Label();
+            fechaNacDatePicker = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -121,13 +121,6 @@
             apellidoTextBox.Size = new Size(326, 27);
             apellidoTextBox.TabIndex = 7;
             // 
-            // fechaNacTextBox
-            // 
-            fechaNacTextBox.Location = new Point(251, 262);
-            fechaNacTextBox.Name = "fechaNacTextBox";
-            fechaNacTextBox.Size = new Size(326, 27);
-            fechaNacTextBox.TabIndex = 8;
-            // 
             // emailTextBox
             // 
             emailTextBox.Location = new Point(251, 59);
@@ -180,18 +173,26 @@
             label7.TabIndex = 13;
             label7.Text = "Id";
             // 
+            // fechaNacDatePicker
+            // 
+            fechaNacDatePicker.Location = new Point(251, 269);
+            fechaNacDatePicker.Name = "fechaNacDatePicker";
+            fechaNacDatePicker.Size = new Size(250, 27);
+            fechaNacDatePicker.TabIndex = 15;
+            fechaNacDatePicker.Value = new DateTime(2004, 4, 3, 0, 0, 0, 0);
+            // 
             // ClienteDetalle
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(668, 405);
+            Controls.Add(fechaNacDatePicker);
             Controls.Add(idTextBox);
             Controls.Add(label7);
             Controls.Add(button1);
             Controls.Add(instagramTextBox);
             Controls.Add(numeroTelefonoTextBox);
             Controls.Add(emailTextBox);
-            Controls.Add(fechaNacTextBox);
             Controls.Add(apellidoTextBox);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -218,7 +219,6 @@
         private Label label6;
         private TextBox nombreTextBox;
         private TextBox apellidoTextBox;
-        private TextBox fechaNacTextBox;
         private TextBox emailTextBox;
         private TextBox numeroTelefonoTextBox;
         private TextBox instagramTextBox;
@@ -226,5 +226,6 @@
         private ErrorProvider errorProvider;
         private TextBox idTextBox;
         private Label label7;
+        private DateTimePicker fechaNacDatePicker;
     }
 }

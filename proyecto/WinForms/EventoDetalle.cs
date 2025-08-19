@@ -46,42 +46,16 @@ namespace WinForms
 
             Mode = FormMode.Add;
         }
-        private async void aceptarButton_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateEvento())
-            {
-                try
-                {
-                    this.Evento.Nombre = nombreTextBox.Text;
-                    this.Evento.Desc = descTextBox.Text;
-                    this.Evento.Fecha = DateTime.Parse(fechaTextBox.Text);
-                    this.Evento.Lugar = lugarTextBox.Text;
-
-
-
-                    if (this.Mode == FormMode.Update)
-                    {
-                        await EventoApiClient.UpdateAsync(this.Evento);
-                    }
-                    else
-                    {
-                        await EventoApiClient.AddAsync(this.Evento);
-                    }
-
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
         private void SetEvento()
         {
 
             this.nombreTextBox.Text = this.Evento.Nombre;
             this.descTextBox.Text = this.Evento.Desc;
-            this.fechaTextBox.Text = this.Evento.Fecha.ToString();
+            //asegurar que la fechha no sea la default
+            if (this.Evento.Fecha != default(DateTime))
+            {
+                this.fechaPicker.Value = DateTime.Now;
+            }
             this.lugarTextBox.Text = this.Evento.Lugar;
         }
 
@@ -132,7 +106,7 @@ namespace WinForms
                 {
                     this.Evento.Nombre = nombreTextBox.Text;
                     this.Evento.Desc = descTextBox.Text;
-                    this.Evento.Fecha = DateTime.Parse(fechaTextBox.Text);
+                    this.Evento.Fecha = fechaPicker.Value;
                     this.Evento.Lugar = lugarTextBox.Text;
 
                     if (this.Mode == FormMode.Update)

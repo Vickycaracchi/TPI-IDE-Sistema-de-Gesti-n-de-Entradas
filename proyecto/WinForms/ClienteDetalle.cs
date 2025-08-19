@@ -65,7 +65,7 @@ namespace WinForms
                     this.Cliente.Nombre = nombreTextBox.Text;
                     this.Cliente.Apellido = apellidoTextBox.Text;
                     this.Cliente.NumeroTelefono = numeroTelefonoTextBox.Text;
-                    this.Cliente.FechaNac = DateTime.Parse(fechaNacTextBox.Text);
+                    this.Cliente.FechaNac = fechaNacDatePicker.Value;
                     this.Cliente.Instagram = instagramTextBox.Text;
 
                     if (this.Mode == FormMode.Update)
@@ -88,12 +88,15 @@ namespace WinForms
         }
         private void SetCliente()
         {
-            this.idTextBox.Text = this.Cliente.Id.ToString();
             this.emailTextBox.Text = this.Cliente.Email;
             this.nombreTextBox.Text = this.Cliente.Nombre;
             this.apellidoTextBox.Text = this.Cliente.Apellido;
             this.numeroTelefonoTextBox.Text = this.Cliente.NumeroTelefono;
-            this.fechaNacTextBox.Text = this.Cliente.FechaNac.ToString();
+            //asegurar que la fechha no sea la default
+            if (this.Cliente.FechaNac != default(DateTime))
+            {
+                this.fechaNacDatePicker.Value = this.Cliente.FechaNac;
+            }
             this.instagramTextBox.Text = this.Cliente.Instagram;
         }
         private bool ValidateCliente()
