@@ -16,7 +16,6 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un cliente con el Email '{dto.Email}'.");
             }
 
-            var fechaAlta = DateTime.Now;
             Cliente cliente = new Cliente(dto.Id, dto.Nombre, dto.Apellido, dto.Email, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
 
             clienteRepository.Add(cliente);

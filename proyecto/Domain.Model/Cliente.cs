@@ -34,9 +34,9 @@ namespace Domain.Model
         }
 
         public void SetEmail(string email)
-        {
+        {/*
             if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
-                throw new ArgumentException("Debe ser un email válido.", nameof(email));
+                throw new ArgumentException("Debe ser un email válido.", nameof(email));*/
             Email = email;
         }
 

@@ -8,6 +8,7 @@ namespace Data
     {
         public DbSet<Cliente> Clientes { get; set; }
 
+        public DbSet<Evento> Eventos { get; set; }
         internal BGEContext()
         {
             this.Database.EnsureCreated();
@@ -70,7 +71,7 @@ namespace Data
                     .HasMaxLength(100);
             });
 
-            /*modelBuilder.Entity<Pais>(entity =>
+            modelBuilder.Entity<Evento>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -84,15 +85,25 @@ namespace Data
                 entity.HasIndex(e => e.Nombre)
                     .IsUnique();
 
-                // Datos iniciales
+                entity.Property(e => e.Desc)
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.Fecha)
+                    .IsRequired();
+
+                entity.Property(e => e.Lugar)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                /*// Datos iniciales
                 entity.HasData(
                     new { Id = 1, Nombre = "Argentina" },
                     new { Id = 2, Nombre = "Brasil" },
                     new { Id = 3, Nombre = "Chile" },
                     new { Id = 4, Nombre = "Uruguay" },
                     new { Id = 5, Nombre = "Paraguay" }
-                );
-        });*/
+                );*/
+            });
         }
     }
 }

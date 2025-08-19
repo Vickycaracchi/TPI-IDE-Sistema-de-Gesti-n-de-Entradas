@@ -8,42 +8,29 @@ namespace Application.Services
     {
         public EventoDTO Add(EventoDTO dto)
         {
-            // Validar que el nombre no esté duplicado
-            if (EventosInMemory.Eventos.Any(e => e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
-            {
-                throw new ArgumentException($"Ya existe un evento con el Nombre '{dto.Nombre}'.");
-            }
+            var eventoRepository = new EventoRepository();
 
-            var id = GetNextId();
+            var fecha = DateTime.Now;
+            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
 
-            Evento evento = new Evento(id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
-
-            EventosInMemory.Eventos.Add(evento);
+            eventoRepository.Add(evento);
 
             dto.Id = evento.Id;
+            dto.Fecha = evento.Fecha;
 
             return dto;
         }
 
         public bool Delete(int id)
         {
-            Evento? eventoToDelete = EventosInMemory.Eventos.Find(x => x.Id == id);
-
-            if (eventoToDelete != null)
-            {
-                EventosInMemory.Eventos.Remove(eventoToDelete);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var eventoRepository = new EventoRepository();
+            return eventoRepository.Delete(id);
         }
 
         public EventoDTO Get(int id)
         {
-            Evento? evento = EventosInMemory.Eventos.Find(x => x.Id == id);
+            var eventoRepository = new EventoRepository();
+            Evento? evento = eventoRepository.Get(id);
 
             if (evento == null)
                 return null;
@@ -51,65 +38,28 @@ namespace Application.Services
             return new EventoDTO
             {
                 Id = evento.Id,
-                Nombre = evento.Nombre,
-                Desc = evento.Desc,
-                Fecha = evento.Fecha,
-                Lugar = evento.Lugar
+                Nombre = evento.Nombre
             };
         }
 
         public IEnumerable<EventoDTO> GetAll()
         {
-            return EventosInMemory.Eventos.Select(evento => new EventoDTO
+            var eventoRepository = new EventoRepository();
+            var eventos = eventoRepository.GetAll();
+
+            return eventos.Select(evento => new EventoDTO
             {
                 Id = evento.Id,
-                Nombre = evento.Nombre,
-                Desc = evento.Desc,
-                Fecha = evento.Fecha,
-                Lugar = evento.Lugar
+                Nombre = evento.Nombre
             }).ToList();
         }
 
         public bool Update(EventoDTO dto)
         {
-            Evento? eventoToUpdate = EventosInMemory.Eventos.Find(x => x.Id == dto.Id);
+            var eventoRepository = new EventoRepository();
 
-            if (eventoToUpdate != null)
-            {
-                // Validar que el nombre no esté duplicado
-                if (EventosInMemory.Eventos.Any(e => e.Id != dto.Id && e.Nombre.Equals(dto.Nombre, StringComparison.OrdinalIgnoreCase)))
-                {
-                    throw new ArgumentException($"Ya existe un evento con el Nombre '{dto.Nombre}'.");
-                }
-
-                eventoToUpdate.SetNombre(dto.Nombre);
-                eventoToUpdate.SetDesc(dto.Desc);
-                eventoToUpdate.SetFecha(dto.Fecha);
-                eventoToUpdate.SetLugar(dto.Lugar);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        //No es ThreadSafe pero sirve para el proposito del ejemplo        
-        private static int GetNextId()
-        {
-            int nextId;
-
-            if (EventosInMemory.Eventos.Count > 0)
-            {
-                nextId = EventosInMemory.Eventos.Max(x => x.Id) + 1;
-            }
-            else
-            {
-                nextId = 1;
-            }
-
-            return nextId;
+            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
+            return eventoRepository.Update(evento);
         }
     }
 }
