@@ -1,4 +1,5 @@
-﻿using DTOs;
+﻿using API.Clients;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsForms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinForms
