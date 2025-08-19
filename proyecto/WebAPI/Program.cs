@@ -31,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseCors("AllowBlazorWasm");
 
 app.MapClienteEndpoints();
+app.MapEventoEndpoints();
 
 app.Run();

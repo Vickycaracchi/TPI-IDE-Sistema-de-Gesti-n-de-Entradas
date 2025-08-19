@@ -16,7 +16,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un cliente con el Email '{dto.Email}'.");
             }
 
-            Cliente cliente = new Cliente(dto.Id, dto.Nombre, dto.Apellido, dto.Email, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
 
             clienteRepository.Add(cliente);
 
@@ -42,9 +42,12 @@ namespace Application.Services
             return new ClienteDTO
             {
                 Id = cliente.Id,
+                Email = cliente.Email,
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,
-                Email = cliente.Email
+                NumeroTelefono = cliente.NumeroTelefono,
+                FechaNac = cliente.FechaNac,
+                Instagram = cliente.Instagram
             };
         }
 
@@ -56,9 +59,12 @@ namespace Application.Services
             return clientes.Select(cliente => new ClienteDTO
             {
                 Id = cliente.Id,
+                Email = cliente.Email,
                 Nombre = cliente.Nombre,
                 Apellido = cliente.Apellido,
-                Email = cliente.Email
+                NumeroTelefono = cliente.NumeroTelefono,
+                FechaNac = cliente.FechaNac,
+                Instagram = cliente.Instagram
             }).ToList();
         }
 
@@ -72,7 +78,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe otro cliente con el Email '{dto.Email}'.");
             }
 
-            Cliente cliente = new Cliente(dto.Id, dto.Nombre, dto.Apellido, dto.Email, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
             return clienteRepository.Update(cliente);
         }
     }

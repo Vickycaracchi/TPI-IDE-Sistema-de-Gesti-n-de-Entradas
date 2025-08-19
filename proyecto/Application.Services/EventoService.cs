@@ -38,7 +38,10 @@ namespace Application.Services
             return new EventoDTO
             {
                 Id = evento.Id,
-                Nombre = evento.Nombre
+                Nombre = evento.Nombre,
+                Desc = evento.Desc,
+                Fecha = evento.Fecha,
+                Lugar = evento.Lugar
             };
         }
 
@@ -50,7 +53,10 @@ namespace Application.Services
             return eventos.Select(evento => new EventoDTO
             {
                 Id = evento.Id,
-                Nombre = evento.Nombre
+                Nombre = evento.Nombre,
+                Desc = evento.Desc,
+                Fecha = evento.Fecha,
+                Lugar = evento.Lugar
             }).ToList();
         }
 
