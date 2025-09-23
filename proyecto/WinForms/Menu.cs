@@ -19,18 +19,29 @@ namespace WinForms
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
-            // Crea una instancia del formulario ClientesLista
             ClientesLista clientesForm = new ClientesLista();
-            // Muestra el formulario
-            clientesForm.ShowDialog();
+
+            clientesForm.MdiParent = this;
+
+            clientesForm.Show();
         }
 
         private void btnEventos_Click(object sender, EventArgs e)
         {
-            // Crea una instancia del formulario EventosLista
             EventosLista eventosForm = new EventosLista();
-            // Muestra el formulario
+
+            eventosForm.MdiParent = this;
+
             eventosForm.ShowDialog();
+        }
+
+        private void clienteABMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientesLista clientesForm = new ClientesLista();
+
+            clientesForm.MdiParent = this;
+
+            clientesForm.Show();
         }
     }
 }

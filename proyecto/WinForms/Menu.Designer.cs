@@ -30,6 +30,9 @@
         {
             btnClientes = new Button();
             btnEventos = new Button();
+            menuStrip1 = new MenuStrip();
+            clienteABMToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // btnClientes
@@ -52,6 +55,23 @@
             btnEventos.UseVisualStyleBackColor = true;
             btnEventos.Click += btnEventos_Click;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clienteABMToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.TabIndex = 3;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // clienteABMToolStripMenuItem
+            // 
+            clienteABMToolStripMenuItem.Name = "clienteABMToolStripMenuItem";
+            clienteABMToolStripMenuItem.Size = new Size(101, 24);
+            clienteABMToolStripMenuItem.Text = "ClienteABM";
+            clienteABMToolStripMenuItem.Click += clienteABMToolStripMenuItem_Click;
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -59,14 +79,22 @@
             ClientSize = new Size(800, 450);
             Controls.Add(btnEventos);
             Controls.Add(btnClientes);
+            Controls.Add(menuStrip1);
+            IsMdiContainer = true;
+            MainMenuStrip = menuStrip1;
             Name = "Menu";
             Text = "Form1";
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnClientes;
         private Button btnEventos;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem clienteABMToolStripMenuItem;
     }
 }

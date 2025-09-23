@@ -203,6 +203,7 @@
             Controls.Add(label1);
             Name = "ClienteDetalle";
             Text = "ClienteDetalle";
+            TopMost = true;
             Load += ClienteDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
