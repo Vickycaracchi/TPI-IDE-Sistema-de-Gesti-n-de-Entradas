@@ -3,15 +3,15 @@ using DTOs;
 
 namespace WebAPI
 {
-    public static class ClienteEndpoint
+    public static class VendedorEndpoint
     {
-        public static void MapClienteEndpoints(this WebApplication app)
+        public static void MapVendedorEndpoints(this WebApplication app)
         {
-            app.MapGet("/clientes/{id}", (int id) =>
+            app.MapGet("/vendedors/{id}", (int id) =>
             {
-                ClienteService clienteService = new ClienteService();
+                VendedorService vendedorService = new VendedorService();
 
-                ClienteDTO dto = clienteService.Get(id);
+                VendedorDTO dto = vendedorService.Get(id);
 
                 if (dto == null)
                 {
@@ -20,50 +20,50 @@ namespace WebAPI
 
                 return Results.Ok(dto);
             })
-            .WithName("GetCliente")
-            .Produces<ClienteDTO>(StatusCodes.Status200OK)
+            .WithName("GetVendedor")
+            .Produces<VendedorDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
 
-            app.MapGet("/clientes", () =>
+            app.MapGet("/vendedors", () =>
             {
-                ClienteService clienteService = new ClienteService();
+                VendedorService vendedorService = new VendedorService();
 
-                var dtos = clienteService.GetAll();
+                var dtos = vendedorService.GetAll();
 
                 return Results.Ok(dtos);
             })
-            .WithName("GetAllClientes")
-            .Produces<List<ClienteDTO>>(StatusCodes.Status200OK)
+            .WithName("GetAllVendedors")
+            .Produces<List<VendedorDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
 
-            app.MapPost("/clientes", (ClienteDTO dto) =>
+            app.MapPost("/vendedors", (VendedorDTO dto) =>
             {
                 try
                 {
-                    ClienteService clienteService = new ClienteService();
+                    VendedorService vendedorService = new VendedorService();
 
-                    ClienteDTO clienteDTO = clienteService.Add(dto);
+                    VendedorDTO vendedorDTO = vendedorService.Add(dto);
 
-                    return Results.Created($"/clientes/{clienteDTO.Id}", clienteDTO);
+                    return Results.Created($"/vendedors/{vendedorDTO.Id}", vendedorDTO);
                 }
                 catch (ArgumentException ex)
                 {
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-            .WithName("AddCliente")
-            .Produces<ClienteDTO>(StatusCodes.Status201Created)
+            .WithName("AddVendedor")
+            .Produces<VendedorDTO>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
 
-            app.MapPut("/clientes", (ClienteDTO dto) =>
+            app.MapPut("/vendedors", (VendedorDTO dto) =>
             {
                 try
                 {
-                    ClienteService clienteService = new ClienteService();
+                    VendedorService vendedorService = new VendedorService();
 
-                    var found = clienteService.Update(dto);
+                    var found = vendedorService.Update(dto);
 
                     if (!found)
                     {
@@ -77,16 +77,16 @@ namespace WebAPI
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-            .WithName("UpdateCliente")
+            .WithName("UpdateVendedor")
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
 
-            app.MapDelete("/clientes/{id}", (int id) =>
+            app.MapDelete("/vendedors/{id}", (int id) =>
             {
-                ClienteService clienteService = new ClienteService();
+                VendedorService vendedorService = new VendedorService();
 
-                var deleted = clienteService.Delete(id);
+                var deleted = vendedorService.Delete(id);
 
                 if (!deleted)
                 {
@@ -95,25 +95,25 @@ namespace WebAPI
 
                 return Results.NoContent();
             })
-            .WithName("DeleteCliente")
+            .WithName("DeleteVendedor")
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
 
-            app.MapPost("loginCliente", (CliLoginDTO loginDto) =>
+            app.MapPost("loginVendedor", (CliLoginDTO loginDto) =>
             {
                 try
                 {
-                    ClienteService clienteService = new ClienteService();
+                    VendedorService vendedorService = new VendedorService();
 
-                    ClienteDTO? cliente = clienteService.GetForLogin(loginDto);
+                    VendedorDTO? vendedor = vendedorService.GetForLogin(loginDto);
 
-                    if (cliente == null)
+                    if (vendedor == null)
                     {
                         return Results.Unauthorized();
                     }
 
-                    return Results.Ok(cliente);
+                    return Results.Ok(vendedor);
                 }
                 catch (ArgumentException ex)
                 {
@@ -124,8 +124,8 @@ namespace WebAPI
                     return Results.StatusCode(500);
                 }
             })
-            .WithName("LoginCliente")
-            .Produces<ClienteDTO>(StatusCodes.Status200OK)
+            .WithName("LoginVendedor")
+            .Produces<VendedorDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();

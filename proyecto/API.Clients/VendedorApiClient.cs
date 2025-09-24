@@ -8,138 +8,138 @@ using System.Threading.Tasks;
 
 namespace API.Clients
 {
-    public class ClienteApiClient
+    public class VendedorApiClient
     {
         private static HttpClient client = new HttpClient();
-        static ClienteApiClient()
+        static VendedorApiClient()
         {
             client.BaseAddress = new Uri("http://localhost:5183/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public static async Task<ClienteDTO> GetAsync(int id)
+        public static async Task<VendedorDTO> GetAsync(int id)
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("clientes/" + id);
+                HttpResponseMessage response = await client.GetAsync("vendedors/" + id);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<ClienteDTO>();
+                    return await response.Content.ReadAsAsync<VendedorDTO>();
                 }
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener cliente con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener vendedor con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener cliente con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener vendedor con Id {id}: {ex.Message}", ex);
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener cliente con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener vendedor con Id {id}: {ex.Message}", ex);
             }
         }
-        public static async Task<IEnumerable<ClienteDTO>> GetAllAsync()
+        public static async Task<IEnumerable<VendedorDTO>> GetAllAsync()
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("clientes");
+                HttpResponseMessage response = await client.GetAsync("vendedors");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<IEnumerable<ClienteDTO>>();
+                    return await response.Content.ReadAsAsync<IEnumerable<VendedorDTO>>();
                 }
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de clientes. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de vendedors. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de clientes: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de vendedors: {ex.Message}", ex);
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de clientes: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lista de vendedors: {ex.Message}", ex);
             }
         }
-        public async static Task AddAsync(ClienteDTO cliente)
+        public async static Task AddAsync(VendedorDTO vendedor)
         {
             try
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync("clientes", cliente);
+                HttpResponseMessage response = await client.PostAsJsonAsync("vendedors", vendedor);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear cliente. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear vendedor. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear cliente: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear vendedor: {ex.Message}", ex);
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear cliente: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear vendedor: {ex.Message}", ex);
             }
         }
         public static async Task DeleteAsync(int id)
         {
             try
             {
-                HttpResponseMessage response = await client.DeleteAsync("clientes/" + id);
+                HttpResponseMessage response = await client.DeleteAsync("vendedors/" + id);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar cliente con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar vendedor con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al eliminar cliente con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar vendedor con Id {id}: {ex.Message}", ex);
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar cliente con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar vendedor con Id {id}: {ex.Message}", ex);
             }
         }
-        public static async Task UpdateAsync(ClienteDTO cliente)
+        public static async Task UpdateAsync(VendedorDTO vendedor)
         {
             try
             {
-                HttpResponseMessage response = await client.PutAsJsonAsync("clientes", cliente);
+                HttpResponseMessage response = await client.PutAsJsonAsync("vendedors", vendedor);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar cliente con Id {cliente.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al actualizar vendedor con Id {vendedor.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar cliente con Id {cliente.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar vendedor con Id {vendedor.Id}: {ex.Message}", ex);
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar cliente con Id {cliente.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar vendedor con Id {vendedor.Id}: {ex.Message}", ex);
             }
         }
-        public static async Task<ClienteDTO?> LoginAsync(CliLoginDTO cliente)
+        public static async Task<VendedorDTO?> LoginAsync(CliLoginDTO vendedor)
         {
             try
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync("loginCliente", cliente);
+                HttpResponseMessage response = await client.PostAsJsonAsync("loginVendedor", vendedor);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<ClienteDTO>();
+                    return await response.Content.ReadFromJsonAsync<VendedorDTO>();
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {

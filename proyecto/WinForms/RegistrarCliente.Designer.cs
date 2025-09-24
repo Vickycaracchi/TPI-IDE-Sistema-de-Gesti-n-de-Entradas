@@ -226,7 +226,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RegistrarCliente";
             TopMost = true;
-            Load += ClienteDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

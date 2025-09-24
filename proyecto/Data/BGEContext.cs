@@ -9,6 +9,7 @@ namespace Data
         public DbSet<Cliente> Clientes { get; set; }
 
         public DbSet<Evento> Eventos { get; set; }
+        public DbSet<Vendedor> Vendedores { get; set; }
         internal BGEContext()
         {
             this.Database.EnsureCreated();
@@ -98,15 +99,45 @@ namespace Data
                 entity.Property(e => e.Lugar)
                     .IsRequired()
                     .HasMaxLength(200);
+            });
 
-                /*// Datos iniciales
-                entity.HasData(
-                    new { Id = 1, Nombre = "Argentina" },
-                    new { Id = 2, Nombre = "Brasil" },
-                    new { Id = 3, Nombre = "Chile" },
-                    new { Id = 4, Nombre = "Uruguay" },
-                    new { Id = 5, Nombre = "Paraguay" }
-                );*/
+            modelBuilder.Entity<Vendedor>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Dni)
+                    .IsRequired()
+                    .HasMaxLength(9);
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Apellido)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                // Restricción única para Email
+                entity.HasIndex(e => e.Email)
+                    .IsUnique();
+
+                entity.Property(e => e.Contrasena)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Cvu)
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Tipo)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
         }
     }

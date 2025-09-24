@@ -25,5 +25,8 @@
     <Compile Update="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RegistrarVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

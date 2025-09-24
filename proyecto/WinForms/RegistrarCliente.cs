@@ -93,7 +93,7 @@ namespace WinForms
             this.nombreTextBox.Text = this.Cliente.Nombre;
             this.apellidoTextBox.Text = this.Cliente.Apellido;
             this.numeroTelefonoTextBox.Text = this.Cliente.NumeroTelefono;
-            //asegurar que la fechha no sea la default
+            //asegurar que la fecha no sea la default
             if (this.Cliente.FechaNac != default(DateTime))
             {
                 this.fechaNacDatePicker.Value = this.Cliente.FechaNac;
@@ -168,11 +168,6 @@ namespace WinForms
         }
 
         private void emailTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ClienteDetalle_Load(object sender, EventArgs e)
         {
 
         }

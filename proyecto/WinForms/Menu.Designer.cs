@@ -29,36 +29,21 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            clienteABMToolStripMenuItem = new ToolStripMenuItem();
-            eventosABMToolStripMenuItem = new ToolStripMenuItem();
             ingresarToolStripMenuItem = new ToolStripMenuItem();
             registrarseToolStripMenuItem = new ToolStripMenuItem();
+            registarVendedorToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { clienteABMToolStripMenuItem, eventosABMToolStripMenuItem, ingresarToolStripMenuItem, registrarseToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ingresarToolStripMenuItem, registrarseToolStripMenuItem, registarVendedorToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
-            // 
-            // clienteABMToolStripMenuItem
-            // 
-            clienteABMToolStripMenuItem.Name = "clienteABMToolStripMenuItem";
-            clienteABMToolStripMenuItem.Size = new Size(101, 24);
-            clienteABMToolStripMenuItem.Text = "ClienteABM";
-            clienteABMToolStripMenuItem.Click += clienteABMToolStripMenuItem_Click;
-            // 
-            // eventosABMToolStripMenuItem
-            // 
-            eventosABMToolStripMenuItem.Name = "eventosABMToolStripMenuItem";
-            eventosABMToolStripMenuItem.Size = new Size(106, 24);
-            eventosABMToolStripMenuItem.Text = "EventosABM";
-            eventosABMToolStripMenuItem.Click += eventosABMToolStripMenuItem_Click;
             // 
             // ingresarToolStripMenuItem
             // 
@@ -70,8 +55,16 @@
             // registrarseToolStripMenuItem
             // 
             registrarseToolStripMenuItem.Name = "registrarseToolStripMenuItem";
-            registrarseToolStripMenuItem.Size = new Size(96, 24);
-            registrarseToolStripMenuItem.Text = "Registrarse";
+            registrarseToolStripMenuItem.Size = new Size(132, 24);
+            registrarseToolStripMenuItem.Text = "Registrar Cliente";
+            registrarseToolStripMenuItem.Click += registrarseToolStripMenuItem_Click;
+            // 
+            // registarVendedorToolStripMenuItem
+            // 
+            registarVendedorToolStripMenuItem.Name = "registarVendedorToolStripMenuItem";
+            registarVendedorToolStripMenuItem.Size = new Size(145, 24);
+            registarVendedorToolStripMenuItem.Text = "Registar Vendedor";
+            registarVendedorToolStripMenuItem.Click += registarVendedorToolStripMenuItem_Click;
             // 
             // Menu
             // 
@@ -93,9 +86,8 @@
 
         #endregion
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem clienteABMToolStripMenuItem;
-        private ToolStripMenuItem eventosABMToolStripMenuItem;
         private ToolStripMenuItem ingresarToolStripMenuItem;
         private ToolStripMenuItem registrarseToolStripMenuItem;
+        private ToolStripMenuItem registarVendedorToolStripMenuItem;
     }
 }

@@ -16,24 +16,6 @@ namespace WinForms
         {
             InitializeComponent();
         }
-        private void clienteABMToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ClientesLista clientesForm = new ClientesLista();
-
-            clientesForm.MdiParent = this;
-
-            clientesForm.Show();
-        }
-
-        private void eventosABMToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EventosLista eventosForm = new EventosLista();
-
-            eventosForm.MdiParent = this;
-
-            eventosForm.Show();
-        }
-
         private void ingresarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IngresarCliente ingresarCliForm = new IngresarCliente();
@@ -42,5 +24,23 @@ namespace WinForms
 
             ingresarCliForm.Show();
         }
+        private void registrarseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegistrarCliente registrarClienteForm = new RegistrarCliente();
+
+            registrarClienteForm.MdiParent = this;
+
+            registrarClienteForm.Show();
+        }
+
+        private void registarVendedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegistrarVendedor registrarVendedorForm = new RegistrarVendedor();
+
+            registrarVendedorForm.MdiParent = this;
+
+            registrarVendedorForm.Show();
+        }
+
     }
 }
