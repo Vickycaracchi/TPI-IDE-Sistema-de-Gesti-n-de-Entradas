@@ -29,48 +29,78 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            ingresarToolStripMenuItem = new ToolStripMenuItem();
-            registrarseToolStripMenuItem = new ToolStripMenuItem();
-            registarVendedorToolStripMenuItem = new ToolStripMenuItem();
+            ingresarCliente = new ToolStripMenuItem();
+            registrarCliente = new ToolStripMenuItem();
+            registarVendedor = new ToolStripMenuItem();
+            ingresarVendedor = new ToolStripMenuItem();
+            nombreVendedor = new Label();
+            tipoVendedor = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { ingresarToolStripMenuItem, registrarseToolStripMenuItem, registarVendedorToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ingresarCliente, registrarCliente, registarVendedor, ingresarVendedor });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
-            // ingresarToolStripMenuItem
+            // ingresarCliente
             // 
-            ingresarToolStripMenuItem.Name = "ingresarToolStripMenuItem";
-            ingresarToolStripMenuItem.Size = new Size(76, 24);
-            ingresarToolStripMenuItem.Text = "Ingresar";
-            ingresarToolStripMenuItem.Click += ingresarToolStripMenuItem_Click;
+            ingresarCliente.Name = "ingresarCliente";
+            ingresarCliente.Size = new Size(126, 24);
+            ingresarCliente.Text = "Ingresar Cliente";
+            ingresarCliente.Click += ingresarToolStripMenuItem_Click;
             // 
-            // registrarseToolStripMenuItem
+            // registrarCliente
             // 
-            registrarseToolStripMenuItem.Name = "registrarseToolStripMenuItem";
-            registrarseToolStripMenuItem.Size = new Size(132, 24);
-            registrarseToolStripMenuItem.Text = "Registrar Cliente";
-            registrarseToolStripMenuItem.Click += registrarseToolStripMenuItem_Click;
+            registrarCliente.Name = "registrarCliente";
+            registrarCliente.Size = new Size(132, 24);
+            registrarCliente.Text = "Registrar Cliente";
+            registrarCliente.Click += registrarseToolStripMenuItem_Click;
             // 
-            // registarVendedorToolStripMenuItem
+            // registarVendedor
             // 
-            registarVendedorToolStripMenuItem.Name = "registarVendedorToolStripMenuItem";
-            registarVendedorToolStripMenuItem.Size = new Size(145, 24);
-            registarVendedorToolStripMenuItem.Text = "Registar Vendedor";
-            registarVendedorToolStripMenuItem.Click += registarVendedorToolStripMenuItem_Click;
+            registarVendedor.Name = "registarVendedor";
+            registarVendedor.Size = new Size(145, 24);
+            registarVendedor.Text = "Registar Vendedor";
+            registarVendedor.Click += registarVendedorToolStripMenuItem_Click;
+            // 
+            // ingresarVendedor
+            // 
+            ingresarVendedor.Name = "ingresarVendedor";
+            ingresarVendedor.Size = new Size(144, 24);
+            ingresarVendedor.Text = "Ingresar Vendedor";
+            ingresarVendedor.Click += ingresarVendedor_Click;
+            // 
+            // nombreVendedor
+            // 
+            nombreVendedor.AutoSize = true;
+            nombreVendedor.Location = new Point(98, 182);
+            nombreVendedor.Name = "nombreVendedor";
+            nombreVendedor.Size = new Size(90, 20);
+            nombreVendedor.TabIndex = 5;
+            nombreVendedor.Text = "Contenido 1";
+            // 
+            // tipoVendedor
+            // 
+            tipoVendedor.AutoSize = true;
+            tipoVendedor.Location = new Point(533, 182);
+            tipoVendedor.Name = "tipoVendedor";
+            tipoVendedor.Size = new Size(90, 20);
+            tipoVendedor.TabIndex = 6;
+            tipoVendedor.Text = "Contenido 2";
             // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tipoVendedor);
+            Controls.Add(nombreVendedor);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
@@ -86,8 +116,11 @@
 
         #endregion
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem ingresarToolStripMenuItem;
-        private ToolStripMenuItem registrarseToolStripMenuItem;
-        private ToolStripMenuItem registarVendedorToolStripMenuItem;
+        private ToolStripMenuItem ingresarCliente;
+        private ToolStripMenuItem registrarCliente;
+        private ToolStripMenuItem registarVendedor;
+        private ToolStripMenuItem ingresarVendedor;
+        private Label nombreVendedor;
+        private Label tipoVendedor;
     }
 }

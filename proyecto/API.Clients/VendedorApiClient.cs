@@ -131,7 +131,7 @@ namespace API.Clients
                 throw new Exception($"Timeout al actualizar vendedor con Id {vendedor.Id}: {ex.Message}", ex);
             }
         }
-        public static async Task<VendedorDTO?> LoginAsync(CliLoginDTO vendedor)
+        public static async Task<VendedorDTO?> LoginAsync(VendedorLoginDTO vendedor)
         {
             try
             {
