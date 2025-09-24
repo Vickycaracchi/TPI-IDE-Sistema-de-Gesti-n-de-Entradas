@@ -47,7 +47,7 @@ namespace WinForms
         public RegistrarCliente()
         {
             InitializeComponent();
-
+            cliente = new ClienteDTO();
             Mode = FormMode.Add;
         }
 

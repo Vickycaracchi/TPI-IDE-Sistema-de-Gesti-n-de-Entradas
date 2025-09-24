@@ -15,8 +15,8 @@ namespace WinForms
 {
     public partial class RegistrarVendedor : Form
     {
-        private VendedorDTO vendedor;
         private FormMode mode;
+        private VendedorDTO vendedor;
         public VendedorDTO Vendedor
         {
             get { return vendedor; }
@@ -43,10 +43,10 @@ namespace WinForms
 
             Mode = FormMode.Add;
             vendedor = new VendedorDTO();
-            AgrgarItems();
+            AgregarItems();
         }
 
-        private void AgrgarItems()
+        private void AgregarItems()
         {
             tipoListBox.Items.Add("Administrador");
             tipoListBox.Items.Add("Jefe");
