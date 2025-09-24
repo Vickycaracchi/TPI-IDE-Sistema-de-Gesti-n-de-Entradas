@@ -10,7 +10,7 @@ namespace Data
 
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Vendedor> Vendedores { get; set; }
-        internal BGEContext()
+        public BGEContext()
         {
             this.Database.EnsureCreated();
         }

@@ -3,7 +3,14 @@ using WebAPI;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v2", new()
+    {
+        Title = "Bohemia Gestión de Entradas API",
+        Version = "v2"
+    });
+});
 builder.Services.AddHttpLogging(o => { });
 
 builder.Services.AddCors(options =>
@@ -22,7 +29,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Bohemia Gestión de Entradas API v2");
+    });
     app.UseHttpLogging();
 }
 
