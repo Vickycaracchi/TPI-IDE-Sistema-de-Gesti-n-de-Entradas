@@ -7,7 +7,7 @@
     <ActiveDebugProfile>WinForms</ActiveDebugProfile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="ClienteDetalle.cs">
+    <Compile Update="RegistrarCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ClientesLista.cs">

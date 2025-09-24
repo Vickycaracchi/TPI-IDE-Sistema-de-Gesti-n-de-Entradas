@@ -20,7 +20,7 @@ namespace WinForms
         Add,
         Update
     }
-    public partial class ClienteDetalle : Form
+    public partial class RegistrarCliente : Form
     {
         private ClienteDTO cliente;
         private FormMode mode;
@@ -44,7 +44,7 @@ namespace WinForms
                 SetFormMode(value);
             }
         }
-        public ClienteDetalle()
+        public RegistrarCliente()
         {
             InitializeComponent();
 

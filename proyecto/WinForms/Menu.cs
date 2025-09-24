@@ -16,25 +16,6 @@ namespace WinForms
         {
             InitializeComponent();
         }
-
-        private void btnClientes_Click(object sender, EventArgs e)
-        {
-            ClientesLista clientesForm = new ClientesLista();
-
-            clientesForm.MdiParent = this;
-
-            clientesForm.Show();
-        }
-
-        private void btnEventos_Click(object sender, EventArgs e)
-        {
-            EventosLista eventosForm = new EventosLista();
-
-            eventosForm.MdiParent = this;
-
-            eventosForm.ShowDialog();
-        }
-
         private void clienteABMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientesLista clientesForm = new ClientesLista();
@@ -42,6 +23,15 @@ namespace WinForms
             clientesForm.MdiParent = this;
 
             clientesForm.Show();
+        }
+
+        private void eventosABMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EventosLista eventosForm = new EventosLista();
+
+            eventosForm.MdiParent = this;
+
+            eventosForm.Show();
         }
     }
 }

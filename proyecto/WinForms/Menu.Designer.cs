@@ -28,37 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnClientes = new Button();
-            btnEventos = new Button();
             menuStrip1 = new MenuStrip();
             clienteABMToolStripMenuItem = new ToolStripMenuItem();
+            eventosABMToolStripMenuItem = new ToolStripMenuItem();
+            ingresarToolStripMenuItem = new ToolStripMenuItem();
+            registrarseToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // btnClientes
-            // 
-            btnClientes.Location = new Point(98, 158);
-            btnClientes.Name = "btnClientes";
-            btnClientes.Size = new Size(174, 77);
-            btnClientes.TabIndex = 0;
-            btnClientes.Text = "ClientesABM";
-            btnClientes.UseVisualStyleBackColor = true;
-            btnClientes.Click += btnClientes_Click;
-            // 
-            // btnEventos
-            // 
-            btnEventos.Location = new Point(453, 158);
-            btnEventos.Name = "btnEventos";
-            btnEventos.Size = new Size(210, 76);
-            btnEventos.TabIndex = 1;
-            btnEventos.Text = "EventosABM";
-            btnEventos.UseVisualStyleBackColor = true;
-            btnEventos.Click += btnEventos_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { clienteABMToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { clienteABMToolStripMenuItem, eventosABMToolStripMenuItem, ingresarToolStripMenuItem, registrarseToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
@@ -72,18 +53,37 @@
             clienteABMToolStripMenuItem.Text = "ClienteABM";
             clienteABMToolStripMenuItem.Click += clienteABMToolStripMenuItem_Click;
             // 
+            // eventosABMToolStripMenuItem
+            // 
+            eventosABMToolStripMenuItem.Name = "eventosABMToolStripMenuItem";
+            eventosABMToolStripMenuItem.Size = new Size(106, 24);
+            eventosABMToolStripMenuItem.Text = "EventosABM";
+            eventosABMToolStripMenuItem.Click += eventosABMToolStripMenuItem_Click;
+            // 
+            // ingresarToolStripMenuItem
+            // 
+            ingresarToolStripMenuItem.Name = "ingresarToolStripMenuItem";
+            ingresarToolStripMenuItem.Size = new Size(76, 24);
+            ingresarToolStripMenuItem.Text = "Ingresar";
+            // 
+            // registrarseToolStripMenuItem
+            // 
+            registrarseToolStripMenuItem.Name = "registrarseToolStripMenuItem";
+            registrarseToolStripMenuItem.Size = new Size(96, 24);
+            registrarseToolStripMenuItem.Text = "Registrarse";
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnEventos);
-            Controls.Add(btnClientes);
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "Menu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -91,10 +91,10 @@
         }
 
         #endregion
-
-        private Button btnClientes;
-        private Button btnEventos;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem clienteABMToolStripMenuItem;
+        private ToolStripMenuItem eventosABMToolStripMenuItem;
+        private ToolStripMenuItem ingresarToolStripMenuItem;
+        private ToolStripMenuItem registrarseToolStripMenuItem;
     }
 }

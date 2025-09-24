@@ -24,7 +24,7 @@ namespace WinForms
         }
         private void agregarButton_Click(object sender, EventArgs e)
         {
-            ClienteDetalle clienteDetalle = new ClienteDetalle();
+            RegistrarCliente clienteDetalle = new RegistrarCliente();
 
             ClienteDTO clienteNuevo = new ClienteDTO();
 
@@ -47,7 +47,7 @@ namespace WinForms
                     return;
                 }
 
-                ClienteDetalle clienteDetalle = new ClienteDetalle();
+                RegistrarCliente clienteDetalle = new RegistrarCliente();
 
                 ClienteDTO cliente = await ClienteApiClient.GetAsync(selected.Id);
 

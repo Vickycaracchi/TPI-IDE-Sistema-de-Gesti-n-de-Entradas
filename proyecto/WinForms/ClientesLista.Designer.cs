@@ -85,6 +85,7 @@
             Controls.Add(eliminarButtonCliente);
             Controls.Add(clientesDataGridView);
             Name = "ClientesLista";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += ClientesLista_Load;
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).EndInit();
