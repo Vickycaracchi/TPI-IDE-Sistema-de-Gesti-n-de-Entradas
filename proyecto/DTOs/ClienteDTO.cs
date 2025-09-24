@@ -16,5 +16,6 @@ namespace DTOs
         public string NumeroTelefono { get; set; }
         public DateTime FechaNac { get; set; }
         public string Instagram { get; set; }
+        public string Contrasena { get; set; }
     }
 }

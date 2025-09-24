@@ -69,6 +69,10 @@ namespace Data
 
                 entity.Property(e => e.Instagram)
                     .HasMaxLength(100);
+
+                entity.Property(e => e.Contrasena)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<Evento>(entity =>

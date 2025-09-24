@@ -16,7 +16,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un cliente con el Email '{dto.Email}'.");
             }
 
-            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram, dto.Contrasena);
 
             clienteRepository.Add(cliente);
 
@@ -47,7 +47,8 @@ namespace Application.Services
                 Apellido = cliente.Apellido,
                 NumeroTelefono = cliente.NumeroTelefono,
                 FechaNac = cliente.FechaNac,
-                Instagram = cliente.Instagram
+                Instagram = cliente.Instagram,
+                Contrasena = cliente.Contrasena
             };
         }
 
@@ -64,7 +65,8 @@ namespace Application.Services
                 Apellido = cliente.Apellido,
                 NumeroTelefono = cliente.NumeroTelefono,
                 FechaNac = cliente.FechaNac,
-                Instagram = cliente.Instagram
+                Instagram = cliente.Instagram,
+                Contrasena = cliente.Contrasena
             }).ToList();
         }
 
@@ -78,8 +80,38 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe otro cliente con el Email '{dto.Email}'.");
             }
 
-            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Cliente cliente = new Cliente(dto.Id, dto.Email, dto.Nombre, dto.Apellido, dto.NumeroTelefono, dto.FechaNac, dto.Instagram, dto.Contrasena);
             return clienteRepository.Update(cliente);
+        }
+
+        public ClienteDTO? GetForLogin(CliLoginDTO cliLogin)
+        {
+            var clienteRepository = new ClienteRepository();
+            Cliente? cliente = clienteRepository.GetByEmail(cliLogin.Email);
+            if (cliente == null)
+            {
+                return null;
+            }
+            if (cliLogin.Nombre != cliente.Nombre)
+            {
+                throw new ArgumentException("El nombre y el email no coinciden.");
+            }
+            if (cliLogin.Contrasena != cliente.Contrasena)
+            {
+                throw new ArgumentException("La contraseña es incorrecta.");
+            }
+
+            return new ClienteDTO
+            {
+                Id = cliente.Id,
+                Email = cliente.Email,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                NumeroTelefono = cliente.NumeroTelefono,
+                FechaNac = cliente.FechaNac,
+                Instagram = cliente.Instagram,
+                Contrasena = cliente.Contrasena
+            };
         }
     }
 }

@@ -67,6 +67,7 @@ namespace WinForms
                     this.Cliente.NumeroTelefono = numeroTelefonoTextBox.Text;
                     this.Cliente.FechaNac = fechaNacDatePicker.Value;
                     this.Cliente.Instagram = instagramTextBox.Text;
+                    this.Cliente.Contrasena = contrasenaTextBox.Text;
 
                     if (this.Mode == FormMode.Update)
                     {
@@ -98,6 +99,7 @@ namespace WinForms
                 this.fechaNacDatePicker.Value = this.Cliente.FechaNac;
             }
             this.instagramTextBox.Text = this.Cliente.Instagram;
+            this.contrasenaTextBox.Text = this.Cliente.Contrasena;
         }
         private bool ValidateCliente()
         {

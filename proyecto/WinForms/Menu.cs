@@ -33,5 +33,14 @@ namespace WinForms
 
             eventosForm.Show();
         }
+
+        private void ingresarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IngresarCliente ingresarCliForm = new IngresarCliente();
+
+            ingresarCliForm.MdiParent = this;
+
+            ingresarCliForm.Show();
+        }
     }
 }

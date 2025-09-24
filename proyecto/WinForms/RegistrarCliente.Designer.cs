@@ -41,6 +41,8 @@
             numeroTelefonoTextBox = new TextBox();
             instagramLabel = new Label();
             instagramTextBox = new TextBox();
+            contrasenaLabel = new Label();
+            contrasenaTextBox = new TextBox();
             fechaNacLabel = new Label();
             fechaNacDatePicker = new DateTimePicker();
             button1 = new Button();
@@ -149,30 +151,47 @@
             instagramTextBox.Size = new Size(326, 27);
             instagramTextBox.TabIndex = 11;
             // 
+            // contrasenaLabel
+            // 
+            contrasenaLabel.AutoSize = true;
+            contrasenaLabel.Location = new Point(52, 299);
+            contrasenaLabel.Name = "contrasenaLabel";
+            contrasenaLabel.Size = new Size(83, 20);
+            contrasenaLabel.TabIndex = 12;
+            contrasenaLabel.Text = "Contrasena";
+            // 
+            // contrasenaTextBox
+            // 
+            contrasenaTextBox.Location = new Point(251, 296);
+            contrasenaTextBox.Name = "contrasenaTextBox";
+            contrasenaTextBox.Size = new Size(326, 27);
+            contrasenaTextBox.TabIndex = 13;
+            contrasenaTextBox.UseSystemPasswordChar = true;
+            // 
             // fechaNacLabel
             // 
             fechaNacLabel.AutoSize = true;
-            fechaNacLabel.Location = new Point(52, 297);
+            fechaNacLabel.Location = new Point(52, 339);
             fechaNacLabel.Name = "fechaNacLabel";
             fechaNacLabel.Size = new Size(146, 20);
-            fechaNacLabel.TabIndex = 12;
+            fechaNacLabel.TabIndex = 14;
             fechaNacLabel.Text = "Fecha de nacimiento";
             fechaNacLabel.Click += label3_Click;
             // 
             // fechaNacDatePicker
             // 
-            fechaNacDatePicker.Location = new Point(251, 297);
+            fechaNacDatePicker.Location = new Point(251, 339);
             fechaNacDatePicker.Name = "fechaNacDatePicker";
             fechaNacDatePicker.Size = new Size(250, 27);
-            fechaNacDatePicker.TabIndex = 13;
+            fechaNacDatePicker.TabIndex = 15;
             fechaNacDatePicker.Value = new DateTime(2004, 4, 3, 0, 0, 0, 0);
             // 
             // button1
             // 
-            button1.Location = new Point(251, 372);
+            button1.Location = new Point(251, 414);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
-            button1.TabIndex = 14;
+            button1.TabIndex = 16;
             button1.Text = "Enviar";
             button1.UseVisualStyleBackColor = true;
             button1.Click += enviarFormularioCliente;
@@ -185,7 +204,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(668, 405);
+            ClientSize = new Size(996, 575);
+            Controls.Add(contrasenaTextBox);
+            Controls.Add(contrasenaLabel);
             Controls.Add(fechaNacDatePicker);
             Controls.Add(idTextBox);
             Controls.Add(idLabel);
@@ -229,5 +250,7 @@
         private TextBox idTextBox;
         private Label idLabel;
         private DateTimePicker fechaNacDatePicker;
+        private TextBox contrasenaTextBox;
+        private Label contrasenaLabel;
     }
 }

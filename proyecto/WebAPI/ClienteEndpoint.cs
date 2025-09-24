@@ -99,6 +99,36 @@ namespace WebAPI
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
+
+            app.MapPost("/auth/login", (CliLoginDTO loginDto) =>
+            {
+                try
+                {
+                    ClienteService clienteService = new ClienteService();
+
+                    ClienteDTO? cliente = clienteService.GetForLogin(loginDto);
+
+                    if (cliente == null)
+                    {
+                        return Results.Unauthorized();
+                    }
+
+                    return Results.Ok(cliente);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+                catch (Exception)
+                {
+                    return Results.StatusCode(500);
+                }
+            })
+            .WithName("Login")
+            .Produces<ClienteDTO>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status400BadRequest)
+            .WithOpenApi();
         }
     }
 }

@@ -131,5 +131,34 @@ namespace API.Clients
                 throw new Exception($"Timeout al actualizar cliente con Id {cliente.Id}: {ex.Message}", ex);
             }
         }
+        public static async Task<ClienteDTO?> LoginAsync(CliLoginDTO cliente)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync("auth/login", cliente);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<ClienteDTO>();
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return null;
+                }
+                else
+                {
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Error de servidor. Status: {response.StatusCode}, Detalle: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de conexión al intentar iniciar sesión: {ex.Message}", ex);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception($"Timeout al intentar iniciar sesión: {ex.Message}", ex);
+            }
+        }
     }
 }

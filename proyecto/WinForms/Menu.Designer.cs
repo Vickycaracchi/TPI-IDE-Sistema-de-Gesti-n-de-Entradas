@@ -65,6 +65,7 @@
             ingresarToolStripMenuItem.Name = "ingresarToolStripMenuItem";
             ingresarToolStripMenuItem.Size = new Size(76, 24);
             ingresarToolStripMenuItem.Text = "Ingresar";
+            ingresarToolStripMenuItem.Click += ingresarToolStripMenuItem_Click;
             // 
             // registrarseToolStripMenuItem
             // 

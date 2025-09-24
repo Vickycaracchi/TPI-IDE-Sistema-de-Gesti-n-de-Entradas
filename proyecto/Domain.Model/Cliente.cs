@@ -12,10 +12,11 @@ namespace Domain.Model
         public string NumeroTelefono { get; private set; }
         public DateTime FechaNac { get; private set; }
         public string Instagram { get; private set; }
+        public string Contrasena { get; private set; }
 
         public Cliente() { }
 
-        public Cliente(int id, string email, string nombre, string apellido, string numeroTelefono, DateTime fechaNac, string instagram)
+        public Cliente(int id, string email, string nombre, string apellido, string numeroTelefono, DateTime fechaNac, string instagram, string contrasena)
         {
             SetId(id);
             SetEmail(email);
@@ -24,6 +25,7 @@ namespace Domain.Model
             SetNumeroTelefono(numeroTelefono);
             SetFechaNac(fechaNac);
             SetInstagram(instagram);
+            SetContrasena(contrasena);
         }
 
         public void SetId(int id)
@@ -76,6 +78,12 @@ namespace Domain.Model
             if (string.IsNullOrWhiteSpace(instagram))
                 throw new ArgumentException("El instagram no puede ser nulo o vacío.", nameof(instagram));
             Instagram = instagram;
+        }
+        public void SetContrasena(string contrasena)
+        {
+            if (string.IsNullOrWhiteSpace(contrasena))
+                throw new ArgumentException("La contrasena no puede ser nula o vacía.", nameof(contrasena));
+            Contrasena = contrasena;
         }
 
     }

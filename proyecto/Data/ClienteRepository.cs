@@ -1,4 +1,5 @@
 ﻿using Domain.Model;
+using DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data.SqlClient;
@@ -58,11 +59,19 @@ namespace Data
                 existingCliente.SetNumeroTelefono(cliente.NumeroTelefono);
                 existingCliente.SetFechaNac(cliente.FechaNac);
                 existingCliente.SetInstagram(cliente.Instagram);
+                existingCliente.SetContrasena(cliente.Contrasena);
 
                 context.SaveChanges();
                 return true;
             }
             return false;
+        }
+
+        public Cliente? GetByEmail(string email)
+        {
+            using var context = CreateContext();
+            return context.Clientes
+                .FirstOrDefault(c => c.Email.ToLower() == email.ToLower());
         }
 
         public bool EmailExists(string email, int? excludeId = null)
