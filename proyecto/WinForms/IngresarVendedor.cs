@@ -20,6 +20,8 @@ namespace WinForms
             InitializeComponent();
         }
 
+        public string TipoVendedor { get; private set; }
+
         private async void enviarLoginVendedor_Click(object sender, EventArgs e)
         {
             if (this.ValidateVendedor())
@@ -36,8 +38,10 @@ namespace WinForms
                     VendedorDTO? vendedor = await VendedorApiClient.LoginAsync(vendedorIng);
                     if (vendedor != null)
                     {
-                        this.Hide();
-                        Menu nuevoMenu = new Menu(vendedor);
+                        TipoVendedor = vendedor.Tipo;
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                     else
                     {

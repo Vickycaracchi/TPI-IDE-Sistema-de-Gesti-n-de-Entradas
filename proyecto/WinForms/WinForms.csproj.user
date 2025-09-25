@@ -13,6 +13,9 @@
     <Compile Update="IngresarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Pruebas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RegistrarCliente.cs">
       <SubType>Form</SubType>
     </Compile>

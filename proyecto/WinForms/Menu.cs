@@ -13,21 +13,10 @@ namespace WinForms
 {
     public partial class Menu : Form
     {
-        public Menu(VendedorDTO vendedor)
-        {
-            InitializeComponent();
-            ingresarVendedor.Visible = false;
-            registarVendedor.Visible = true;
-            nombreVendedor.Visible = false;
-            nombreVendedor.Text = vendedor.Nombre;
-            nombreVendedor.Visible = true;
-            tipoVendedor.Visible = true;
-            tipoVendedor.Text = vendedor.Tipo;
-            //MessageBox.Show($"Bienvenido {vendedor.Nombre} ({vendedor.Tipo})", "Acceso Concedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
         public Menu()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
         
         private void ingresarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,8 +43,8 @@ namespace WinForms
         {
             IngresarVendedor ingresarVendedorForm = new IngresarVendedor();
 
-            ingresarVendedorForm.ShowDialog();
-            
+            if (ingresarVendedorForm.ShowDialog() == DialogResult.OK) this.Close();
+
         }
-        }
+    }
 }

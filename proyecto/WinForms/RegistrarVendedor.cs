@@ -15,17 +15,15 @@ namespace WinForms
 {
     public partial class RegistrarVendedor : Form
     {
-        private FormMode mode;
-        private VendedorDTO vendedor;
-        public VendedorDTO Vendedor
+        public RegistrarVendedor()
         {
-            get { return vendedor; }
-            set
-            {
-                vendedor = value;
-                this.SetVendedor();
-            }
+            InitializeComponent();
+
+            Mode = FormMode.Add;
+            AgregarItems();
         }
+
+        private FormMode mode;
         public FormMode Mode
         {
             get
@@ -37,21 +35,15 @@ namespace WinForms
                 SetFormMode(value);
             }
         }
-        public RegistrarVendedor()
-        {
-            InitializeComponent();
-
-            Mode = FormMode.Add;
-            vendedor = new VendedorDTO();
-            AgregarItems();
-        }
 
         private void AgregarItems()
         {
-            tipoListBox.Items.Add("Administrador");
-            tipoListBox.Items.Add("Jefe");
-            tipoListBox.Items.Add("Vendedor");
-            tipoListBox.SelectedIndex = 0;
+            var tiposVendedores = new List<string> {
+                "Administrador",
+                "Jefe",
+                "Vendedor"
+            };
+            tipoComboBox.DataSource = tiposVendedores;
         }
         private void SetFormMode(FormMode value)
         {
@@ -63,21 +55,21 @@ namespace WinForms
             {
                 try
                 {
-                    this.Vendedor.Email = emailTextBox.Text;
-                    this.Vendedor.Dni = dniTextBox.Text;
-                    this.Vendedor.Nombre = nombreTextBox.Text;
-                    this.Vendedor.Apellido = apellidoTextBox.Text;
-                    this.Vendedor.Contrasena = contrasenaTextBox.Text;
-                    this.Vendedor.Cvu = cvuTextBox.Text;
-                    this.Vendedor.Tipo = tipoListBox.SelectedItem.ToString();
-
+                    VendedorDTO vendedor = new VendedorDTO();
+                    vendedor.Email = emailTextBox.Text;
+                    vendedor.Dni = dniTextBox.Text;
+                    vendedor.Nombre = nombreTextBox.Text;
+                    vendedor.Apellido = apellidoTextBox.Text;
+                    vendedor.Contrasena = contrasenaTextBox.Text;
+                    vendedor.Cvu = cvuTextBox.Text;
+                    vendedor.Tipo = tipoComboBox.SelectedItem.ToString(); ;
                     if (this.Mode == FormMode.Update)
                     {
-                        await VendedorApiClient.UpdateAsync(this.Vendedor);
+                        await VendedorApiClient.UpdateAsync(vendedor);
                     }
                     else
                     {
-                        await VendedorApiClient.AddAsync(this.Vendedor);
+                        await VendedorApiClient.AddAsync(vendedor);
                     }
 
                     this.Close();
@@ -89,16 +81,6 @@ namespace WinForms
             }
 
         }
-        private void SetVendedor()
-        {
-            this.dniTextBox.Text = this.Vendedor.Dni;
-            this.nombreTextBox.Text = this.Vendedor.Nombre;
-            this.apellidoTextBox.Text = this.Vendedor.Apellido;
-            this.emailTextBox.Text = this.Vendedor.Email;
-            this.contrasenaTextBox.Text = this.Vendedor.Contrasena;
-            this.cvuTextBox.Text = this.Vendedor.Cvu;
-            this.tipoListBox.SelectedItem = this.Vendedor.Tipo;
-        }
         private bool ValidateVendedor()
         {
             bool isValid = true;
@@ -106,6 +88,7 @@ namespace WinForms
             registrarVendedorErrorProvider.SetError(nombreTextBox, string.Empty);
             registrarVendedorErrorProvider.SetError(apellidoTextBox, string.Empty);
             registrarVendedorErrorProvider.SetError(emailTextBox, string.Empty);
+            registrarVendedorErrorProvider.SetError(tipoComboBox, string.Empty);
 
 
             if (this.nombreTextBox.Text == string.Empty)
@@ -129,7 +112,11 @@ namespace WinForms
                 isValid = false;
                 registrarVendedorErrorProvider.SetError(emailTextBox, "El formato del Email no es válido");
             }
-
+            if(string.IsNullOrWhiteSpace(this.tipoComboBox.SelectedItem.ToString()))
+            {
+                isValid = false;
+                registrarVendedorErrorProvider.SetError(tipoComboBox, "El Tipo es Requerido");
+            }
             return isValid;
         }
 

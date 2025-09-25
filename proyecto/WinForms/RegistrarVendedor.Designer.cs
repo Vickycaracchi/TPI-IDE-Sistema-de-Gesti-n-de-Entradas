@@ -43,8 +43,8 @@
             apellidoLabel = new Label();
             nombreTextBox = new TextBox();
             nombreLabel = new Label();
-            tipoListBox = new ListBox();
             registrarVendedorErrorProvider = new ErrorProvider(components);
+            tipoComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)registrarVendedorErrorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -164,24 +164,24 @@
             nombreLabel.TabIndex = 2;
             nombreLabel.Text = "Nombre";
             // 
-            // tipoListBox
-            // 
-            tipoListBox.FormattingEnabled = true;
-            tipoListBox.Location = new Point(547, 400);
-            tipoListBox.Name = "tipoListBox";
-            tipoListBox.Size = new Size(326, 24);
-            tipoListBox.TabIndex = 13;
-            // 
             // registrarVendedorErrorProvider
             // 
             registrarVendedorErrorProvider.ContainerControl = this;
+            // 
+            // tipoComboBox
+            // 
+            tipoComboBox.FormattingEnabled = true;
+            tipoComboBox.Location = new Point(547, 400);
+            tipoComboBox.Name = "tipoComboBox";
+            tipoComboBox.Size = new Size(151, 28);
+            tipoComboBox.TabIndex = 15;
             // 
             // RegistrarVendedor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1221, 657);
-            Controls.Add(tipoListBox);
+            Controls.Add(tipoComboBox);
             Controls.Add(contrasenaTextBox);
             Controls.Add(contrasenaLabel);
             Controls.Add(enviarRegistroVendedor);
@@ -208,7 +208,6 @@
 
         private TextBox contrasenaTextBox;
         private Label contrasenaLabel;
-        private DateTimePicker fechaNacDatePicker;
         private Button enviarRegistroVendedor;
         private TextBox cvuTextBox;
         private TextBox dniTextBox;
@@ -221,7 +220,7 @@
         private Label apellidoLabel;
         private TextBox nombreTextBox;
         private Label nombreLabel;
-        private ListBox tipoListBox;
         private ErrorProvider registrarVendedorErrorProvider;
+        private ComboBox tipoComboBox;
     }
 }
