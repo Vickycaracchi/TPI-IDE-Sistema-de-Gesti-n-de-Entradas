@@ -10,16 +10,16 @@ namespace WinForms
         {
             IngresarVendedor ingresarVendedorForm = new IngresarVendedor();
             
+            RegistrarVendedor registrarVendedor = new RegistrarVendedor();  
+            registrarVendedor.ShowDialog();
 
             if (ingresarVendedorForm.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show($"Bienvenido, {ingresarVendedorForm.TipoVendedor}!", "Inicio de Sesión Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (ingresarVendedorForm.TipoVendedor == "Administrador")
                 {
-                    RegistrarVendedor registrarVendedorForm = new RegistrarVendedor();
-                    //Application.Run(registrarVendedorForm);
-                    Menu menuForm = new Menu();
-                    Application.Run(menuForm);
+                    MenuAdmin menuAdminForm = new MenuAdmin();
+                    Application.Run(menuAdminForm);
                 }
                 else if (ingresarVendedorForm.TipoVendedor == "Vendedor")
                 {
