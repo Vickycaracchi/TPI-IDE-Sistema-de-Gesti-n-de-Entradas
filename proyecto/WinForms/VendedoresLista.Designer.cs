@@ -27,54 +27,60 @@
             // vendedoresDataGridView
             // 
             vendedoresDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            vendedoresDataGridView.Location = new Point(23, 24);
+            vendedoresDataGridView.Location = new Point(20, 18);
+            vendedoresDataGridView.Margin = new Padding(3, 2, 3, 2);
             vendedoresDataGridView.Name = "vendedoresDataGridView";
             vendedoresDataGridView.RowHeadersWidth = 51;
-            vendedoresDataGridView.Size = new Size(748, 306);
+            vendedoresDataGridView.Size = new Size(654, 230);
             vendedoresDataGridView.TabIndex = 0;
             vendedoresDataGridView.CellContentClick += vendedoresDataGridView_CellContentClick;
             // 
-            // eliminar
-            eliminarButtonVendedor.Location = new Point(23, 355);
+            // eliminarButtonVendedor
+            // 
+            eliminarButtonVendedor.Location = new Point(20, 266);
+            eliminarButtonVendedor.Margin = new Padding(3, 2, 3, 2);
             eliminarButtonVendedor.Name = "eliminarButtonVendedor";
-            eliminarButtonVendedor.Size = new Size(163, 50);
+            eliminarButtonVendedor.Size = new Size(143, 38);
             eliminarButtonVendedor.TabIndex = 1;
             eliminarButtonVendedor.Text = "Eliminar";
             eliminarButtonVendedor.UseVisualStyleBackColor = true;
             eliminarButtonVendedor.Click += eliminarButtonVendedor_Click;
             // 
-            // modificar
+            // modificarButtonVendedor
             // 
-            modificarButtonVendedor.Location = new Point(223, 355);
+            modificarButtonVendedor.Location = new Point(195, 266);
+            modificarButtonVendedor.Margin = new Padding(3, 2, 3, 2);
             modificarButtonVendedor.Name = "modificarButtonVendedor";
-            modificarButtonVendedor.Size = new Size(163, 50);
+            modificarButtonVendedor.Size = new Size(143, 38);
             modificarButtonVendedor.TabIndex = 2;
             modificarButtonVendedor.Text = "Modificar";
             modificarButtonVendedor.UseVisualStyleBackColor = true;
             modificarButtonVendedor.Click += modificarButtonVendedor_Click;
             // 
-            // agregar
+            // agregarButtonVendedor
             // 
-            agregarButtonVendedor.Location = new Point(426, 355);
+            agregarButtonVendedor.Location = new Point(373, 266);
+            agregarButtonVendedor.Margin = new Padding(3, 2, 3, 2);
             agregarButtonVendedor.Name = "agregarButtonVendedor";
-            agregarButtonVendedor.Size = new Size(163, 50);
+            agregarButtonVendedor.Size = new Size(143, 38);
             agregarButtonVendedor.TabIndex = 3;
             agregarButtonVendedor.Text = "Agregar";
             agregarButtonVendedor.UseVisualStyleBackColor = true;
             agregarButtonVendedor.Click += agregarButtonVendedor_Click;
             // 
-            // lista
+            // VendedoresLista
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(agregarButtonVendedor);
             Controls.Add(modificarButtonVendedor);
             Controls.Add(eliminarButtonVendedor);
             Controls.Add(vendedoresDataGridView);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "VendedoresLista";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Lista de Vendedores";
+            Text = "Gestión de Vendedores";
             Load += VendedoresLista_Load;
             ((System.ComponentModel.ISupportInitialize)vendedoresDataGridView).EndInit();
             ResumeLayout(false);

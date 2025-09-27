@@ -38,18 +38,20 @@
             // clientesDataGridView
             // 
             clientesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            clientesDataGridView.Location = new Point(23, 24);
+            clientesDataGridView.Location = new Point(20, 18);
+            clientesDataGridView.Margin = new Padding(3, 2, 3, 2);
             clientesDataGridView.Name = "clientesDataGridView";
             clientesDataGridView.RowHeadersWidth = 51;
-            clientesDataGridView.Size = new Size(748, 306);
+            clientesDataGridView.Size = new Size(654, 230);
             clientesDataGridView.TabIndex = 0;
             clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
             // eliminarButtonCliente
             // 
-            eliminarButtonCliente.Location = new Point(23, 355);
+            eliminarButtonCliente.Location = new Point(20, 266);
+            eliminarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             eliminarButtonCliente.Name = "eliminarButtonCliente";
-            eliminarButtonCliente.Size = new Size(163, 50);
+            eliminarButtonCliente.Size = new Size(143, 38);
             eliminarButtonCliente.TabIndex = 1;
             eliminarButtonCliente.Text = "Eliminar";
             eliminarButtonCliente.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // modificarButtonCliente
             // 
-            modificarButtonCliente.Location = new Point(223, 355);
+            modificarButtonCliente.Location = new Point(195, 266);
+            modificarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             modificarButtonCliente.Name = "modificarButtonCliente";
-            modificarButtonCliente.Size = new Size(163, 50);
+            modificarButtonCliente.Size = new Size(143, 38);
             modificarButtonCliente.TabIndex = 2;
             modificarButtonCliente.Text = "Modificar";
             modificarButtonCliente.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // agregarButtonCliente
             // 
-            agregarButtonCliente.Location = new Point(426, 355);
+            agregarButtonCliente.Location = new Point(373, 266);
+            agregarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             agregarButtonCliente.Name = "agregarButtonCliente";
-            agregarButtonCliente.Size = new Size(163, 50);
+            agregarButtonCliente.Size = new Size(143, 38);
             agregarButtonCliente.TabIndex = 3;
             agregarButtonCliente.Text = "Agregar";
             agregarButtonCliente.UseVisualStyleBackColor = true;
@@ -77,16 +81,17 @@
             // 
             // ClientesLista
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(agregarButtonCliente);
             Controls.Add(modificarButtonCliente);
             Controls.Add(eliminarButtonCliente);
             Controls.Add(clientesDataGridView);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ClientesLista";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Gestión de clientes";
             Load += ClientesLista_Load;
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).EndInit();
             ResumeLayout(false);

@@ -24,70 +24,67 @@
 
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.listarClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listarVendedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listarEventosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelContenedor = new System.Windows.Forms.Panel();
-            this.menuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new MenuStrip();
+            listarClientesToolStripMenuItem = new ToolStripMenuItem();
+            listarVendedoresToolStripMenuItem = new ToolStripMenuItem();
+            listarEventosToolStripMenuItem = new ToolStripMenuItem();
+            panelContenedor = new Panel();
+            menuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listarClientesToolStripMenuItem,
-            this.listarVendedoresToolStripMenuItem,
-            this.listarEventosToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1000, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1000, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // listarClientesToolStripMenuItem
             // 
-            this.listarClientesToolStripMenuItem.Name = "listarClientesToolStripMenuItem";
-            this.listarClientesToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.listarClientesToolStripMenuItem.Text = "Listar Clientes";
-            this.listarClientesToolStripMenuItem.Click += new System.EventHandler(this.listarClientesToolStripMenuItem_Click);
+            listarClientesToolStripMenuItem.Name = "listarClientesToolStripMenuItem";
+            listarClientesToolStripMenuItem.Size = new Size(104, 20);
+            listarClientesToolStripMenuItem.Text = "Gestión Clientes";
+            listarClientesToolStripMenuItem.Click += listarClientesToolStripMenuItem_Click;
             // 
             // listarVendedoresToolStripMenuItem
             // 
-            this.listarVendedoresToolStripMenuItem.Name = "listarVendedoresToolStripMenuItem";
-            this.listarVendedoresToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
-            this.listarVendedoresToolStripMenuItem.Text = "Listar Vendedores";
-            this.listarVendedoresToolStripMenuItem.Click += new System.EventHandler(this.listarVendedoresToolStripMenuItem_Click);
+            listarVendedoresToolStripMenuItem.Name = "listarVendedoresToolStripMenuItem";
+            listarVendedoresToolStripMenuItem.Size = new Size(123, 20);
+            listarVendedoresToolStripMenuItem.Text = "Gestión Vendedores";
+            listarVendedoresToolStripMenuItem.Click += listarVendedoresToolStripMenuItem_Click;
             // 
             // listarEventosToolStripMenuItem
             // 
-            this.listarEventosToolStripMenuItem.Name = "listarEventosToolStripMenuItem";
-            this.listarEventosToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.listarEventosToolStripMenuItem.Text = "Listar Eventos";
-            this.listarEventosToolStripMenuItem.Click += new System.EventHandler(this.listarEventosToolStripMenuItem_Click);
+            listarEventosToolStripMenuItem.Name = "listarEventosToolStripMenuItem";
+            listarEventosToolStripMenuItem.Size = new Size(103, 20);
+            listarEventosToolStripMenuItem.Text = "Gestión Eventos";
+            listarEventosToolStripMenuItem.Click += listarEventosToolStripMenuItem_Click;
             // 
             // panelContenedor
             // 
-            this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(0, 24);
-            this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(1000, 576);
-            this.panelContenedor.TabIndex = 1;
+            panelContenedor.Dock = DockStyle.Fill;
+            panelContenedor.Location = new Point(0, 24);
+            panelContenedor.Name = "panelContenedor";
+            panelContenedor.Size = new Size(1000, 576);
+            panelContenedor.TabIndex = 1;
             // 
             // MenuAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 600);
-            this.Controls.Add(this.panelContenedor);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MenuAdmin";
-            this.Text = "Menú Administrador";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1000, 600);
+            Controls.Add(panelContenedor);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "MenuAdmin";
+            Text = "Menú Administrador";
+            WindowState = FormWindowState.Maximized;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
