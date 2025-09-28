@@ -10,6 +10,8 @@ namespace Data
 
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Vendedor> Vendedores { get; set; }
+
+        public DbSet<Producto> Productos { get; set; }
         public BGEContext()
         {
             this.Database.EnsureCreated();
@@ -138,6 +140,28 @@ namespace Data
                 entity.Property(e => e.Tipo)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Producto>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Nombre)
+                      .IsRequired()
+                      .HasMaxLength(100);
+
+                entity.Property(e => e.Id)
+                      .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Descripcion)
+                      .IsRequired()
+                      .HasMaxLength(500);
+
+                entity.Property(e => e.Precio)
+                      .IsRequired()
+                      .HasColumnType("decimal(18,2)"); 
+
+
             });
         }
     }

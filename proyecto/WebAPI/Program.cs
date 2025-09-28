@@ -43,5 +43,6 @@ app.UseCors("AllowBlazorWasm");
 app.MapClienteEndpoints();
 app.MapEventoEndpoints();
 app.MapVendedorEndpoints();
+app.MapProductoEndpoints();
 
 app.Run();

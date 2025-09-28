@@ -44,34 +44,31 @@
             // 
             // nombreTextBox
             // 
-            nombreTextBox.Location = new Point(161, 33);
-            nombreTextBox.Margin = new Padding(3, 4, 3, 4);
+            nombreTextBox.Location = new Point(141, 25);
             nombreTextBox.Name = "nombreTextBox";
-            nombreTextBox.Size = new Size(114, 27);
+            nombreTextBox.Size = new Size(100, 23);
             nombreTextBox.TabIndex = 0;
             // 
             // descTextBox
             // 
-            descTextBox.Location = new Point(161, 96);
-            descTextBox.Margin = new Padding(3, 4, 3, 4);
+            descTextBox.Location = new Point(141, 72);
             descTextBox.Name = "descTextBox";
-            descTextBox.Size = new Size(114, 27);
+            descTextBox.Size = new Size(100, 23);
             descTextBox.TabIndex = 1;
             // 
             // lugarTextBox
             // 
-            lugarTextBox.Location = new Point(161, 224);
-            lugarTextBox.Margin = new Padding(3, 4, 3, 4);
+            lugarTextBox.Location = new Point(141, 168);
             lugarTextBox.Name = "lugarTextBox";
-            lugarTextBox.Size = new Size(114, 27);
+            lugarTextBox.Size = new Size(100, 23);
             lugarTextBox.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(69, 37);
+            label1.Location = new Point(60, 28);
             label1.Name = "label1";
-            label1.Size = new Size(64, 20);
+            label1.Size = new Size(51, 15);
             label1.TabIndex = 4;
             label1.Text = "Nombre";
             label1.Click += label1_Click;
@@ -79,36 +76,35 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(69, 100);
+            label2.Location = new Point(60, 75);
             label2.Name = "label2";
-            label2.Size = new Size(87, 20);
+            label2.Size = new Size(69, 15);
             label2.TabIndex = 5;
             label2.Text = "Descripcion";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(69, 163);
+            label3.Location = new Point(60, 122);
             label3.Name = "label3";
-            label3.Size = new Size(47, 20);
+            label3.Size = new Size(38, 15);
             label3.TabIndex = 6;
             label3.Text = "Fecha";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(69, 235);
+            label4.Location = new Point(60, 176);
             label4.Name = "label4";
-            label4.Size = new Size(46, 20);
+            label4.Size = new Size(37, 15);
             label4.TabIndex = 7;
             label4.Text = "Lugar";
             // 
             // button1
             // 
-            button1.Location = new Point(255, 296);
-            button1.Margin = new Padding(3, 4, 3, 4);
+            button1.Location = new Point(223, 222);
             button1.Name = "button1";
-            button1.Size = new Size(86, 31);
+            button1.Size = new Size(75, 23);
             button1.TabIndex = 8;
             button1.Text = "Enviar";
             button1.UseVisualStyleBackColor = true;
@@ -120,17 +116,18 @@
             // 
             // fechaPicker
             // 
-            fechaPicker.Location = new Point(161, 163);
+            fechaPicker.Location = new Point(141, 122);
+            fechaPicker.Margin = new Padding(3, 2, 3, 2);
             fechaPicker.Name = "fechaPicker";
-            fechaPicker.Size = new Size(250, 27);
+            fechaPicker.Size = new Size(219, 23);
             fechaPicker.TabIndex = 9;
             fechaPicker.Value = new DateTime(2025, 1, 1, 12, 0, 0, 0);
             // 
             // EventoDetalle
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(fechaPicker);
             Controls.Add(button1);
             Controls.Add(label4);
@@ -140,9 +137,9 @@
             Controls.Add(lugarTextBox);
             Controls.Add(descTextBox);
             Controls.Add(nombreTextBox);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "EventoDetalle";
             Text = "EventoDetalle";
+            Load += EventoDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

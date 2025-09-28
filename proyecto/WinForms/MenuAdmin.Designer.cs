@@ -29,12 +29,13 @@
             listarVendedoresToolStripMenuItem = new ToolStripMenuItem();
             listarEventosToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
+            gestiónProductosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1000, 24);
@@ -70,6 +71,13 @@
             panelContenedor.Size = new Size(1000, 576);
             panelContenedor.TabIndex = 1;
             // 
+            // gestiónProductosToolStripMenuItem
+            // 
+            gestiónProductosToolStripMenuItem.Name = "gestiónProductosToolStripMenuItem";
+            gestiónProductosToolStripMenuItem.Size = new Size(116, 20);
+            gestiónProductosToolStripMenuItem.Text = "Gestión Productos";
+            gestiónProductosToolStripMenuItem.Click += gestiónProductosToolStripMenuItem_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -95,5 +103,6 @@
         private System.Windows.Forms.ToolStripMenuItem listarVendedoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarEventosToolStripMenuItem;
         private System.Windows.Forms.Panel panelContenedor;
+        private ToolStripMenuItem gestiónProductosToolStripMenuItem;
     }
 }
