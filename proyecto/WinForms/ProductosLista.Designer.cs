@@ -37,7 +37,7 @@
             // 
             // agregarButtonProducto
             // 
-            agregarButtonProducto.Location = new Point(504, 330);
+            agregarButtonProducto.Location = new Point(426, 258);
             agregarButtonProducto.Margin = new Padding(3, 2, 3, 2);
             agregarButtonProducto.Name = "agregarButtonProducto";
             agregarButtonProducto.Size = new Size(82, 22);
@@ -45,12 +45,10 @@
             agregarButtonProducto.Text = "Agregar";
             agregarButtonProducto.UseVisualStyleBackColor = true;
             agregarButtonProducto.Click += agregarButtonProducto_Click;
-  
-
             // 
             // modificarButtonProducto
             // 
-            modificarButtonProducto.Location = new Point(340, 330);
+            modificarButtonProducto.Location = new Point(262, 258);
             modificarButtonProducto.Margin = new Padding(3, 2, 3, 2);
             modificarButtonProducto.Name = "modificarButtonProducto";
             modificarButtonProducto.Size = new Size(82, 22);
@@ -58,11 +56,10 @@
             modificarButtonProducto.Text = "Modificar";
             modificarButtonProducto.UseVisualStyleBackColor = true;
             modificarButtonProducto.Click += modificarButtonProducto_Click;
-
             // 
             // eliminarButtonProducto
             // 
-            eliminarButtonProducto.Location = new Point(173, 330);
+            eliminarButtonProducto.Location = new Point(95, 258);
             eliminarButtonProducto.Margin = new Padding(3, 2, 3, 2);
             eliminarButtonProducto.Name = "eliminarButtonProducto";
             eliminarButtonProducto.Size = new Size(82, 22);
@@ -74,7 +71,7 @@
             // productosDataGridView
             // 
             productosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productosDataGridView.Location = new Point(124, 98);
+            productosDataGridView.Location = new Point(46, 26);
             productosDataGridView.Margin = new Padding(3, 2, 3, 2);
             productosDataGridView.Name = "productosDataGridView";
             productosDataGridView.RowHeadersWidth = 51;
@@ -85,14 +82,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(agregarButtonProducto);
             Controls.Add(modificarButtonProducto);
             Controls.Add(eliminarButtonProducto);
             Controls.Add(productosDataGridView);
             Name = "ProductosLista";
             Text = "Form1";
-            Load += this.ProductosLista_Load;
+            Load += ProductosLista_Load;
             ((System.ComponentModel.ISupportInitialize)productosDataGridView).EndInit();
             ResumeLayout(false);
         }

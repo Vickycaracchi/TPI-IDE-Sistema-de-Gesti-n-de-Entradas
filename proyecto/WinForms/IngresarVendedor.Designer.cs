@@ -43,40 +43,43 @@
             // emailLabel
             // 
             emailLabel.AutoSize = true;
-            emailLabel.Location = new Point(237, 108);
+            emailLabel.Location = new Point(207, 81);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new Size(46, 20);
+            emailLabel.Size = new Size(36, 15);
             emailLabel.TabIndex = 0;
             emailLabel.Text = "Email";
             // 
             // emailTextBox
             // 
-            emailTextBox.Location = new Point(411, 101);
+            emailTextBox.Location = new Point(360, 76);
+            emailTextBox.Margin = new Padding(3, 2, 3, 2);
             emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new Size(125, 27);
+            emailTextBox.Size = new Size(110, 23);
             emailTextBox.TabIndex = 1;
             // 
             // contrasenaLabel
             // 
             contrasenaLabel.AutoSize = true;
-            contrasenaLabel.Location = new Point(237, 263);
+            contrasenaLabel.Location = new Point(207, 197);
             contrasenaLabel.Name = "contrasenaLabel";
-            contrasenaLabel.Size = new Size(83, 20);
+            contrasenaLabel.Size = new Size(67, 15);
             contrasenaLabel.TabIndex = 4;
             contrasenaLabel.Text = "Contrasena";
             // 
             // contrasenaTextBox
             // 
-            contrasenaTextBox.Location = new Point(411, 256);
+            contrasenaTextBox.Location = new Point(360, 192);
+            contrasenaTextBox.Margin = new Padding(3, 2, 3, 2);
             contrasenaTextBox.Name = "contrasenaTextBox";
-            contrasenaTextBox.Size = new Size(125, 27);
+            contrasenaTextBox.Size = new Size(110, 23);
             contrasenaTextBox.TabIndex = 5;
             // 
             // enviarLoginVendedor
             // 
-            enviarLoginVendedor.Location = new Point(344, 354);
+            enviarLoginVendedor.Location = new Point(301, 266);
+            enviarLoginVendedor.Margin = new Padding(3, 2, 3, 2);
             enviarLoginVendedor.Name = "enviarLoginVendedor";
-            enviarLoginVendedor.Size = new Size(94, 29);
+            enviarLoginVendedor.Size = new Size(82, 22);
             enviarLoginVendedor.TabIndex = 6;
             enviarLoginVendedor.Text = "Enviar";
             enviarLoginVendedor.UseVisualStyleBackColor = true;
@@ -89,24 +92,25 @@
             // nombreLabel
             // 
             nombreLabel.AutoSize = true;
-            nombreLabel.Location = new Point(237, 190);
+            nombreLabel.Location = new Point(207, 142);
             nombreLabel.Name = "nombreLabel";
-            nombreLabel.Size = new Size(64, 20);
+            nombreLabel.Size = new Size(51, 15);
             nombreLabel.TabIndex = 2;
             nombreLabel.Text = "Nombre";
             // 
             // nombreTextBox
             // 
-            nombreTextBox.Location = new Point(411, 183);
+            nombreTextBox.Location = new Point(360, 137);
+            nombreTextBox.Margin = new Padding(3, 2, 3, 2);
             nombreTextBox.Name = "nombreTextBox";
-            nombreTextBox.Size = new Size(125, 27);
+            nombreTextBox.Size = new Size(110, 23);
             nombreTextBox.TabIndex = 3;
             // 
             // IngresarVendedor
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(nombreTextBox);
             Controls.Add(nombreLabel);
             Controls.Add(enviarLoginVendedor);
@@ -114,9 +118,11 @@
             Controls.Add(contrasenaLabel);
             Controls.Add(emailTextBox);
             Controls.Add(emailLabel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "IngresarVendedor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "IngresarVendedor";
+            Load += IngresarVendedor_Load;
             ((System.ComponentModel.ISupportInitialize)ingresarVendedorErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

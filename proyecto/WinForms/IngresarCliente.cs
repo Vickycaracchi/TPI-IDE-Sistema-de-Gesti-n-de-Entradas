@@ -22,7 +22,7 @@ namespace WinForms
 
         private async void ingresarButton_Click(object sender, EventArgs e)
         {
-            if(this.ValidateCliente())
+            if (this.ValidateCliente())
             {
                 try
                 {
@@ -34,16 +34,18 @@ namespace WinForms
                     };
 
                     ClienteDTO? cliente = await ClienteApiClient.LoginAsync(clienteIng);
-                    if(cliente != null)
+                    if (cliente != null)
                     {
-                        this.Hide();
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                     else
                     {
                         MessageBox.Show("Credenciales inválidas. Intente nuevamente.", "Error de Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show($"Ocurrió un error al intentar iniciar sesión: {ex.Message}", "Error de Conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -89,6 +91,11 @@ namespace WinForms
             if (string.IsNullOrWhiteSpace(email))
                 return false;
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        }
+
+        private void IngresarCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

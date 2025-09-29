@@ -28,8 +28,8 @@
             listarClientesToolStripMenuItem = new ToolStripMenuItem();
             listarVendedoresToolStripMenuItem = new ToolStripMenuItem();
             listarEventosToolStripMenuItem = new ToolStripMenuItem();
-            panelContenedor = new Panel();
             gestiónProductosToolStripMenuItem = new ToolStripMenuItem();
+            panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,6 +63,13 @@
             listarEventosToolStripMenuItem.Text = "Gestión Eventos";
             listarEventosToolStripMenuItem.Click += listarEventosToolStripMenuItem_Click;
             // 
+            // gestiónProductosToolStripMenuItem
+            // 
+            gestiónProductosToolStripMenuItem.Name = "gestiónProductosToolStripMenuItem";
+            gestiónProductosToolStripMenuItem.Size = new Size(116, 20);
+            gestiónProductosToolStripMenuItem.Text = "Gestión Productos";
+            gestiónProductosToolStripMenuItem.Click += gestiónProductosToolStripMenuItem_Click;
+            // 
             // panelContenedor
             // 
             panelContenedor.Dock = DockStyle.Fill;
@@ -70,13 +77,6 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1000, 576);
             panelContenedor.TabIndex = 1;
-            // 
-            // gestiónProductosToolStripMenuItem
-            // 
-            gestiónProductosToolStripMenuItem.Name = "gestiónProductosToolStripMenuItem";
-            gestiónProductosToolStripMenuItem.Size = new Size(116, 20);
-            gestiónProductosToolStripMenuItem.Text = "Gestión Productos";
-            gestiónProductosToolStripMenuItem.Click += gestiónProductosToolStripMenuItem_Click;
             // 
             // MenuAdmin
             // 
@@ -89,6 +89,7 @@
             Name = "MenuAdmin";
             Text = "Menú Administrador";
             WindowState = FormWindowState.Maximized;
+            Load += MenuAdmin_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

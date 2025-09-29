@@ -46,9 +46,9 @@ namespace WinForms
                     else
                     {
                         MessageBox.Show("Credenciales inválidas. Intente nuevamente.", "Error de Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        
+
                         this.Hide();
-                        
+
                         IngresarVendedor ingresarVendedorForm = new IngresarVendedor();
 
                         ingresarVendedorForm.ShowDialog();
@@ -101,6 +101,11 @@ namespace WinForms
             if (string.IsNullOrWhiteSpace(email))
                 return false;
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        }
+
+        private void IngresarVendedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

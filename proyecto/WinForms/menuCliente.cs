@@ -1,11 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinForms
 {
-    public partial class MenuAdmin : Form
+
+    public partial class menuCliente : Form
     {
-        public MenuAdmin()
+        public menuCliente()
         {
             InitializeComponent();
         }
@@ -26,27 +34,21 @@ namespace WinForms
             formHijo.Show();
         }
 
-        private void listarClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void verProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new ClientesLista());
+           AbrirFormularioEnPanel(new ListarProductos());
+        }
+        private void verEventosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             AbrirFormularioEnPanel(new ListarEventos());
         }
 
-        private void listarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MenuCliente_Load(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new VendedoresLista());
+
         }
 
-        private void listarEventosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new EventosLista());
-        }
-
-        private void gestiónProductosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new ProductosLista());
-        }
-
-        private void MenuAdmin_Load(object sender, EventArgs e)
+        private void menuCliente_Load_1(object sender, EventArgs e)
         {
 
         }
