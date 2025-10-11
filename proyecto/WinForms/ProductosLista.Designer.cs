@@ -37,10 +37,9 @@
             // 
             // agregarButtonProducto
             // 
-            agregarButtonProducto.Location = new Point(426, 258);
-            agregarButtonProducto.Margin = new Padding(3, 2, 3, 2);
+            agregarButtonProducto.Location = new Point(487, 344);
             agregarButtonProducto.Name = "agregarButtonProducto";
-            agregarButtonProducto.Size = new Size(82, 22);
+            agregarButtonProducto.Size = new Size(94, 29);
             agregarButtonProducto.TabIndex = 3;
             agregarButtonProducto.Text = "Agregar";
             agregarButtonProducto.UseVisualStyleBackColor = true;
@@ -48,10 +47,9 @@
             // 
             // modificarButtonProducto
             // 
-            modificarButtonProducto.Location = new Point(262, 258);
-            modificarButtonProducto.Margin = new Padding(3, 2, 3, 2);
+            modificarButtonProducto.Location = new Point(299, 344);
             modificarButtonProducto.Name = "modificarButtonProducto";
-            modificarButtonProducto.Size = new Size(82, 22);
+            modificarButtonProducto.Size = new Size(94, 29);
             modificarButtonProducto.TabIndex = 2;
             modificarButtonProducto.Text = "Modificar";
             modificarButtonProducto.UseVisualStyleBackColor = true;
@@ -59,10 +57,9 @@
             // 
             // eliminarButtonProducto
             // 
-            eliminarButtonProducto.Location = new Point(95, 258);
-            eliminarButtonProducto.Margin = new Padding(3, 2, 3, 2);
+            eliminarButtonProducto.Location = new Point(109, 344);
             eliminarButtonProducto.Name = "eliminarButtonProducto";
-            eliminarButtonProducto.Size = new Size(82, 22);
+            eliminarButtonProducto.Size = new Size(94, 29);
             eliminarButtonProducto.TabIndex = 1;
             eliminarButtonProducto.Text = "Eliminar";
             eliminarButtonProducto.UseVisualStyleBackColor = true;
@@ -71,24 +68,24 @@
             // productosDataGridView
             // 
             productosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productosDataGridView.Location = new Point(46, 26);
-            productosDataGridView.Margin = new Padding(3, 2, 3, 2);
+            productosDataGridView.Location = new Point(53, 35);
             productosDataGridView.Name = "productosDataGridView";
             productosDataGridView.RowHeadersWidth = 51;
-            productosDataGridView.Size = new Size(553, 198);
+            productosDataGridView.Size = new Size(632, 264);
             productosDataGridView.TabIndex = 0;
             // 
             // ProductosLista
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(agregarButtonProducto);
             Controls.Add(modificarButtonProducto);
             Controls.Add(eliminarButtonProducto);
             Controls.Add(productosDataGridView);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ProductosLista";
-            Text = "Form1";
+            Text = "Gestion de productos";
             Load += ProductosLista_Load;
             ((System.ComponentModel.ISupportInitialize)productosDataGridView).EndInit();
             ResumeLayout(false);

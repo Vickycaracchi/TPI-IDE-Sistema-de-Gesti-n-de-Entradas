@@ -3,29 +3,35 @@
 
 namespace Domain.Model
 {
-    public class Cliente
+    public class Usuario
     {
         public int Id { get; private set; }
-        public string Email { get; private set; }
+        public string Dni { get; private set; }
         public string Nombre { get; private set; }
         public string Apellido { get; private set; }
+        public string Email { get; private set; }
+        public string Contrasena { get; private set; }
+        public string Cvu { get; private set; }
+        public string Tipo { get; private set; }
         public string NumeroTelefono { get; private set; }
         public DateTime FechaNac { get; private set; }
         public string Instagram { get; private set; }
-        public string Contrasena { get; private set; }
 
-        public Cliente() { }
+        public Usuario() { }
 
-        public Cliente(int id, string email, string nombre, string apellido, string numeroTelefono, DateTime fechaNac, string instagram, string contrasena)
+        public Usuario(int id, string dni, string nombre, string apellido, string email, string contrasena, string cvu, string tipo, string numeroTelefono, DateTime fechaNac, string instagram)
         {
             SetId(id);
-            SetEmail(email);
+            SetDni(dni);
             SetNombre(nombre);
             SetApellido(apellido);
+            SetEmail(email);
+            SetContrasena(contrasena);
+            SetCvu(cvu);
+            SetTipo(tipo);
             SetNumeroTelefono(numeroTelefono);
             SetFechaNac(fechaNac);
             SetInstagram(instagram);
-            SetContrasena(contrasena);
         }
 
         public void SetId(int id)
@@ -34,13 +40,13 @@ namespace Domain.Model
                 throw new ArgumentException("El Id debe ser mayor que 0.", nameof(id));
             Id = id;
         }
-
-        public void SetEmail(string email)
+        public void SetDni(string dni)
         {
-            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
-                throw new ArgumentException("Debe ser un email válido.", nameof(email));
-            Email = email;
+            if (string.IsNullOrWhiteSpace(dni))
+                throw new ArgumentException("El dni no puede ser nulo o vacío.", nameof(dni));
+            Dni = dni;
         }
+
 
         public void SetNombre(string nombre)
         {
@@ -54,6 +60,33 @@ namespace Domain.Model
             if (string.IsNullOrWhiteSpace(apellido))
                 throw new ArgumentException("El apellido no puede ser nulo o vacío.", nameof(apellido));
             Apellido = apellido;
+        }
+        public void SetEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
+                throw new ArgumentException("Debe ser un email válido.", nameof(email));
+            Email = email;
+        }
+        public void SetContrasena(string contrasena)
+        {
+            if (string.IsNullOrWhiteSpace(contrasena))
+                throw new ArgumentException("La contrasena no puede ser nula o vacía.", nameof(contrasena));
+            Contrasena = contrasena;
+        }
+
+
+        public void SetCvu(string cvu)
+        {
+            if (string.IsNullOrWhiteSpace(cvu))
+                throw new ArgumentException("El cvu no puede ser nulo o vacío.", nameof(cvu));
+            Cvu = cvu;
+        }
+
+        public void SetTipo(string tipo)
+        {
+            if (string.IsNullOrWhiteSpace(tipo))
+                throw new ArgumentException("El tipo no puede ser nulo o vacío.", nameof(tipo));
+            Tipo = tipo;
         }
 
         public void SetNumeroTelefono(string numeroTelefono)
@@ -78,13 +111,7 @@ namespace Domain.Model
             if (string.IsNullOrWhiteSpace(instagram))
                 throw new ArgumentException("El instagram no puede ser nulo o vacío.", nameof(instagram));
             Instagram = instagram;
-        }
-        public void SetContrasena(string contrasena)
-        {
-            if (string.IsNullOrWhiteSpace(contrasena))
-                throw new ArgumentException("La contrasena no puede ser nula o vacía.", nameof(contrasena));
-            Contrasena = contrasena;
-        }
 
+        }
     }
 }

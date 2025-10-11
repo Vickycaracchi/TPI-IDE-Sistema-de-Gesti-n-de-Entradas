@@ -1,6 +1,6 @@
 ﻿namespace WinForms
 {
-    partial class IngresarVendedor
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -29,57 +29,52 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            emailLabel = new Label();
-            emailTextBox = new TextBox();
+            DniLabel = new Label();
+            DniTextBox = new TextBox();
             contrasenaLabel = new Label();
             contrasenaTextBox = new TextBox();
             enviarLoginVendedor = new Button();
             ingresarVendedorErrorProvider = new ErrorProvider(components);
-            nombreLabel = new Label();
-            nombreTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)ingresarVendedorErrorProvider).BeginInit();
             SuspendLayout();
             // 
-            // emailLabel
+            // DniLabel
             // 
-            emailLabel.AutoSize = true;
-            emailLabel.Location = new Point(207, 81);
-            emailLabel.Name = "emailLabel";
-            emailLabel.Size = new Size(36, 15);
-            emailLabel.TabIndex = 0;
-            emailLabel.Text = "Email";
+            DniLabel.AutoSize = true;
+            DniLabel.Location = new Point(267, 121);
+            DniLabel.Name = "DniLabel";
+            DniLabel.Size = new Size(32, 20);
+            DniLabel.TabIndex = 0;
+            DniLabel.Text = "Dni";
             // 
-            // emailTextBox
+            // DniTextBox
             // 
-            emailTextBox.Location = new Point(360, 76);
-            emailTextBox.Margin = new Padding(3, 2, 3, 2);
-            emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new Size(110, 23);
-            emailTextBox.TabIndex = 1;
+            DniTextBox.Location = new Point(441, 114);
+            DniTextBox.Name = "DniTextBox";
+            DniTextBox.Size = new Size(125, 27);
+            DniTextBox.TabIndex = 1;
             // 
             // contrasenaLabel
             // 
             contrasenaLabel.AutoSize = true;
-            contrasenaLabel.Location = new Point(207, 197);
+            contrasenaLabel.Location = new Point(267, 191);
             contrasenaLabel.Name = "contrasenaLabel";
-            contrasenaLabel.Size = new Size(67, 15);
+            contrasenaLabel.Size = new Size(83, 20);
             contrasenaLabel.TabIndex = 4;
             contrasenaLabel.Text = "Contrasena";
             // 
             // contrasenaTextBox
             // 
-            contrasenaTextBox.Location = new Point(360, 192);
-            contrasenaTextBox.Margin = new Padding(3, 2, 3, 2);
+            contrasenaTextBox.Location = new Point(441, 184);
             contrasenaTextBox.Name = "contrasenaTextBox";
-            contrasenaTextBox.Size = new Size(110, 23);
+            contrasenaTextBox.Size = new Size(125, 27);
             contrasenaTextBox.TabIndex = 5;
             // 
             // enviarLoginVendedor
             // 
-            enviarLoginVendedor.Location = new Point(301, 266);
-            enviarLoginVendedor.Margin = new Padding(3, 2, 3, 2);
+            enviarLoginVendedor.Location = new Point(344, 273);
             enviarLoginVendedor.Name = "enviarLoginVendedor";
-            enviarLoginVendedor.Size = new Size(82, 22);
+            enviarLoginVendedor.Size = new Size(94, 29);
             enviarLoginVendedor.TabIndex = 6;
             enviarLoginVendedor.Text = "Enviar";
             enviarLoginVendedor.UseVisualStyleBackColor = true;
@@ -89,40 +84,19 @@
             // 
             ingresarVendedorErrorProvider.ContainerControl = this;
             // 
-            // nombreLabel
+            // Login
             // 
-            nombreLabel.AutoSize = true;
-            nombreLabel.Location = new Point(207, 142);
-            nombreLabel.Name = "nombreLabel";
-            nombreLabel.Size = new Size(51, 15);
-            nombreLabel.TabIndex = 2;
-            nombreLabel.Text = "Nombre";
-            // 
-            // nombreTextBox
-            // 
-            nombreTextBox.Location = new Point(360, 137);
-            nombreTextBox.Margin = new Padding(3, 2, 3, 2);
-            nombreTextBox.Name = "nombreTextBox";
-            nombreTextBox.Size = new Size(110, 23);
-            nombreTextBox.TabIndex = 3;
-            // 
-            // IngresarVendedor
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
-            Controls.Add(nombreTextBox);
-            Controls.Add(nombreLabel);
+            ClientSize = new Size(800, 451);
             Controls.Add(enviarLoginVendedor);
             Controls.Add(contrasenaTextBox);
             Controls.Add(contrasenaLabel);
-            Controls.Add(emailTextBox);
-            Controls.Add(emailLabel);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "IngresarVendedor";
+            Controls.Add(DniTextBox);
+            Controls.Add(DniLabel);
+            Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "IngresarVendedor";
-            Load += IngresarVendedor_Load;
+            Text = "Login";
             ((System.ComponentModel.ISupportInitialize)ingresarVendedorErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -130,13 +104,11 @@
 
         #endregion
 
-        private Label emailLabel;
-        private TextBox emailTextBox;
+        private Label DniLabel;
+        private TextBox DniTextBox;
         private Label contrasenaLabel;
         private TextBox contrasenaTextBox;
         private Button enviarLoginVendedor;
         private ErrorProvider ingresarVendedorErrorProvider;
-        private Label nombreLabel;
-        private TextBox nombreTextBox;
     }
 }

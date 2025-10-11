@@ -18,8 +18,6 @@ namespace WinForms
     public partial class EventoDetalle : Form
     {
         private EventoDTO evento;
-        private FormMode mode;
-
         public EventoDTO Evento
         {
             get { return evento; }
@@ -29,6 +27,7 @@ namespace WinForms
                 this.SetEvento();
             }
         }
+        public FormMode mode;
         public FormMode Mode
         {
             get
@@ -39,6 +38,10 @@ namespace WinForms
             {
                 SetFormMode(value);
             }
+        }
+        private void SetFormMode(FormMode value)
+        {
+            mode = value;
         }
         public EventoDetalle()
         {
@@ -58,12 +61,6 @@ namespace WinForms
             }
             this.lugarTextBox.Text = this.Evento.Lugar;
         }
-
-        private void SetFormMode(FormMode value)
-        {
-            mode = value;
-        }
-
         private bool ValidateEvento()
         {
             bool isValid = true;
@@ -82,9 +79,6 @@ namespace WinForms
                 isValid = false;
                 errorProvider.SetError(lugarTextBox, "El Lugar es Requerido");
             }
-
-
-
             return isValid;
         }
 

@@ -19,12 +19,9 @@ namespace WinForms
 
         private void agregarButtonVendedor_Click(object sender, EventArgs e)
         {
-            RegistrarVendedor vendedorDetalle = new RegistrarVendedor();
-
-            VendedorDTO vendedorNuevo = new VendedorDTO();
+            RegistrarUsuario vendedorDetalle = new RegistrarUsuario();
 
             vendedorDetalle.Mode = FormMode.Add;
-            vendedorDetalle.Vendedor = vendedorNuevo;
 
             vendedorDetalle.ShowDialog();
 
@@ -43,12 +40,12 @@ namespace WinForms
                 }
 
                 // Traigo el vendedor desde la API
-                VendedorDTO vendedor = await VendedorApiClient.GetAsync(selected.Id);
+                UsuarioDTO vendedor = await UsuarioApiClient.GetAsync(selected.Id);
 
-                RegistrarVendedor vendedorDetalle = new RegistrarVendedor();
+                RegistrarUsuario vendedorDetalle = new RegistrarUsuario();
 
                 // IMPORTANTE: primero asigno el vendedor, después el modo
-                vendedorDetalle.Vendedor = vendedor;
+                vendedorDetalle.usuario = vendedor;
                 vendedorDetalle.Mode = FormMode.Update;
 
                 vendedorDetalle.ShowDialog();
@@ -76,7 +73,7 @@ namespace WinForms
 
                 if (result == DialogResult.Yes)
                 {
-                    await VendedorApiClient.DeleteAsync(selected.Id);
+                    await UsuarioApiClient.DeleteAsync(selected.Id);
                     this.GetAllAndLoad();
                 }
             }
@@ -91,7 +88,7 @@ namespace WinForms
             try
             {
                 this.vendedoresDataGridView.DataSource = null;
-                this.vendedoresDataGridView.DataSource = await VendedorApiClient.GetAllAsync();
+                this.vendedoresDataGridView.DataSource = await UsuarioApiClient.GetAllAsync();
 
                 if (this.vendedoresDataGridView.Rows.Count > 0)
                 {
@@ -113,11 +110,11 @@ namespace WinForms
             }
         }
 
-        private VendedorDTO SelectedItem()
+        private UsuarioDTO SelectedItem()
         {
             if (vendedoresDataGridView.SelectedRows.Count > 0)
             {
-                return (VendedorDTO)vendedoresDataGridView.SelectedRows[0].DataBoundItem;
+                return (UsuarioDTO)vendedoresDataGridView.SelectedRows[0].DataBoundItem;
             }
             return null;
         }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public class VendedorLoginDTO
+    public class LoginDTO
     {
-        public string Email { get; set; }
-        public string Nombre { get; set; }
+        public string Dni { get; set; }
         public string Contrasena { get; set; }
     }
 }

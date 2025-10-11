@@ -6,11 +6,8 @@ namespace Data
 {
     public class BGEContext : DbContext
     {
-        public DbSet<Cliente> Clientes { get; set; }
-
         public DbSet<Evento> Eventos { get; set; }
-        public DbSet<Vendedor> Vendedores { get; set; }
-
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public BGEContext()
         {
@@ -41,43 +38,6 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Cliente>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.Apellido)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                // Restricción única para Email
-                entity.HasIndex(e => e.Email)
-                    .IsUnique();
-
-                entity.Property(e => e.NumeroTelefono)
-                    .HasMaxLength(15);
-
-                entity.Property(e => e.FechaNac)
-                    .IsRequired();
-
-                entity.Property(e => e.Instagram)
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.Contrasena)
-                    .IsRequired()
-                    .HasMaxLength(100);
-            });
-
             modelBuilder.Entity<Evento>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -103,7 +63,7 @@ namespace Data
                     .HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Vendedor>(entity =>
+            modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -139,6 +99,15 @@ namespace Data
 
                 entity.Property(e => e.Tipo)
                     .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.NumeroTelefono)
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.FechaNac)
+                    .IsRequired();
+
+                entity.Property(e => e.Instagram)
                     .HasMaxLength(100);
             });
 

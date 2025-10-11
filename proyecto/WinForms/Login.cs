@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace WinForms
 {
-    public partial class IngresarVendedor : Form
+    public partial class Login : Form
     {
-        public IngresarVendedor()
+        public Login()
         {
             InitializeComponent();
         }
 
-        public string TipoVendedor { get; private set; }
+        public string TipoUsuario { get; private set; }
 
         private async void enviarLoginVendedor_Click(object sender, EventArgs e)
         {
@@ -28,17 +28,16 @@ namespace WinForms
             {
                 try
                 {
-                    VendedorLoginDTO vendedorIng = new VendedorLoginDTO()
+                    LoginDTO login = new LoginDTO()
                     {
-                        Email = this.emailTextBox.Text,
-                        Nombre = this.nombreTextBox.Text,
+                        Dni = this.DniTextBox.Text,
                         Contrasena = this.contrasenaTextBox.Text
                     };
 
-                    VendedorDTO? vendedor = await VendedorApiClient.LoginAsync(vendedorIng);
-                    if (vendedor != null)
+                    UsuarioDTO? usuario = await UsuarioApiClient.LoginAsync(login);
+                    if (usuario != null)
                     {
-                        TipoVendedor = vendedor.Tipo;
+                        TipoUsuario = usuario.Tipo;
 
                         this.DialogResult = DialogResult.OK;
                         this.Close();
@@ -49,9 +48,9 @@ namespace WinForms
 
                         this.Hide();
 
-                        IngresarVendedor ingresarVendedorForm = new IngresarVendedor();
+                        Login ingresarUsuarioForm = new Login();
 
-                        ingresarVendedorForm.ShowDialog();
+                        ingresarUsuarioForm.ShowDialog();
                     }
 
                 }
@@ -66,25 +65,13 @@ namespace WinForms
         {
             bool isValid = true;
 
-            ingresarVendedorErrorProvider.SetError(emailTextBox, string.Empty);
-            ingresarVendedorErrorProvider.SetError(nombreTextBox, string.Empty);
+            ingresarVendedorErrorProvider.SetError(DniTextBox, string.Empty);
             ingresarVendedorErrorProvider.SetError(contrasenaTextBox, string.Empty);
 
-            if (this.emailTextBox.Text == string.Empty)
+            if (this.DniTextBox.Text == string.Empty)
             {
                 isValid = false;
-                ingresarVendedorErrorProvider.SetError(emailTextBox, "El Email es Requerido");
-            }
-            else if (!EsEmailValido(this.emailTextBox.Text))
-            {
-                isValid = false;
-                ingresarVendedorErrorProvider.SetError(emailTextBox, "El formato del Email no es válido");
-            }
-
-            if (this.nombreTextBox.Text == string.Empty)
-            {
-                isValid = false;
-                ingresarVendedorErrorProvider.SetError(nombreTextBox, "El Nombre es Requerido");
+                ingresarVendedorErrorProvider.SetError(DniTextBox, "El DNI es Requerido");
             }
 
             if (this.contrasenaTextBox.Text == string.Empty)
@@ -95,17 +82,5 @@ namespace WinForms
 
             return isValid;
         }
-
-        private static bool EsEmailValido(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
         }
-
-        private void IngresarVendedor_Load(object sender, EventArgs e)
-        {
-
-        }
-    }
 }

@@ -18,20 +18,33 @@ namespace WinForms
         {
             InitializeComponent();
         }
+        public FormMode mode;
+        public FormMode Mode
+        {
+            get
+            {
+                return mode;
+            }
+            set
+            {
+                SetFormMode(value);
+            }
+        }
+        private void SetFormMode(FormMode value)
+        {
+            mode = value;
+        }
         private void ClientesLista_Load(object sender, EventArgs e)
         {
             this.GetAllAndLoad();
         }
         private void agregarButton_Click(object sender, EventArgs e)
         {
-            RegistrarCliente clienteDetalle = new RegistrarCliente();
+            RegistrarUsuario registrarCliente = new RegistrarUsuario();
 
-            ClienteDTO clienteNuevo = new ClienteDTO();
+            registrarCliente.Mode = FormMode.Add;
 
-            clienteDetalle.Mode = FormMode.Add;
-            clienteDetalle.Cliente = clienteNuevo;
-
-            clienteDetalle.ShowDialog();
+            registrarCliente.ShowDialog();
 
             this.GetAllAndLoad();
         }
@@ -47,12 +60,12 @@ namespace WinForms
                     return;
                 }
 
-                RegistrarCliente clienteDetalle = new RegistrarCliente();
+                RegistrarUsuario clienteDetalle = new RegistrarUsuario();
 
-                ClienteDTO cliente = await ClienteApiClient.GetAsync(selected.Id);
+                UsuarioDTO usuario = await UsuarioApiClient.GetAsync(selected.Id);
 
                 clienteDetalle.Mode = FormMode.Update;
-                clienteDetalle.Cliente = cliente;
+                clienteDetalle.usuario = usuario;
 
                 clienteDetalle.ShowDialog();
 
@@ -79,7 +92,7 @@ namespace WinForms
 
                 if (result == DialogResult.Yes)
                 {
-                    await ClienteApiClient.DeleteAsync(selected.Id);
+                    await UsuarioApiClient.DeleteAsync(selected.Id);
                     this.GetAllAndLoad();
                 }
             }
@@ -94,7 +107,7 @@ namespace WinForms
             try
             {
                 this.clientesDataGridView.DataSource = null;
-                this.clientesDataGridView.DataSource = await ClienteApiClient.GetAllAsync();
+                this.clientesDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
 
                 if (this.clientesDataGridView.Rows.Count > 0)
                 {
@@ -115,11 +128,11 @@ namespace WinForms
                 this.modificarButtonCliente.Enabled = false;
             }
         }
-        private ClienteDTO SelectedItem()
+        private UsuarioDTO SelectedItem()
         {
             if (clientesDataGridView.SelectedRows.Count > 0)
             {
-                return (ClienteDTO)clientesDataGridView.SelectedRows[0].DataBoundItem;
+                return (UsuarioDTO)clientesDataGridView.SelectedRows[0].DataBoundItem;
             }
             return null;
         }

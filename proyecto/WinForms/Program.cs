@@ -10,8 +10,6 @@ namespace WinForms
         { 
             inicio inicio = new inicio();
             inicio.ShowDialog();
-
-            IngresarVendedor ingresarVendedorForm = new IngresarVendedor();
             
 
         }

@@ -10,8 +10,29 @@ using System.Windows.Forms;
 
 namespace WinForms
 {
+    public enum FormMode
+    {
+        Add,
+        Update
+    }
     public partial class inicio : Form
     {
+        public FormMode mode;
+        public FormMode Mode
+        {
+            get
+            {
+                return mode;
+            }
+            set
+            {
+                SetFormMode(value);
+            }
+        }
+        private void SetFormMode(FormMode value)
+        {
+            mode = value;
+        }
         public inicio()
         {
             InitializeComponent();
@@ -31,70 +52,38 @@ namespace WinForms
 
             formHijo.Show();
         }
-
-        private void ingresarComoClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ingresarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var ingresarClienteForm = new IngresarCliente())
+
+            using (var ingresarUsuarioForm = new Login())
             {
-                if (ingresarClienteForm.ShowDialog() == DialogResult.OK)
+                if (ingresarUsuarioForm.ShowDialog() == DialogResult.OK)
                 {
                     MessageBox.Show(
-                        $"Bienvenido!",
-                        "Inicio de Sesión Exitoso",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-                    var inicioCliente = new menuCliente();
-                    inicioCliente.ShowDialog();
-
-
-                }
-            }
-        }
-
-        private void ingresarComoVendedorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-            using (var ingresarVendedorForm = new IngresarVendedor())
-            {
-                if (ingresarVendedorForm.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show(
-                        $"Bienvenido, {ingresarVendedorForm.TipoVendedor}!",
+                        $"Bienvenido, {ingresarUsuarioForm.TipoUsuario}!",
                         "Inicio de Sesión Exitoso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                     );
 
-                    if (ingresarVendedorForm.TipoVendedor == "Administrador")
+                    if (ingresarUsuarioForm.TipoUsuario == "Administrador")
                     {
-                        
+
                         var menuAdminForm = new MenuAdmin();
                         menuAdminForm.ShowDialog();
                     }
-                    else if (ingresarVendedorForm.TipoVendedor == "Vendedor")
+                    else if (ingresarUsuarioForm.TipoUsuario == "Vendedor")
                     {
                         var listaClientesForm = new ClientesLista();
                         listaClientesForm.ShowDialog();
                     }
+                    //falta else if para cliente
                 }
             }
         }
-
-        private void registrarClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void registrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new RegistrarCliente());
-        }
-
-        private void registrarAdministradorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new RegistrarVendedor());
-        }
-
-
-        private void inicio_Load(object sender, EventArgs e)
-        {
-
+            AbrirFormularioEnPanel(new RegistrarUsuario());
         }
     }
 }
