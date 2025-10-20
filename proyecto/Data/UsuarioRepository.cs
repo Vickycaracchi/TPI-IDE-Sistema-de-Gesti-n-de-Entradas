@@ -78,10 +78,10 @@ namespace Data
                 .FirstOrDefault(c => c.Email.ToLower() == email.ToLower());
         }
 
-        public bool EmailExists(string email, int? excludeId = null)
+        public bool EmailOrDniExists(string email, string dni , int? excludeId = null)
         {
             using var context = CreateContext();
-            var query = context.Usuarios.Where(c => c.Email.ToLower() == email.ToLower());
+            var query = context.Usuarios.Where(c => c.Email.ToLower() == email.ToLower() && c.Dni.ToLower() == dni.ToLower());
             if (excludeId.HasValue)
             {
                 query = query.Where(c => c.Id != excludeId.Value);

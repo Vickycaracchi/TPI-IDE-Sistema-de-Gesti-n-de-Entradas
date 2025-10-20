@@ -11,9 +11,9 @@ namespace Application.Services
             var usuarioRepository = new UsuarioRepository();
 
             // Validar que el email no esté duplicado
-            if (usuarioRepository.EmailExists(dto.Email))
+            if (usuarioRepository.EmailOrDniExists(dto.Email, dto.Dni))
             {
-                throw new ArgumentException($"Ya existe un usuario con el Email '{dto.Email}'.");
+                throw new ArgumentException($"Ya existe un usuario con el Email '{dto.Email}' o el Dni '{dto.Dni}'.");
             }
 
             Usuario usuario = new Usuario(dto.Id, dto.Dni, dto.Nombre, dto.Apellido, dto.Email, dto.Contrasena, dto.Cvu, dto.Tipo, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
@@ -99,7 +99,7 @@ namespace Application.Services
             var usuarioRepository = new UsuarioRepository();
 
             // Validar que el email no esté duplicado (excluyendo el usuario actual)
-            if (usuarioRepository.EmailExists(dto.Email, dto.Id))
+            if (usuarioRepository.EmailOrDniExists(dto.Email, dto.Dni, dto.Id))
             {
                 throw new ArgumentException($"Ya existe otro usuario con el Email '{dto.Email}'.");
             }
