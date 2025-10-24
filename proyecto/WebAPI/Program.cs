@@ -7,7 +7,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v2", new()
     {
-        Title = "Bohemia Gestión de Entradas API",
+        Title = "Bohemia Gestiï¿½n de Entradas API",
         Version = "v2"
     });
 });
@@ -31,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Bohemia Gestión de Entradas API v2");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Bohemia Gestiï¿½n de Entradas API v2");
     });
     app.UseHttpLogging();
 }
@@ -43,5 +43,6 @@ app.UseCors("AllowBlazorWasm");
 app.MapEventoEndpoints();
 app.MapUsuarioEndpoints();
 app.MapProductoEndpoints();
+app.MapLugarEndpoints();
 
 app.Run();

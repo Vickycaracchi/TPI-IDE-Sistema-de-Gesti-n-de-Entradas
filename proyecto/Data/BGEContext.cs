@@ -9,6 +9,7 @@ namespace Data
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Lugar> Lugares { get; set; }
 
         public DbSet<Compra> Compras { get; set; }
         public BGEContext()
@@ -132,6 +133,29 @@ namespace Data
                       .IsRequired()
                       .HasColumnType("decimal(18,2)");
 
+            });
+
+            modelBuilder.Entity<Lugar>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasIndex(e => e.Nombre)
+                    .IsUnique();
+
+                entity.Property(e => e.Direccion)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Ciudad)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<Compra>(entity =>
