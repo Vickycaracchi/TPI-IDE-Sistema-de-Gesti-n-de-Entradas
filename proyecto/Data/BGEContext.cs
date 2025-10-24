@@ -9,6 +9,8 @@ namespace Data
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
+
+        public DbSet<Compra> Compras { get; set; }
         public BGEContext()
         {
             this.Database.EnsureCreated();
@@ -130,6 +132,33 @@ namespace Data
                       .IsRequired()
                       .HasColumnType("decimal(18,2)");
 
+            });
+
+            modelBuilder.Entity<Compra>(entity =>
+            {
+                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora });
+
+                entity.Property(e => e.IdVendedor)
+                    .IsRequired();
+
+                entity.Property(e => e.IdCliente)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaHora)
+                    .IsRequired();
+
+                entity.Property(e => e.CantidadCompra)
+                    .IsRequired(); 
+
+                entity.HasOne<Usuario>()
+                    .WithMany() 
+                    .HasForeignKey(c => c.IdVendedor)
+                    .OnDelete(DeleteBehavior.Restrict); 
+
+                entity.HasOne<Usuario>()
+                    .WithMany() 
+                    .HasForeignKey(c => c.IdCliente)
+                    .OnDelete(DeleteBehavior.Restrict); 
             });
 
             modelBuilder.Entity<Evento>().HasData(
