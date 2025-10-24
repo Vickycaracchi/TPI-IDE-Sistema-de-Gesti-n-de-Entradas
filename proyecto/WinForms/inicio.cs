@@ -74,7 +74,7 @@ namespace WinForms
                     }
                     else if (ingresarUsuarioForm.TipoUsuario == "Vendedor")
                     {
-                        var listaClientesForm = new ClientesLista();
+                        var listaClientesForm = new MenuVendedor();
                         listaClientesForm.ShowDialog();
                     }
                     //falta else if para cliente
