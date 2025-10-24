@@ -34,8 +34,8 @@ namespace WinForms
         {
             var tiposUsuarios = new List<string> {
                 "Administrador",
+                "Jefe",
                 "Vendedor",
-                "Usuario",
                 "Cliente"
             };
             tipoComboBox.DataSource = tiposUsuarios;

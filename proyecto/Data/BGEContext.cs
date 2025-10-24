@@ -222,15 +222,113 @@ namespace Data
                 new
                 {
                     Id = 2,
-                    Dni = "111",
+                    Dni = "qwe",
                     Nombre = "Ana",
                     Apellido = "Gomez",
                     Email = "ana.gomez@example.com",
-                    Contrasena = "111", // Usar un hash real aquí
+                    Contrasena = "qwe", // Usar un hash real aquí
                     Cvu = "9999888877776666555544",
                     Tipo = "Vendedor",
                     NumeroTelefono = "600333444",
                     FechaNac = new DateTime(1985, 10, 20),
+                    Instagram = "@anagomez"
+                }, 
+                new
+                {
+                    Id = 3,
+                    Dni = "asd",
+                    Nombre = "Joaquin",
+                    Apellido = "Lopez",
+                    Email = "joaco.lopez@example.com",
+                    Contrasena = "asd", // Usar un hash real aquí
+                    Cvu = "91823918239128319823",
+                    Tipo = "Administrador",
+                    NumeroTelefono = "3211321331",
+                    FechaNac = new DateTime(1980, 3, 4),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 4,
+                    Dni = "1234",
+                    Nombre = "Juan",
+                    Apellido = "Perez",
+                    Email = "juan4.perez@example.com",
+                    Contrasena = "1234", // Usar un hash real aquí
+                    Cvu = "1111222233334444555566",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "600111222",
+                    FechaNac = new DateTime(1990, 5, 15),
+                    Instagram = "@juanperez"
+                },
+                new
+                {
+                    Id = 5,
+                    Dni = "1235",
+                    Nombre = "Juan",
+                    Apellido = "Perez",
+                    Email = "juan.perez5@example.com",
+                    Contrasena = "1235", // Usar un hash real aquí
+                    Cvu = "1111222233334444555566",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "600111222",
+                    FechaNac = new DateTime(1990, 5, 15),
+                    Instagram = "@juanperez"
+                },
+                new
+                {
+                    Id = 6,
+                    Dni = "qwe",
+                    Nombre = "Ana",
+                    Apellido = "Gomez",
+                    Email = "ana.gomez6@example.com",
+                    Contrasena = "qwe6", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Vendedor",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(1985, 10, 20),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 7,
+                    Dni = "qwe7",
+                    Nombre = "Ana",
+                    Apellido = "Gomez",
+                    Email = "ana.gomez7@example.com",
+                    Contrasena = "qwe7", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Vendedor",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(1985, 10, 20),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 8,
+                    Dni = "asd8",
+                    Nombre = "Joaquin",
+                    Apellido = "Lopez",
+                    Email = "joaco.lopez8@example.com",
+                    Contrasena = "asd8", // Usar un hash real aquí
+                    Cvu = "91823918239128319823",
+                    Tipo = "Administrador",
+                    NumeroTelefono = "3211321331",
+                    FechaNac = new DateTime(1980, 3, 4),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 9,
+                    Dni = "asd",
+                    Nombre = "Joaquin",
+                    Apellido = "Lopez",
+                    Email = "joaco.lopez9@example.com",
+                    Contrasena = "asd9", // Usar un hash real aquí
+                    Cvu = "91823918239128319823",
+                    Tipo = "Administrador",
+                    NumeroTelefono = "3211321331",
+                    FechaNac = new DateTime(1980, 3, 4),
                     Instagram = "@anagomez"
                 }
             );
@@ -249,6 +347,23 @@ namespace Data
                     Nombre = "Poster Limitado",
                     Descripcion = "Poster numerado de la feria, edición especial.",
                     Precio = 10.00m 
+                }
+            );
+
+            modelBuilder.Entity<Lugar>().HasData(
+                new
+                {
+                    Id = 1,
+                    Nombre = "La sala de las Artes.",
+                    Direccion = "Av Ovidio Lagos y Guemes",
+                    Ciudad = "Rosario"
+                },
+                new
+                {
+                    Id = 2,
+                    Nombre = "Teatro Vorterix.",
+                    Direccion = "Av Ovidio Lagos y Guemes",
+                    Ciudad = "Buenos Aires"
                 }
             );
         }
