@@ -42,10 +42,10 @@ namespace WinForms
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(200, 200);
+            this.button1.Location = new System.Drawing.Point(180, 220);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 22);
+            this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 0;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@ namespace WinForms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 150);
+            this.label3.Location = new System.Drawing.Point(50, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 1;
@@ -63,7 +63,7 @@ namespace WinForms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 100);
+            this.label2.Location = new System.Drawing.Point(50, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 15);
             this.label2.TabIndex = 2;
@@ -72,7 +72,7 @@ namespace WinForms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 50);
+            this.label1.Location = new System.Drawing.Point(50, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 15);
             this.label1.TabIndex = 3;
@@ -80,26 +80,26 @@ namespace WinForms
             // 
             // nombreTextBox
             // 
-            this.nombreTextBox.Location = new System.Drawing.Point(100, 47);
+            this.nombreTextBox.Location = new System.Drawing.Point(150, 57);
             this.nombreTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(200, 23);
+            this.nombreTextBox.Size = new System.Drawing.Size(250, 23);
             this.nombreTextBox.TabIndex = 4;
             // 
             // direccionTextBox
             // 
-            this.direccionTextBox.Location = new System.Drawing.Point(100, 97);
+            this.direccionTextBox.Location = new System.Drawing.Point(150, 107);
             this.direccionTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.direccionTextBox.Name = "direccionTextBox";
-            this.direccionTextBox.Size = new System.Drawing.Size(200, 23);
+            this.direccionTextBox.Size = new System.Drawing.Size(250, 23);
             this.direccionTextBox.TabIndex = 5;
             // 
             // ciudadTextBox
             // 
-            this.ciudadTextBox.Location = new System.Drawing.Point(100, 147);
+            this.ciudadTextBox.Location = new System.Drawing.Point(150, 157);
             this.ciudadTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ciudadTextBox.Name = "ciudadTextBox";
-            this.ciudadTextBox.Size = new System.Drawing.Size(200, 23);
+            this.ciudadTextBox.Size = new System.Drawing.Size(250, 23);
             this.ciudadTextBox.TabIndex = 6;
             // 
             // lugarErrorProvider
@@ -110,7 +110,7 @@ namespace WinForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 250);
+            this.ClientSize = new System.Drawing.Size(450, 300);
             this.Controls.Add(this.ciudadTextBox);
             this.Controls.Add(this.direccionTextBox);
             this.Controls.Add(this.nombreTextBox);
@@ -120,6 +120,7 @@ namespace WinForms
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LugarDetalle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Detalle de Lugar";
             this.Load += new System.EventHandler(this.LugarDetalle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lugarErrorProvider)).EndInit();
