@@ -34,7 +34,7 @@ namespace WinForms
         {
             var tiposUsuarios = new List<string> {
                 "Administrador",
-                "Jefe",
+                "Vendedor",
                 "Usuario",
                 "Cliente"
             };
