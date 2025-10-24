@@ -128,10 +128,76 @@ namespace Data
 
                 entity.Property(e => e.Precio)
                       .IsRequired()
-                      .HasColumnType("decimal(18,2)"); 
-
+                      .HasColumnType("decimal(18,2)");
 
             });
+
+            modelBuilder.Entity<Evento>().HasData(
+                new  
+                {
+                    Id = 1,
+                    Nombre = "Concierto de Rock",
+                    Desc = "Banda local tocando en vivo, ¡imperdible!",
+                    Fecha = DateTime.Now.AddDays(10), Lugar = "The Venue" 
+                },
+
+                new  
+                {
+                    Id = 2,
+                    Nombre = "Feria de Artesanía",
+                    Desc = "Exposición de productos hechos a mano por artistas locales.",
+                    Fecha = DateTime.Now.AddMonths(1),
+                    Lugar = "Plaza Central" 
+                }
+            );
+
+            modelBuilder.Entity<Usuario>().HasData(
+                new
+                {
+                    Id = 1,
+                    Dni = "123",
+                    Nombre = "Juan",
+                    Apellido = "Perez",
+                    Email = "juan.perez@example.com",
+                    Contrasena = "123", // Usar un hash real aquí
+                    Cvu = "1111222233334444555566",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "600111222",
+                    FechaNac = new DateTime(1990, 5, 15),
+                    Instagram = "@juanperez"
+                },
+                new
+                {
+                    Id = 2,
+                    Dni = "111",
+                    Nombre = "Ana",
+                    Apellido = "Gomez",
+                    Email = "ana.gomez@example.com",
+                    Contrasena = "111", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Vendedor",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(1985, 10, 20),
+                    Instagram = "@anagomez"
+                }
+            );
+
+            modelBuilder.Entity<Producto>().HasData(
+                new  
+                { 
+                    Id = 1,
+                    Nombre = "Camiseta Oficial",
+                    Descripcion = "Camiseta de algodón con logo del evento.",
+                    Precio = 25.50m 
+                },
+                new  
+                {
+                    Id = 2,
+                    Nombre = "Poster Limitado",
+                    Descripcion = "Poster numerado de la feria, edición especial.",
+                    Precio = 10.00m 
+                }
+            );
         }
     }
 }
