@@ -72,7 +72,7 @@ namespace API.Clients
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("usuarios/" + tipoBuscado);
+                HttpResponseMessage response = await client.GetAsync("usuariosByTipo/" + tipoBuscado);
 
                 if (response.IsSuccessStatusCode)
                 {
