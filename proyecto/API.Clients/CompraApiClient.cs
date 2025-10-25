@@ -22,7 +22,7 @@ namespace API.Clients
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("compras");
+                HttpResponseMessage response = await client.GetAsync("compras/" + idVendedor);
 
                 if (response.IsSuccessStatusCode)
                 {

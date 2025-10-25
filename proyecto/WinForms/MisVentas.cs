@@ -1,4 +1,5 @@
 ﻿using API.Clients;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace WinForms
 {
     public partial class MisVentas : Form
     {
+        public UsuarioDTO usuarioIngresado { get; set; }
         public MisVentas()
         {
             InitializeComponent();
@@ -31,7 +33,7 @@ namespace WinForms
         private async void GetAllAndLoad()
         {
             this.misVentasDataGridView.DataSource = null;
-            this.misVentasDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
+            this.misVentasDataGridView.DataSource = await CompraApiClient.GetAllAsync(usuarioIngresado.Id);
 
             if (this.misVentasDataGridView.Rows.Count > 0)
             {

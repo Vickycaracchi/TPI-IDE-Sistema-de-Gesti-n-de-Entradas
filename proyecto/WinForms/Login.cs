@@ -21,6 +21,7 @@ namespace WinForms
         }
 
         public string TipoUsuario { get; private set; }
+        public UsuarioDTO usuarioIngresado { get; private set; }
 
         private async void enviarLoginVendedor_Click(object sender, EventArgs e)
         {
@@ -38,6 +39,7 @@ namespace WinForms
                     if (usuario != null)
                     {
                         TipoUsuario = usuario.Tipo;
+                        usuarioIngresado = usuario;
 
                         this.DialogResult = DialogResult.OK;
                         this.Close();

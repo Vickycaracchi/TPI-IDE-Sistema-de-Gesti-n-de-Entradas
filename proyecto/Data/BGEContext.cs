@@ -437,6 +437,29 @@ namespace Data
                     Ciudad = "Buenos Aires"
                 }
             );
+            modelBuilder.Entity<Compra>().HasData(
+                new
+                {
+                    FechaHora = new DateTime(2025, 10, 15, 5, 12, 5),
+                    CantidadCompra = 4,
+                    IdVendedor = 10,
+                    IdCliente = 1
+                },
+                new
+                {
+                    FechaHora = new DateTime(2025, 10, 15, 5, 13, 5),
+                    CantidadCompra = 5,
+                    IdVendedor = 10,
+                    IdCliente = 1
+                },
+                new
+                {
+                    FechaHora = new DateTime(2025, 10, 15, 5, 14, 5),
+                    CantidadCompra = 6,
+                    IdVendedor = 10,
+                    IdCliente = 1
+                }
+            );
         }
     }
 }

@@ -26,13 +26,14 @@ namespace Application.Services
 
         public IEnumerable<CompraDTO> GetAll(int idVendedor)
         {
-            var eventoRepository = new CompraRepository();
-            var eventos = eventoRepository.GetAll(idVendedor);
+            var compraRepository = new CompraRepository();
+            var compras = compraRepository.GetAll(idVendedor);
 
-            return eventos.Select(compra => new CompraDTO
+            return compras.Select(compra => new CompraDTO
             {
                 FechaHora = compra.FechaHora,
                 CantidadCompra = compra.CantidadCompra,
+                IdVendedor = compra.IdVendedor,
                 IdCliente = compra.IdCliente
 
             }).ToList();

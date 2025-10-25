@@ -20,13 +20,12 @@ namespace Data
             context.Compras.Add(compra);
             context.SaveChanges();
         }
-
+        
         public IEnumerable<Compra> GetAll(int idVendedor)
         {
             using var context = CreateContext();
-            return context.Compras
-                .Where(c => c.IdVendedor == idVendedor)
-                .ToList();
+            var query = context.Compras.Where(c => c.IdVendedor == idVendedor);
+            return query.ToList();
         }
 
         public bool Update(Compra compra)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTOs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace WinForms
 {
     public partial class MenuVendedor : Form
     {
+        public UsuarioDTO usuarioIngresado {  get; set; }
         public MenuVendedor()
         {
             InitializeComponent();
@@ -33,7 +35,9 @@ namespace WinForms
         }
         private void verMisVentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new MisVentas());
+            MisVentas misVentasForm = new MisVentas();
+            misVentasForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(misVentasForm);
         }
 
         private void resgistrarNuevaVentaToolStripMenuItem_Click(object sender, EventArgs e)
