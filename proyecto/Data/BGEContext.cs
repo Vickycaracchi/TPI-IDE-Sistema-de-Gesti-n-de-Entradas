@@ -261,7 +261,21 @@ namespace Data
                     NumeroTelefono = "600333444",
                     FechaNac = new DateTime(1985, 10, 20),
                     Instagram = "@anagomez"
-                }, 
+                },
+                new
+                {
+                    Id = 10,
+                    Dni = "zxc",
+                    Nombre = "Martin",
+                    Apellido = "Perez",
+                    Email = "mar.perez@example.com",
+                    Contrasena = "zxc", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Jefe",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(2005, 10, 20),
+                    Instagram = "@anagomez"
+                },
                 new
                 {
                     Id = 3,
@@ -358,6 +372,34 @@ namespace Data
                     Tipo = "Administrador",
                     NumeroTelefono = "3211321331",
                     FechaNac = new DateTime(1980, 3, 4),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 11,
+                    Dni = "zxc2",
+                    Nombre = "Martin",
+                    Apellido = "Perez",
+                    Email = "mar.perez2@example.com",
+                    Contrasena = "zxc2", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Jefe",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(2005, 10, 20),
+                    Instagram = "@anagomez"
+                },
+                new
+                {
+                    Id = 12,
+                    Dni = "zxc3",
+                    Nombre = "Martin",
+                    Apellido = "Perez",
+                    Email = "mar.perez3@example.com",
+                    Contrasena = "zxc3", // Usar un hash real aquí
+                    Cvu = "9999888877776666555544",
+                    Tipo = "Jefe",
+                    NumeroTelefono = "600333444",
+                    FechaNac = new DateTime(2005, 10, 20),
                     Instagram = "@anagomez"
                 }
             );
