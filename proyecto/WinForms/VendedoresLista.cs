@@ -88,7 +88,10 @@ namespace WinForms
             try
             {
                 this.vendedoresDataGridView.DataSource = null;
-                this.vendedoresDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Vendedor");
+                var listaVendedores = await UsuarioApiClient.GetByTipoAsync("Vendedor");
+                var listaJefes = await UsuarioApiClient.GetByTipoAsync("Jefe");
+                var listaVendedoresJefes = listaVendedores.Concat(listaJefes).ToList();
+                this.vendedoresDataGridView.DataSource = listaVendedoresJefes;
 
                 if (this.vendedoresDataGridView.Rows.Count > 0)
                 {
