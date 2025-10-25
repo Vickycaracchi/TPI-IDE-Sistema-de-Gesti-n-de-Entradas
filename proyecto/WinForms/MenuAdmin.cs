@@ -51,6 +51,11 @@ namespace WinForms
             AbrirFormularioEnPanel(new LugaresLista());
         }
 
+        private void gestiónLotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new LotesLista());
+        }
+
         private void MenuAdmin_Load(object sender, EventArgs e)
         {
 

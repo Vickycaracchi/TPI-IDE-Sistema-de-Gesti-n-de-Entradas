@@ -10,6 +10,7 @@ namespace Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Lugar> Lugares { get; set; }
+        public DbSet<Lote> Lotes { get; set; }
 
         public DbSet<Compra> Compras { get; set; }
         public BGEContext()
@@ -156,6 +157,34 @@ namespace Data
                 entity.Property(e => e.Ciudad)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Lote>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Precio)
+                    .IsRequired()
+                    .HasColumnType("decimal(18,2)");
+
+                entity.Property(e => e.FechaDesde)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaHasta)
+                    .IsRequired();
+
+                entity.Property(e => e.CantidadLote)
+                    .IsRequired();
+
+                entity.HasIndex(e => e.Nombre)
+                    .IsUnique();
             });
 
             modelBuilder.Entity<Compra>(entity =>

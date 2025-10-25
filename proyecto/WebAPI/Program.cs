@@ -45,5 +45,6 @@ app.MapUsuarioEndpoints();
 app.MapProductoEndpoints();
 app.MapCompraEndpoints();
 app.MapLugarEndpoints();
+app.MapLoteEndpoints();
 
 app.Run();

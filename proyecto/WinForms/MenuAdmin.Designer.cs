@@ -30,13 +30,14 @@
             listarEventosToolStripMenuItem = new ToolStripMenuItem();
             gestiónProductosToolStripMenuItem = new ToolStripMenuItem();
             gestiónLugaresToolStripMenuItem = new ToolStripMenuItem();
+            gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1000, 24);
@@ -78,6 +79,13 @@
             gestiónLugaresToolStripMenuItem.Text = "Gestión Lugares";
             gestiónLugaresToolStripMenuItem.Click += gestiónLugaresToolStripMenuItem_Click;
             // 
+            // gestiónLotesToolStripMenuItem
+            // 
+            gestiónLotesToolStripMenuItem.Name = "gestiónLotesToolStripMenuItem";
+            gestiónLotesToolStripMenuItem.Size = new Size(104, 20);
+            gestiónLotesToolStripMenuItem.Text = "Gestión Lotes";
+            gestiónLotesToolStripMenuItem.Click += gestiónLotesToolStripMenuItem_Click;
+            // 
             // panelContenedor
             // 
             panelContenedor.Dock = DockStyle.Fill;
@@ -114,5 +122,6 @@
         private System.Windows.Forms.Panel panelContenedor;
         private ToolStripMenuItem gestiónProductosToolStripMenuItem;
         private ToolStripMenuItem gestiónLugaresToolStripMenuItem;
+        private ToolStripMenuItem gestiónLotesToolStripMenuItem;
     }
 }
