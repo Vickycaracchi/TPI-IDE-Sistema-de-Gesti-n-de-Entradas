@@ -31,7 +31,7 @@
             vendedoresDataGridView.Margin = new Padding(3, 2, 3, 2);
             vendedoresDataGridView.Name = "vendedoresDataGridView";
             vendedoresDataGridView.RowHeadersWidth = 51;
-            vendedoresDataGridView.Size = new Size(654, 230);
+            vendedoresDataGridView.Size = new Size(1153, 230);
             vendedoresDataGridView.TabIndex = 0;
             vendedoresDataGridView.CellContentClick += vendedoresDataGridView_CellContentClick;
             // 
@@ -72,7 +72,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(1256, 338);
             Controls.Add(agregarButtonVendedor);
             Controls.Add(modificarButtonVendedor);
             Controls.Add(eliminarButtonVendedor);

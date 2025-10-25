@@ -42,7 +42,7 @@
             clientesDataGridView.Margin = new Padding(3, 2, 3, 2);
             clientesDataGridView.Name = "clientesDataGridView";
             clientesDataGridView.RowHeadersWidth = 51;
-            clientesDataGridView.Size = new Size(654, 230);
+            clientesDataGridView.Size = new Size(1156, 230);
             clientesDataGridView.TabIndex = 0;
             clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
@@ -83,7 +83,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(1257, 338);
             Controls.Add(agregarButtonCliente);
             Controls.Add(modificarButtonCliente);
             Controls.Add(eliminarButtonCliente);
