@@ -14,7 +14,8 @@ namespace WinForms
 {
     public partial class FiestasLista : Form
     {
-
+        private List<LugarDTO> lugares;
+        private List<EventoDTO> eventos;
         public FiestasLista()
         {
             InitializeComponent();
@@ -95,22 +96,35 @@ namespace WinForms
         }
         private async void GetAllAndLoad()
         {
-            try
-            {
-                this.FiestasDataGridView.DataSource = null;
-                this.FiestasDataGridView.DataSource = await FiestaApiClient.GetAllAsync();
+            try {
+                lugares = (await LugarApiClient.GetAllAsync()).ToList();
+                eventos = (await EventoApiClient.GetAllAsync()).ToList();
 
-                if (this.FiestasDataGridView.Rows.Count > 0)
-                {
-                    this.FiestasDataGridView.Rows[0].Selected = true;
-                    this.eliminarButtonFiesta.Enabled = true;
-                    this.modificarButtonFiesta.Enabled = true;
-                }
-                else
-                {
-                    this.eliminarButtonFiesta.Enabled = false;
-                    this.modificarButtonFiesta.Enabled = false;
-                }
+                var fiestas = await FiestaApiClient.GetAllAsync();
+
+            var listaParaMostrar = fiestas.Select(f => new
+            {
+                f.IdFiesta,
+                f.FechaFiesta,
+                NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+            }).ToList();
+
+            FiestasDataGridView.DataSource = listaParaMostrar;
+
+            if (FiestasDataGridView.Rows.Count > 0)
+            {
+                FiestasDataGridView.Rows[0].Selected = true;
+                eliminarButtonFiesta.Enabled = true;
+                modificarButtonFiesta.Enabled = true;
+            }
+            else
+            {
+                eliminarButtonFiesta.Enabled = false;
+                modificarButtonFiesta.Enabled = false;
+            }
+
+            
             }
             catch (Exception ex)
             {
@@ -119,15 +133,15 @@ namespace WinForms
                 this.modificarButtonFiesta.Enabled = false;
             }
         }
-        private FiestaDTO SelectedItem()
+
+        private dynamic SelectedItem()
         {
             if (FiestasDataGridView.SelectedRows.Count > 0)
             {
-                return (FiestaDTO)FiestasDataGridView.SelectedRows[0].DataBoundItem;
+                return FiestasDataGridView.SelectedRows[0].DataBoundItem;
             }
             return null;
         }
-
 
     }
 }

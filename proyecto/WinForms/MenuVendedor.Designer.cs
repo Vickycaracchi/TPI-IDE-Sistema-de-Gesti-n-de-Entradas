@@ -42,46 +42,49 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { verMisVentasToolStripMenuItem, resgistrarNuevaVentaToolStripMenuItem, gestionDeClientesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1382, 28);
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(1209, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // verMisVentasToolStripMenuItem
             // 
             verMisVentasToolStripMenuItem.Name = "verMisVentasToolStripMenuItem";
-            verMisVentasToolStripMenuItem.Size = new Size(92, 24);
+            verMisVentasToolStripMenuItem.Size = new Size(75, 20);
             verMisVentasToolStripMenuItem.Text = "Mis ventas";
             verMisVentasToolStripMenuItem.Click += verMisVentasToolStripMenuItem_Click;
             // 
             // resgistrarNuevaVentaToolStripMenuItem
             // 
             resgistrarNuevaVentaToolStripMenuItem.Name = "resgistrarNuevaVentaToolStripMenuItem";
-            resgistrarNuevaVentaToolStripMenuItem.Size = new Size(165, 24);
+            resgistrarNuevaVentaToolStripMenuItem.Size = new Size(132, 20);
             resgistrarNuevaVentaToolStripMenuItem.Text = "Registrar nueva venta";
             resgistrarNuevaVentaToolStripMenuItem.Click += resgistrarNuevaVentaToolStripMenuItem_Click;
             // 
             // gestionDeClientesToolStripMenuItem
             // 
             gestionDeClientesToolStripMenuItem.Name = "gestionDeClientesToolStripMenuItem";
-            gestionDeClientesToolStripMenuItem.Size = new Size(148, 24);
+            gestionDeClientesToolStripMenuItem.Size = new Size(118, 20);
             gestionDeClientesToolStripMenuItem.Text = "Gestion de clientes";
             gestionDeClientesToolStripMenuItem.Click += gestionDeClientesToolStripMenuItem_Click;
             // 
             // panelContenedorVendedor
             // 
-            panelContenedorVendedor.Location = new Point(0, 31);
+            panelContenedorVendedor.Location = new Point(0, 23);
+            panelContenedorVendedor.Margin = new Padding(3, 2, 3, 2);
             panelContenedorVendedor.Name = "panelContenedorVendedor";
-            panelContenedorVendedor.Size = new Size(1382, 618);
+            panelContenedorVendedor.Size = new Size(1209, 464);
             panelContenedorVendedor.TabIndex = 1;
             // 
             // MenuVendedor
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1382, 648);
+            ClientSize = new Size(1209, 486);
             Controls.Add(panelContenedorVendedor);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MenuVendedor";
             Text = "MenuVendedor";
             WindowState = FormWindowState.Maximized;

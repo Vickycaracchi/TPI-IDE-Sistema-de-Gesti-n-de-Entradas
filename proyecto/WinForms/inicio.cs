@@ -78,7 +78,11 @@ namespace WinForms
                         listaClientesForm.usuarioIngresado = ingresarUsuarioForm.usuarioIngresado;
                         listaClientesForm.ShowDialog();
                     }
-                    //falta else if para cliente
+                    else if (ingresarUsuarioForm.TipoUsuario == "Cliente")
+                    {
+                        var menuClienteForm = new menuCliente();
+                        menuClienteForm.ShowDialog();
+                    }
                 }
             }
         }
@@ -87,6 +91,9 @@ namespace WinForms
             AbrirFormularioEnPanel(new RegistrarUsuario());
         }
 
-     
+        private void inicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

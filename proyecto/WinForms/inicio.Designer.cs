@@ -45,7 +45,6 @@
             menuStrip1.Size = new Size(984, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
-       
             // 
             // ingresarToolStripMenuItem
             // 
@@ -89,6 +88,7 @@
             Name = "inicio";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
+            Load += inicio_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

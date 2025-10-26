@@ -31,18 +31,20 @@
             menuStrip1 = new MenuStrip();
             verProductosToolStripMenuItem = new ToolStripMenuItem();
             verEventosToolStripMenuItem = new ToolStripMenuItem();
+            verFiestas = new ToolStripMenuItem();
             panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { verProductosToolStripMenuItem, verEventosToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { verProductosToolStripMenuItem, verEventosToolStripMenuItem, verFiestas });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // verProductosToolStripMenuItem
             // 
@@ -57,6 +59,13 @@
             verEventosToolStripMenuItem.Size = new Size(79, 20);
             verEventosToolStripMenuItem.Text = "Ver Eventos";
             verEventosToolStripMenuItem.Click += verEventosToolStripMenuItem_Click;
+            // 
+            // verFiestas
+            // 
+            verFiestas.Name = "verFiestas";
+            verFiestas.Size = new Size(73, 20);
+            verFiestas.Text = "Ver Fiestas";
+            verFiestas.Click += verFiestas_Click;
             // 
             // panelContenedor
             // 
@@ -89,5 +98,7 @@
         private ToolStripMenuItem verProductosToolStripMenuItem;
         private ToolStripMenuItem verEventosToolStripMenuItem;
         private Panel panelContenedor;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem verFiestas;
     }
 }

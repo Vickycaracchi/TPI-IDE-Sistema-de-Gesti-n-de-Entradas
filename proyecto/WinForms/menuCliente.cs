@@ -36,13 +36,16 @@ namespace WinForms
 
         private void verProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           AbrirFormularioEnPanel(new ListarProductos());
+            AbrirFormularioEnPanel(new ListarProductos());
         }
         private void verEventosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-             AbrirFormularioEnPanel(new ListarEventos());
+            AbrirFormularioEnPanel(new ListarEventos());
         }
-
+        private void verFiestas_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new ListarFiestas());
+        }
         private void MenuCliente_Load(object sender, EventArgs e)
         {
 
@@ -52,5 +55,12 @@ namespace WinForms
         {
 
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+
     }
 }
