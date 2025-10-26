@@ -7,6 +7,12 @@
     <ActiveDebugProfile>WinForms</ActiveDebugProfile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="FiestasLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RegistrarFiesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ListarEventos.cs">
       <SubType>Form</SubType>
     </Compile>

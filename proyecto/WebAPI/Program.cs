@@ -46,5 +46,6 @@ app.MapProductoEndpoints();
 app.MapCompraEndpoints();
 app.MapLugarEndpoints();
 app.MapLoteEndpoints();
+app.MapFiestaEndpoints();
 
 app.Run();

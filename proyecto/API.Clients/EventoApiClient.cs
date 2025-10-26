@@ -102,6 +102,7 @@ namespace API.Clients
                 }
             }
             catch (HttpRequestException ex)
+
             {
                 throw new Exception($"Error de conexión al eliminar evento con Id {id}: {ex.Message}", ex);
             }

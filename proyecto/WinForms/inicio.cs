@@ -86,5 +86,7 @@ namespace WinForms
         {
             AbrirFormularioEnPanel(new RegistrarUsuario());
         }
+
+     
     }
 }

@@ -12,6 +12,7 @@ namespace Data
         public DbSet<Lugar> Lugares { get; set; }
         public DbSet<Lote> Lotes { get; set; }
         public DbSet<Compra> Compras { get; set; }
+        public DbSet<Fiesta> Fiestas {get; set;}
         public BGEContext()
         {
             this.Database.EnsureCreated();
@@ -465,6 +466,33 @@ namespace Data
                     IdFiesta = 1
                 }
             );
+
+            modelBuilder.Entity<Fiesta>(entity =>
+            {
+                entity.HasKey(e => new { e.IdFiesta });
+
+                entity.Property(e => e.IdFiesta)
+                .IsRequired();
+
+                entity.Property(e => e.IdLugar)
+                    .IsRequired();
+
+                entity.Property(e => e.IdEvento)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaFiesta)
+                    .IsRequired();
+
+                entity.HasOne<Lugar>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdLugar)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne<Evento>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdEvento)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

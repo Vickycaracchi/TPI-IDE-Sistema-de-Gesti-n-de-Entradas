@@ -32,12 +32,13 @@
             gestiónLugaresToolStripMenuItem = new ToolStripMenuItem();
             gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
+            gestiónFiestasToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1000, 24);
@@ -75,14 +76,14 @@
             // gestiónLugaresToolStripMenuItem
             // 
             gestiónLugaresToolStripMenuItem.Name = "gestiónLugaresToolStripMenuItem";
-            gestiónLugaresToolStripMenuItem.Size = new Size(104, 20);
+            gestiónLugaresToolStripMenuItem.Size = new Size(103, 20);
             gestiónLugaresToolStripMenuItem.Text = "Gestión Lugares";
             gestiónLugaresToolStripMenuItem.Click += gestiónLugaresToolStripMenuItem_Click;
             // 
             // gestiónLotesToolStripMenuItem
             // 
             gestiónLotesToolStripMenuItem.Name = "gestiónLotesToolStripMenuItem";
-            gestiónLotesToolStripMenuItem.Size = new Size(104, 20);
+            gestiónLotesToolStripMenuItem.Size = new Size(90, 20);
             gestiónLotesToolStripMenuItem.Text = "Gestión Lotes";
             gestiónLotesToolStripMenuItem.Click += gestiónLotesToolStripMenuItem_Click;
             // 
@@ -93,6 +94,13 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1000, 576);
             panelContenedor.TabIndex = 1;
+            // 
+            // gestiónFiestasToolStripMenuItem
+            // 
+            gestiónFiestasToolStripMenuItem.Name = "gestiónFiestasToolStripMenuItem";
+            gestiónFiestasToolStripMenuItem.Size = new Size(97, 20);
+            gestiónFiestasToolStripMenuItem.Text = "Gestión Fiestas";
+            gestiónFiestasToolStripMenuItem.Click += gestiónFiestasToolStripMenuItem_Click;
             // 
             // MenuAdmin
             // 
@@ -105,7 +113,6 @@
             Name = "MenuAdmin";
             Text = "Menú Administrador";
             WindowState = FormWindowState.Maximized;
-            Load += MenuAdmin_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -123,5 +130,6 @@
         private ToolStripMenuItem gestiónProductosToolStripMenuItem;
         private ToolStripMenuItem gestiónLugaresToolStripMenuItem;
         private ToolStripMenuItem gestiónLotesToolStripMenuItem;
+        private ToolStripMenuItem gestiónFiestasToolStripMenuItem;
     }
 }

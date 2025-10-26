@@ -42,52 +42,50 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { ingresarToolStripMenuItem, registrarUsuarioToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1125, 30);
+            menuStrip1.Size = new Size(984, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+       
             // 
             // ingresarToolStripMenuItem
             // 
             ingresarToolStripMenuItem.Name = "ingresarToolStripMenuItem";
-            ingresarToolStripMenuItem.Size = new Size(76, 24);
+            ingresarToolStripMenuItem.Size = new Size(61, 20);
             ingresarToolStripMenuItem.Text = "Ingresar";
             ingresarToolStripMenuItem.Click += ingresarToolStripMenuItem_Click;
             // 
             // registrarUsuarioToolStripMenuItem
             // 
             registrarUsuarioToolStripMenuItem.Name = "registrarUsuarioToolStripMenuItem";
-            registrarUsuarioToolStripMenuItem.Size = new Size(134, 24);
+            registrarUsuarioToolStripMenuItem.Size = new Size(107, 20);
             registrarUsuarioToolStripMenuItem.Text = "Registrar usuario";
             registrarUsuarioToolStripMenuItem.Click += registrarUsuarioToolStripMenuItem_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(231, 59);
+            label1.Location = new Point(202, 44);
             label1.Name = "label1";
-            label1.Size = new Size(684, 20);
+            label1.Size = new Size(538, 15);
             label1.TabIndex = 1;
             label1.Text = "Bienvenido! Antes de usar el sistema cree un administrador par apoder acceder al area de vendedores";
             // 
             // panelContenedor
             // 
-            panelContenedor.Location = new Point(2, 97);
-            panelContenedor.Margin = new Padding(3, 4, 3, 4);
+            panelContenedor.Location = new Point(2, 73);
             panelContenedor.Name = "panelContenedor";
-            panelContenedor.Size = new Size(1121, 616);
+            panelContenedor.Size = new Size(981, 462);
             panelContenedor.TabIndex = 2;
             // 
             // inicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1125, 716);
+            ClientSize = new Size(984, 537);
             Controls.Add(panelContenedor);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "inicio";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
