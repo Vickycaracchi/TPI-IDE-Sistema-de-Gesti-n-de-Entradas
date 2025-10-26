@@ -11,7 +11,6 @@ namespace Data
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Lugar> Lugares { get; set; }
         public DbSet<Lote> Lotes { get; set; }
-
         public DbSet<Compra> Compras { get; set; }
         public BGEContext()
         {
@@ -189,7 +188,7 @@ namespace Data
 
             modelBuilder.Entity<Compra>(entity =>
             {
-                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora });
+                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora});
 
                 entity.Property(e => e.IdVendedor)
                     .IsRequired();
@@ -211,7 +210,7 @@ namespace Data
                 entity.HasOne<Usuario>()
                     .WithMany() 
                     .HasForeignKey(c => c.IdCliente)
-                    .OnDelete(DeleteBehavior.Restrict); 
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Evento>().HasData(
@@ -442,22 +441,28 @@ namespace Data
                 {
                     FechaHora = new DateTime(2025, 10, 15, 5, 12, 5),
                     CantidadCompra = 4,
+                    Entrada = "entrada-1",
                     IdVendedor = 10,
-                    IdCliente = 1
+                    IdCliente = 1,
+                    IdFiesta = 1
                 },
                 new
                 {
                     FechaHora = new DateTime(2025, 10, 15, 5, 13, 5),
                     CantidadCompra = 5,
+                    Entrada = "entrada-2",
                     IdVendedor = 10,
-                    IdCliente = 1
+                    IdCliente = 1,
+                    IdFiesta = 1
                 },
                 new
                 {
                     FechaHora = new DateTime(2025, 10, 15, 5, 14, 5),
                     CantidadCompra = 6,
+                    Entrada = "entrada-3",
                     IdVendedor = 10,
-                    IdCliente = 1
+                    IdCliente = 1,
+                    IdFiesta = 1
                 }
             );
         }

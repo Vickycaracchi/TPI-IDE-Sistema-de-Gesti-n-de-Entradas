@@ -11,15 +11,19 @@ namespace Domain.Model
     {
         public DateTime FechaHora { get; private set; }
         public int CantidadCompra { get; private set; }
+        public string Entrada { get; private set; }
         public int IdVendedor { get; private set; }
         public int IdCliente { get; private set; }
+        public int IdFiesta { get; private set; }
 
-        public Compra(DateTime fechaHora, int cantidadCompra, int idVendedor, int idCliente)
+        public Compra(DateTime fechaHora, int cantidadCompra, string entrada, int idVendedor, int idCliente, int idFiesta)
         {
             SetFecha(fechaHora);
             SetCantidadCompra(cantidadCompra);
+            SetEntrada(entrada);
             SetIdVendedor(idVendedor);
             SetIdCliente(idCliente);
+            SetIdFiesta(idFiesta);
         }
         public void SetFecha(DateTime fecha)
         {
@@ -33,6 +37,10 @@ namespace Domain.Model
                 throw new ArgumentException("La cantidad de compra no puede ser nula.", nameof(cantidadCompra));
             CantidadCompra = cantidadCompra;
         }
+        public void SetEntrada(string entrada)
+        {
+            if (entrada == null) { Entrada = null; } else {  Entrada = entrada; }
+        }
         public void SetIdVendedor(int idVendedor)
         {
             if (idVendedor == 0)
@@ -44,6 +52,12 @@ namespace Domain.Model
             if (idCliente == 0)
                 throw new ArgumentException("La cantidad de compra no puede ser nula.", nameof(idCliente));
             IdCliente = idCliente;
+        }
+        public void SetIdFiesta(int idFiesta)
+        {
+            if(idFiesta == 0)
+                throw new ArgumentException("La fiesta no puede ser nula.", nameof (idFiesta));
+            IdFiesta = idFiesta;
         }
     }
 }

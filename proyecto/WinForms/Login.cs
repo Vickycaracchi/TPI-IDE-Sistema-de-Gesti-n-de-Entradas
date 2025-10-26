@@ -84,5 +84,5 @@ namespace WinForms
 
             return isValid;
         }
-        }
+    }
 }

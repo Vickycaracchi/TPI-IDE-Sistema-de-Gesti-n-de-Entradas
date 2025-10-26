@@ -10,7 +10,9 @@ namespace DTOs
     {
         public DateTime FechaHora { get; set; }
         public int CantidadCompra { get; set; }
+        public string Entrada { get; set; }
         public int IdCliente { get; set; }
         public int IdVendedor { get; set; }
+        public int IdFiesta { get; set; }
     }
 }

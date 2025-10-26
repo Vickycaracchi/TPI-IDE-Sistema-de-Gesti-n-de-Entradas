@@ -42,7 +42,9 @@ namespace WinForms
 
         private void resgistrarNuevaVentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //AbrirFormularioEnPanel(new RegistrarVenta());
+            RegistrarCompra registrarVentaForm = new RegistrarCompra();
+            registrarVentaForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(registrarVentaForm);
         }
 
 
