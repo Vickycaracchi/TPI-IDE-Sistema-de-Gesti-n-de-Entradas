@@ -13,10 +13,14 @@
     ]
   },
   {
-    "Name": "Debug WebAPI",
+    "Name": "Blazor Server",
     "Projects": [
       {
         "Path": "WebAPI\\WebAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "BlazorApp\\BlazorApp.csproj",
         "Action": "Start"
       }
     ]
