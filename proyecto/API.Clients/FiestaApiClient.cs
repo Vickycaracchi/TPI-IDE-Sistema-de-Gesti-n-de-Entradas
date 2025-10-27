@@ -43,6 +43,20 @@ namespace API.Clients
                 throw new Exception($"Timeout al obtener lista de fiestas.");
             }
         }
+
+        public static async Task<IEnumerable<FiestaDTO>> GetFiestasConLotesAsync()
+        {
+            HttpResponseMessage response = await client.GetAsync("fiestas/con-lotes");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<IEnumerable<FiestaDTO>>();
+            }
+            else
+            {
+                string errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error al obtener fiestas con lotes. Status: {response.StatusCode}, Detalle: {errorContent}");
+            }
+        }
         public static async Task<FiestaDTO> GetAsync(int idFiesta)
         {
             try

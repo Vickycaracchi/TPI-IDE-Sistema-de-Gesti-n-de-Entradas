@@ -30,7 +30,11 @@ namespace Application.Services
             var loteRepository = new LoteRepository();
             return loteRepository.Delete(id);
         }
-
+        public bool FiestaTieneLotes(int idFiesta)
+        {
+            var loteRepository = new LoteRepository();
+            return loteRepository.FiestaTieneLotes(idFiesta);
+        }
         public LoteDTO Get(int id)
         {
             var loteRepository = new LoteRepository();
@@ -84,13 +88,18 @@ namespace Application.Services
             Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote, dto.IdFiesta, dto.LoteActual);
             return loteRepository.Update(lote);
         }
+ 
+
         public LoteDTO GetLoteActual(int idFiesta)
         {
             var loteRepository = new LoteRepository();
-            LoteDTO loteActual = loteRepository.GetLoteActual(idFiesta);
+            var lotes = loteRepository.GetLotesPorFiesta(idFiesta);
 
-            if (loteActual == null)
-                return null;
+            var loteActual = lotes
+                .Where(l => l.FechaDesde <= DateTime.Now && l.FechaHasta >= DateTime.Now)
+                .FirstOrDefault();
+
+            if (loteActual == null) return null;
 
             return new LoteDTO
             {
@@ -99,12 +108,9 @@ namespace Application.Services
                 Precio = loteActual.Precio,
                 FechaDesde = loteActual.FechaDesde,
                 FechaHasta = loteActual.FechaHasta,
-                CantidadLote = loteActual.CantidadLote,
                 IdFiesta = loteActual.IdFiesta,
                 LoteActual = loteActual.LoteActual
             };
-
-
         }
     }
 }

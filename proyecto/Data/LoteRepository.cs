@@ -1,6 +1,7 @@
 using Domain.Model;
 using DTOs;
 using Microsoft.AspNetCore.Http.Timeouts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,25 @@ namespace Data
             }
             return false;
         }
+        public List<Lote> GetLotesPorFiesta(int idFiesta)
+        {
+            using var context = CreateContext();
+            return context.Lotes
+                .Where(l => l.IdFiesta == idFiesta)
+                .ToList();
+        }
 
         public Lote? Get(int id)
         {
             using var context = CreateContext();
             return context.Lotes
                 .FirstOrDefault(c => c.Id == id);
+        }
+
+        public bool FiestaTieneLotes(int idFiesta)
+        {
+            using var context = CreateContext();
+            return context.Lotes.Any(l => l.IdFiesta == idFiesta);
         }
 
         public IEnumerable<Lote> GetAll()

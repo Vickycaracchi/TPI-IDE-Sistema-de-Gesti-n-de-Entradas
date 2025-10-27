@@ -62,6 +62,7 @@ namespace WinForms
                         c.CantidadCompra,
                         c.FechaHora,
                         c.Entrada,
+                        c.Precio_Entrada,
                     };
                 }).ToList();
 

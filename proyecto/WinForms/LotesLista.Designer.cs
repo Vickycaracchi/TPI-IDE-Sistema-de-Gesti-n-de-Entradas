@@ -28,73 +28,73 @@ namespace WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.lotesDataGridView = new System.Windows.Forms.DataGridView();
-            this.eliminarButtonLote = new System.Windows.Forms.Button();
-            this.modificarButtonLote = new System.Windows.Forms.Button();
-            this.agregarButtonLote = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.lotesDataGridView)).BeginInit();
-            this.SuspendLayout();
+            lotesDataGridView = new DataGridView();
+            eliminarButtonLote = new Button();
+            modificarButtonLote = new Button();
+            agregarButtonLote = new Button();
+            ((System.ComponentModel.ISupportInitialize)lotesDataGridView).BeginInit();
+            SuspendLayout();
             // 
             // lotesDataGridView
             // 
-            this.lotesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lotesDataGridView.Location = new System.Drawing.Point(20, 20);
-            this.lotesDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lotesDataGridView.Name = "lotesDataGridView";
-            this.lotesDataGridView.RowHeadersWidth = 51;
-            this.lotesDataGridView.RowTemplate.Height = 29;
-            this.lotesDataGridView.Size = new System.Drawing.Size(700, 230);
-            this.lotesDataGridView.TabIndex = 0;
-            this.lotesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lotesDataGridView_CellContentClick);
+            lotesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            lotesDataGridView.Location = new Point(20, 20);
+            lotesDataGridView.Margin = new Padding(3, 2, 3, 2);
+            lotesDataGridView.Name = "lotesDataGridView";
+            lotesDataGridView.RowHeadersWidth = 51;
+            lotesDataGridView.RowTemplate.Height = 29;
+            lotesDataGridView.Size = new Size(700, 230);
+            lotesDataGridView.TabIndex = 0;
+            lotesDataGridView.CellContentClick += lotesDataGridView_CellContentClick;
             // 
             // eliminarButtonLote
             // 
-            this.eliminarButtonLote.Location = new System.Drawing.Point(20, 266);
-            this.eliminarButtonLote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.eliminarButtonLote.Name = "eliminarButtonLote";
-            this.eliminarButtonLote.Size = new System.Drawing.Size(143, 38);
-            this.eliminarButtonLote.TabIndex = 1;
-            this.eliminarButtonLote.Text = "Eliminar";
-            this.eliminarButtonLote.UseVisualStyleBackColor = true;
-            this.eliminarButtonLote.Click += new System.EventHandler(this.eliminarButton_Click);
+            eliminarButtonLote.Location = new Point(20, 266);
+            eliminarButtonLote.Margin = new Padding(3, 2, 3, 2);
+            eliminarButtonLote.Name = "eliminarButtonLote";
+            eliminarButtonLote.Size = new Size(143, 38);
+            eliminarButtonLote.TabIndex = 1;
+            eliminarButtonLote.Text = "Eliminar";
+            eliminarButtonLote.UseVisualStyleBackColor = true;
+            eliminarButtonLote.Click += eliminarButton_Click;
             // 
             // modificarButtonLote
             // 
-            this.modificarButtonLote.Location = new System.Drawing.Point(195, 266);
-            this.modificarButtonLote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.modificarButtonLote.Name = "modificarButtonLote";
-            this.modificarButtonLote.Size = new System.Drawing.Size(143, 38);
-            this.modificarButtonLote.TabIndex = 2;
-            this.modificarButtonLote.Text = "Modificar";
-            this.modificarButtonLote.UseVisualStyleBackColor = true;
-            this.modificarButtonLote.Click += new System.EventHandler(this.modificarButton_Click);
+            modificarButtonLote.Location = new Point(195, 266);
+            modificarButtonLote.Margin = new Padding(3, 2, 3, 2);
+            modificarButtonLote.Name = "modificarButtonLote";
+            modificarButtonLote.Size = new Size(143, 38);
+            modificarButtonLote.TabIndex = 2;
+            modificarButtonLote.Text = "Modificar";
+            modificarButtonLote.UseVisualStyleBackColor = true;
+            modificarButtonLote.Click += modificarButton_Click;
             // 
             // agregarButtonLote
             // 
-            this.agregarButtonLote.Location = new System.Drawing.Point(373, 266);
-            this.agregarButtonLote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.agregarButtonLote.Name = "agregarButtonLote";
-            this.agregarButtonLote.Size = new System.Drawing.Size(143, 38);
-            this.agregarButtonLote.TabIndex = 3;
-            this.agregarButtonLote.Text = "Agregar";
-            this.agregarButtonLote.UseVisualStyleBackColor = true;
-            this.agregarButtonLote.Click += new System.EventHandler(this.agregarButton_Click);
+            agregarButtonLote.Location = new Point(373, 266);
+            agregarButtonLote.Margin = new Padding(3, 2, 3, 2);
+            agregarButtonLote.Name = "agregarButtonLote";
+            agregarButtonLote.Size = new Size(143, 38);
+            agregarButtonLote.TabIndex = 3;
+            agregarButtonLote.Text = "Agregar";
+            agregarButtonLote.UseVisualStyleBackColor = true;
+            agregarButtonLote.Click += agregarButton_Click;
             // 
             // LotesLista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 324);
-            this.Controls.Add(this.agregarButtonLote);
-            this.Controls.Add(this.modificarButtonLote);
-            this.Controls.Add(this.eliminarButtonLote);
-            this.Controls.Add(this.lotesDataGridView);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "LotesLista";
-            this.Text = "Gestión de Lotes";
-            this.Load += new System.EventHandler(this.LotesLista_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.lotesDataGridView)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(740, 324);
+            Controls.Add(agregarButtonLote);
+            Controls.Add(modificarButtonLote);
+            Controls.Add(eliminarButtonLote);
+            Controls.Add(lotesDataGridView);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "LotesLista";
+            Text = "Gestión de Lotes";
+            Load += LotesLista_Load;
+            ((System.ComponentModel.ISupportInitialize)lotesDataGridView).EndInit();
+            ResumeLayout(false);
 
         }
 

@@ -36,7 +36,7 @@ namespace WinForms
                 eventos = (await EventoApiClient.GetAllAsync()).ToList();
 
 
-                var fiestas = await FiestaApiClient.GetAllAsync();
+                var fiestas = await FiestaApiClient.GetFiestasConLotesAsync();
 
 
                 var listaParaMostrar = fiestas.Select(f => new
@@ -90,7 +90,8 @@ namespace WinForms
                     var cantidad = int.Parse(cantidadTextBox.Text);
 
                     var fecha = DateTime.Now;
-
+                    var fiestaDTO = await FiestaApiClient.GetAsync(idFiesta);
+                    LoteDTO loteDTO = await LoteApiClient.GetLoteActualAsync(fiestaDTO.IdFiesta);
 
                     CompraDTO compraDTO = new();
                     compraDTO.IdFiesta = idFiesta;
@@ -99,11 +100,11 @@ namespace WinForms
                     compraDTO.CantidadCompra = cantidad;
                     compraDTO.Entrada = "";
                     compraDTO.FechaHora = fecha;
-
+                    compraDTO.Precio_Entrada = loteDTO.Precio;
                     await CompraApiClient.AddAsync(compraDTO);
 
-                    FiestaDTO fiestaDTO = await FiestaApiClient.GetAsync(idFiesta);
-                    LoteDTO loteDTO = await LoteApiClient.GetLoteAcutalAsync(fiestaDTO.IdFiesta);
+                   
+                    
 
                     MessageBox.Show("Compra registrada correctamente.");
                     this.DialogResult = DialogResult.OK;

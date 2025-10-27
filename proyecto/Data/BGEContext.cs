@@ -211,6 +211,9 @@ namespace Data
                     .WithMany() 
                     .HasForeignKey(c => c.IdCliente)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.Property(e => e.Precio_Entrada)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Evento>().HasData(
@@ -441,7 +444,8 @@ namespace Data
                     Entrada = "entrada-1",
                     IdVendedor = 10,
                     IdCliente = 1,
-                    IdFiesta = 1
+                    IdFiesta = 1,
+                    Precio_Entrada = 25.50m
                 },
                 new
                 {
@@ -450,7 +454,8 @@ namespace Data
                     Entrada = "entrada-2",
                     IdVendedor = 10,
                     IdCliente = 1,
-                    IdFiesta = 1
+                    IdFiesta = 1,
+                    Precio_Entrada = 25.50m
                 },
                 new
                 {
@@ -459,7 +464,8 @@ namespace Data
                     Entrada = "entrada-3",
                     IdVendedor = 10,
                     IdCliente = 1,
-                    IdFiesta = 1
+                    IdFiesta = 1,
+                    Precio_Entrada = 25.50m
                 }
             );
 
@@ -488,6 +494,8 @@ namespace Data
                     .WithMany()
                     .HasForeignKey(c => c.IdEvento)
                     .OnDelete(DeleteBehavior.Restrict);
+
+
             });
         }
     }

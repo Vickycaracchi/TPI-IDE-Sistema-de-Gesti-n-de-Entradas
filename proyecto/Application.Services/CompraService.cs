@@ -17,7 +17,7 @@ namespace Application.Services
 
             dto.FechaHora = DateTime.Now;
 
-            Compra compra = new Compra(dto.FechaHora, dto.CantidadCompra, dto.Entrada, dto.IdVendedor, dto.IdCliente, dto.IdFiesta);
+            Compra compra = new Compra(dto.FechaHora, dto.CantidadCompra, dto.Entrada, dto.IdVendedor, dto.IdCliente, dto.IdFiesta, dto.Precio_Entrada);
 
             compraRepository.Add(compra);
 
@@ -36,7 +36,8 @@ namespace Application.Services
                 Entrada = compra.Entrada,
                 IdVendedor = compra.IdVendedor,
                 IdCliente = compra.IdCliente,
-                IdFiesta = compra.IdFiesta
+                IdFiesta = compra.IdFiesta,
+                Precio_Entrada = compra.Precio_Entrada
 
             }).ToList();
         }
@@ -52,7 +53,8 @@ namespace Application.Services
                 Entrada = compra.Entrada,
                 IdVendedor = compra.IdVendedor,
                 IdCliente = compra.IdCliente,
-                IdFiesta = compra.IdFiesta
+                IdFiesta = compra.IdFiesta,
+                Precio_Entrada = compra.Precio_Entrada
 
             }).ToList();
         }
@@ -60,7 +62,7 @@ namespace Application.Services
         {
             var compraRepository = new CompraRepository();
 
-            Compra compra = new Compra(dto.FechaHora, dto.CantidadCompra, dto.Entrada, dto.IdVendedor, dto.IdCliente, dto.IdFiesta);
+            Compra compra = new Compra(dto.FechaHora, dto.CantidadCompra, dto.Entrada, dto.IdVendedor, dto.IdCliente, dto.IdFiesta,dto.Precio_Entrada);
             return compraRepository.Update(compra);
         }
     }

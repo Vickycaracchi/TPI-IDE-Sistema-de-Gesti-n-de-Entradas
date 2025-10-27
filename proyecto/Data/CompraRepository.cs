@@ -38,7 +38,7 @@ namespace Data
         public bool Update(Compra compra)
         {
             using var context = CreateContext();
-            var existingCompra = context.Compras.Find(compra.FechaHora, compra.IdVendedor, compra.IdCliente, compra.IdFiesta);
+            var existingCompra = context.Compras.Find(compra.FechaHora, compra.IdVendedor, compra.IdCliente, compra.IdFiesta, compra.Precio_Entrada);
             if (existingCompra != null)
             {
                 existingCompra.SetFecha(compra.FechaHora);
@@ -47,6 +47,7 @@ namespace Data
                 existingCompra.SetIdVendedor(compra.IdVendedor);
                 existingCompra.SetIdCliente(compra.IdCliente);
                 existingCompra.SetIdFiesta(compra.IdFiesta);
+                existingCompra.SetPrecioEntrada(compra.Precio_Entrada);
 
 
                 context.SaveChanges();

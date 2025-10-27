@@ -15,6 +15,8 @@ namespace WinForms
     public partial class LoteDetalle : Form
     {
         internal LoteDTO lote = new LoteDTO();
+        private List<LugarDTO> lugares;
+        private List<EventoDTO> eventos;
         public LoteDetalle()
         {
             InitializeComponent();
@@ -46,15 +48,46 @@ namespace WinForms
             }
         }
 
+        private void listaFiestas_Load(object sender, EventArgs e)
+        {
+            this.GetAllAndLoad();
+        }
+        private async void GetAllAndLoad()
+        {
+            try
+            {
+                lugares = (await LugarApiClient.GetAllAsync()).ToList();
+                eventos = (await EventoApiClient.GetAllAsync()).ToList();
+
+                var fiestas = await FiestaApiClient.GetAllAsync();
+
+                var listaParaMostrar = fiestas.Select(f => new
+                {
+                    f.IdFiesta,
+                    f.FechaFiesta,
+                    NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                    NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+                }).ToList();
+
+                listaFiestas.AutoGenerateColumns = true;
+                listaFiestas.DataSource = listaParaMostrar;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar la lista de fiestas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void LoteDetalle_Load(object sender, EventArgs e)
         {
+            GetAllAndLoad(); // Igual que en RegistrarCompra
+
             if (mode == FormMode.Update)
             {
-                this.nombreTextBox.Text = lote.Nombre;
-                this.precioTextBox.Text = lote.Precio.ToString();
-                this.fechaDesdeDateTimePicker.Value = lote.FechaDesde;
-                this.fechaHastaDateTimePicker.Value = lote.FechaHasta;
-                this.cantidadLoteTextBox.Text = lote.CantidadLote.ToString();
+                nombreTextBox.Text = lote.Nombre;
+                precioTextBox.Text = lote.Precio.ToString();
+                fechaDesdeDateTimePicker.Value = lote.FechaDesde;
+                fechaHastaDateTimePicker.Value = lote.FechaHasta;
+                cantidadLoteTextBox.Text = lote.CantidadLote.ToString();
             }
             else
             {
@@ -115,6 +148,15 @@ namespace WinForms
             {
                 try
                 {
+                    if (listaFiestas.SelectedRows.Count == 0)
+                    {
+                        MessageBox.Show("Debe seleccionar una fiesta antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    var fiesta = listaFiestas.SelectedRows[0].Cells[0].Value;
+                    var idFiestaStr = Convert.ToString(fiesta);
+                    var idFiesta = int.Parse(idFiestaStr);
+                    lote.IdFiesta = idFiesta;
                     lote.Nombre = this.nombreTextBox.Text;
                     lote.Precio = decimal.Parse(this.precioTextBox.Text);
                     lote.FechaDesde = this.fechaDesdeDateTimePicker.Value;
@@ -140,6 +182,11 @@ namespace WinForms
                     MessageBox.Show($"Error al guardar lote: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

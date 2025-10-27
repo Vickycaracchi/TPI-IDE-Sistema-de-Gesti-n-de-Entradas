@@ -14,5 +14,6 @@ namespace DTOs
         public int IdCliente { get; set; }
         public int IdVendedor { get; set; }
         public int IdFiesta { get; set; }
+        public decimal Precio_Entrada { get; set; }
     }
 }
