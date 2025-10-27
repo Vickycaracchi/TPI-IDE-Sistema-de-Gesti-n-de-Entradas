@@ -14,5 +14,7 @@ namespace DTOs
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
         public int CantidadLote { get; set; }
+        public int IdFiesta { get; set; }
+        public bool LoteActual { get; set; }
     }
 }

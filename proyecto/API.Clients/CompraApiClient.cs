@@ -18,7 +18,7 @@ namespace API.Clients
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public static async Task<IEnumerable<CompraDTO>> GetAllAsync(int idVendedor)
+        public static async Task<IEnumerable<CompraDTO>> GetAllVendedorAsync(int idVendedor)
         {
             try
             {

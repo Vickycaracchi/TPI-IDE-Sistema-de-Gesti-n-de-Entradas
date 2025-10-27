@@ -101,6 +101,10 @@ namespace WinForms
                     compraDTO.FechaHora = fecha;
 
                     await CompraApiClient.AddAsync(compraDTO);
+
+                    FiestaDTO fiestaDTO = await FiestaApiClient.GetAsync(idFiesta);
+                    LoteDTO loteDTO = await LoteApiClient.GetLoteAcutalAsync(fiestaDTO.IdFiesta);
+
                     MessageBox.Show("Compra registrada correctamente.");
                     this.DialogResult = DialogResult.OK;
                     this.Close();

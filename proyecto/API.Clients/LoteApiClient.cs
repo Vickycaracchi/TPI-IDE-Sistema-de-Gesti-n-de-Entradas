@@ -156,5 +156,31 @@ namespace API.Clients
                 throw new Exception($"Timeout al actualizar lote con Id {lote.Id}: {ex.Message}", ex);
             }
         }
+
+        public static async Task<LoteDTO> GetLoteAcutalAsync(int idFiesta)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("loteActual/" + idFiesta);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<LoteDTO>();
+                }
+                else
+                {
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Error al obtener el lote actual de la fiesta de id: {idFiesta}. status: {response.StatusCode}, Detalle: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de conexión al obtener el lote actual de la fiesta de id: {idFiesta}: {ex.Message}", ex);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception($"Timeout al obtener el lote actual de la fiesta de id: {idFiesta}: {ex.Message}", ex);
+            }
+        }
     }
 }

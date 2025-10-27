@@ -163,6 +163,9 @@ namespace Data
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.HasIndex(e => e.Nombre)
+                    .IsUnique();
+
                 entity.Property(e => e.Precio)
                     .IsRequired()
                     .HasColumnType("decimal(18,2)");
@@ -175,9 +178,12 @@ namespace Data
 
                 entity.Property(e => e.CantidadLote)
                     .IsRequired();
+                
+                entity.Property( e => e.IdFiesta)
+                    .IsRequired();
 
-                entity.HasIndex(e => e.Nombre)
-                    .IsUnique();
+                entity.Property(e => e.LoteActual)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Compra>(entity =>

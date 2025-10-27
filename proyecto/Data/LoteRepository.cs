@@ -61,6 +61,8 @@ namespace Data
                 existingLote.SetFechaDesde(lote.FechaDesde);
                 existingLote.SetFechaHasta(lote.FechaHasta);
                 existingLote.SetCantidadLote(lote.CantidadLote);
+                existingLote.SetIdFiesta(lote.IdFiesta);
+                existingLote.SetLoteActual(lote.LoteActual);
 
                 context.SaveChanges();
                 return true;
@@ -88,6 +90,23 @@ namespace Data
 
         public LoteDTO ToDTO(Lote lote)
         {
+            return new LoteDTO
+            {
+                Id = lote.Id,
+                Nombre = lote.Nombre,
+                Precio = lote.Precio,
+                FechaDesde = lote.FechaDesde,
+                FechaHasta = lote.FechaHasta,
+                CantidadLote = lote.CantidadLote
+            };
+        }
+
+        public LoteDTO? GetLoteActual(int idFiesta)
+        {
+            using var context = CreateContext();
+            var query = context.Lotes.Where(c => c.IdFiesta == idFiesta && c.LoteActual == true);
+            var lote = query.FirstOrDefault();
+            
             return new LoteDTO
             {
                 Id = lote.Id,

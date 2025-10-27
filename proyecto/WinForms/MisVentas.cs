@@ -35,8 +35,7 @@ namespace WinForms
             try
             {
                 
-                var compras = await CompraApiClient.GetAllAsync(usuarioIngresado.Id);
-
+                var compras = await CompraApiClient.GetAllVendedorAsync(usuarioIngresado.Id);
                
                 var usuarios = await UsuarioApiClient.GetAllAsync();
                 var fiestas = await FiestaApiClient.GetAllAsync();

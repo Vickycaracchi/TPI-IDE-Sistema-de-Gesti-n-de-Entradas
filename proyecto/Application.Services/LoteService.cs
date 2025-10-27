@@ -16,7 +16,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un lote con el nombre '{dto.Nombre}'.");
             }
 
-            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote);
+            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote, dto.IdFiesta, dto.LoteActual);
 
             loteRepository.Add(lote);
 
@@ -46,7 +46,9 @@ namespace Application.Services
                 Precio = lote.Precio,
                 FechaDesde = lote.FechaDesde,
                 FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote
+                CantidadLote = lote.CantidadLote,
+                IdFiesta = lote.IdFiesta,
+                LoteActual = lote.LoteActual
             };
         }
 
@@ -62,7 +64,9 @@ namespace Application.Services
                 Precio = lote.Precio,
                 FechaDesde = lote.FechaDesde,
                 FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote
+                CantidadLote = lote.CantidadLote,
+                IdFiesta = lote.IdFiesta,
+                LoteActual = lote.LoteActual
             }).ToList();
         }
 
@@ -77,8 +81,30 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe otro lote con el nombre '{dto.Nombre}'.");
             }
 
-            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote);
+            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote, dto.IdFiesta, dto.LoteActual);
             return loteRepository.Update(lote);
+        }
+        public LoteDTO GetLoteActual(int idFiesta)
+        {
+            var loteRepository = new LoteRepository();
+            LoteDTO loteActual = loteRepository.GetLoteActual(idFiesta);
+
+            if (loteActual == null)
+                return null;
+
+            return new LoteDTO
+            {
+                Id = loteActual.Id,
+                Nombre = loteActual.Nombre,
+                Precio = loteActual.Precio,
+                FechaDesde = loteActual.FechaDesde,
+                FechaHasta = loteActual.FechaHasta,
+                CantidadLote = loteActual.CantidadLote,
+                IdFiesta = loteActual.IdFiesta,
+                LoteActual = loteActual.LoteActual
+            };
+
+
         }
     }
 }
