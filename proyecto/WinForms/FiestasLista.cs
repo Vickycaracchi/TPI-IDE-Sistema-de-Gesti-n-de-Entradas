@@ -96,35 +96,36 @@ namespace WinForms
         }
         private async void GetAllAndLoad()
         {
-            try {
+            try
+            {
                 lugares = (await LugarApiClient.GetAllAsync()).ToList();
                 eventos = (await EventoApiClient.GetAllAsync()).ToList();
 
                 var fiestas = await FiestaApiClient.GetAllAsync();
 
-            var listaParaMostrar = fiestas.Select(f => new
-            {
-                f.IdFiesta,
-                f.FechaFiesta,
-                NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
-                NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
-            }).ToList();
+                var listaParaMostrar = fiestas.Select(f => new
+                {
+                    f.IdFiesta,
+                    f.FechaFiesta,
+                    NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                    NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+                }).ToList();
 
-            FiestasDataGridView.DataSource = listaParaMostrar;
+                FiestasDataGridView.DataSource = listaParaMostrar;
 
-            if (FiestasDataGridView.Rows.Count > 0)
-            {
-                FiestasDataGridView.Rows[0].Selected = true;
-                eliminarButtonFiesta.Enabled = true;
-                modificarButtonFiesta.Enabled = true;
-            }
-            else
-            {
-                eliminarButtonFiesta.Enabled = false;
-                modificarButtonFiesta.Enabled = false;
-            }
+                if (FiestasDataGridView.Rows.Count > 0)
+                {
+                    FiestasDataGridView.Rows[0].Selected = true;
+                    eliminarButtonFiesta.Enabled = true;
+                    modificarButtonFiesta.Enabled = true;
+                }
+                else
+                {
+                    eliminarButtonFiesta.Enabled = false;
+                    modificarButtonFiesta.Enabled = false;
+                }
 
-            
+
             }
             catch (Exception ex)
             {
@@ -143,5 +144,9 @@ namespace WinForms
             return null;
         }
 
+        private void FiestasDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

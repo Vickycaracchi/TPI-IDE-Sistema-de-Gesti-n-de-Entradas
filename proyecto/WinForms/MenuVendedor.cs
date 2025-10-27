@@ -13,7 +13,7 @@ namespace WinForms
 {
     public partial class MenuVendedor : Form
     {
-        public UsuarioDTO usuarioIngresado {  get; set; }
+        public UsuarioDTO usuarioIngresado { get; set; }
         public MenuVendedor()
         {
             InitializeComponent();
@@ -51,6 +51,11 @@ namespace WinForms
         private void gestionDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new ClientesLista());
+        }
+
+        private void MenuVendedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

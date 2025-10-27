@@ -22,7 +22,33 @@ namespace API.Clients
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("compras/" + idVendedor);
+                HttpResponseMessage response = await client.GetAsync("compras/vendedor/" + idVendedor);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<IEnumerable<CompraDTO>>();
+                }
+                else
+                {
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de conexión al obtener lista de compras.");
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception($"Timeout al obtener lista de compras.");
+            }
+        }
+
+        public static async Task<IEnumerable<CompraDTO>> GetAllCliAsync(int idCliente)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("compras/cliente/" + idCliente);
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DTOs;
 
 namespace WinForms
 {
@@ -17,7 +18,7 @@ namespace WinForms
         {
             InitializeComponent();
         }
-
+        public UsuarioDTO usuarioIngresado { get; set; }
         private void AbrirFormularioEnPanel(Form formHijo)
         {
             // Limpia el panel antes de cargar otro form
@@ -44,6 +45,7 @@ namespace WinForms
         }
         private void verFiestas_Click(object sender, EventArgs e)
         {
+
             AbrirFormularioEnPanel(new ListarFiestas());
         }
         private void MenuCliente_Load(object sender, EventArgs e)
@@ -61,6 +63,11 @@ namespace WinForms
 
         }
 
-
+        private void verMisComprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListarCompras listarComprasForm = new ListarCompras();
+            listarComprasForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(listarComprasForm);
+        }
     }
 }

@@ -6,17 +6,27 @@ namespace WebAPI
     public static class CompraEndpoint
     {
         public static void MapCompraEndpoints(this WebApplication app)
-        {          
+        {
 
-            app.MapGet("/compras/{idVendedor}", (int idVendedor) =>
+            // GET compras por vendedor
+            app.MapGet("/compras/vendedor/{idVendedor}", (int idVendedor) =>
             {
                 CompraService compraService = new CompraService();
-
                 var dtos = compraService.GetAll(idVendedor);
-
                 return Results.Ok(dtos);
             })
-            .WithName("GetAllCompras")
+            .WithName("GetAllComprasVendedor")
+            .Produces<List<EventoDTO>>(StatusCodes.Status200OK)
+            .WithOpenApi();
+
+            // GET compras por cliente
+            app.MapGet("/compras/cliente/{idCliente}", (int idCliente) =>
+            {
+                CompraService compraService = new CompraService();
+                var dtos = compraService.GetAllCli(idCliente);
+                return Results.Ok(dtos);
+            })
+            .WithName("GetAllComprasCliente")
             .Produces<List<EventoDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
 

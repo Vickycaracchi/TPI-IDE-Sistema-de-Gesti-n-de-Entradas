@@ -28,6 +28,13 @@ namespace Data
             return query.ToList();
         }
 
+        public IEnumerable<Compra> GetAllCli(int idCliente)
+        {
+            using var context = CreateContext();
+            var query = context.Compras.Where(c => c.IdCliente == idCliente);
+            return query.ToList();
+        }
+
         public bool Update(Compra compra)
         {
             using var context = CreateContext();

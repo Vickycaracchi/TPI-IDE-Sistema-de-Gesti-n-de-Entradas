@@ -40,7 +40,22 @@ namespace Application.Services
 
             }).ToList();
         }
+        public IEnumerable<CompraDTO> GetAllCli(int idCliente)
+        {
+            var compraRepository = new CompraRepository();
+            var compras = compraRepository.GetAllCli(idCliente);
 
+            return compras.Select(compra => new CompraDTO
+            {
+                FechaHora = compra.FechaHora,
+                CantidadCompra = compra.CantidadCompra,
+                Entrada = compra.Entrada,
+                IdVendedor = compra.IdVendedor,
+                IdCliente = compra.IdCliente,
+                IdFiesta = compra.IdFiesta
+
+            }).ToList();
+        }
         public bool Update(CompraDTO dto)
         {
             var compraRepository = new CompraRepository();

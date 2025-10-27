@@ -44,7 +44,7 @@
             agregarButtonFiesta.TabIndex = 7;
             agregarButtonFiesta.Text = "Agregar";
             agregarButtonFiesta.UseVisualStyleBackColor = true;
-            this.agregarButtonFiesta.Click += new System.EventHandler(this.agregarButtonFiesta_Click);
+            agregarButtonFiesta.Click += agregarButtonFiesta_Click;
             // 
             // modificarButtonFiesta
             // 
@@ -55,7 +55,7 @@
             modificarButtonFiesta.TabIndex = 6;
             modificarButtonFiesta.Text = "Modificar";
             modificarButtonFiesta.UseVisualStyleBackColor = true;
-            this.modificarButtonFiesta.Click += new System.EventHandler(this.modificarButtonFiesta_Click);
+            modificarButtonFiesta.Click += modificarButtonFiesta_Click;
             // 
             // eliminarButtonFiesta
             // 
@@ -66,7 +66,7 @@
             eliminarButtonFiesta.TabIndex = 5;
             eliminarButtonFiesta.Text = "Eliminar";
             eliminarButtonFiesta.UseVisualStyleBackColor = true;
-            this.eliminarButtonFiesta.Click += new System.EventHandler(this.eliminarButtonFiesta_Click);
+            eliminarButtonFiesta.Click += eliminarButtonFiesta_Click;
             // 
             // FiestasDataGridView
             // 
@@ -77,6 +77,7 @@
             FiestasDataGridView.RowHeadersWidth = 51;
             FiestasDataGridView.Size = new Size(553, 198);
             FiestasDataGridView.TabIndex = 4;
+            FiestasDataGridView.CellContentClick += FiestasDataGridView_CellContentClick;
             // 
             // FiestasLista
             // 

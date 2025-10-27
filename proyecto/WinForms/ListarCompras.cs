@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace WinForms
 {
-    public partial class MisVentas : Form
+    public partial class ListarCompras : Form
     {
         public UsuarioDTO usuarioIngresado { get; set; }
-        public MisVentas()
+        public ListarCompras()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace WinForms
 
         }
 
-        private void MisVentas_Load(object sender, EventArgs e)
+        private void ListarCompras_Load(object sender, EventArgs e)
         {
             GetAllAndLoad();
         }
@@ -34,16 +34,16 @@ namespace WinForms
         {
             try
             {
-                
-                var compras = await CompraApiClient.GetAllAsync(usuarioIngresado.Id);
 
-               
+                var compras = await CompraApiClient.GetAllCliAsync(usuarioIngresado.Id);
+
+
                 var usuarios = await UsuarioApiClient.GetAllAsync();
                 var fiestas = await FiestaApiClient.GetAllAsync();
                 var lugares = await LugarApiClient.GetAllAsync();
                 var eventos = await EventoApiClient.GetAllAsync();
 
-                
+
                 var listaParaMostrar = compras.Select(c =>
                 {
                     var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
@@ -66,19 +66,24 @@ namespace WinForms
                     };
                 }).ToList();
 
-               
-                misVentasDataGridView.AutoGenerateColumns = true;
-                misVentasDataGridView.DataSource = listaParaMostrar;
 
-                if (misVentasDataGridView.Rows.Count > 0)
+                ListarComprasDataGridView.AutoGenerateColumns = true;
+                ListarComprasDataGridView.DataSource = listaParaMostrar;
+
+                if (ListarComprasDataGridView.Rows.Count > 0)
                 {
-                    misVentasDataGridView.Rows[0].Selected = true;
+                    ListarComprasDataGridView.Rows[0].Selected = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar las compras: {ex.Message}\n\nStackTrace:\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

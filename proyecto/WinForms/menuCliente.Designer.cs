@@ -33,12 +33,13 @@
             verEventosToolStripMenuItem = new ToolStripMenuItem();
             verFiestas = new ToolStripMenuItem();
             panelContenedor = new Panel();
+            verMisComprasToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { verProductosToolStripMenuItem, verEventosToolStripMenuItem, verFiestas });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { verProductosToolStripMenuItem, verEventosToolStripMenuItem, verFiestas, verMisComprasToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
@@ -74,6 +75,13 @@
             panelContenedor.Size = new Size(793, 424);
             panelContenedor.TabIndex = 1;
             // 
+            // verMisComprasToolStripMenuItem
+            // 
+            verMisComprasToolStripMenuItem.Name = "verMisComprasToolStripMenuItem";
+            verMisComprasToolStripMenuItem.Size = new Size(106, 20);
+            verMisComprasToolStripMenuItem.Text = "Ver mis compras";
+            verMisComprasToolStripMenuItem.Click += verMisComprasToolStripMenuItem_Click;
+            // 
             // menuCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -100,5 +108,6 @@
         private Panel panelContenedor;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem verFiestas;
+        private ToolStripMenuItem verMisComprasToolStripMenuItem;
     }
 }
