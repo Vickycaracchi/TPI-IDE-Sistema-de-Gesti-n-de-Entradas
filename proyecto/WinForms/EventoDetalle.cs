@@ -51,33 +51,19 @@ namespace WinForms
         }
         private void SetEvento()
         {
-
             this.nombreTextBox.Text = this.Evento.Nombre;
             this.descTextBox.Text = this.Evento.Desc;
-            //asegurar que la fechha no sea la default
-            if (this.Evento.Fecha != default(DateTime))
-            {
-                this.fechaPicker.Value = DateTime.Now;
-            }
-            this.lugarTextBox.Text = this.Evento.Lugar;
         }
         private bool ValidateEvento()
         {
             bool isValid = true;
 
             errorProvider.SetError(nombreTextBox, string.Empty);
-            errorProvider.SetError(lugarTextBox, string.Empty);
 
             if (this.nombreTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(nombreTextBox, "El Nombre es Requerido");
-            }
-
-            if (this.lugarTextBox.Text == string.Empty)
-            {
-                isValid = false;
-                errorProvider.SetError(lugarTextBox, "El Lugar es Requerido");
             }
             return isValid;
         }
@@ -100,8 +86,6 @@ namespace WinForms
                 {
                     this.Evento.Nombre = nombreTextBox.Text;
                     this.Evento.Desc = descTextBox.Text;
-                    this.Evento.Fecha = fechaPicker.Value;
-                    this.Evento.Lugar = lugarTextBox.Text;
 
                     if (this.Mode == FormMode.Update)
                     {

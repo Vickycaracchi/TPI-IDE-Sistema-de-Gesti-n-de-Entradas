@@ -11,12 +11,11 @@ namespace Application.Services
             var eventoRepository = new EventoRepository();
 
             var fecha = DateTime.Now;
-            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
+            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc);
 
             eventoRepository.Add(evento);
 
             dto.Id = evento.Id;
-            dto.Fecha = evento.Fecha;
 
             return dto;
         }
@@ -39,9 +38,7 @@ namespace Application.Services
             {
                 Id = evento.Id,
                 Nombre = evento.Nombre,
-                Desc = evento.Desc,
-                Fecha = evento.Fecha,
-                Lugar = evento.Lugar
+                Desc = evento.Desc
             };
         }
 
@@ -54,9 +51,7 @@ namespace Application.Services
             {
                 Id = evento.Id,
                 Nombre = evento.Nombre,
-                Desc = evento.Desc,
-                Fecha = evento.Fecha,
-                Lugar = evento.Lugar
+                Desc = evento.Desc
             }).ToList();
         }
 
@@ -64,7 +59,7 @@ namespace Application.Services
         {
             var eventoRepository = new EventoRepository();
 
-            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc, dto.Fecha, dto.Lugar);
+            Evento evento = new Evento(dto.Id, dto.Nombre, dto.Desc);
             return eventoRepository.Update(evento);
         }
     }

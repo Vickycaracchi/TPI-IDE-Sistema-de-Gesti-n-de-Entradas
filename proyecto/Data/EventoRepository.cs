@@ -54,9 +54,6 @@ namespace Data
             {
                 existingEvento.SetNombre(evento.Nombre);
                 existingEvento.SetDesc(evento.Desc);
-                existingEvento.SetFecha(evento.Fecha);
-                existingEvento.SetLugar(evento.Lugar);
-
 
                 context.SaveChanges();
                 return true;

@@ -58,13 +58,6 @@ namespace Data
 
                 entity.Property(e => e.Desc)
                     .HasMaxLength(500);
-
-                entity.Property(e => e.Fecha)
-                    .IsRequired();
-
-                entity.Property(e => e.Lugar)
-                    .IsRequired()
-                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -219,17 +212,14 @@ namespace Data
                 {
                     Id = 1,
                     Nombre = "Concierto de Rock",
-                    Desc = "Banda local tocando en vivo, ¡imperdible!",
-                    Fecha = DateTime.Now.AddDays(10), Lugar = "The Venue" 
+                    Desc = "Banda local tocando en vivo, ¡imperdible!"
                 },
 
                 new  
                 {
                     Id = 2,
                     Nombre = "Feria de Artesanía",
-                    Desc = "Exposición de productos hechos a mano por artistas locales.",
-                    Fecha = DateTime.Now.AddMonths(1),
-                    Lugar = "Plaza Central" 
+                    Desc = "Exposición de productos hechos a mano por artistas locales."
                 }
             );
 

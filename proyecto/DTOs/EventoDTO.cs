@@ -12,7 +12,5 @@ namespace DTOs
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Desc { get; set; }
-        public DateTime Fecha { get; set; }
-        public string Lugar { get; set; }
     }
 }

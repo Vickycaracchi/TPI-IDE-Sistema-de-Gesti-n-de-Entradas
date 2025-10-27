@@ -12,19 +12,13 @@ namespace Domain.Model
         public int Id { get; private set; }
         public string Nombre { get; private set; }
         public string Desc { get; private set; }
-
-        public DateTime Fecha { get; private set; }
-        public string Lugar { get; private set; }
-
         public Evento() { }
 
-        public Evento(int id, string nombre, string desc, DateTime fecha, string lugar)
+        public Evento(int id, string nombre, string desc)
         {
             SetId(id);
             SetNombre(nombre);
             SetDesc(desc);
-            SetFecha(fecha);
-            SetLugar(lugar);
         }
 
         public void SetId(int id)
@@ -44,18 +38,6 @@ namespace Domain.Model
             if (string.IsNullOrWhiteSpace(desc))
                 throw new ArgumentException("El nombre no puede ser nulo o vacío.", nameof(desc));
             Desc = desc;
-        }
-        public void SetFecha(DateTime fecha)
-        {
-            if (fecha == default)
-                throw new ArgumentException("La fecha no puede ser nula.", nameof(fecha));
-            Fecha = fecha;
-        }
-        public void SetLugar(string lugar)
-        {
-            if (string.IsNullOrWhiteSpace(lugar))
-                throw new ArgumentException("El lugar no puede ser nulo o vacío.", nameof(lugar));
-            Lugar = lugar;
         }
     }
 }
