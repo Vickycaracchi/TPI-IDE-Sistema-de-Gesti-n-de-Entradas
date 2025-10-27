@@ -1,6 +1,6 @@
 ﻿@page "/login"
 @using Application.Services
-@using BlazorApp.Auth
+@using BlazorApp.Authentication
 @using DTOs
 @using Microsoft.AspNetCore.Components.Authorization
 
@@ -27,26 +27,36 @@
 
     [Inject] NavigationManager Nav { get; set; } = default!;
     [Inject] AuthenticationStateProvider AuthProvider { get; set; } = default!;
+    [Inject] IHttpClientFactory HttpClientFactory { get; set; } = default!;
 
-    private void HandleLogin()
+    private async Task HandleLogin()
     {
         try
         {
-            var service = new UsuarioService(); // ✅ Usamos new, como está diseñado
-            var usuario = service.GetForLogin(loginDto);
+            var httpClient = HttpClientFactory.CreateClient("WebAPI");
+            var response = await httpClient.PostAsJsonAsync("loginUsuario", loginDto);
 
-            if (usuario != null)
+            if (response.IsSuccessStatusCode)
             {
-                // Si usas CustomAuthStateProvider, aquí debes notificar el login
-                if (AuthProvider is CustomAuthStateProvider customProvider)
+                var usuario = await response.Content.ReadFromJsonAsync<UsuarioDTO>();
+                
+                if (usuario != null)
                 {
-                    customProvider.SetUser(usuario); // Tendrás que crear este método
+                    // Si usas CustomAuthStateProvider, aquí debes notificar el login
+                    if (AuthProvider is CustomAuthStateProvider customProvider)
+                    {
+                        customProvider.SetUser(usuario);
+                    }
+                    Nav.NavigateTo("/");
                 }
-                Nav.NavigateTo("/");
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                error = "Credenciales incorrectas.";
             }
             else
             {
-                error = "Credenciales incorrectas.";
+                error = "Error al iniciar sesión.";
             }
         }
         catch (Exception ex)
