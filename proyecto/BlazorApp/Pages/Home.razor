@@ -1,1 +1,32 @@
-﻿
+@page "/"
+
+<PageTitle>Inicio - Sistema de Gestión de Entradas</PageTitle>
+
+<h1>Bienvenido al Sistema de Gestión de Entradas</h1>
+
+<p>Este es el sistema de gestión de entradas para eventos y fiestas.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Acceso al Sistema</h5>
+            </div>
+            <div class="card-body">
+                <p>Para acceder a las funciones del sistema, por favor inicie sesión.</p>
+                <a href="/login" class="btn btn-primary">Iniciar Sesión</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Área Protegida</h5>
+            </div>
+            <div class="card-body">
+                <p>Acceda a las funciones restringidas del sistema.</p>
+                <a href="/soloAutenticados" class="btn btn-secondary">Área Protegida</a>
+            </div>
+        </div>
+    </div>
+</div>

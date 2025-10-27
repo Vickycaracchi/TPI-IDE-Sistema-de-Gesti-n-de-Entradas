@@ -1,0 +1,14 @@
+﻿@page "/soloAutenticados"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h2>Área protegida</h2>
+<p>Solo usuarios autenticados pueden ver esto.</p>
+
+<AuthorizeView>
+    <Authorized>
+        <p>Bienvenido, @context.User.Identity?.Name!</p>
+    </Authorized>
+</AuthorizeView>
+
+<a href="/">Volver al inicio</a>

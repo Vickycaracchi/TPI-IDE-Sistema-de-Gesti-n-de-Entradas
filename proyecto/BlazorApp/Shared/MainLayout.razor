@@ -1,0 +1,39 @@
+@inherits LayoutView
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <AuthorizeView>
+                <Authorized>
+                    <span>Hola, @context.User.Identity?.Name!</span>
+                    <a href="/login" @onclick="Logout" class="ml-2">Cerrar Sesión</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/login">Iniciar Sesión</a>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    [Inject] NavigationManager Navigation { get; set; } = default!;
+    [Inject] AuthenticationStateProvider AuthProvider { get; set; } = default!;
+
+    private void Logout()
+    {
+        if (AuthProvider is CustomAuthStateProvider customProvider)
+        {
+            customProvider.Logout();
+        }
+        Navigation.NavigateTo("/login");
+    }
+}

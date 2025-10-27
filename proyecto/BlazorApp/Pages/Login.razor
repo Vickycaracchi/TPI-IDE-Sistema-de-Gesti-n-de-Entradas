@@ -1,5 +1,57 @@
-﻿<h3>Login</h3>
+﻿@page "/login"
+@using Application.Services
+@using BlazorApp.Auth
+@using DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+
+<h3>Iniciar Sesión</h3>
+
+<div>
+    <label>DNI:</label>
+    <input @bind="loginDto.Dni" class="form-control" />
+</div>
+<div>
+    <label>Contraseña:</label>
+    <input type="password" @bind="loginDto.Contrasena" class="form-control" />
+</div>
+<button @onclick="HandleLogin" class="btn btn-primary">Entrar</button>
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <div class="alert alert-danger">@error</div>
+}
 
 @code {
+    private LoginDTO loginDto = new();
+    private string error = string.Empty;
 
+    [Inject] NavigationManager Nav { get; set; } = default!;
+    [Inject] AuthenticationStateProvider AuthProvider { get; set; } = default!;
+
+    private void HandleLogin()
+    {
+        try
+        {
+            var service = new UsuarioService(); // ✅ Usamos new, como está diseñado
+            var usuario = service.GetForLogin(loginDto);
+
+            if (usuario != null)
+            {
+                // Si usas CustomAuthStateProvider, aquí debes notificar el login
+                if (AuthProvider is CustomAuthStateProvider customProvider)
+                {
+                    customProvider.SetUser(usuario); // Tendrás que crear este método
+                }
+                Nav.NavigateTo("/");
+            }
+            else
+            {
+                error = "Credenciales incorrectas.";
+            }
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
 }
