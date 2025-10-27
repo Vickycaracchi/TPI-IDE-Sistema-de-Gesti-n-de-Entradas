@@ -15,6 +15,8 @@ namespace WinForms
     public partial class RegistrarCompra : Form
     {
         internal UsuarioDTO usuarioIngresado = new UsuarioDTO();
+        private List<LugarDTO> lugares;
+        private List<EventoDTO> eventos;
         public RegistrarCompra()
         {
             InitializeComponent();
@@ -30,10 +32,28 @@ namespace WinForms
             {
                 this.clientesDataGridView.DataSource = null;
                 this.clientesDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
+                lugares = (await LugarApiClient.GetAllAsync()).ToList();
+                eventos = (await EventoApiClient.GetAllAsync()).ToList();
+
+
+                var fiestas = await FiestaApiClient.GetAllAsync();
+
+
+                var listaParaMostrar = fiestas.Select(f => new
+                {
+                    f.IdFiesta,
+                    f.FechaFiesta,
+                    NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                    NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+                }).ToList();
+
+
+                fiestasDataGridView.AutoGenerateColumns = true;
+                fiestasDataGridView.DataSource = listaParaMostrar;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar la lista de clientes: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);       
+                MessageBox.Show($"Error al cargar la lista de clientes o eventos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void clientesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -47,21 +67,33 @@ namespace WinForms
             {
                 try
                 {
+                    if (clientesDataGridView.SelectedRows.Count == 0)
+                    {
+                        MessageBox.Show("Debe seleccionar un cliente antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (fiestasDataGridView.SelectedRows.Count == 0)
+                    {
+                        MessageBox.Show("Debe seleccionar una fiesta antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     var cliente = clientesDataGridView.SelectedRows[0].Cells[0].Value;
                     var idClienteStr = Convert.ToString(cliente);
                     var idCliente = int.Parse(idClienteStr);
 
-                    //var fiesta = fiestasDataGridView.SelectedRows[0].Cells[0].Value;
-                    //var idFiestaStr = Convert.ToString(fiesta);
-                    //var idFiesta = int.Parse(idFiestaStr);
+                    var fiesta = fiestasDataGridView.SelectedRows[0].Cells[0].Value;
+                    var idFiestaStr = Convert.ToString(fiesta);
+                    var idFiesta = int.Parse(idFiestaStr);
 
                     var cantidad = int.Parse(cantidadTextBox.Text);
 
                     var fecha = DateTime.Now;
 
-                    
+
                     CompraDTO compraDTO = new();
-                    compraDTO.IdFiesta = 1;
+                    compraDTO.IdFiesta = idFiesta;
                     compraDTO.IdCliente = idCliente;
                     compraDTO.IdVendedor = usuarioIngresado.Id;
                     compraDTO.CantidadCompra = cantidad;
@@ -69,7 +101,10 @@ namespace WinForms
                     compraDTO.FechaHora = fecha;
 
                     await CompraApiClient.AddAsync(compraDTO);
-                  
+                    MessageBox.Show("Compra registrada correctamente.");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+
                 }
                 catch (Exception ex)
                 {
@@ -92,6 +127,11 @@ namespace WinForms
             }
 
             return isValid;
+        }
+
+        private void fiestasDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
