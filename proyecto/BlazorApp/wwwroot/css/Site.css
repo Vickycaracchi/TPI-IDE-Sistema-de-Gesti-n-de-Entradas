@@ -1,0 +1,33 @@
+﻿/* Blazor.WebApp/wwwroot/css/site.css */
+
+/* Estilos para el encabezado principal */
+h1 {
+    color: #007bff; /* Un azul primario */
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilo para el contenedor de la página */
+.page-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo para los títulos de las tarjetas */
+.card-header h5 {
+    font-weight: 600;
+    color: #343a40; /* Gris oscuro */
+}
+
+/* Ajuste sutil al cuerpo de la tarjeta */
+.card-body {
+    padding: 20px;
+}
+
+/* Separador simple para el párrafo introductorio */
+p {
+    margin-bottom: 1rem;
+    color: #6c757d; /* Gris texto */
+}

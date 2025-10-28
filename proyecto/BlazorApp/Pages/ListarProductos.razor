@@ -1,0 +1,58 @@
+﻿@using DTOs
+@using API.Clients
+
+<h3>Listado de Productos</h3>
+
+@if (productos is null)
+{
+    <p>Cargando productos...</p>
+}
+else if (!productos.Any())
+{
+    <p>No hay productos disponibles.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in productos)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Nombre</td>
+                    <td>@p.Descripcion</td>
+                    <td>@p.Precio</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ProductoDTO>? productos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarProductos();
+    }
+
+    private async Task CargarProductos()
+    {
+        try
+        {
+            productos = (await ProductoApiClient.GetAllAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar productos: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,76 @@
+﻿@using DTOs
+@using API.Clients
+
+<h3>Listado de Fiestas</h3>
+
+@if (fiestasParaMostrar is null)
+{
+    <p>Cargando fiestas...</p>
+}
+else if (!fiestasParaMostrar.Any())
+{
+    <p>No hay fiestas registradas.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+                <th>Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in fiestasParaMostrar)
+            {
+                <tr>
+                    <td>@f.IdFiesta</td>
+                    <td>@f.FechaFiesta.ToString("dd/MM/yyyy")</td>
+                    <td>@f.NombreLugar</td>
+                    <td>@f.NombreEvento</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<FiestaVista>? fiestasParaMostrar;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarFiestas();
+    }
+
+    private async Task CargarFiestas()
+    {
+        try
+        {
+            var lugares = await LugarApiClient.GetAllAsync();
+            var eventos = await EventoApiClient.GetAllAsync();
+            var fiestas = await FiestaApiClient.GetAllAsync();
+
+            fiestasParaMostrar = fiestas.Select(f => new FiestaVista
+            {
+                IdFiesta = f.IdFiesta,
+                FechaFiesta = f.FechaFiesta,
+                NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+            }).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar las fiestas: {ex.Message}");
+        }
+    }
+
+    public class FiestaVista
+    {
+        public int IdFiesta { get; set; }
+        public DateTime FechaFiesta { get; set; }
+        public string NombreLugar { get; set; } = "";
+        public string NombreEvento { get; set; } = "";
+    }
+}

@@ -42,12 +42,20 @@
                 
                 if (usuario != null)
                 {
-                    // Si usas CustomAuthStateProvider, aquí debes notificar el login
                     if (AuthProvider is CustomAuthStateProvider customProvider)
                     {
                         customProvider.SetUser(usuario);
                     }
-                    Nav.NavigateTo("/");
+
+                    // Redirigir según el tipo de usuario
+                    if (usuario.Tipo == "Cliente")
+                    {
+                        Nav.NavigateTo("/menu-cliente");
+                    }
+                    else
+                    {
+                        Nav.NavigateTo("/"); // Otra página para otros tipos
+                    }
                 }
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)

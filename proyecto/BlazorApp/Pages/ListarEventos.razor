@@ -1,0 +1,56 @@
+﻿@using DTOs
+@using API.Clients
+
+<h3>Listado de Eventos</h3>
+
+@if (eventos is null)
+{
+    <p>Cargando eventos...</p>
+}
+else if (!eventos.Any())
+{
+    <p>No hay eventos disponibles.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evento in eventos)
+            {
+                <tr>
+                    <td>@evento.Id</td>
+                    <td>@evento.Nombre</td>
+                    <td>@evento.Desc</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<EventoDTO>? eventos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarEventos();
+    }
+
+    private async Task CargarEventos()
+    {
+        try
+        {
+            eventos = (await EventoApiClient.GetAllAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar la lista de eventos: {ex.Message}");
+        }
+    }
+}

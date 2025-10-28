@@ -1,0 +1,109 @@
+﻿@using DTOs
+@using API.Clients
+@inject NavigationManager Nav
+
+<h3>Mis Compras</h3>
+
+@if (comprasParaMostrar is null)
+{
+    <p>Cargando compras...</p>
+}
+else if (!comprasParaMostrar.Any())
+{
+    <p>No tienes compras registradas.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th>Fiesta</th>
+                <th>Lugar</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Entrada</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var compra in comprasParaMostrar)
+            {
+                <tr>
+                    <td>@compra.Cliente</td>
+                    <td>@compra.Vendedor</td>
+                    <td>@compra.Fiesta</td>
+                    <td>@compra.Lugar</td>
+                    <td>@compra.CantidadCompra</td>
+                    <td>@compra.FechaHora.ToString("g")</td>
+                    <td>@compra.Entrada</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    public UsuarioDTO? Usuario { get; set; }
+
+    private List<CompraVista>? comprasParaMostrar;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Usuario is null)
+        {
+            Nav.NavigateTo("/login");
+            return;
+        }
+
+        await CargarCompras();
+    }
+
+    private async Task CargarCompras()
+    {
+        try
+        {
+            var compras = await CompraApiClient.GetAllCliAsync(Usuario.Id);
+            var usuarios = await UsuarioApiClient.GetAllAsync();
+            var fiestas = await FiestaApiClient.GetAllAsync();
+            var lugares = await LugarApiClient.GetAllAsync();
+            var eventos = await EventoApiClient.GetAllAsync();
+
+            comprasParaMostrar = compras.Select(c =>
+            {
+                var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
+                var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
+                var fiesta = fiestas.FirstOrDefault(f => f.IdFiesta == c.IdFiesta);
+                var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
+                var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
+
+                return new CompraVista
+                {
+                    Cliente = cliente?.Nombre ?? "Desconocido",
+                    Vendedor = vendedor?.Nombre ?? "Desconocido",
+                    Fiesta = evento?.Nombre ?? "Desconocido",
+                    Lugar = lugar?.Nombre ?? "Desconocido",
+                    CantidadCompra = c.CantidadCompra,
+                    FechaHora = c.FechaHora,
+                    Entrada = c.Entrada
+                };
+            }).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al cargar compras: {ex.Message}");
+        }
+    }
+
+    public class CompraVista
+    {
+        public string Cliente { get; set; } = "";
+        public string Vendedor { get; set; } = "";
+        public string Fiesta { get; set; } = "";
+        public string Lugar { get; set; } = "";
+        public int CantidadCompra { get; set; }
+        public DateTime FechaHora { get; set; }
+        public string Entrada { get; set; } = "";
+    }
+}
