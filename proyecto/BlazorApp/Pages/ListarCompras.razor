@@ -65,15 +65,16 @@ else
         try
         {
             var compras = await CompraApiClient.GetAllCliAsync(Usuario.Id);
-            var usuarios = await UsuarioApiClient.GetAllAsync();
+            var clientes = await UsuarioApiClient.GetByTipoAsync("Cliente");
+            var vendedores = await UsuarioApiClient.GetByTipoAsync("Vendedor");
             var fiestas = await FiestaApiClient.GetAllAsync();
             var lugares = await LugarApiClient.GetAllAsync();
             var eventos = await EventoApiClient.GetAllAsync();
 
             comprasParaMostrar = compras.Select(c =>
             {
-                var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
-                var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
+                var cliente = clientes.FirstOrDefault(cli => cli.Id == c.IdCliente);
+                var vendedor = vendedores.FirstOrDefault(v => v.Id == c.IdVendedor);
                 var fiesta = fiestas.FirstOrDefault(f => f.IdFiesta == c.IdFiesta);
                 var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
                 var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
