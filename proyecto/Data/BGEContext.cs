@@ -216,6 +216,35 @@ namespace Data
                     .IsRequired();
             });
 
+            modelBuilder.Entity<Fiesta>(entity =>
+            {
+                entity.HasKey(e => new { e.IdFiesta });
+
+                entity.Property(e => e.IdFiesta)
+                .IsRequired();
+
+                entity.Property(e => e.IdLugar)
+                    .IsRequired();
+
+                entity.Property(e => e.IdEvento)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaFiesta)
+                    .IsRequired();
+
+                entity.HasOne<Lugar>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdLugar)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne<Evento>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdEvento)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+            });
+
             modelBuilder.Entity<Evento>().HasData(
                 new  
                 {
@@ -229,6 +258,27 @@ namespace Data
                     Id = 2,
                     Nombre = "Feria de Artesanía",
                     Desc = "Exposición de productos hechos a mano por artistas locales."
+                },
+
+                new  
+                {
+                    Id = 3,
+                    Nombre = "Bohemia",
+                    Desc = "Fiesta nocturna de publico adolecente."
+                },
+
+                new
+                {
+                    Id = 4,
+                    Nombre = "La Cúpula del Templo",
+                    Desc = "Fiesta nocturna de publico adolecente."
+                },
+
+                new 
+                {
+                    Id = 5,
+                    Nombre = "Bresh",
+                    Desc = "Fiesta nocturna de publico adolecente."
                 }
             );
 
@@ -424,16 +474,30 @@ namespace Data
                 new
                 {
                     Id = 1,
-                    Nombre = "La sala de las Artes.",
+                    Nombre = "La sala de las Artes",
                     Direccion = "Av Ovidio Lagos y Guemes",
                     Ciudad = "Rosario"
                 },
                 new
                 {
                     Id = 2,
-                    Nombre = "Teatro Vorterix.",
-                    Direccion = "Av Ovidio Lagos y Guemes",
-                    Ciudad = "Buenos Aires"
+                    Nombre = "Vorterix",
+                    Direccion = "Av. Federico Lacroze 3455",
+                    Ciudad = "Ciudad Autónoma de Buenos Aires"
+                },
+                new
+                {
+                    Id = 3,
+                    Nombre = "Centro Cultural Güemes",
+                    Direccion = "Güemes 2808",
+                    Ciudad = "Rosario"
+                },
+                new
+                {
+                    Id = 4,
+                    Nombre = "BIOCERES ARENA",
+                    Direccion = "Cafferata 729",
+                    Ciudad = "Rosario"
                 }
             );
             modelBuilder.Entity<Compra>().HasData(
@@ -468,35 +532,6 @@ namespace Data
                     Precio_Entrada = 25.50m
                 }
             );
-
-            modelBuilder.Entity<Fiesta>(entity =>
-            {
-                entity.HasKey(e => new { e.IdFiesta });
-
-                entity.Property(e => e.IdFiesta)
-                .IsRequired();
-
-                entity.Property(e => e.IdLugar)
-                    .IsRequired();
-
-                entity.Property(e => e.IdEvento)
-                    .IsRequired();
-
-                entity.Property(e => e.FechaFiesta)
-                    .IsRequired();
-
-                entity.HasOne<Lugar>()
-                    .WithMany()
-                    .HasForeignKey(c => c.IdLugar)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne<Evento>()
-                    .WithMany()
-                    .HasForeignKey(c => c.IdEvento)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-
-            });
         }
     }
 }
