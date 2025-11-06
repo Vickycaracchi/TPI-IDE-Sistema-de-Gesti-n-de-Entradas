@@ -16,9 +16,7 @@ namespace Domain.Model
         public int IdCliente { get; private set; }
         public int IdFiesta { get; private set; }
 
-        public decimal Precio_Entrada{ get; private set; }
-
-        public Compra(DateTime fechaHora, int cantidadCompra, string entrada, int idVendedor, int idCliente, int idFiesta, decimal precio)
+        public Compra(DateTime fechaHora, int cantidadCompra, string entrada, int idVendedor, int idCliente, int idFiesta)
         {
             SetFecha(fechaHora);
             SetCantidadCompra(cantidadCompra);
@@ -26,7 +24,6 @@ namespace Domain.Model
             SetIdVendedor(idVendedor);
             SetIdCliente(idCliente);
             SetIdFiesta(idFiesta);
-            SetPrecioEntrada(precio);
         }
         public Compra() { }
         public void SetFecha(DateTime fecha)
@@ -62,13 +59,6 @@ namespace Domain.Model
             if(idFiesta == 0)
                 throw new ArgumentException("La fiesta no puede ser nula.", nameof (idFiesta));
             IdFiesta = idFiesta;
-        }
-
-        public void SetPrecioEntrada(decimal precio)
-        {
-            if (precio < 0)
-                throw new ArgumentException("el precio no puede ser negativo.", nameof(precio));
-            Precio_Entrada = precio;
         }
     }
 }

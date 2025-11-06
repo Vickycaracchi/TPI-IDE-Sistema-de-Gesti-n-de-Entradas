@@ -110,14 +110,17 @@ namespace Data
 
             modelBuilder.Entity<Producto>(entity =>
             {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => new { e.Id, e.IdEvento});
+
+                entity.Property(e => e.Id)
+                      .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.IdEvento)
+                      .IsRequired();
 
                 entity.Property(e => e.Nombre)
                       .IsRequired()
                       .HasMaxLength(100);
-
-                entity.Property(e => e.Id)
-                      .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Descripcion)
                       .IsRequired()
@@ -127,6 +130,10 @@ namespace Data
                       .IsRequired()
                       .HasColumnType("decimal(18,2)");
 
+                entity.HasOne<Evento>()
+                        .WithMany()
+                        .HasForeignKey(p => p.IdEvento)
+                        .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Lugar>(entity =>
@@ -154,10 +161,13 @@ namespace Data
 
             modelBuilder.Entity<Lote>(entity =>
             {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => new { e.Id, e.IdFiesta });
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
+                
+                entity.Property( e => e.IdFiesta)
+                    .IsRequired();
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -178,22 +188,27 @@ namespace Data
 
                 entity.Property(e => e.CantidadLote)
                     .IsRequired();
-                
-                entity.Property( e => e.IdFiesta)
-                    .IsRequired();
 
                 entity.Property(e => e.LoteActual)
                     .IsRequired();
+
+                entity.HasOne<Fiesta>()
+                    .WithMany()
+                    .HasForeignKey(l => l.IdFiesta)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Compra>(entity =>
             {
-                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora});
+                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora, e.IdFiesta});
 
                 entity.Property(e => e.IdVendedor)
                     .IsRequired();
 
                 entity.Property(e => e.IdCliente)
+                    .IsRequired();
+
+                entity.Property(e => e.IdFiesta)
                     .IsRequired();
 
                 entity.Property(e => e.FechaHora)
@@ -212,8 +227,10 @@ namespace Data
                     .HasForeignKey(c => c.IdCliente)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(e => e.Precio_Entrada)
-                    .IsRequired();
+                entity.HasOne<Fiesta>()
+                    .WithMany() 
+                    .HasForeignKey(c => c.IdFiesta)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Fiesta>(entity =>
@@ -457,6 +474,7 @@ namespace Data
                 new  
                 { 
                     Id = 1,
+                    IdEvento = 1,
                     Nombre = "Camiseta Oficial",
                     Descripcion = "Camiseta de algodón con logo del evento.",
                     Precio = 25.50m 
@@ -464,6 +482,7 @@ namespace Data
                 new  
                 {
                     Id = 2,
+                    IdEvento = 1,
                     Nombre = "Poster Limitado",
                     Descripcion = "Poster numerado de la feria, edición especial.",
                     Precio = 10.00m 
@@ -500,6 +519,109 @@ namespace Data
                     Ciudad = "Rosario"
                 }
             );
+            
+            modelBuilder.Entity<Lote>().HasData(
+                new
+                {
+                    Id = 1,
+                    Nombre = "Lote Early Bird",
+                    Precio = 15.00m,
+                    FechaDesde = new DateTime(2025, 9, 1),
+                    FechaHasta = new DateTime(2025, 9, 30),
+                    CantidadLote = 100,
+                    IdFiesta = 1,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 2,
+                    Nombre = "Lote Regular",
+                    Precio = 25.50m,
+                    FechaDesde = new DateTime(2025, 10, 1),
+                    FechaHasta = new DateTime(2025, 12, 30),
+                    CantidadLote = 300,
+                    IdFiesta = 1,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 3,
+                    Nombre = "Lote Last Minute",
+                    Precio = 35.00m,
+                    FechaDesde = new DateTime(2025, 12, 31),
+                    FechaHasta = new DateTime(2025, 12, 31),
+                    CantidadLote = 50,
+                    IdFiesta = 1,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 4,
+                    Nombre = "Lote Early Bird Feria",
+                    Precio = 5.00m,
+                    FechaDesde = new DateTime(2025, 8, 1),
+                    FechaHasta = new DateTime(2025, 8, 31),
+                    CantidadLote = 200,
+                    IdFiesta = 2,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 5,
+                    Nombre = "Lote Regular Feria",
+                    Precio = 12.00m,
+                    FechaDesde = new DateTime(2025, 9, 1),
+                    FechaHasta = new DateTime(2025, 11, 14),
+                    CantidadLote = 400,
+                    IdFiesta = 2,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 6,
+                    Nombre = "Lote Last Minute Feria",
+                    Precio = 18.00m,
+                    FechaDesde = new DateTime(2025, 11, 15),
+                    FechaHasta = new DateTime(2025, 11, 15),
+                    CantidadLote = 100,
+                    IdFiesta = 2,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 7,
+                    Nombre = "Lote Early Bird Bohemia",
+                    Precio = 20.00m,
+                    FechaDesde = new DateTime(2025, 9, 15),
+                    FechaHasta = new DateTime(2025, 10, 10),
+                    CantidadLote = 150,
+                    IdFiesta = 3,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 8,
+                    Nombre = "Lote Regular Bohemia",
+                    Precio = 30.00m,
+                    FechaDesde = new DateTime(2025, 10, 11),
+                    FechaHasta = new DateTime(2025, 10, 19),
+                    CantidadLote = 250,
+                    IdFiesta = 3,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 9,
+                    Nombre = "Lote Last Minute Bohemia",
+                    Precio = 40.00m,
+                    FechaDesde = new DateTime(2025, 10, 20),
+                    FechaHasta = new DateTime(2025, 10, 20),
+                    CantidadLote = 80,
+                    IdFiesta = 3,
+                    LoteActual = false
+                }
+            );
+
             modelBuilder.Entity<Compra>().HasData(
                 new
                 {
@@ -530,6 +652,30 @@ namespace Data
                     IdCliente = 1,
                     IdFiesta = 1,
                     Precio_Entrada = 25.50m
+                }
+            );
+            
+            modelBuilder.Entity<Fiesta>().HasData(
+                new
+                {
+                    IdFiesta = 1,
+                    IdLugar = 2,
+                    IdEvento = 3,
+                    FechaFiesta = new DateTime(2025, 12, 31, 22, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLugar = 1,
+                    IdEvento = 4,
+                    FechaFiesta = new DateTime(2025, 11, 15, 21, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 3,
+                    IdLugar = 4,
+                    IdEvento = 5,
+                    FechaFiesta = new DateTime(2025, 10, 20, 23, 0, 0)
                 }
             );
         }

@@ -9,16 +9,17 @@ namespace Domain.Model
     public class Producto
     {
         public int Id { get; private set; }
-
+        public int IdEvento { get; set; }
         public string Nombre { get; private set; }
         public string Descripcion { get; private set; }
         public decimal Precio { get; private set; }
 
         public Producto() { }
 
-        public Producto(int id, string nombre, string descripcion, decimal precio)
+        public Producto(int id, int idEvento, string nombre, string descripcion, decimal precio)
         {
             SetId(id);
+            SetIdEvento(idEvento);
             SetNombre(nombre);
             SetDescripcion(descripcion);
             SetPrecio(precio);
@@ -29,6 +30,13 @@ namespace Domain.Model
             if (id < 0)
                 throw new ArgumentException("El Id debe ser mayor que 0.", nameof(id));
             Id = id;
+        }
+
+        public void SetIdEvento(int idEvento)
+        {
+            if (idEvento < 0)
+                throw new ArgumentException("El Id del evento debe ser mayor que 0.", nameof(idEvento));
+            IdEvento = idEvento;
         }
 
         public void SetNombre(string nombre)

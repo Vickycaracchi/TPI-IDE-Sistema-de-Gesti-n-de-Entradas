@@ -36,30 +36,30 @@
             // ListarComprasDataGridView
             // 
             ListarComprasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ListarComprasDataGridView.Location = new Point(80, 94);
-            ListarComprasDataGridView.Margin = new Padding(3, 2, 3, 2);
+            ListarComprasDataGridView.Location = new Point(91, 125);
             ListarComprasDataGridView.Name = "ListarComprasDataGridView";
             ListarComprasDataGridView.RowHeadersWidth = 51;
-            ListarComprasDataGridView.Size = new Size(626, 207);
+            ListarComprasDataGridView.Size = new Size(945, 276);
             ListarComprasDataGridView.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(84, 60);
+            label1.Location = new Point(96, 80);
             label1.Name = "label1";
-            label1.Size = new Size(75, 15);
+            label1.Size = new Size(93, 20);
             label1.TabIndex = 2;
             label1.Text = "Mis compras";
             label1.Click += label1_Click;
             // 
             // ListarCompras
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1146, 600);
             Controls.Add(label1);
             Controls.Add(ListarComprasDataGridView);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ListarCompras";
             Text = "ListarCompras";
             Load += ListarCompras_Load;
