@@ -51,12 +51,6 @@ namespace Data
                 .FirstOrDefault(c => c.Id == id);
         }
 
-        public bool FiestaTieneLotes(int idFiesta)
-        {
-            using var context = CreateContext();
-            return context.Lotes.Any(l => l.IdFiesta == idFiesta);
-        }
-
         public IEnumerable<Lote> GetAll()
         {
             using var context = CreateContext();
@@ -75,7 +69,6 @@ namespace Data
                 existingLote.SetFechaDesde(lote.FechaDesde);
                 existingLote.SetFechaHasta(lote.FechaHasta);
                 existingLote.SetCantidadLote(lote.CantidadLote);
-                existingLote.SetIdFiesta(lote.IdFiesta);
                 existingLote.SetLoteActual(lote.LoteActual);
 
                 context.SaveChanges();

@@ -42,8 +42,6 @@ namespace Data
             if (existingCompra != null)
             {
                 existingCompra.SetFecha(compra.FechaHora);
-                existingCompra.SetCantidadCompra(compra.CantidadCompra);
-                existingCompra.SetEntrada(compra.Entrada);
                 existingCompra.SetIdVendedor(compra.IdVendedor);
                 existingCompra.SetIdCliente(compra.IdCliente);
                 existingCompra.SetIdFiesta(compra.IdFiesta);

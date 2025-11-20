@@ -122,8 +122,7 @@ namespace Data
                       .HasMaxLength(500);
 
                 entity.Property(e => e.Precio)
-                      .IsRequired()
-                      .HasColumnType("decimal(18,2)");
+                      .IsRequired();
             });
 
             modelBuilder.Entity<Lugar>(entity =>
@@ -164,8 +163,7 @@ namespace Data
                     .IsUnique();
 
                 entity.Property(e => e.Precio)
-                    .IsRequired()
-                    .HasColumnType("decimal(18,2)");
+                    .IsRequired();
 
                 entity.Property(e => e.FechaDesde)
                     .IsRequired();
@@ -525,13 +523,13 @@ namespace Data
                 { 
                     Id = 1,
                     Descripcion = "Vaso ecofriendly.",
-                    Precio = 10.00m 
+                    Precio = 10 
                 },
                 new  
                 {
                     Id = 2,
                     Descripcion = "Hamburguesa con queso.",
-                    Precio = 25.50m 
+                    Precio = 25
                 }
             );
 
@@ -571,7 +569,7 @@ namespace Data
                 {
                     Id = 1,
                     Nombre = "Lote Early Bird",
-                    Precio = 15.00m,
+                    Precio = 15,
                     FechaDesde = new DateTime(2025, 9, 1),
                     FechaHasta = new DateTime(2025, 9, 30),
                     CantidadLote = 100,
@@ -581,7 +579,7 @@ namespace Data
                 {
                     Id = 2,
                     Nombre = "Lote Regular",
-                    Precio = 25.50m,
+                    Precio = 25,
                     FechaDesde = new DateTime(2025, 10, 1),
                     FechaHasta = new DateTime(2025, 12, 30),
                     CantidadLote = 300,
@@ -591,7 +589,7 @@ namespace Data
                 {
                     Id = 3,
                     Nombre = "Lote Last Minute",
-                    Precio = 35.00m,
+                    Precio = 35,
                     FechaDesde = new DateTime(2025, 12, 31),
                     FechaHasta = new DateTime(2025, 12, 31),
                     CantidadLote = 50,
@@ -601,7 +599,7 @@ namespace Data
                 {
                     Id = 4,
                     Nombre = "Lote Early Bird Feria",
-                    Precio = 5.00m,
+                    Precio = 5,
                     FechaDesde = new DateTime(2025, 8, 1),
                     FechaHasta = new DateTime(2025, 8, 31),
                     CantidadLote = 200,
@@ -611,7 +609,7 @@ namespace Data
                 {
                     Id = 5,
                     Nombre = "Lote Regular Feria",
-                    Precio = 12.00m,
+                    Precio = 12,
                     FechaDesde = new DateTime(2025, 9, 1),
                     FechaHasta = new DateTime(2025, 11, 14),
                     CantidadLote = 400,
@@ -621,7 +619,7 @@ namespace Data
                 {
                     Id = 6,
                     Nombre = "Lote Last Minute Feria",
-                    Precio = 18.00m,
+                    Precio = 18,
                     FechaDesde = new DateTime(2025, 11, 15),
                     FechaHasta = new DateTime(2025, 11, 15),
                     CantidadLote = 100,
@@ -631,7 +629,7 @@ namespace Data
                 {
                     Id = 7,
                     Nombre = "Lote Early Bird Bohemia",
-                    Precio = 20.00m,
+                    Precio = 20,
                     FechaDesde = new DateTime(2025, 9, 15),
                     FechaHasta = new DateTime(2025, 10, 10),
                     CantidadLote = 150,
@@ -641,7 +639,7 @@ namespace Data
                 {
                     Id = 8,
                     Nombre = "Lote Regular Bohemia",
-                    Precio = 30.00m,
+                    Precio = 30,
                     FechaDesde = new DateTime(2025, 10, 11),
                     FechaHasta = new DateTime(2025, 10, 19),
                     CantidadLote = 250,
@@ -651,7 +649,7 @@ namespace Data
                 {
                     Id = 9,
                     Nombre = "Lote Last Minute Bohemia",
-                    Precio = 40.00m,
+                    Precio = 40,
                     FechaDesde = new DateTime(2025, 10, 20),
                     FechaHasta = new DateTime(2025, 10, 20),
                     CantidadLote = 80,

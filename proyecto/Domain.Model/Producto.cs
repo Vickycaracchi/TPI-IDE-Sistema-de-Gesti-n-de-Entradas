@@ -9,18 +9,14 @@ namespace Domain.Model
     public class Producto
     {
         public int Id { get; private set; }
-        public int IdEvento { get; set; }
-        public string Nombre { get; private set; }
         public string Descripcion { get; private set; }
-        public decimal Precio { get; private set; }
+        public int Precio { get; private set; }
 
         public Producto() { }
 
-        public Producto(int id, int idEvento, string nombre, string descripcion, decimal precio)
+        public Producto(int id, string descripcion, int precio)
         {
             SetId(id);
-            SetIdEvento(idEvento);
-            SetNombre(nombre);
             SetDescripcion(descripcion);
             SetPrecio(precio);
         }
@@ -32,20 +28,6 @@ namespace Domain.Model
             Id = id;
         }
 
-        public void SetIdEvento(int idEvento)
-        {
-            if (idEvento < 0)
-                throw new ArgumentException("El Id del evento debe ser mayor que 0.", nameof(idEvento));
-            IdEvento = idEvento;
-        }
-
-        public void SetNombre(string nombre)
-        {
-            if (string.IsNullOrWhiteSpace(nombre))
-                throw new ArgumentException("El nombre no puede ser nulo o vacío.", nameof(nombre));
-            Nombre = nombre;
-        }
-
         public void SetDescripcion(string descripcion)
         {
             if (string.IsNullOrWhiteSpace(descripcion))
@@ -53,7 +35,7 @@ namespace Domain.Model
 
             Descripcion = descripcion;
         }
-        public void SetPrecio(decimal precio)
+        public void SetPrecio(int precio)
         {
             if (precio < 0)
                 throw new ArgumentException("El precio no puede ser negativo.", nameof(precio));
