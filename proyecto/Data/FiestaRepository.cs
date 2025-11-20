@@ -61,6 +61,7 @@ namespace Data
             if (fiesta != null)
             {
                 context.Fiestas.Remove(fiesta);
+                context.FiestasLotes.RemoveRange(context.FiestasLotes.Where(fl => fl.IdFiesta == idFiesta));
                 context.SaveChanges();
                 return true;
             }

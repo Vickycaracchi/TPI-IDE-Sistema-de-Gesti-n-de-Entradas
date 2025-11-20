@@ -155,7 +155,12 @@ namespace WinForms
                     }
                     else if (mode == FormMode.Add)
                     {
-                        await LoteApiClient.AddAsync(this.lote);
+                        LoteConFiestaDTO loteConFiesta = new LoteConFiestaDTO
+                        {
+                            Lote = this.lote,
+                            IdFiesta = idFiesta
+                        };
+                        await LoteApiClient.AddAsync(loteConFiesta);
                         MessageBox.Show("Lote agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
@@ -164,7 +169,7 @@ namespace WinForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al guardar lote: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error al guardar lote.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

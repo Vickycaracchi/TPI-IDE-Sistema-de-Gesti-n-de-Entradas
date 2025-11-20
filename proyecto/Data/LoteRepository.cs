@@ -17,13 +17,20 @@ namespace Data
             return new BGEContext();
         }
 
-        public void Add(Lote lote)
+        public Lote Add(Lote lote, int idFiesta)
         {
             using var context = CreateContext();
             context.Lotes.Add(lote);
             context.SaveChanges();
+            return lote;
         }
-
+        public void AddRelacion(int idLote, int idFiesta)
+        {
+            using var context = CreateContext();
+            var relacion = new FiestaLote(idFiesta, idLote);
+            context.FiestasLotes.Add(relacion);
+            context.SaveChanges();
+        }
         public bool Delete(int id)
         {
             using var context = CreateContext();

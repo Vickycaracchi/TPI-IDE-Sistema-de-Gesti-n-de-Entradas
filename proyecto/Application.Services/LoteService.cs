@@ -6,7 +6,7 @@ namespace Application.Services
 {
     public class LoteService
     {
-        public LoteDTO Add(LoteDTO dto)
+        public LoteDTO Add(LoteDTO dto, int idFiesta)
         {
             var loteRepository = new LoteRepository();
 
@@ -17,8 +17,9 @@ namespace Application.Services
             }
 
             Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta);
-
-            loteRepository.Add(lote);
+            
+            loteRepository.Add(lote, idFiesta);
+            loteRepository.AddRelacion(lote.Id, idFiesta);
 
             dto.Id = lote.Id;
 

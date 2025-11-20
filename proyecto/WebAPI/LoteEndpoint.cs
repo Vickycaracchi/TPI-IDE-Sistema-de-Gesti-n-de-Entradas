@@ -38,13 +38,13 @@ namespace WebAPI
             .WithOpenApi();
 
 
-            app.MapPost("/lotes", (LoteDTO dto) =>
+            app.MapPost("/lotes", (LoteConFiestaDTO dto) =>
             {
                 try
                 {
                     LoteService loteService = new LoteService();
 
-                    LoteDTO loteDTO = loteService.Add(dto);
+                    LoteDTO loteDTO = loteService.Add(dto.Lote, dto.IdFiesta);
 
                     return Results.Created($"/lotes/{loteDTO.Id}", loteDTO);
                 }

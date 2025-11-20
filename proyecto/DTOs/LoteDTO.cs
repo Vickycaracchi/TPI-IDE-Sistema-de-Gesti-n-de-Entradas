@@ -14,4 +14,9 @@ namespace DTOs
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
     }
+    public class LoteConFiestaDTO
+    {
+        public LoteDTO Lote { get; set; }
+        public int IdFiesta { get; set; }
+    }
 }
