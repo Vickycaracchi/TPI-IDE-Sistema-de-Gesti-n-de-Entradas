@@ -14,7 +14,7 @@ namespace Domain.Model
         public int IdCliente { get; private set; }
         public int IdFiesta { get; private set; }
 
-        public Compra(DateTime fechaHora, int cantidadCompra, string entrada, int idVendedor, int idCliente, int idFiesta)
+        public Compra(DateTime fechaHora, int idVendedor, int idCliente, int idFiesta)
         {
             SetFecha(fechaHora);
             SetIdVendedor(idVendedor);
