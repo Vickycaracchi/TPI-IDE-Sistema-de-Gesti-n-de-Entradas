@@ -79,7 +79,7 @@ namespace WinForms
         }
         private void LoteDetalle_Load(object sender, EventArgs e)
         {
-            GetAllAndLoad(); // Igual que en RegistrarCompra
+            GetAllAndLoad();
 
             if (mode == FormMode.Update)
             {
@@ -87,7 +87,6 @@ namespace WinForms
                 precioTextBox.Text = lote.Precio.ToString();
                 fechaDesdeDateTimePicker.Value = lote.FechaDesde;
                 fechaHastaDateTimePicker.Value = lote.FechaHasta;
-                cantidadLoteTextBox.Text = lote.CantidadLote.ToString();
             }
             else
             {
@@ -103,7 +102,6 @@ namespace WinForms
             loteErrorProvider.SetError(precioTextBox, string.Empty);
             loteErrorProvider.SetError(fechaDesdeDateTimePicker, string.Empty);
             loteErrorProvider.SetError(fechaHastaDateTimePicker, string.Empty);
-            loteErrorProvider.SetError(cantidadLoteTextBox, string.Empty);
 
             if (this.nombreTextBox.Text == string.Empty)
             {
@@ -128,17 +126,6 @@ namespace WinForms
                 loteErrorProvider.SetError(fechaHastaDateTimePicker, "La fecha hasta debe ser posterior a la fecha desde");
             }
 
-            if (this.cantidadLoteTextBox.Text == string.Empty)
-            {
-                isValid = false;
-                loteErrorProvider.SetError(cantidadLoteTextBox, "La cantidad del lote es requerida");
-            }
-            else if (!int.TryParse(this.cantidadLoteTextBox.Text, out int cantidadLote) || cantidadLote < 0)
-            {
-                isValid = false;
-                loteErrorProvider.SetError(cantidadLoteTextBox, "La cantidad del lote debe ser un número entero válido mayor o igual a 0");
-            }
-
             return isValid;
         }
 
@@ -156,12 +143,10 @@ namespace WinForms
                     var fiesta = listaFiestas.SelectedRows[0].Cells[0].Value;
                     var idFiestaStr = Convert.ToString(fiesta);
                     var idFiesta = int.Parse(idFiestaStr);
-                    lote.IdFiesta = idFiesta;
                     lote.Nombre = this.nombreTextBox.Text;
-                    lote.Precio = decimal.Parse(this.precioTextBox.Text);
+                    lote.Precio = int.Parse(this.precioTextBox.Text);
                     lote.FechaDesde = this.fechaDesdeDateTimePicker.Value;
                     lote.FechaHasta = this.fechaHastaDateTimePicker.Value;
-                    lote.CantidadLote = int.Parse(this.cantidadLoteTextBox.Text);
 
                     if (mode == FormMode.Update)
                     {

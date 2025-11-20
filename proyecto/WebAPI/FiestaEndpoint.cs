@@ -83,16 +83,6 @@ namespace WebAPI
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
 
-            app.MapGet("/fiestas/con-lotes", () =>
-            {
-                var fiestaService = new FiestaService();
-                var fiestasConLotes = fiestaService.GetFiestasConLotes();
-                return Results.Ok(fiestasConLotes);
-            })
-            .WithName("GetFiestasConLotes")
-            .Produces<List<FiestaDTO>>(StatusCodes.Status200OK)
-            .WithOpenApi();
-
             app.MapDelete("/fiestas/{idFiesta}", (int idFiesta) =>
             {
                 FiestaService fiestaService = new FiestaService();
@@ -108,21 +98,6 @@ namespace WebAPI
             })
             .WithName("DeleteFiesta")
             .Produces(StatusCodes.Status204NoContent)
-            .Produces(StatusCodes.Status404NotFound)
-            .WithOpenApi();
-
-            app.MapGet("/loteActual/{idFiesta}", (int idFiesta) =>
-            {
-                var loteService = new LoteService();
-                var lote = loteService.GetLoteActual(idFiesta);
-
-                if (lote == null)
-                    return Results.NotFound();
-
-                return Results.Ok(lote);
-            })
-            .WithName("GetLoteActual_Fiesta")
-            .Produces<LoteDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
         }

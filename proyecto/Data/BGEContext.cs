@@ -170,12 +170,6 @@ namespace Data
 
                 entity.Property(e => e.FechaHasta)
                     .IsRequired();
-
-                entity.Property(e => e.CantidadLote)
-                    .IsRequired();
-
-                entity.Property(e => e.LoteActual)
-                    .IsRequired();
             });
 
             modelBuilder.Entity<Compra>(entity =>

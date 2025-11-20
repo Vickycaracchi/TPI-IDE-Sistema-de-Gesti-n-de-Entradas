@@ -36,28 +36,18 @@ namespace Data
             }
             return false;
         }
-        public List<Lote> GetLotesPorFiesta(int idFiesta)
-        {
-            using var context = CreateContext();
-            return context.Lotes
-                .Where(l => l.IdFiesta == idFiesta)
-                .ToList();
-        }
-
         public Lote? Get(int id)
         {
             using var context = CreateContext();
             return context.Lotes
                 .FirstOrDefault(c => c.Id == id);
         }
-
         public IEnumerable<Lote> GetAll()
         {
             using var context = CreateContext();
             return context.Lotes
                 .ToList();
         }
-
         public bool Update(Lote lote)
         {
             using var context = CreateContext();
@@ -68,22 +58,12 @@ namespace Data
                 existingLote.SetPrecio(lote.Precio);
                 existingLote.SetFechaDesde(lote.FechaDesde);
                 existingLote.SetFechaHasta(lote.FechaHasta);
-                existingLote.SetCantidadLote(lote.CantidadLote);
-                existingLote.SetLoteActual(lote.LoteActual);
 
                 context.SaveChanges();
                 return true;
             }
             return false;
         }
-
-        public Lote? GetByNombre(string nombre)
-        {
-            using var context = CreateContext();
-            return context.Lotes
-                .FirstOrDefault(c => c.Nombre.ToLower() == nombre.ToLower());
-        }
-
         public bool NombreExists(string nombre, int? excludeId = null)
         {
             using var context = CreateContext();
@@ -94,35 +74,15 @@ namespace Data
             }
             return query.Any();
         }
-
-        public LoteDTO ToDTO(Lote lote)
-        {
-            return new LoteDTO
-            {
-                Id = lote.Id,
-                Nombre = lote.Nombre,
-                Precio = lote.Precio,
-                FechaDesde = lote.FechaDesde,
-                FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote
-            };
-        }
-
-        public LoteDTO? GetLoteActual(int idFiesta)
+        public Lote? GetLoteActual(int idFiesta)
         {
             using var context = CreateContext();
-            var query = context.Lotes.Where(c => c.IdFiesta == idFiesta && c.LoteActual == true);
-            var lote = query.FirstOrDefault();
-            
-            return new LoteDTO
-            {
-                Id = lote.Id,
-                Nombre = lote.Nombre,
-                Precio = lote.Precio,
-                FechaDesde = lote.FechaDesde,
-                FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote
-            };
+            var query = context.FiestasLotes
+                .Where(fl => fl.IdFiesta == idFiesta)
+                .Select(fl => fl.IdLote);
+            return context.Lotes
+                .Where(l => query.Contains(l.Id) && l.FechaDesde <= DateTime.Now && l.FechaHasta >= DateTime.Now)
+                .FirstOrDefault();
         }
     }
 }

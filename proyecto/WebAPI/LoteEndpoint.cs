@@ -101,7 +101,21 @@ namespace WebAPI
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
 
-            
+            app.MapGet("/loteActual/{idFiesta}", (int idFiesta) =>
+            {
+                var loteService = new LoteService();
+                var lote = loteService.GetLoteActual(idFiesta);
+
+                if (lote == null)
+                    return Results.NotFound();
+
+                return Results.Ok(lote);
+            })
+            .WithName("GetLoteActual_Fiesta")
+            .Produces<LoteDTO>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .WithOpenApi();
+
         }
     }
 }

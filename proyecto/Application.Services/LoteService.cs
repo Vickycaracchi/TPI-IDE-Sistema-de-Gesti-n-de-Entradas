@@ -16,7 +16,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un lote con el nombre '{dto.Nombre}'.");
             }
 
-            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote, dto.IdFiesta, dto.LoteActual);
+            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta);
 
             loteRepository.Add(lote);
 
@@ -29,11 +29,6 @@ namespace Application.Services
         {
             var loteRepository = new LoteRepository();
             return loteRepository.Delete(id);
-        }
-        public bool FiestaTieneLotes(int idFiesta)
-        {
-            var loteRepository = new LoteRepository();
-            return loteRepository.FiestaTieneLotes(idFiesta);
         }
         public LoteDTO Get(int id)
         {
@@ -49,10 +44,7 @@ namespace Application.Services
                 Nombre = lote.Nombre,
                 Precio = lote.Precio,
                 FechaDesde = lote.FechaDesde,
-                FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote,
-                IdFiesta = lote.IdFiesta,
-                LoteActual = lote.LoteActual
+                FechaHasta = lote.FechaHasta
             };
         }
 
@@ -67,10 +59,7 @@ namespace Application.Services
                 Nombre = lote.Nombre,
                 Precio = lote.Precio,
                 FechaDesde = lote.FechaDesde,
-                FechaHasta = lote.FechaHasta,
-                CantidadLote = lote.CantidadLote,
-                IdFiesta = lote.IdFiesta,
-                LoteActual = lote.LoteActual
+                FechaHasta = lote.FechaHasta
             }).ToList();
         }
 
@@ -85,31 +74,24 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe otro lote con el nombre '{dto.Nombre}'.");
             }
 
-            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta, dto.CantidadLote, dto.IdFiesta, dto.LoteActual);
+            Lote lote = new Lote(dto.Id, dto.Nombre, dto.Precio, dto.FechaDesde, dto.FechaHasta);
             return loteRepository.Update(lote);
         }
- 
-
         public LoteDTO GetLoteActual(int idFiesta)
         {
             var loteRepository = new LoteRepository();
-            var lotes = loteRepository.GetLotesPorFiesta(idFiesta);
+            Lote? lote = loteRepository.GetLoteActual(idFiesta);
 
-            var loteActual = lotes
-                .Where(l => l.FechaDesde <= DateTime.Now && l.FechaHasta >= DateTime.Now)
-                .FirstOrDefault();
-
-            if (loteActual == null) return null;
-
+            if(lote == null)
+                return null;
+            
             return new LoteDTO
             {
-                Id = loteActual.Id,
-                Nombre = loteActual.Nombre,
-                Precio = loteActual.Precio,
-                FechaDesde = loteActual.FechaDesde,
-                FechaHasta = loteActual.FechaHasta,
-                IdFiesta = loteActual.IdFiesta,
-                LoteActual = loteActual.LoteActual
+                Id = lote.Id,
+                Nombre = lote.Nombre,
+                Precio = lote.Precio,
+                FechaDesde = lote.FechaDesde,
+                FechaHasta = lote.FechaHasta
             };
         }
     }
