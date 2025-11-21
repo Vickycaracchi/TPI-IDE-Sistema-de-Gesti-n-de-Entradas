@@ -25,32 +25,24 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            listarClientesToolStripMenuItem = new ToolStripMenuItem();
             listarVendedoresToolStripMenuItem = new ToolStripMenuItem();
             listarEventosToolStripMenuItem = new ToolStripMenuItem();
             gestiónProductosToolStripMenuItem = new ToolStripMenuItem();
             gestiónLugaresToolStripMenuItem = new ToolStripMenuItem();
             gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
-            panelContenedor = new Panel();
             gestiónFiestasToolStripMenuItem = new ToolStripMenuItem();
+            panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarClientesToolStripMenuItem, listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1000, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
-            // 
-            // listarClientesToolStripMenuItem
-            // 
-            listarClientesToolStripMenuItem.Name = "listarClientesToolStripMenuItem";
-            listarClientesToolStripMenuItem.Size = new Size(104, 20);
-            listarClientesToolStripMenuItem.Text = "Gestión Clientes";
-            listarClientesToolStripMenuItem.Click += listarClientesToolStripMenuItem_Click;
             // 
             // listarVendedoresToolStripMenuItem
             // 
@@ -87,6 +79,13 @@
             gestiónLotesToolStripMenuItem.Text = "Gestión Lotes";
             gestiónLotesToolStripMenuItem.Click += gestiónLotesToolStripMenuItem_Click;
             // 
+            // gestiónFiestasToolStripMenuItem
+            // 
+            gestiónFiestasToolStripMenuItem.Name = "gestiónFiestasToolStripMenuItem";
+            gestiónFiestasToolStripMenuItem.Size = new Size(97, 20);
+            gestiónFiestasToolStripMenuItem.Text = "Gestión Fiestas";
+            gestiónFiestasToolStripMenuItem.Click += gestiónFiestasToolStripMenuItem_Click;
+            // 
             // panelContenedor
             // 
             panelContenedor.Dock = DockStyle.Fill;
@@ -94,13 +93,6 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1000, 576);
             panelContenedor.TabIndex = 1;
-            // 
-            // gestiónFiestasToolStripMenuItem
-            // 
-            gestiónFiestasToolStripMenuItem.Name = "gestiónFiestasToolStripMenuItem";
-            gestiónFiestasToolStripMenuItem.Size = new Size(97, 20);
-            gestiónFiestasToolStripMenuItem.Text = "Gestión Fiestas";
-            gestiónFiestasToolStripMenuItem.Click += gestiónFiestasToolStripMenuItem_Click;
             // 
             // MenuAdmin
             // 
@@ -123,7 +115,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem listarClientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarVendedoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarEventosToolStripMenuItem;
         private System.Windows.Forms.Panel panelContenedor;
