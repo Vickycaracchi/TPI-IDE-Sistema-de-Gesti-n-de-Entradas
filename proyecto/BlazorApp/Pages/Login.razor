@@ -1,75 +1,114 @@
 ﻿@page "/login"
-@using Application.Services
-@using BlazorApp.Authentication
+@using API.Clients
 @using DTOs
-@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+@inject LoginState LoginState
 
 <h3>Iniciar Sesión</h3>
 
-<div>
-    <label>DNI:</label>
-    <input @bind="loginDto.Dni" class="form-control" />
+<div class="mb-3">
+    <label for="dni" class="form-label">DNI</label>
+    <input type="text" id="dni" class="form-control" @bind="Dni" />
+    @if (!string.IsNullOrEmpty(DniError))
+    {
+        <div class="text-danger">@DniError</div>
+    }
 </div>
-<div>
-    <label>Contraseña:</label>
-    <input type="password" @bind="loginDto.Contrasena" class="form-control" />
+<div class="mb-3">
+    <label for="contrasena" class="form-label">Contraseña</label>
+    <input type="password" id="contrasena" class="form-control" @bind="Contrasena" />
+    @if (!string.IsNullOrEmpty(ContrasenaError))
+    {
+        <div class="text-danger">@ContrasenaError</div>
+    }
 </div>
-<button @onclick="HandleLogin" class="btn btn-primary">Entrar</button>
+<button class="btn btn-primary" @onclick="EnviarLoginVendedor" disabled="@IsLoading">Ingresar</button>
 
-@if (!string.IsNullOrEmpty(error))
+@if (!string.IsNullOrEmpty(LoginError))
 {
-    <div class="alert alert-danger">@error</div>
+    <div class="alert alert-danger mt-3">@LoginError</div>
 }
 
 @code {
-    private LoginDTO loginDto = new();
-    private string error = string.Empty;
+    private string Dni { get; set; } = string.Empty;
+    private string Contrasena { get; set; } = string.Empty;
+    private string DniError { get; set; } = string.Empty;
+    private string ContrasenaError { get; set; } = string.Empty;
+    private string LoginError { get; set; } = string.Empty;
+    private bool IsLoading { get; set; } = false;
 
-    [Inject] NavigationManager Nav { get; set; } = default!;
-    [Inject] AuthenticationStateProvider AuthProvider { get; set; } = default!;
-    [Inject] IHttpClientFactory HttpClientFactory { get; set; } = default!;
+    public string TipoUsuario { get; private set; }
+    public UsuarioDTO usuarioIngresado { get; private set; }
 
-    private async Task HandleLogin()
+    private async Task EnviarLoginVendedor()
     {
-        try
+        LimpiarErrores();
+        if (ValidateVendedor())
         {
-            var httpClient = HttpClientFactory.CreateClient("WebAPI");
-            var response = await httpClient.PostAsJsonAsync("loginUsuario", loginDto);
-
-            if (response.IsSuccessStatusCode)
+            IsLoading = true;
+            try
             {
-                var usuario = await response.Content.ReadFromJsonAsync<UsuarioDTO>();
-                
+                var login = new LoginDTO
+                    {
+                        Dni = Dni,
+                        Contrasena = Contrasena
+                    };
+
+                var usuario = await UsuarioApiClient.LoginAsync(login);
                 if (usuario != null)
                 {
-                    if (AuthProvider is CustomAuthStateProvider customProvider)
-                    {
-                        customProvider.SetUser(usuario);
-                    }
+                    TipoUsuario = usuario.Tipo;
+                    usuarioIngresado = usuario;
 
-                    // Redirigir según el tipo de usuario
-                    if (usuario.Tipo == "Cliente")
+                    LoginState.SetUsuario(usuario);
+
+
+                    if (TipoUsuario == "Cliente")
                     {
-                        Nav.NavigateTo("/menu-cliente");
+                        Navigation.NavigateTo("/menucliente");
                     }
-                    else
+                    else if (TipoUsuario == "Administrador" || TipoUsuario == "Vendedor")
                     {
-                        Nav.NavigateTo("/"); // Otra página para otros tipos
+                        Navigation.NavigateTo("/enconstruccion");
                     }
                 }
+                else
+                {
+                    LoginError = "Credenciales inválidas. Intente nuevamente.";
+                }
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            catch (Exception ex)
             {
-                error = "Credenciales incorrectas.";
+                LoginError = $"Ocurrió un error al intentar iniciar sesión: {ex.Message}";
             }
-            else
+            finally
             {
-                error = "Error al iniciar sesión.";
+                IsLoading = false;
             }
         }
-        catch (Exception ex)
+    }
+
+    private bool ValidateVendedor()
+    {
+        bool isValid = true;
+
+        if (string.IsNullOrWhiteSpace(Dni))
         {
-            error = ex.Message;
+            DniError = "El DNI es Requerido";
+            isValid = false;
         }
+        if (string.IsNullOrWhiteSpace(Contrasena))
+        {
+            ContrasenaError = "La contraseña es Requerida";
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    private void LimpiarErrores()
+    {
+        DniError = string.Empty;
+        ContrasenaError = string.Empty;
+        LoginError = string.Empty;
     }
 }

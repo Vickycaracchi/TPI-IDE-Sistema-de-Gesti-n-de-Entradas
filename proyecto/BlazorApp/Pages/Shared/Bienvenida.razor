@@ -1,0 +1,12 @@
+﻿@inject LoginState LoginState
+@namespace BlazorApp.Shared
+
+<div class="card text-center shadow-lg my-4">
+    <div class="card-body py-5">
+        <h2 class="card-title mb-3">¡Bienvenido, @LoginState.Usuario?.Nombre!</h2>
+        <p class="card-text fs-5">
+            Nos alegra verte nuevamente. Usá el menú para navegar por el sistema.
+        </p>
+    </div>
+</div>
+

@@ -1,89 +1,53 @@
-﻿@page "/menu-cliente"
+﻿@page "/menucliente"
+@using BlazorApp.Shared
 @using DTOs
-@inject AuthenticationStateProvider AuthProvider
-@inject NavigationManager Nav
+@inject NavigationManager Navigation
+@inject LoginState LoginState
 
-<h3>Menú Cliente</h3>
 
-<div class="row">
-    <div class="col-3">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-action" @onclick="CargarProductos">Ver Productos</li>
-            <li class="list-group-item list-group-item-action" @onclick="CargarEventos">Ver Eventos</li>
-            <li class="list-group-item list-group-item-action" @onclick="CargarFiestas">Ver Fiestas</li>
-            <li class="list-group-item list-group-item-action" @onclick="CargarMisCompras">Ver Mis Compras</li>
-        </ul>
-    </div>
-    <div class="col-9 border p-3">
-        @ComponenteActual
-    </div>
+<Header />
+<br />
+<br />
+@if (LoginState.Usuario is not null)
+{
+    <Bienvenida />
+}
+else
+{
+    <p>Por favor inicie sesión.</p>
+}
+<br />
+<br />
+
+<div class="list-group">
+    <button class="list-group-item list-group-item-action" @onclick="IrAProductos">Ver Productos</button>
+    <button class="list-group-item list-group-item-action" @onclick="IrAEventos">Ver Eventos</button>
+    <button class="list-group-item list-group-item-action" @onclick="IrAFiestas">Ver Fiestas</button>
+    <button class="list-group-item list-group-item-action" @onclick="IrAMisCompras">Ver Mis Compras</button>
 </div>
 
 @code {
-    private RenderFragment? ComponenteActual { get; set; }
-    private UsuarioDTO? usuario;
 
-    protected override async Task OnInitializedAsync()
+    [Parameter]
+    public UsuarioDTO usuarioIngresado { get; set; }
+
+    private void IrAProductos()
     {
-        var authState = await AuthProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        if (!user.Identity?.IsAuthenticated ?? true)
-        {
-            // Redirigir si no está autenticado
-            Nav.NavigateTo("/login");
-            return;
-        }
-
-        // Obtener información del usuario desde los Claims
-        usuario = new UsuarioDTO
-        {
-            Nombre = user.Identity.Name ?? "",
-            Email = user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value ?? "",
-            Tipo = user.FindFirst(c => c.Type == "Tipo")?.Value ?? ""
-            // Agregá Id u otros campos si los necesitás
-        };
+        Navigation.NavigateTo("/listarproductos");
     }
 
-    // Métodos para cada opción del menú
-    void CargarProductos() => CargarComponente("productos");
-    void CargarEventos() => CargarComponente("eventos");
-    void CargarFiestas() => CargarComponente("fiestas");
-    void CargarMisCompras() => CargarComponente("miscompras");
-
-    private void CargarComponente(string opcion)
+    private void IrAEventos()
     {
-        switch (opcion)
-        {
-            case "productos":
-                ComponenteActual = builder =>
-                {
-                    builder.OpenComponent(0, typeof(ListarProductos));
-                    builder.CloseComponent();
-                };
-                break;
-            case "eventos":
-                ComponenteActual = builder =>
-                {
-                    builder.OpenComponent(0, typeof(ListarEventos));
-                    builder.CloseComponent();
-                };
-                break;
-            case "fiestas":
-                ComponenteActual = builder =>
-                {
-                    builder.OpenComponent(0, typeof(ListarFiestas));
-                    builder.CloseComponent();
-                };
-                break;
-            case "miscompras":
-                ComponenteActual = builder =>
-                {
-                    builder.OpenComponent(0, typeof(ListarCompras));
-                    builder.AddAttribute(1, "Usuario", usuario); // Pasar usuario como parámetro
-                    builder.CloseComponent();
-                };
-                break;
-        }
+        Navigation.NavigateTo("/listareventos");
+    }
+
+    private void IrAFiestas()
+    {
+        Navigation.NavigateTo("/listarfiestas");
+    }
+
+    private void IrAMisCompras()
+    {
+        Navigation.NavigateTo("/listarcompras");
     }
 }

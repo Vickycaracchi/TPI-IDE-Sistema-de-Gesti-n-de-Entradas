@@ -1,0 +1,26 @@
+﻿@inject NavigationManager Nav
+@inject LoginState LoginState
+@namespace BlazorApp.Shared
+
+<nav class="navbar navbar-light bg-light shadow-sm py-3 px-4 w-100 mb-4" style="width:100%; margin:0;">
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <span class="navbar-brand h4 m-0">
+            Bohemia: Sistema de Gestión de Entradas
+        </span>
+
+        @if (LoginState.Usuario is not null)
+        {
+            <button class="btn btn-danger btn-sm" @onclick="CerrarSesion">
+                Cerrar sesión (@LoginState.Usuario.Nombre)
+            </button>
+        }
+    </div>
+</nav>
+
+@code {
+    private void CerrarSesion()
+    {
+        LoginState.Logout();
+        Nav.NavigateTo("/", true);
+    }
+}

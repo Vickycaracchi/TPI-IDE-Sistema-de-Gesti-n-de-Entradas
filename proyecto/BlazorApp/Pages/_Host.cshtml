@@ -2,11 +2,9 @@
 @namespace BlazorApp.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    Layout = "_Layout";
+    Layout = "_Layout";     
 }
 
 <app>
-    <CascadingAuthenticationState>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </CascadingAuthenticationState>
+    <component type="typeof(App)" render-mode="Server" />
 </app>

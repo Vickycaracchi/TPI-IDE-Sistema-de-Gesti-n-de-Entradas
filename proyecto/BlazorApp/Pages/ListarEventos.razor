@@ -1,56 +1,65 @@
-﻿@using DTOs
+﻿@page "/listareventos"
 @using API.Clients
+@using DTOs
 
 <h3>Listado de Eventos</h3>
 
-@if (eventos is null)
+@if (IsLoading)
 {
-    <p>Cargando eventos...</p>
+    <div>Cargando eventos...</div>
 }
-else if (!eventos.Any())
+else if (!string.IsNullOrEmpty(Error))
 {
-    <p>No hay eventos disponibles.</p>
+    <div class="alert alert-danger">@Error</div>
 }
-else
+else if (Eventos is not null && Eventos.Any())
 {
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+           
                 <th>Nombre</th>
-                <th>Descripción</th>
+                <th>Descripcion</th>
+              
             </tr>
         </thead>
         <tbody>
-            @foreach (var evento in eventos)
+            @foreach (var evento in Eventos)
             {
                 <tr>
-                    <td>@evento.Id</td>
+                    
                     <td>@evento.Nombre</td>
                     <td>@evento.Desc</td>
+
+                    
                 </tr>
             }
         </tbody>
     </table>
 }
+else
+{
+    <div>No hay eventos para mostrar.</div>
+}
 
 @code {
-    private List<EventoDTO>? eventos;
+    private List<EventoDTO> Eventos;
+    private bool IsLoading = true;
+    private string Error;
 
     protected override async Task OnInitializedAsync()
     {
-        await CargarEventos();
-    }
-
-    private async Task CargarEventos()
-    {
         try
         {
-            eventos = (await EventoApiClient.GetAllAsync()).ToList();
+            Eventos = (await EventoApiClient.GetAllAsync()).ToList();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error al cargar la lista de eventos: {ex.Message}");
-        }
-    }
+            Error = $"Error al cargar la lista de eventos: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
 }

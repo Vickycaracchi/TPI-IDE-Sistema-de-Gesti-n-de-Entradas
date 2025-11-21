@@ -1,58 +1,66 @@
-﻿@using DTOs
+﻿@page "/listarproductos"
 @using API.Clients
+@using DTOs
 
 <h3>Listado de Productos</h3>
 
-@if (productos is null)
+@if (IsLoading)
 {
-    <p>Cargando productos...</p>
+    <div>Cargando productos...</div>
 }
-else if (!productos.Any())
+else if (!string.IsNullOrEmpty(Error))
 {
-    <p>No hay productos disponibles.</p>
+    <div class="alert alert-danger">@Error</div>
 }
-else
+else if (Productos is not null && Productos.Any())
 {
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
+       
+             
                 <th>Descripción</th>
                 <th>Precio</th>
+                
             </tr>
         </thead>
         <tbody>
-            @foreach (var p in productos)
+            @foreach (var producto in Productos)
             {
                 <tr>
-                    <td>@p.Id</td>
-                    <td>@p.Nombre</td>
-                    <td>@p.Descripcion</td>
-                    <td>@p.Precio</td>                    
+                    
+                   
+                    <td>@producto.Descripcion</td>
+                    <td>@producto.Precio</td>
+                   
                 </tr>
             }
         </tbody>
     </table>
 }
+else
+{
+    <div>No hay productos para mostrar.</div>
+}
 
 @code {
-    private List<ProductoDTO>? productos;
+    private List<ProductoDTO> Productos;
+    private bool IsLoading = true;
+    private string Error;
 
     protected override async Task OnInitializedAsync()
     {
-        await CargarProductos();
-    }
-
-    private async Task CargarProductos()
-    {
         try
         {
-            productos = (await ProductoApiClient.GetAllAsync()).ToList();
+            Productos = (await ProductoApiClient.GetAllAsync()).ToList();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error al cargar productos: {ex.Message}");
+            Error = $"Error al cargar la lista de productos: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
         }
     }
 }

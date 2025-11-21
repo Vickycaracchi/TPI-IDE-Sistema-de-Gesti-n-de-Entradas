@@ -1,76 +1,82 @@
-﻿@using DTOs
+﻿@page "/listarfiestas"
 @using API.Clients
+@using DTOs
 
 <h3>Listado de Fiestas</h3>
 
-@if (fiestasParaMostrar is null)
+@if (IsLoading)
 {
-    <p>Cargando fiestas...</p>
+    <div>Cargando fiestas...</div>
 }
-else if (!fiestasParaMostrar.Any())
+else if (!string.IsNullOrEmpty(Error))
 {
-    <p>No hay fiestas registradas.</p>
+    <div class="alert alert-danger">@Error</div>
 }
-else
+else if (FiestasParaMostrar is not null && FiestasParaMostrar.Any())
 {
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+               
                 <th>Fecha</th>
                 <th>Lugar</th>
                 <th>Evento</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var f in fiestasParaMostrar)
+            @foreach (var fiesta in FiestasParaMostrar)
             {
                 <tr>
-                    <td>@f.IdFiesta</td>
-                    <td>@f.FechaFiesta.ToString("dd/MM/yyyy")</td>
-                    <td>@f.NombreLugar</td>
-                    <td>@f.NombreEvento</td>
+                  
+                    <td>@fiesta.FechaFiesta.ToShortDateString()</td>
+                    <td>@fiesta.NombreLugar</td>
+                    <td>@fiesta.NombreEvento</td>
                 </tr>
             }
         </tbody>
     </table>
 }
+else
+{
+    <div>No hay fiestas para mostrar.</div>
+}
 
 @code {
-    private List<FiestaVista>? fiestasParaMostrar;
+    private bool IsLoading = true;
+    private string Error;
+    private List<FiestaParaMostrarDTO> FiestasParaMostrar;
 
     protected override async Task OnInitializedAsync()
     {
-        await CargarFiestas();
-    }
-
-    private async Task CargarFiestas()
-    {
         try
         {
-            var lugares = await LugarApiClient.GetAllAsync();
-            var eventos = await EventoApiClient.GetAllAsync();
+            var lugares = (await LugarApiClient.GetAllAsync()).ToList();
+            var eventos = (await EventoApiClient.GetAllAsync()).ToList();
             var fiestas = await FiestaApiClient.GetAllAsync();
 
-            fiestasParaMostrar = fiestas.Select(f => new FiestaVista
-            {
-                IdFiesta = f.IdFiesta,
-                FechaFiesta = f.FechaFiesta,
-                NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
-                NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
-            }).ToList();
+            FiestasParaMostrar = fiestas.Select(f => new FiestaParaMostrarDTO
+                {
+                    IdFiesta = f.IdFiesta,
+                    FechaFiesta = f.FechaFiesta,
+                    NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                    NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
+                }).ToList();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error al cargar las fiestas: {ex.Message}");
+            Error = $"Error al cargar la lista de fiestas: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
         }
     }
 
-    public class FiestaVista
+    private class FiestaParaMostrarDTO
     {
         public int IdFiesta { get; set; }
         public DateTime FechaFiesta { get; set; }
-        public string NombreLugar { get; set; } = "";
-        public string NombreEvento { get; set; } = "";
+        public string NombreLugar { get; set; }
+        public string NombreEvento { get; set; }
     }
 }

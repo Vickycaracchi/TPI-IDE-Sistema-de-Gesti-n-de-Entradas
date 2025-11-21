@@ -1,32 +1,39 @@
 @page "/"
+@using DTOs
+@inject NavigationManager Navigation
 
-<PageTitle>Inicio - Sistema de Gestión de Entradas</PageTitle>
 
-<h1>Bienvenido al Sistema de Gestión de Entradas</h1>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card p-4 shadow" style="width: 380px; border-radius: 12px;">
 
-<p>Este es el sistema de gestión de entradas para eventos y fiestas.</p>
+        <h3 class="text-center mb-4">Bienvenido al sistema</h3>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5>Acceso al Sistema</h5>
-            </div>
-            <div class="card-body">
-                <p>Para acceder a las funciones del sistema, por favor inicie sesión.</p>
-                <a href="/login" class="btn btn-primary">Iniciar Sesión</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5>Área Protegida</h5>
-            </div>
-            <div class="card-body">
-                <p>Acceda a las funciones restringidas del sistema.</p>
-                <a href="/soloAutenticados" class="btn btn-secondary">Área Protegida</a>
-            </div>
-        </div>
+        <button class="btn btn-primary w-100 mb-3" @onclick="IrALogin">
+            Ingresar
+        </button>
+
+        <button class="btn btn-secondary w-100" @onclick="IrARegistro">
+            Registrar Usuario
+        </button>
+
+        @if (!string.IsNullOrEmpty(Bienvenida))
+        {
+            <div class="alert alert-success mt-4 text-center">@Bienvenida</div>
+        }
+
     </div>
 </div>
+
+@code {
+    private string Bienvenida;
+
+    private void IrALogin()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private void IrARegistro()
+    {
+        Navigation.NavigateTo("/registrarusuario");
+    }
+}
