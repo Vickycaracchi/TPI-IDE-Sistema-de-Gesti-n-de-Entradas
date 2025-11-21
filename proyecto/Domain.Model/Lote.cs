@@ -10,25 +10,19 @@ namespace Domain.Model
     {
         public int Id { get; private set; }
         public string Nombre { get; private set; }
-        public decimal Precio { get; private set; }
+        public int Precio { get; private set; }
         public DateTime FechaDesde { get; private set; }
         public DateTime FechaHasta { get; private set; }
-        public int CantidadLote { get; private set; }
-        public int IdFiesta { get; private set; }
-        public bool LoteActual {  get; private set; }
 
         public Lote() { }
 
-        public Lote(int id, string nombre, decimal precio, DateTime fechaDesde, DateTime fechaHasta, int cantidadLote, int idFiesta, bool loteActual)
+        public Lote(int id, string nombre, int precio, DateTime fechaDesde, DateTime fechaHasta)
         {
             SetId(id);
             SetNombre(nombre);
             SetPrecio(precio);
             SetFechaDesde(fechaDesde);
             SetFechaHasta(fechaHasta);
-            SetCantidadLote(cantidadLote);
-            SetIdFiesta(idFiesta);
-            SetLoteActual(loteActual);
         }
 
         public void SetId(int id)
@@ -45,7 +39,7 @@ namespace Domain.Model
             Nombre = nombre;
         }
 
-        public void SetPrecio(decimal precio)
+        public void SetPrecio(int precio)
         {
             if (precio < 0)
                 throw new ArgumentException("El precio no puede ser negativo.", nameof(precio));
@@ -66,23 +60,6 @@ namespace Domain.Model
             if (fechaHasta <= FechaDesde)
                 throw new ArgumentException("La fecha hasta debe ser posterior a la fecha desde.", nameof(fechaHasta));
             FechaHasta = fechaHasta;
-        }
-
-        public void SetCantidadLote(int cantidadLote)
-        {
-            if (cantidadLote < 0)
-                throw new ArgumentException("La cantidad del lote no puede ser negativa.", nameof(cantidadLote));
-            CantidadLote = cantidadLote;
-        }
-        public void SetIdFiesta(int idFiesta)
-        {
-            if (idFiesta == 0)
-                throw new ArgumentException("El id de la fiesta no puede ser nulo.", nameof(idFiesta));
-            IdFiesta = idFiesta;
-        }
-        public void SetLoteActual(bool estado)
-        {
-            LoteActual = estado;
         }
     }
 }

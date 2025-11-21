@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Domain.Model;
+﻿using Domain.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Data
@@ -13,6 +13,9 @@ namespace Data
         public DbSet<Lote> Lotes { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Fiesta> Fiestas {get; set;}
+        public DbSet<Entrada> Entradas {get; set; }
+        public DbSet<CompraProducto> ComprasProductos { get; set; }
+        public DbSet<FiestaLote> FiestasLotes { get; set; }
         public BGEContext()
         {
             this.Database.EnsureCreated();
@@ -83,7 +86,6 @@ namespace Data
                     .IsRequired()
                     .HasMaxLength(255);
 
-                // Restricción única para Email
                 entity.HasIndex(e => e.Email)
                     .IsUnique();
 
@@ -110,11 +112,7 @@ namespace Data
 
             modelBuilder.Entity<Producto>(entity =>
             {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Nombre)
-                      .IsRequired()
-                      .HasMaxLength(100);
+                entity.HasKey(e => new { e.Id});
 
                 entity.Property(e => e.Id)
                       .ValueGeneratedOnAdd();
@@ -124,9 +122,7 @@ namespace Data
                       .HasMaxLength(500);
 
                 entity.Property(e => e.Precio)
-                      .IsRequired()
-                      .HasColumnType("decimal(18,2)");
-
+                      .IsRequired();
             });
 
             modelBuilder.Entity<Lugar>(entity =>
@@ -154,7 +150,7 @@ namespace Data
 
             modelBuilder.Entity<Lote>(entity =>
             {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => new { e.Id });
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
@@ -167,40 +163,30 @@ namespace Data
                     .IsUnique();
 
                 entity.Property(e => e.Precio)
-                    .IsRequired()
-                    .HasColumnType("decimal(18,2)");
+                    .IsRequired();
 
                 entity.Property(e => e.FechaDesde)
                     .IsRequired();
 
                 entity.Property(e => e.FechaHasta)
                     .IsRequired();
-
-                entity.Property(e => e.CantidadLote)
-                    .IsRequired();
-                
-                entity.Property( e => e.IdFiesta)
-                    .IsRequired();
-
-                entity.Property(e => e.LoteActual)
-                    .IsRequired();
             });
 
             modelBuilder.Entity<Compra>(entity =>
             {
-                entity.HasKey(e => new { e.IdVendedor, e.IdCliente, e.FechaHora});
-
-                entity.Property(e => e.IdVendedor)
-                    .IsRequired();
+                entity.HasKey(e => new { e.IdCliente, e.FechaHora, e.IdFiesta});
 
                 entity.Property(e => e.IdCliente)
+                    .IsRequired();
+
+                entity.Property(e => e.IdFiesta)
                     .IsRequired();
 
                 entity.Property(e => e.FechaHora)
                     .IsRequired();
 
-                entity.Property(e => e.CantidadCompra)
-                    .IsRequired(); 
+                entity.Property(e => e.IdVendedor)
+                    .IsRequired();
 
                 entity.HasOne<Usuario>()
                     .WithMany() 
@@ -212,8 +198,110 @@ namespace Data
                     .HasForeignKey(c => c.IdCliente)
                     .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(e => e.Precio_Entrada)
+                entity.HasOne<Fiesta>()
+                    .WithMany() 
+                    .HasForeignKey(c => c.IdFiesta)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<Fiesta>(entity =>
+            {
+                entity.HasKey(e => new { e.IdFiesta });
+
+                entity.Property(e => e.IdFiesta)
+                .IsRequired();
+
+                entity.Property(e => e.IdLugar)
                     .IsRequired();
+
+                entity.Property(e => e.IdEvento)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaFiesta)
+                    .IsRequired();
+
+                entity.HasOne<Lugar>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdLugar)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne<Evento>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdEvento)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+
+            });
+
+            modelBuilder.Entity<Entrada>(entity =>
+            {
+                entity.HasKey(e => new { e.IdEntrada });
+                
+                entity.Property(e => e.IdEntrada)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                
+                entity.Property(e => e.IdFiesta)
+                    .IsRequired();
+                
+                entity.Property(e => e.IdCliente)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaHora)
+                    .IsRequired();
+
+                entity.HasOne<Compra>()
+                    .WithMany()
+                    .HasForeignKey(c => new { c.IdCliente, c.FechaHora, c.IdFiesta })
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<CompraProducto>(entity =>
+            {
+                entity.HasKey(e => new { e.IdCliente, e.FechaHora, e.IdFiesta, e.IdProducto });
+                
+                entity.Property(e => e.IdCliente)
+                    .IsRequired();
+
+                entity.Property(e => e.FechaHora)
+                    .IsRequired();
+
+                entity.Property(e => e.IdFiesta)
+                    .IsRequired();
+
+                entity.Property(e => e.IdProducto)
+                    .IsRequired();
+                
+                entity.HasOne<Compra>()
+                    .WithMany()
+                    .HasForeignKey(c => new { c.IdCliente, c.FechaHora, c.IdFiesta })
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                entity.HasOne<Producto>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdProducto)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<FiestaLote>(entity =>
+            {
+                entity.HasKey(e => new { e.IdFiesta, e.IdLote });
+
+                entity.Property(e => e.IdFiesta)
+                    .IsRequired();
+
+                entity.Property(e => e.IdLote)
+                    .IsRequired();
+                
+                entity.HasOne<Fiesta>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdFiesta )
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                entity.HasOne<Lote>()
+                    .WithMany()
+                    .HasForeignKey(c => c.IdLote)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Evento>().HasData(
@@ -229,6 +317,27 @@ namespace Data
                     Id = 2,
                     Nombre = "Feria de Artesanía",
                     Desc = "Exposición de productos hechos a mano por artistas locales."
+                },
+
+                new  
+                {
+                    Id = 3,
+                    Nombre = "Bohemia",
+                    Desc = "Fiesta nocturna de publico adolecente."
+                },
+
+                new
+                {
+                    Id = 4,
+                    Nombre = "La Cúpula del Templo",
+                    Desc = "Fiesta nocturna de publico adolecente."
+                },
+
+                new 
+                {
+                    Id = 5,
+                    Nombre = "Bresh",
+                    Desc = "Fiesta nocturna de publico adolecente."
                 }
             );
 
@@ -407,16 +516,14 @@ namespace Data
                 new  
                 { 
                     Id = 1,
-                    Nombre = "Camiseta Oficial",
-                    Descripcion = "Camiseta de algodón con logo del evento.",
-                    Precio = 25.50m 
+                    Descripcion = "Vaso ecofriendly.",
+                    Precio = 10 
                 },
                 new  
                 {
                     Id = 2,
-                    Nombre = "Poster Limitado",
-                    Descripcion = "Poster numerado de la feria, edición especial.",
-                    Precio = 10.00m 
+                    Descripcion = "Hamburguesa con queso.",
+                    Precio = 25
                 }
             );
 
@@ -424,79 +531,173 @@ namespace Data
                 new
                 {
                     Id = 1,
-                    Nombre = "La sala de las Artes.",
+                    Nombre = "La sala de las Artes",
                     Direccion = "Av Ovidio Lagos y Guemes",
                     Ciudad = "Rosario"
                 },
                 new
                 {
                     Id = 2,
-                    Nombre = "Teatro Vorterix.",
-                    Direccion = "Av Ovidio Lagos y Guemes",
-                    Ciudad = "Buenos Aires"
+                    Nombre = "Vorterix",
+                    Direccion = "Av. Federico Lacroze 3455",
+                    Ciudad = "Ciudad Autónoma de Buenos Aires"
+                },
+                new
+                {
+                    Id = 3,
+                    Nombre = "Centro Cultural Güemes",
+                    Direccion = "Güemes 2808",
+                    Ciudad = "Rosario"
+                },
+                new
+                {
+                    Id = 4,
+                    Nombre = "BIOCERES ARENA",
+                    Direccion = "Cafferata 729",
+                    Ciudad = "Rosario"
                 }
             );
+            
+            modelBuilder.Entity<Lote>().HasData(
+                new
+                {
+                    Id = 1,
+                    Nombre = "Lote Early Bird",
+                    Precio = 15,
+                    FechaDesde = new DateTime(2025, 9, 1),
+                    FechaHasta = new DateTime(2025, 9, 30),
+                    CantidadLote = 100,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 2,
+                    Nombre = "Lote Regular",
+                    Precio = 25,
+                    FechaDesde = new DateTime(2025, 10, 1),
+                    FechaHasta = new DateTime(2025, 12, 30),
+                    CantidadLote = 300,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 3,
+                    Nombre = "Lote Last Minute",
+                    Precio = 35,
+                    FechaDesde = new DateTime(2025, 12, 31),
+                    FechaHasta = new DateTime(2025, 12, 31),
+                    CantidadLote = 50,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 4,
+                    Nombre = "Lote Early Bird Feria",
+                    Precio = 5,
+                    FechaDesde = new DateTime(2025, 8, 1),
+                    FechaHasta = new DateTime(2025, 8, 31),
+                    CantidadLote = 200,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 5,
+                    Nombre = "Lote Regular Feria",
+                    Precio = 12,
+                    FechaDesde = new DateTime(2025, 9, 1),
+                    FechaHasta = new DateTime(2025, 11, 14),
+                    CantidadLote = 400,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 6,
+                    Nombre = "Lote Last Minute Feria",
+                    Precio = 18,
+                    FechaDesde = new DateTime(2025, 11, 15),
+                    FechaHasta = new DateTime(2025, 11, 15),
+                    CantidadLote = 100,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 7,
+                    Nombre = "Lote Early Bird Bohemia",
+                    Precio = 20,
+                    FechaDesde = new DateTime(2025, 9, 15),
+                    FechaHasta = new DateTime(2025, 10, 10),
+                    CantidadLote = 150,
+                    LoteActual = false
+                },
+                new
+                {
+                    Id = 8,
+                    Nombre = "Lote Regular Bohemia",
+                    Precio = 30,
+                    FechaDesde = new DateTime(2025, 10, 11),
+                    FechaHasta = new DateTime(2025, 10, 19),
+                    CantidadLote = 250,
+                    LoteActual = true
+                },
+                new
+                {
+                    Id = 9,
+                    Nombre = "Lote Last Minute Bohemia",
+                    Precio = 40,
+                    FechaDesde = new DateTime(2025, 10, 20),
+                    FechaHasta = new DateTime(2025, 10, 20),
+                    CantidadLote = 80,
+                    LoteActual = false
+                }
+            );
+
             modelBuilder.Entity<Compra>().HasData(
                 new
                 {
+                    IdCliente = 1,
                     FechaHora = new DateTime(2025, 10, 15, 5, 12, 5),
-                    CantidadCompra = 4,
-                    Entrada = "entrada-1",
-                    IdVendedor = 10,
-                    IdCliente = 1,
                     IdFiesta = 1,
-                    Precio_Entrada = 25.50m
+                    IdVendedor = 10
                 },
                 new
                 {
+                    IdCliente = 1,
                     FechaHora = new DateTime(2025, 10, 15, 5, 13, 5),
-                    CantidadCompra = 5,
-                    Entrada = "entrada-2",
-                    IdVendedor = 10,
-                    IdCliente = 1,
                     IdFiesta = 1,
-                    Precio_Entrada = 25.50m
+                    IdVendedor = 10,
                 },
                 new
                 {
-                    FechaHora = new DateTime(2025, 10, 15, 5, 14, 5),
-                    CantidadCompra = 6,
-                    Entrada = "entrada-3",
-                    IdVendedor = 10,
                     IdCliente = 1,
+                    FechaHora = new DateTime(2025, 10, 15, 5, 14, 5),
                     IdFiesta = 1,
-                    Precio_Entrada = 25.50m
+                    IdVendedor = 10
                 }
             );
-
-            modelBuilder.Entity<Fiesta>(entity =>
-            {
-                entity.HasKey(e => new { e.IdFiesta });
-
-                entity.Property(e => e.IdFiesta)
-                .IsRequired();
-
-                entity.Property(e => e.IdLugar)
-                    .IsRequired();
-
-                entity.Property(e => e.IdEvento)
-                    .IsRequired();
-
-                entity.Property(e => e.FechaFiesta)
-                    .IsRequired();
-
-                entity.HasOne<Lugar>()
-                    .WithMany()
-                    .HasForeignKey(c => c.IdLugar)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne<Evento>()
-                    .WithMany()
-                    .HasForeignKey(c => c.IdEvento)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-
-            });
+            
+            modelBuilder.Entity<Fiesta>().HasData(
+                new
+                {
+                    IdFiesta = 1,
+                    IdLugar = 2,
+                    IdEvento = 3,
+                    FechaFiesta = new DateTime(2025, 12, 31, 22, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLugar = 1,
+                    IdEvento = 4,
+                    FechaFiesta = new DateTime(2025, 11, 15, 21, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 3,
+                    IdLugar = 4,
+                    IdEvento = 5,
+                    FechaFiesta = new DateTime(2025, 10, 20, 23, 0, 0)
+                }
+            );
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Application.Services
             var productoRepository = new ProductoRepository();
 
 
-            Producto producto = new Producto(dto.Id, dto.Nombre, dto.Descripcion, dto.Precio);
+            Producto producto = new Producto(dto.Id, dto.Descripcion, dto.Precio);
 
             productoRepository.Add(producto);
 
@@ -37,7 +37,6 @@ namespace Application.Services
             return new ProductoDTO
             {
                 Id = producto.Id,
-                Nombre = producto.Nombre,
                 Descripcion = producto.Descripcion,
                 Precio = producto.Precio,
                 
@@ -52,7 +51,6 @@ namespace Application.Services
             return productos.Select(producto => new ProductoDTO
             {
                 Id = producto.Id,
-                Nombre = producto.Nombre,
                 Descripcion = producto.Descripcion,
                 Precio = producto.Precio,
 
@@ -63,11 +61,8 @@ namespace Application.Services
         {
             var productoRepository = new ProductoRepository();
 
-            Producto producto = new Producto(dto.Id,dto.Nombre, dto.Descripcion, dto.Precio);
+            Producto producto = new Producto(dto.Id, dto.Descripcion, dto.Precio);
             return productoRepository.Update(producto);
         }
-
-
-
-        }
     }
+}

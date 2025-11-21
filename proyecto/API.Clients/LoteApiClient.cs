@@ -93,7 +93,7 @@ namespace API.Clients
                 throw new Exception($"Timeout al obtener lista de lotes: {ex.Message}", ex);
             }
         }
-        public async static Task AddAsync(LoteDTO lote)
+        public async static Task AddAsync(LoteConFiestaDTO lote)
         {
             try
             {
@@ -102,16 +102,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear lote. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear lote.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear lote: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear lote.");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear lote: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear lote.");
             }
         }
         public static async Task DeleteAsync(int id)

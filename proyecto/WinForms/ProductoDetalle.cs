@@ -48,9 +48,8 @@ namespace WinForms
         }
         private void SetProducto()
         {
-            this.nombreTextBox.Text = this.Producto.Nombre;
             this.descripcionTextBox.Text = this.Producto.Descripcion;
-            precioTextBox.Text = this.Producto.Precio.ToString("0.00");
+            precioTextBox.Text = this.Producto.Precio.ToString();
         }
 
         private void SetFormMode(FormMode value)
@@ -78,16 +77,15 @@ namespace WinForms
                 errorProvider.SetError(descripcionTextBox, "La descripcion es Requerida");
             }
 
-            if (!decimal.TryParse(precioTextBox.Text.Trim(), out decimal precio))
+            if (!int.TryParse(precioTextBox.Text.Trim(), out int precio))
             {
                 isValid = false;
                 errorProvider.SetError(precioTextBox, "Precio inválido");
             }
             else
             {
-                this.Producto.Precio = precio; 
+                this.Producto.Precio = precio;
             }
-
             return isValid;
         }
 
@@ -107,7 +105,6 @@ namespace WinForms
             {
                 try
                 {
-                    this.Producto.Nombre = nombreTextBox.Text;
                     this.Producto.Descripcion = descripcionTextBox.Text;
 
 

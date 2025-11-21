@@ -16,6 +16,9 @@
     <Compile Update="ListarFiestas.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RegistrarFiesta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,9 +65,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MenuAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Pruebas.cs">

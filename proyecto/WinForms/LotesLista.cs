@@ -45,9 +45,7 @@ namespace WinForms
             lotesDataGridView.AutoGenerateColumns = false;
             lotesDataGridView.Columns.Clear();
 
-            // Deshabilitar redimensionamiento de columnas por el usuario
             lotesDataGridView.AllowUserToResizeColumns = false;
-            // Hacer que las columnas llenen el ancho disponible
             lotesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -55,7 +53,7 @@ namespace WinForms
                 DataPropertyName = "Id",
                 HeaderText = "ID",
                 Name = "Id",
-                FillWeight = 5 // Ancho más pequeño para ID
+                FillWeight = 5
             });
 
             lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -63,7 +61,7 @@ namespace WinForms
                 DataPropertyName = "Nombre",
                 HeaderText = "Nombre",
                 Name = "Nombre",
-                FillWeight = 30 // Ancho más grande para Nombre
+                FillWeight = 30
             });
 
             lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -71,7 +69,7 @@ namespace WinForms
                 DataPropertyName = "Precio",
                 HeaderText = "Precio",
                 Name = "Precio",
-                FillWeight = 15 // Ancho medio para Precio
+                FillWeight = 15
             });
 
             lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -79,7 +77,7 @@ namespace WinForms
                 DataPropertyName = "FechaDesde",
                 HeaderText = "Fecha Desde",
                 Name = "FechaDesde",
-                FillWeight = 20 // Ancho medio-grande para FechaDesde
+                FillWeight = 20
             });
 
             lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -87,15 +85,7 @@ namespace WinForms
                 DataPropertyName = "FechaHasta",
                 HeaderText = "Fecha Hasta",
                 Name = "FechaHasta",
-                FillWeight = 20 // Ancho medio-grande para FechaHasta
-            });
-
-            lotesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                DataPropertyName = "CantidadLote",
-                HeaderText = "Cantidad Lote",
-                Name = "CantidadLote",
-                FillWeight = 10 // Ancho más pequeño para Cantidad
+                FillWeight = 20
             });
         }
         private void agregarButton_Click(object sender, EventArgs e)

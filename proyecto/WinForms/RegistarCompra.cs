@@ -100,7 +100,6 @@ namespace WinForms
                     compraDTO.CantidadCompra = cantidad;
                     compraDTO.Entrada = "";
                     compraDTO.FechaHora = fecha;
-                    compraDTO.Precio_Entrada = loteDTO.Precio;
                     await CompraApiClient.AddAsync(compraDTO);
 
                    

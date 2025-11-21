@@ -54,7 +54,6 @@ namespace Data
             var existingProducto = context.Productos.Find(producto.Id);
             if (existingProducto != null)
             {
-                existingProducto.SetDescripcion(producto.Nombre);
                 existingProducto.SetDescripcion(producto.Descripcion);
                 existingProducto.SetPrecio(producto.Precio);
 

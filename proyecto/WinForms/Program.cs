@@ -8,8 +8,8 @@ namespace WinForms
         [STAThread]
         static void Main()
         { 
-            inicio inicio = new inicio();
-            inicio.ShowDialog();
+            Login Login = new Login();
+            Login.ShowDialog();
             
 
         }

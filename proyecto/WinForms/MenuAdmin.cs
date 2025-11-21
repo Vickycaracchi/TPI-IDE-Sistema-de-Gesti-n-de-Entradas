@@ -26,11 +26,6 @@ namespace WinForms
             formHijo.Show();
         }
 
-        private void listarClientesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new ClientesLista());
-        }
-
         private void listarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new VendedoresLista());

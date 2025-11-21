@@ -61,8 +61,7 @@ namespace WinForms
                         Lugar = lugar?.Nombre ?? "Desconocido",
                         c.CantidadCompra,
                         c.FechaHora,
-                        c.Entrada,
-                        c.Precio_Entrada,
+                        c.Entrada
                     };
                 }).ToList();
 

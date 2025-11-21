@@ -40,11 +40,6 @@ namespace Application.Services
 
             }).ToList();
         }
-        public IEnumerable<FiestaDTO> GetFiestasConLotes()
-        {
-            var loteService = new LoteService();
-            return GetAll().Where(f => loteService.FiestaTieneLotes(f.IdFiesta));
-        }
         public FiestaDTO Get(int idFiesta)
         {
             var fiestaRepository = new FiestaRepository();
