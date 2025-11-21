@@ -1,47 +1,68 @@
 ﻿@page "/listarproductos"
 @using API.Clients
 @using DTOs
+<Header />
+<br />
+<br />
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Listado de Productos</h3>
+        </div>
 
-<h3>Listado de Productos</h3>
+        <div class="card-body">
 
-@if (IsLoading)
-{
-    <div>Cargando productos...</div>
-}
-else if (!string.IsNullOrEmpty(Error))
-{
-    <div class="alert alert-danger">@Error</div>
-}
-else if (Productos is not null && Productos.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-       
-             
-                <th>Descripción</th>
-                <th>Precio</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var producto in Productos)
+            @if (IsLoading)
             {
-                <tr>
-                    
-                   
-                    <td>@producto.Descripcion</td>
-                    <td>@producto.Precio</td>
-                   
-                </tr>
+                <div class="d-flex justify-content-center my-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div>No hay productos para mostrar.</div>
-}
+            else if (!string.IsNullOrEmpty(Error))
+            {
+                <div class="alert alert-danger">@Error</div>
+            }
+            else if (Productos is not null && Productos.Any())
+            {
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var producto in Productos)
+                        {
+                            <tr>
+                                <td>@producto.Descripcion</td>
+                                <td>
+                                    <span class="badge bg-success">
+                                        $ @producto.Precio
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">No hay productos para mostrar.</div>
+            }
+
+        </div>
+
+        <div class="card-footer text-end">
+            <button class="btn btn-secondary" @onclick="Volver">
+                Volver
+            </button>
+        </div>
+    </div>
+</div>
 
 @code {
     private List<ProductoDTO> Productos;
@@ -63,4 +84,12 @@ else
             IsLoading = false;
         }
     }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/menucliente");
+    }
+
+    [Inject]
+    public NavigationManager Navigation { get; set; }
 }

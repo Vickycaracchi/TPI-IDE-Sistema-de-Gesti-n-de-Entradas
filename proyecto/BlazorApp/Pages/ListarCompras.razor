@@ -3,51 +3,76 @@
 @using DTOs
 @inject NavigationManager Navigation
 @inject LoginState LoginState
+<Header />
+<br />
+<br />
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Mis Compras</h3>
+        </div>
 
-<h3>Mis Compras</h3>
+        <div class="card-body">
 
-@if (IsLoading)
-{
-    <div>Cargando compras...</div>
-}
-else if (!string.IsNullOrEmpty(Error))
-{
-    <div class="alert alert-danger">@Error</div>
-}
-else if (ComprasParaMostrar is not null && ComprasParaMostrar.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Vendedor</th>
-                <th>Fiesta</th>
-                <th>Lugar</th>
-                <th>Cantidad</th>
-                <th>Fecha</th>
-                <th>Entrada</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var compra in ComprasParaMostrar)
+            @if (IsLoading)
             {
-                <tr>
-                    <td>@compra.Cliente</td>
-                    <td>@compra.Vendedor</td>
-                    <td>@compra.Fiesta</td>
-                    <td>@compra.Lugar</td>
-                    <td>@compra.CantidadCompra</td>
-                    <td>@compra.FechaHora.ToString("g")</td>
-                    <td>@compra.Entrada</td>
-                </tr>
+                <div class="d-flex justify-content-center my-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div>No hay compras para mostrar.</div>
-}
+            else if (!string.IsNullOrEmpty(Error))
+            {
+                <div class="alert alert-danger">@Error</div>
+            }
+            else if (ComprasParaMostrar is not null && ComprasParaMostrar.Any())
+            {
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Vendedor</th>
+                            <th>Fiesta</th>
+                            <th>Lugar</th>
+                            <th>Cantidad</th>
+                            <th>Fecha</th>
+                            <th>Entrada</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var compra in ComprasParaMostrar)
+                        {
+                            <tr>
+                                <td>@compra.Cliente</td>
+                                <td>@compra.Vendedor</td>
+                                <td>@compra.Fiesta</td>
+                                <td>@compra.Lugar</td>
+                                <td>@compra.CantidadCompra</td>
+                                <td>@compra.FechaHora.ToString("g")</td>
+                                <td>
+                                    <span class="badge bg-success">@compra.Entrada</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">No hay compras para mostrar.</div>
+            }
+
+        </div>
+
+        <div class="card-footer text-end">
+            <button class="btn btn-secondary" @onclick="Volver">
+                Volver al Menú
+            </button>
+        </div>
+    </div>
+</div>
 
 @code {
     [Parameter]
@@ -59,7 +84,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-
         try
         {
             var usuario = LoginState.Usuario;
@@ -71,7 +95,6 @@ else
             }
 
             int id = usuario.Id;
-       
 
             var compras = await CompraApiClient.GetAllCliAsync(id);
             var usuarios = await UsuarioApiClient.GetAllAsync();
@@ -107,6 +130,11 @@ else
         {
             IsLoading = false;
         }
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/menucliente");
     }
 
     private class CompraParaMostrarDTO

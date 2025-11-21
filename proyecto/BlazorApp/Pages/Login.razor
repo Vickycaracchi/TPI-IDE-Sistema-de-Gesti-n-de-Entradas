@@ -4,30 +4,43 @@
 @inject NavigationManager Navigation
 @inject LoginState LoginState
 
-<h3>Iniciar Sesión</h3>
+<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="card shadow p-4" style="min-width: 350px; max-width: 400px;">
+        <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-<div class="mb-3">
-    <label for="dni" class="form-label">DNI</label>
-    <input type="text" id="dni" class="form-control" @bind="Dni" />
-    @if (!string.IsNullOrEmpty(DniError))
-    {
-        <div class="text-danger">@DniError</div>
-    }
-</div>
-<div class="mb-3">
-    <label for="contrasena" class="form-label">Contraseña</label>
-    <input type="password" id="contrasena" class="form-control" @bind="Contrasena" />
-    @if (!string.IsNullOrEmpty(ContrasenaError))
-    {
-        <div class="text-danger">@ContrasenaError</div>
-    }
-</div>
-<button class="btn btn-primary" @onclick="EnviarLoginVendedor" disabled="@IsLoading">Ingresar</button>
+        <div class="mb-3">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" id="dni" class="form-control" @bind="Dni" />
+            @if (!string.IsNullOrEmpty(DniError))
+            {
+                <div class="text-danger">@DniError</div>
+            }
+        </div>
 
-@if (!string.IsNullOrEmpty(LoginError))
-{
-    <div class="alert alert-danger mt-3">@LoginError</div>
-}
+        <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input type="password" id="contrasena" class="form-control" @bind="Contrasena" />
+            @if (!string.IsNullOrEmpty(ContrasenaError))
+            {
+                <div class="text-danger">@ContrasenaError</div>
+            }
+        </div>
+
+        <button class="btn btn-primary w-100" @onclick="EnviarLoginVendedor" disabled="@IsLoading">
+            Ingresar
+        </button>
+
+        @if (!string.IsNullOrEmpty(LoginError))
+        {
+            <div class="alert alert-danger mt-3">@LoginError</div>
+        }
+
+        <div class="text-center mt-3">
+            ¿No tenés cuenta?
+            <a href="/registrarse">Registrate acá</a>
+        </div>
+    </div>
+</div>
 
 @code {
     private string Dni { get; set; } = string.Empty;
@@ -61,7 +74,6 @@
                     usuarioIngresado = usuario;
 
                     LoginState.SetUsuario(usuario);
-
 
                     if (TipoUsuario == "Cliente")
                     {
