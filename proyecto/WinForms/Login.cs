@@ -35,7 +35,6 @@ namespace WinForms
                         TipoUsuario = usuario.Tipo;
                         usuarioIngresado = usuario;
 
-                        // 🔥 Lógica movida desde inicio.cs
                         MessageBox.Show(
                             $"¡Bienvenido, {TipoUsuario}!",
                             "Inicio de Sesión Exitoso",
@@ -93,7 +92,6 @@ namespace WinForms
                 }
             }
         }
-
         private bool ValidateVendedor()
         {
             bool isValid = true;
