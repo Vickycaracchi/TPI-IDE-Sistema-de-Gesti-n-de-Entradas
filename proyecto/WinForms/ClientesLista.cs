@@ -109,6 +109,12 @@ namespace WinForms
                 this.clientesDataGridView.DataSource = null;
                 this.clientesDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
 
+                // Ocultar la columna IdJefe en el listado de clientes
+                if (this.clientesDataGridView.Columns["IdJefe"] != null)
+                {
+                    this.clientesDataGridView.Columns["IdJefe"].Visible = false;
+                }
+
                 if (this.clientesDataGridView.Rows.Count > 0)
                 {
                     this.clientesDataGridView.Rows[0].Selected = true;

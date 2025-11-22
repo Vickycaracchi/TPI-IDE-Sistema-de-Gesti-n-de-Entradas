@@ -74,5 +74,19 @@ namespace Application.Services
             return fiestaRepository.Delete(idFiesta);
         }
 
+        public IEnumerable<FiestaDTO> GetFiestasConLotes()
+        {
+            var fiestaRepository = new FiestaRepository();
+            var fiestas = fiestaRepository.GetFiestasConLotes();
+
+            return fiestas.Select(fiesta => new FiestaDTO
+            {
+                IdFiesta = fiesta.IdFiesta,
+                FechaFiesta = fiesta.FechaFiesta,
+                IdLugar = fiesta.IdLugar,
+                IdEvento = fiesta.IdEvento,
+            }).ToList();
+        }
+
     }
 }

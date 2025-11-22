@@ -32,6 +32,13 @@ namespace WinForms
             {
                 this.clientesDataGridView.DataSource = null;
                 this.clientesDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
+                
+                // Ocultar la columna IdJefe en el listado de clientes
+                if (this.clientesDataGridView.Columns["IdJefe"] != null)
+                {
+                    this.clientesDataGridView.Columns["IdJefe"].Visible = false;
+                }
+                
                 lugares = (await LugarApiClient.GetAllAsync()).ToList();
                 eventos = (await EventoApiClient.GetAllAsync()).ToList();
 

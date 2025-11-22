@@ -20,6 +20,18 @@ namespace WebAPI
             .Produces<List<FiestaDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
 
+            app.MapGet("/fiestas/con-lotes", () =>
+            {
+                FiestaService fiestaService = new FiestaService();
+
+                var dtos = fiestaService.GetFiestasConLotes();
+
+                return Results.Ok(dtos);
+            })
+            .WithName("GetFiestasConLotes")
+            .Produces<List<FiestaDTO>>(StatusCodes.Status200OK)
+            .WithOpenApi();
+
             app.MapGet("/fiestas/{idFiesta}", (int idFiesta) =>
             {
                 FiestaService fiestaService = new FiestaService();

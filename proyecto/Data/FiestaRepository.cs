@@ -68,5 +68,17 @@ namespace Data
             return false;
         }
 
+        public IEnumerable<Fiesta> GetFiestasConLotes()
+        {
+            using var context = CreateContext();
+            var fiestasConLotes = context.FiestasLotes
+                .Select(fl => fl.IdFiesta)
+                .Distinct();
+            
+            return context.Fiestas
+                .Where(f => fiestasConLotes.Contains(f.IdFiesta))
+                .ToList();
+        }
+
     }
 }
