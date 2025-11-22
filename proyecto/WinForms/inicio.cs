@@ -78,6 +78,12 @@ namespace WinForms
                         listaClientesForm.usuarioIngresado = ingresarUsuarioForm.usuarioIngresado;
                         listaClientesForm.ShowDialog();
                     }
+                    else if (ingresarUsuarioForm.TipoUsuario == "Jefe")
+                    {
+                        var menuJefeForm = new MenuJefe();
+                        menuJefeForm.usuarioIngresado = ingresarUsuarioForm.usuarioIngresado;
+                        menuJefeForm.ShowDialog();
+                    }
                     else if (ingresarUsuarioForm.TipoUsuario == "Cliente")
                     {
                         var menuClienteForm = new menuCliente();
