@@ -56,5 +56,10 @@ namespace WinForms
         {
             AbrirFormularioEnPanel(new FiestasLista());
         }
+
+        private void asignarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new AsignarVendedores());
+        }
     }
 }

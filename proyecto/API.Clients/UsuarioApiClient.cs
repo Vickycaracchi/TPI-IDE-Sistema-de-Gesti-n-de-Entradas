@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace API.Clients
@@ -123,6 +124,21 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
+                    
+                    // Intentar extraer el mensaje de error del JSON si está disponible
+                    try
+                    {
+                        var errorObj = await response.Content.ReadFromJsonAsync<JsonElement>();
+                        if (errorObj.TryGetProperty("error", out var errorProperty))
+                        {
+                            throw new Exception(errorProperty.GetString() ?? $"Error al eliminar usuario con Id {id}");
+                        }
+                    }
+                    catch
+                    {
+                        // Si no se puede parsear como JSON, usar el mensaje completo
+                    }
+                    
                     throw new Exception($"Error al eliminar usuario con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
                 }
             }
@@ -183,6 +199,29 @@ namespace API.Clients
             catch (TaskCanceledException ex)
             {
                 throw new Exception($"Timeout al intentar iniciar sesión: {ex.Message}", ex);
+            }
+        }
+
+        public static async Task AsignarVendedorAJefeAsync(int idVendedor, int idJefe)
+        {
+            try
+            {
+                var requestBody = new { IdVendedor = idVendedor, IdJefe = idJefe };
+                HttpResponseMessage response = await client.PostAsJsonAsync("usuarios/asignarVendedor", requestBody);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Error al asignar vendedor a jefe. Status: {response.StatusCode}, Detalle: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de conexión al asignar vendedor a jefe: {ex.Message}", ex);
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception($"Timeout al asignar vendedor a jefe: {ex.Message}", ex);
             }
         }
     }

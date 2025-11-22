@@ -16,10 +16,11 @@ namespace Domain.Model
         public string NumeroTelefono { get; private set; }
         public DateTime FechaNac { get; private set; }
         public string Instagram { get; private set; }
+        public int? IdJefe { get; private set; }
 
         public Usuario() { }
 
-        public Usuario(int id, string dni, string nombre, string apellido, string email, string contrasena, string cvu, string tipo, string numeroTelefono, DateTime fechaNac, string instagram)
+        public Usuario(int id, string dni, string nombre, string apellido, string email, string contrasena, string cvu, string tipo, string numeroTelefono, DateTime fechaNac, string instagram, int? idJefe = null)
         {
             SetId(id);
             SetDni(dni);
@@ -32,6 +33,7 @@ namespace Domain.Model
             SetNumeroTelefono(numeroTelefono);
             SetFechaNac(fechaNac);
             SetInstagram(instagram);
+            SetIdJefe(idJefe);
         }
 
         public void SetId(int id)
@@ -112,6 +114,13 @@ namespace Domain.Model
                 throw new ArgumentException("El instagram no puede ser nulo o vacío.", nameof(instagram));
             Instagram = instagram;
 
+        }
+
+        public void SetIdJefe(int? idJefe)
+        {
+            if (idJefe.HasValue && idJefe.Value < 0)
+                throw new ArgumentException("El IdJefe debe ser mayor que 0.", nameof(idJefe));
+            IdJefe = idJefe;
         }
     }
 }

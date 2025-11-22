@@ -31,13 +31,14 @@
             gestiónLugaresToolStripMenuItem = new ToolStripMenuItem();
             gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
             gestiónFiestasToolStripMenuItem = new ToolStripMenuItem();
+            asignarVendedoresToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem, asignarVendedoresToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1000, 24);
@@ -86,6 +87,13 @@
             gestiónFiestasToolStripMenuItem.Text = "Gestión Fiestas";
             gestiónFiestasToolStripMenuItem.Click += gestiónFiestasToolStripMenuItem_Click;
             // 
+            // asignarVendedoresToolStripMenuItem
+            // 
+            asignarVendedoresToolStripMenuItem.Name = "asignarVendedoresToolStripMenuItem";
+            asignarVendedoresToolStripMenuItem.Size = new Size(120, 20);
+            asignarVendedoresToolStripMenuItem.Text = "Asignar Vendedores";
+            asignarVendedoresToolStripMenuItem.Click += asignarVendedoresToolStripMenuItem_Click;
+            // 
             // panelContenedor
             // 
             panelContenedor.Dock = DockStyle.Fill;
@@ -122,5 +130,6 @@
         private ToolStripMenuItem gestiónLugaresToolStripMenuItem;
         private ToolStripMenuItem gestiónLotesToolStripMenuItem;
         private ToolStripMenuItem gestiónFiestasToolStripMenuItem;
+        private ToolStripMenuItem asignarVendedoresToolStripMenuItem;
     }
 }

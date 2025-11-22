@@ -1,5 +1,6 @@
 ﻿using Domain.Model;
 using Microsoft.AspNetCore.Http.Timeouts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,20 @@ namespace Data
             var usuario = context.Usuarios.Find(id);
             if (usuario != null)
             {
-                context.Usuarios.Remove(usuario);
-                context.SaveChanges();
-                return true;
+                try
+                {
+                    context.Usuarios.Remove(usuario);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (DbUpdateException ex)
+                {
+                    if (ex.InnerException != null && ex.InnerException.Message.Contains("REFERENCE constraint"))
+                    {
+                        throw new InvalidOperationException("No se puede eliminar este usuario porque tiene compras asociadas. Debe eliminar primero las compras relacionadas.");
+                    }
+                    throw;
+                }
             }
             return false;
         }
@@ -65,6 +77,7 @@ namespace Data
                 existingUsuario.SetNumeroTelefono(usuario.NumeroTelefono);
                 existingUsuario.SetFechaNac(usuario.FechaNac);
                 existingUsuario.SetInstagram(usuario.Instagram);
+                existingUsuario.SetIdJefe(usuario.IdJefe);
 
                 context.SaveChanges();
                 return true;

@@ -16,7 +16,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe un usuario con el Email '{dto.Email}' o el Dni '{dto.Dni}'.");
             }
 
-            Usuario usuario = new Usuario(dto.Id, dto.Dni, dto.Nombre, dto.Apellido, dto.Email, dto.Contrasena, dto.Cvu, dto.Tipo, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Usuario usuario = new Usuario(dto.Id, dto.Dni, dto.Nombre, dto.Apellido, dto.Email, dto.Contrasena, dto.Cvu, dto.Tipo, dto.NumeroTelefono, dto.FechaNac, dto.Instagram, dto.IdJefe);
 
             usuarioRepository.Add(usuario);
 
@@ -28,7 +28,14 @@ namespace Application.Services
         public bool Delete(int id)
         {
             var usuarioRepository = new UsuarioRepository();
-            return usuarioRepository.Delete(id);
+            try
+            {
+                return usuarioRepository.Delete(id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw; // Propagar la excepción con el mensaje claro
+            }
         }
 
         public UsuarioDTO Get(int id)
@@ -48,7 +55,11 @@ namespace Application.Services
                 Email = usuario.Email,
                 Contrasena = usuario.Contrasena,
                 Cvu = usuario.Cvu,
-                Tipo = usuario.Tipo
+                Tipo = usuario.Tipo,
+                NumeroTelefono = usuario.NumeroTelefono,
+                FechaNac = usuario.FechaNac,
+                Instagram = usuario.Instagram,
+                IdJefe = usuario.IdJefe
             };
         }
 
@@ -69,7 +80,8 @@ namespace Application.Services
                 Tipo = usuario.Tipo,
                 NumeroTelefono = usuario.NumeroTelefono,
                 FechaNac = usuario.FechaNac,
-                Instagram = usuario.Instagram
+                Instagram = usuario.Instagram,
+                IdJefe = usuario.IdJefe
             }).ToList();
         }
 
@@ -90,7 +102,8 @@ namespace Application.Services
                 Tipo = usuario.Tipo,
                 NumeroTelefono = usuario.NumeroTelefono,
                 FechaNac = usuario.FechaNac,
-                Instagram = usuario.Instagram
+                Instagram = usuario.Instagram,
+                IdJefe = usuario.IdJefe
             }).ToList();
         }
 
@@ -104,7 +117,7 @@ namespace Application.Services
                 throw new ArgumentException($"Ya existe otro usuario con el Email '{dto.Email}'.");
             }
 
-            Usuario usuario = new Usuario(dto.Id, dto.Dni, dto.Nombre, dto.Apellido, dto.Email, dto.Contrasena, dto.Cvu, dto.Tipo, dto.NumeroTelefono, dto.FechaNac, dto.Instagram);
+            Usuario usuario = new Usuario(dto.Id, dto.Dni, dto.Nombre, dto.Apellido, dto.Email, dto.Contrasena, dto.Cvu, dto.Tipo, dto.NumeroTelefono, dto.FechaNac, dto.Instagram, dto.IdJefe);
             return usuarioRepository.Update(usuario);
         }
 
@@ -133,8 +146,56 @@ namespace Application.Services
                 Tipo = usuario.Tipo,
                 NumeroTelefono = usuario.NumeroTelefono,
                 FechaNac = usuario.FechaNac,
-                Instagram = usuario.Instagram
+                Instagram = usuario.Instagram,
+                IdJefe = usuario.IdJefe
             };
+        }
+
+        public bool AsignarVendedorAJefe(int idVendedor, int idJefe)
+        {
+            var usuarioRepository = new UsuarioRepository();
+            
+            var vendedor = usuarioRepository.Get(idVendedor);
+            if (vendedor == null)
+            {
+                throw new ArgumentException($"No se encontró un vendedor con Id {idVendedor}.");
+            }
+
+            if (vendedor.Tipo.ToLower() != "vendedor")
+            {
+                throw new ArgumentException($"El usuario con Id {idVendedor} no es un vendedor.");
+            }
+
+            var jefe = usuarioRepository.Get(idJefe);
+            if (jefe == null)
+            {
+                throw new ArgumentException($"No se encontró un jefe con Id {idJefe}.");
+            }
+
+            if (jefe.Tipo.ToLower() != "jefe")
+            {
+                throw new ArgumentException($"El usuario con Id {idJefe} no es un jefe.");
+            }
+
+            vendedor.SetIdJefe(idJefe);
+            
+            var dto = new UsuarioDTO
+            {
+                Id = vendedor.Id,
+                Dni = vendedor.Dni,
+                Nombre = vendedor.Nombre,
+                Apellido = vendedor.Apellido,
+                Email = vendedor.Email,
+                Contrasena = vendedor.Contrasena,
+                Cvu = vendedor.Cvu,
+                Tipo = vendedor.Tipo,
+                NumeroTelefono = vendedor.NumeroTelefono,
+                FechaNac = vendedor.FechaNac,
+                Instagram = vendedor.Instagram,
+                IdJefe = vendedor.IdJefe
+            };
+
+            return usuarioRepository.Update(vendedor);
         }
     }
 }

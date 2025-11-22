@@ -3,6 +3,12 @@ using DTOs;
 
 namespace WebAPI
 {
+    public class AsignarVendedorRequest
+    {
+        public int IdVendedor { get; set; }
+        public int IdJefe { get; set; }
+    }
+
     public static class UsuarioEndpoint
     {
         public static void MapUsuarioEndpoints(this WebApplication app)
@@ -96,16 +102,27 @@ namespace WebAPI
 
             app.MapDelete("/usuarios/{id}", (int id) =>
             {
-                UsuarioService usuarioService = new UsuarioService();
-
-                var deleted = usuarioService.Delete(id);
-
-                if (!deleted)
+                try
                 {
-                    return Results.NotFound();
-                }
+                    UsuarioService usuarioService = new UsuarioService();
 
-                return Results.NoContent();
+                    var deleted = usuarioService.Delete(id);
+
+                    if (!deleted)
+                    {
+                        return Results.NotFound();
+                    }
+
+                    return Results.NoContent();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest(new { error = $"Error al eliminar usuario: {ex.Message}" });
+                }
             })
             .WithName("DeleteUsuarios")
             .Produces(StatusCodes.Status204NoContent)
@@ -139,6 +156,32 @@ namespace WebAPI
             .WithName("LoginUsuarios")
             .Produces<UsuarioDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status400BadRequest)
+            .WithOpenApi();
+
+            app.MapPost("/usuarios/asignarVendedor", (AsignarVendedorRequest request) =>
+            {
+                try
+                {
+                    UsuarioService usuarioService = new UsuarioService();
+
+                    var result = usuarioService.AsignarVendedorAJefe(request.IdVendedor, request.IdJefe);
+
+                    if (!result)
+                    {
+                        return Results.NotFound();
+                    }
+
+                    return Results.NoContent();
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+            .WithName("AsignarVendedorAJefe")
+            .Produces(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
         }

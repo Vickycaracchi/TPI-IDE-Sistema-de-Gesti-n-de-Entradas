@@ -108,6 +108,14 @@ namespace Data
 
                 entity.Property(e => e.Instagram)
                     .HasMaxLength(100);
+
+                entity.Property(e => e.IdJefe)
+                    .IsRequired(false);
+
+                entity.HasOne<Usuario>()
+                    .WithMany()
+                    .HasForeignKey(u => u.IdJefe)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Producto>(entity =>
