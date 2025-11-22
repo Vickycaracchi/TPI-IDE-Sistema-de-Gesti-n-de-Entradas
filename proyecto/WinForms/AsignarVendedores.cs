@@ -18,14 +18,34 @@ namespace WinForms
             try
             {
                 var listaJefes = await UsuarioApiClient.GetByTipoAsync("Jefe");
-                jefesComboBox.DataSource = listaJefes.ToList();
-                jefesComboBox.DisplayMember = "Nombre";
-                jefesComboBox.ValueMember = "Id";
+                jefesDataGridView.DataSource = listaJefes.Select(j => new
+                {
+                    j.Id,
+                    j.Dni,
+                    j.Nombre,
+                    j.Apellido,
+                    j.Email
+                }).ToList();
 
                 var listaVendedores = await UsuarioApiClient.GetByTipoAsync("Vendedor");
-                vendedoresComboBox.DataSource = listaVendedores.ToList();
-                vendedoresComboBox.DisplayMember = "Nombre";
-                vendedoresComboBox.ValueMember = "Id";
+                vendedoresDataGridView.DataSource = listaVendedores.Select(v => new
+                {
+                    v.Id,
+                    v.Dni,
+                    v.Nombre,
+                    v.Apellido,
+                    v.Email
+                }).ToList();
+
+                if (jefesDataGridView.Rows.Count > 0)
+                {
+                    jefesDataGridView.Rows[0].Selected = true;
+                }
+
+                if (vendedoresDataGridView.Rows.Count > 0)
+                {
+                    vendedoresDataGridView.Rows[0].Selected = true;
+                }
             }
             catch (Exception ex)
             {
@@ -37,17 +57,26 @@ namespace WinForms
         {
             try
             {
-                if (jefesComboBox.SelectedValue == null || vendedoresComboBox.SelectedValue == null)
+                if (jefesDataGridView.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Por favor seleccione un jefe y un vendedor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Por favor seleccione un jefe.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                int idJefe = (int)jefesComboBox.SelectedValue;
-                int idVendedor = (int)vendedoresComboBox.SelectedValue;
+                if (vendedoresDataGridView.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Por favor seleccione un vendedor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var idJefe = (int)jefesDataGridView.SelectedRows[0].Cells["Id"].Value;
+                var idVendedor = (int)vendedoresDataGridView.SelectedRows[0].Cells["Id"].Value;
+
+                var nombreJefe = jefesDataGridView.SelectedRows[0].Cells["Nombre"].Value?.ToString() ?? "Desconocido";
+                var nombreVendedor = vendedoresDataGridView.SelectedRows[0].Cells["Nombre"].Value?.ToString() ?? "Desconocido";
 
                 var result = MessageBox.Show(
-                    $"¿Está seguro que desea asignar el vendedor {vendedoresComboBox.Text} al jefe {jefesComboBox.Text}?",
+                    $"¿Está seguro que desea asignar el vendedor {nombreVendedor} al jefe {nombreJefe}?",
                     "Confirmar asignación",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
