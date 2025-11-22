@@ -1,9 +1,17 @@
 ﻿@page "/listarproductos"
 @using API.Clients
 @using DTOs
+
+@inject LoginState LoginState
 <Header />
 <br />
 <br />
+@if (LoginState.Usuario is null)
+{
+    LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de productos";
+    Navigation.NavigateTo("/login");
+    return;
+}
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">

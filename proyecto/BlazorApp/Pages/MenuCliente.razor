@@ -14,7 +14,9 @@
 }
 else
 {
-    <p>Por favor inicie sesión.</p>
+    LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al menu del cliente";
+    Navigation.NavigateTo("/login");
+    return;
 }
 <br />
 <br />
@@ -27,6 +29,7 @@ else
 </div>
 
 @code {
+
 
     [Parameter]
     public UsuarioDTO usuarioIngresado { get; set; }

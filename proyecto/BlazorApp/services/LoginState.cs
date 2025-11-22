@@ -19,4 +19,6 @@ public class LoginState
     }
 
     private void NotifyStateChanged() => OnChange?.Invoke();
+
+    public string MensajeTemporal { get; set; }
 }

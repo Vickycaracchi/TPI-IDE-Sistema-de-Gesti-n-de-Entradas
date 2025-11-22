@@ -123,4 +123,12 @@
         ContrasenaError = string.Empty;
         LoginError = string.Empty;
     }
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(LoginState.MensajeTemporal))
+        {
+            LoginError = LoginState.MensajeTemporal;
+            LoginState.MensajeTemporal = null;
+        }
+    }
 }

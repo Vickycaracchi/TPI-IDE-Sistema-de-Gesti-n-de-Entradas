@@ -90,6 +90,7 @@
 
             if (usuario == null)
             {
+                LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de compras";
                 Navigation.NavigateTo("/login");
                 return;
             }
