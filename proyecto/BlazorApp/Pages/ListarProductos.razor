@@ -6,12 +6,7 @@
 <Header />
 <br />
 <br />
-@if (LoginState.Usuario is null)
-{
-    LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de productos";
-    Navigation.NavigateTo("/login");
-    return;
-}
+
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
@@ -79,6 +74,12 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (LoginState.Usuario == null)
+        {
+            LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de productos";
+            Navigation.NavigateTo("/login");
+            return;
+        }
         try
         {
             Productos = (await ProductoApiClient.GetAllAsync()).ToList();

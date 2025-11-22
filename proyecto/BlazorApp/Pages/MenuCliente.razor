@@ -4,20 +4,15 @@
 @inject NavigationManager Navigation
 @inject LoginState LoginState
 
-
 <Header />
 <br />
 <br />
+
 @if (LoginState.Usuario is not null)
 {
     <Bienvenida />
 }
-else
-{
-    LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al menu del cliente";
-    Navigation.NavigateTo("/login");
-    return;
-}
+
 <br />
 <br />
 
@@ -30,9 +25,14 @@ else
 
 @code {
 
-
-    [Parameter]
-    public UsuarioDTO usuarioIngresado { get; set; }
+    protected override void OnInitialized()
+    {
+        if (LoginState.Usuario == null)
+        {
+            LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al menú del cliente";
+            Navigation.NavigateTo("/login", true);
+        }
+    }
 
     private void IrAProductos()
     {

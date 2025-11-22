@@ -1,0 +1,188 @@
+﻿@page "/registrarse"
+@using API.Clients
+@using DTOs
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager Navigation
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 90vh; margin: 60px 0;">
+    <div class="card shadow p-4" style="min-width: 450px; max-width: 600px;">
+        <h3 class="text-center mb-4">Registro de Usuario</h3>
+
+        @if (!string.IsNullOrEmpty(FormError))
+        {
+            <div class="alert alert-danger">@FormError</div>
+        }
+
+        <EditForm Model="usuario" OnValidSubmit="EnviarRegistroUsuario">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <InputText class="form-control" @bind-Value="usuario.Nombre" />
+                <div class="text-danger">@NombreError</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                <InputText class="form-control" @bind-Value="usuario.Apellido" />
+                <div class="text-danger">@ApellidoError</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">DNI</label>
+                <InputText class="form-control" @bind-Value="usuario.Dni" />
+                <div class="text-danger">@DniError</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <InputText class="form-control" @bind-Value="usuario.Email" />
+                <div class="text-danger">@EmailError</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <InputText class="form-control" @bind-Value="usuario.Contrasena" type="password" />
+                <div class="text-danger">@ContrasenaError</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CVU</label>
+                <InputText class="form-control" @bind-Value="usuario.Cvu" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Número de Teléfono</label>
+                <InputText class="form-control" @bind-Value="usuario.NumeroTelefono" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Instagram</label>
+                <InputText class="form-control" @bind-Value="usuario.Instagram" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <InputDate class="form-control" @bind-Value="usuario.FechaNac" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tipo de Usuario</label>
+                <InputSelect class="form-select" @bind-Value="usuario.Tipo">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipo in tiposUsuarios)
+                    {
+                        <option value="@tipo">@tipo</option>
+                    }
+                </InputSelect>
+                <div class="text-danger">@TipoError</div>
+            </div>
+
+            <button class="btn btn-primary w-100" type="submit" disabled="@IsLoading">
+                @(IsLoading ? "Guardando..." : "Registrar")
+            </button>
+        </EditForm>
+
+        <div class="text-center mt-3">
+            ¿Ya tenés cuenta? <a href="/login">Iniciar sesión</a>
+        </div>
+    </div>
+</div>
+@code {
+    private UsuarioDTO usuario = new UsuarioDTO();
+    private bool IsLoading = false;
+    private string FormError;
+    private List<string> tiposUsuarios = new() { "Cliente" };
+
+    private string NombreError;
+    private string ApellidoError;
+    private string DniError;
+    private string EmailError;
+    private string ContrasenaError;
+    private string TipoError;
+
+    private async Task EnviarRegistroUsuario()
+    {
+        LimpiarErrores();
+        if (!ValidateUsuario()) return;
+
+        IsLoading = true;
+        try
+        {
+            await UsuarioApiClient.AddAsync(usuario);
+            Navigation.NavigateTo("/menucliente");
+        }
+        catch (Exception ex)
+        {
+            FormError = $"Ocurrió un error: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private bool ValidateUsuario()
+    {
+        bool isValid = true;
+
+        if (string.IsNullOrWhiteSpace(usuario.Nombre))
+        {
+            NombreError = "El Nombre es Requerido";
+            isValid = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(usuario.Apellido))
+        {
+            ApellidoError = "El Apellido es Requerido";
+            isValid = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(usuario.Dni))
+        {
+            DniError = "El DNI es Requerido";
+            isValid = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(usuario.Email))
+        {
+            EmailError = "El Email es Requerido";
+            isValid = false;
+        }
+        else
+        {
+            var emailValidator = new EmailAddressAttribute();
+            if (!emailValidator.IsValid(usuario.Email))
+            {
+                EmailError = "El formato del Email no es válido";
+                isValid = false;
+            }
+        }
+
+        if (string.IsNullOrWhiteSpace(usuario.Contrasena))
+        {
+            ContrasenaError = "La Contraseña es Requerida";
+            isValid = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(usuario.Tipo))
+        {
+            TipoError = "El Tipo es Requerido";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void LimpiarErrores()
+    {
+        FormError = string.Empty;
+        NombreError = string.Empty;
+        ApellidoError = string.Empty;
+        DniError = string.Empty;
+        EmailError = string.Empty;
+        ContrasenaError = string.Empty;
+        TipoError = string.Empty;
+    }
+}
