@@ -247,7 +247,7 @@ namespace Data
                 
                 entity.Property(e => e.IdEntrada)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .ValueGeneratedNever();
                 
                 entity.Property(e => e.IdFiesta)
                     .IsRequired();

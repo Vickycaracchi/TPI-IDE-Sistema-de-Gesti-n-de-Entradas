@@ -32,6 +32,7 @@ namespace WinForms
             verMisVentasToolStripMenuItem = new ToolStripMenuItem();
             resgistrarNuevaVentaToolStripMenuItem = new ToolStripMenuItem();
             gestionDeClientesToolStripMenuItem = new ToolStripMenuItem();
+            ventasDeTusVendedoresToolStripMenuItem = new ToolStripMenuItem();
             panelContenedorJefe = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -39,7 +40,7 @@ namespace WinForms
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { verMisVentasToolStripMenuItem, resgistrarNuevaVentaToolStripMenuItem, gestionDeClientesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { verMisVentasToolStripMenuItem, resgistrarNuevaVentaToolStripMenuItem, gestionDeClientesToolStripMenuItem, ventasDeTusVendedoresToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -67,6 +68,13 @@ namespace WinForms
             gestionDeClientesToolStripMenuItem.Size = new Size(118, 20);
             gestionDeClientesToolStripMenuItem.Text = "Gestion de clientes";
             gestionDeClientesToolStripMenuItem.Click += gestionDeClientesToolStripMenuItem_Click;
+            // 
+            // ventasDeTusVendedoresToolStripMenuItem
+            // 
+            ventasDeTusVendedoresToolStripMenuItem.Name = "ventasDeTusVendedoresToolStripMenuItem";
+            ventasDeTusVendedoresToolStripMenuItem.Size = new Size(160, 20);
+            ventasDeTusVendedoresToolStripMenuItem.Text = "Ventas de tus vendedores";
+            ventasDeTusVendedoresToolStripMenuItem.Click += ventasDeTusVendedoresToolStripMenuItem_Click;
             // 
             // panelContenedorJefe
             // 
@@ -101,6 +109,7 @@ namespace WinForms
         private ToolStripMenuItem verMisVentasToolStripMenuItem;
         private ToolStripMenuItem resgistrarNuevaVentaToolStripMenuItem;
         private ToolStripMenuItem gestionDeClientesToolStripMenuItem;
+        private ToolStripMenuItem ventasDeTusVendedoresToolStripMenuItem;
         private Panel panelContenedorJefe;
     }
 }

@@ -111,5 +111,31 @@ namespace API.Clients
                 throw new Exception($"Timeout al actualizar compra.");
             }
         }
+
+        public static async Task<IEnumerable<CompraDTO>> GetAllByJefeAsync(int idJefe)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("compras/jefe/" + idJefe);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<IEnumerable<CompraDTO>>();
+                }
+                else
+                {
+                    string errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception($"Error de conexión al obtener lista de compras.");
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception($"Timeout al obtener lista de compras.");
+            }
+        }
     }
 }

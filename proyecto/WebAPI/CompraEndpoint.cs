@@ -74,6 +74,17 @@ namespace WebAPI
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
+
+            // GET compras por jefe (ventas de sus vendedores)
+            app.MapGet("/compras/jefe/{idJefe}", (int idJefe) =>
+            {
+                CompraService compraService = new CompraService();
+                var dtos = compraService.GetAllByJefe(idJefe);
+                return Results.Ok(dtos);
+            })
+            .WithName("GetAllComprasByJefe")
+            .Produces<List<CompraDTO>>(StatusCodes.Status200OK)
+            .WithOpenApi();
         }
     }
 }

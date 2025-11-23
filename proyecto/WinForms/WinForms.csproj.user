@@ -91,5 +91,8 @@
     <Compile Update="RegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="VentasVendedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

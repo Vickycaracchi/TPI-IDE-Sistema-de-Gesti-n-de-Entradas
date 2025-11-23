@@ -20,10 +20,17 @@ namespace Domain.Model
             SetFechaHora(fechaHora);
         }
 
+        public Entrada(int idCliente, int idFiesta, DateTime fechaHora)
+        {
+            SetIdCliente(idCliente);
+            SetIdFiesta(idFiesta);
+            SetFechaHora(fechaHora);
+        }
+
         public void SetIdEntrada(int idEntrada)
         {
-            if (idEntrada < 0)
-                throw new ArgumentException("El Id debe ser mayor que 0.", nameof(idEntrada));
+            if (idEntrada <= 0)
+                throw new ArgumentException("El Id de entrada debe ser mayor que 0.", nameof(idEntrada));
             IdEntrada = idEntrada;
         }
         public void SetIdCliente(int idCliente)

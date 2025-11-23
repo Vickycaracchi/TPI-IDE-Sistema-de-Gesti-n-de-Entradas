@@ -53,6 +53,13 @@ namespace WinForms
             AbrirFormularioEnPanel(new ClientesLista());
         }
 
+        private void ventasDeTusVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentasVendedores ventasVendedoresForm = new VentasVendedores();
+            ventasVendedoresForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(ventasVendedoresForm);
+        }
+
         private void MenuJefe_Load(object sender, EventArgs e)
         {
 

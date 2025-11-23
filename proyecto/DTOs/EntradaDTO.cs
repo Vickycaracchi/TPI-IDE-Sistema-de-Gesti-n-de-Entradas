@@ -8,9 +8,9 @@ namespace DTOs
 {
     public class EntradaDTO
     {
-        public int IdEntrada { get; private set; }
-        public int IdCliente { get; private set; }
-        public int IdFiesta { get; private set; }
-        public DateTime FechaHora { get; private set; }
+        public int IdEntrada { get; set; }
+        public int IdCliente { get; set; }
+        public int IdFiesta { get; set; }
+        public DateTime FechaHora { get; set; }
     }
 }
