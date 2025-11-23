@@ -139,16 +139,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear producto con compra. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear producto con compra.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear producto con compra: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear producto con compra.");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear producto con compra: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear producto con compra.");
             }
         }
     }

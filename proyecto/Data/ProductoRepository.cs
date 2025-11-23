@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Model;
 using DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
@@ -67,11 +68,24 @@ namespace Data
         {
             using var context = CreateContext();
             var producto = context.Productos.Find(idProducto);
-            var compra = context.Compras.Find(compraKey);
-            if (producto != null && compra != null)
+            if (producto != null)
             {
-                var compraProducto = new CompraProducto(compra.IdCliente, compra.IdFiesta, idProducto, compra.FechaHora, cantidad);
-                context.ComprasProductos.Add(compraProducto);
+                var compraProductoExist = context.ComprasProductos
+                    .FirstOrDefault(p => p.IdCliente == compraKey.IdCliente
+                                      && p.IdFiesta == compraKey.IdFiesta
+                                      && p.IdProducto == idProducto
+                                      && p.FechaHora == compraKey.FechaHora);
+
+                if (compraProductoExist == default)
+                {
+                    var compraProducto = new CompraProducto(compraKey.IdCliente, compraKey.IdFiesta, producto.Id, compraKey.FechaHora, cantidad);
+                    context.ComprasProductos.Add(compraProducto);
+                }
+                else
+                {
+                    compraProductoExist.SetCantidad(compraProductoExist.Cantidad + cantidad);
+                    context.ComprasProductos.Update(compraProductoExist);
+                }
                 context.SaveChanges();
                 return true;
             }

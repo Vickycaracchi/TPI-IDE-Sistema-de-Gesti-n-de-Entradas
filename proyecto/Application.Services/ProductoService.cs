@@ -66,8 +66,6 @@ namespace Application.Services
         }
         public void AddCompra(List<ProdcutoConCantidadDTO> productos, CompraKeyDTO compra)
         {
-
-
             var productoRepository = new ProductoRepository();
         
             foreach (var prod in productos)

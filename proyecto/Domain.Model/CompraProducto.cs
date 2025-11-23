@@ -19,7 +19,7 @@ namespace Domain.Model
             SetIdFiesta(idFiesta);
             SetIdProducto(idProducto);
             SetFechaHora(fechaHora);
-            SetCantidad = cantidad;
+            SetCantidad(cantidad);
         }
         public void SetIdCliente(int idCliente)
         {
@@ -45,15 +45,11 @@ namespace Domain.Model
                 throw new ArgumentException("La fecha y hora no puede ser nula.", nameof(fechaHora));
             FechaHora = fechaHora;
         }
-        public int SetCantidad
+        public void SetCantidad(int cantidad)
         {
-            get { return Cantidad; }
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("La cantidad debe ser mayor que 0.", nameof(value));
-                Cantidad = value;
-            }
+            if (cantidad <= 0)
+                throw new ArgumentException("La cantidad debe ser mayor que 0.", nameof(cantidad));
+            Cantidad = cantidad;
         }
     }
 }
