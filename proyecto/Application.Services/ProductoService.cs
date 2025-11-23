@@ -64,5 +64,17 @@ namespace Application.Services
             Producto producto = new Producto(dto.Id, dto.Descripcion, dto.Precio);
             return productoRepository.Update(producto);
         }
+        public void AddCompra(List<ProdcutoConCantidadDTO> productos, CompraKeyDTO compra)
+        {
+
+
+            var productoRepository = new ProductoRepository();
+        
+            foreach (var prod in productos)
+            {
+                productoRepository.AddCompra(prod.Id, compra, prod.Cantidad);
+            }
+
+        }
     }
 }

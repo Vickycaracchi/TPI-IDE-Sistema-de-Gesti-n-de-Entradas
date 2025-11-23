@@ -280,6 +280,9 @@ namespace Data
                 entity.Property(e => e.IdProducto)
                     .IsRequired();
                 
+                entity.Property(e => e.Cantidad)
+                    .IsRequired();
+
                 entity.HasOne<Compra>()
                     .WithMany()
                     .HasForeignKey(c => new { c.IdCliente, c.FechaHora, c.IdFiesta })
@@ -704,6 +707,55 @@ namespace Data
                     IdLugar = 4,
                     IdEvento = 5,
                     FechaFiesta = new DateTime(2025, 10, 20, 23, 0, 0)
+                }
+            );
+
+            modelBuilder.Entity<FiestaLote>().HasData
+            (
+                new
+                {
+                    IdFiesta = 1,
+                    IdLote = 1
+                },
+                new
+                {
+                    IdFiesta = 1,
+                    IdLote = 2
+                },
+                new
+                {
+                    IdFiesta = 1,
+                    IdLote = 3
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLote = 4
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLote = 5
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLote = 6
+                },
+                new
+                {
+                    IdFiesta = 3,
+                    IdLote = 7
+                },
+                new
+                {
+                    IdFiesta = 3,
+                    IdLote = 8
+                },
+                new
+                {
+                    IdFiesta = 3,
+                    IdLote = 9
                 }
             );
         }

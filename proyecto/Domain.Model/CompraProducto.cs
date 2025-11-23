@@ -12,12 +12,14 @@ namespace Domain.Model
         public int IdFiesta { get; set; }
         public int IdProducto { get; set; }
         public DateTime FechaHora { get; set; }
-        public CompraProducto(int idCliente, int idFiesta, int idProducto, DateTime fechaHora)
+        public int Cantidad { get; set; }
+        public CompraProducto(int idCliente, int idFiesta, int idProducto, DateTime fechaHora, int cantidad)
         {
             SetIdCliente(idCliente);
             SetIdFiesta(idFiesta);
             SetIdProducto(idProducto);
             SetFechaHora(fechaHora);
+            SetCantidad = cantidad;
         }
         public void SetIdCliente(int idCliente)
         {
@@ -42,6 +44,16 @@ namespace Domain.Model
             if (fechaHora == default)
                 throw new ArgumentException("La fecha y hora no puede ser nula.", nameof(fechaHora));
             FechaHora = fechaHora;
+        }
+        public int SetCantidad
+        {
+            get { return Cantidad; }
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("La cantidad debe ser mayor que 0.", nameof(value));
+                Cantidad = value;
+            }
         }
     }
 }

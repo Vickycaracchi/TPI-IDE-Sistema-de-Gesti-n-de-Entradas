@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Model;
+using DTOs;
 
 namespace Data
 {
@@ -57,6 +58,20 @@ namespace Data
                 existingProducto.SetDescripcion(producto.Descripcion);
                 existingProducto.SetPrecio(producto.Precio);
 
+                context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool AddCompra(int idProducto, CompraKeyDTO compraKey, int cantidad)
+        {
+            using var context = CreateContext();
+            var producto = context.Productos.Find(idProducto);
+            var compra = context.Compras.Find(compraKey);
+            if (producto != null && compra != null)
+            {
+                var compraProducto = new CompraProducto(compra.IdCliente, compra.IdFiesta, idProducto, compra.FechaHora, cantidad);
+                context.ComprasProductos.Add(compraProducto);
                 context.SaveChanges();
                 return true;
             }

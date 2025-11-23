@@ -69,5 +69,12 @@ namespace WinForms
             listarComprasForm.usuarioIngresado = usuarioIngresado;
             AbrirFormularioEnPanel(listarComprasForm);
         }
+
+        private void comrparProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComprarProducto comprarProductoForm = new ComprarProducto();
+            comprarProductoForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(comprarProductoForm);
+        }
     }
 }

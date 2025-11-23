@@ -99,6 +99,24 @@ namespace WebAPI
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
+
+            app.MapPost("/productos/concompra", (ProductoConCompraDTO dto) =>
+            {
+                try
+                {
+                    ProductoService productoService = new ProductoService();
+                    productoService.AddCompra(dto.Producto, dto.Compra);
+                    return Results.Created();
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest();
+                }
+            })
+            .WithName("AddProductoConCompra")
+            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest)
+            .WithOpenApi();
         }
     }
 }
