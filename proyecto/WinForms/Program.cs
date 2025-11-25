@@ -1,3 +1,5 @@
+using QuestPDF.Infrastructure;
+
 namespace WinForms
 {
     internal static class Program
@@ -7,7 +9,8 @@ namespace WinForms
         /// </summary>
         [STAThread]
         static void Main()
-        { 
+        {
+            QuestPDF.Settings.License = LicenseType.Community;
             Login Login = new Login();
             Login.ShowDialog();
             

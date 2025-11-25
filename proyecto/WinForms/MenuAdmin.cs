@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Infraestructura.Reportes;
+using QuestPDF.Fluent;
+using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace WinForms
@@ -51,7 +54,7 @@ namespace WinForms
             AbrirFormularioEnPanel(new LotesLista());
         }
 
-  
+
         private void gestiónFiestasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new FiestasLista());
@@ -60,6 +63,48 @@ namespace WinForms
         private void asignarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AbrirFormularioEnPanel(new AsignarVendedores());
+        }
+
+        private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var datos = new ReporteData();
+                var documento = new Reporte(datos);
+
+                string rutaEjecucion = AppDomain.CurrentDomain.BaseDirectory;
+                string rutaSolucion = Path.GetFullPath(Path.Combine(rutaEjecucion, @"..\..\..\.."));
+                
+                string carpetaReportes = Path.Combine(rutaSolucion, "Reportes");
+                Directory.CreateDirectory(carpetaReportes);
+
+                var nombreArchivo = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                var rutaCompleta = Path.Combine(carpetaReportes, nombreArchivo);// 3. Generar el PDF
+                
+                documento.GeneratePdf(rutaCompleta);
+
+                // 4. Mostrar Mensaje de Éxito y Abrir el Archivo
+                DialogResult resultado = MessageBox.Show(
+                    $"El reporte se generó exitosamente en:\n{rutaCompleta}\n\n¿Desea abrir el archivo ahora?",
+                    "Reporte Generado",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    // Intenta abrir el PDF con el programa predeterminado del sistema
+                    // Usamos Process.Start para lanzar la aplicación.
+                    Process.Start(new ProcessStartInfo(rutaCompleta) { UseShellExecute = true });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocurrió un error al generar el reporte: {ex.Message}",
+                                "Error de Generación",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
         }
     }
 }
