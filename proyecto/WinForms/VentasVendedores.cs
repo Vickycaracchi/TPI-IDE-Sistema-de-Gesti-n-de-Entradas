@@ -36,59 +36,30 @@ namespace WinForms
                 var lugares = await LugarApiClient.GetAllAsync();
                 var eventos = await EventoApiClient.GetAllAsync();
 
-                // Cache de lotes por fiesta
-                var lotesPorFiesta = new Dictionary<int, LoteDTO?>();
+                List<CompraParaMostrarDTO> listacompraMostrar = new List<CompraParaMostrarDTO>();
 
-                // Primero mapear las compras con los nombres y lote
-                var comprasConNombres = new List<(string Vendedor, string Fiesta, string Lote, int CantidadEntradas)>();
                 foreach (var c in compras)
                 {
+                    var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
                     var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
                     var fiesta = fiestas.FirstOrDefault(f => f.IdFiesta == c.IdFiesta);
+                    var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
                     var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
-
-                    // Obtener lote actual de la fiesta (si existe)
-                    LoteDTO? lote = null;
-                    if (fiesta != null)
+                    listacompraMostrar.Add( new CompraParaMostrarDTO
                     {
-                        if (!lotesPorFiesta.TryGetValue(fiesta.IdFiesta, out lote))
-                        {
-                            try
-                            {
-                                lote = await LoteApiClient.GetLoteActualAsync(fiesta.IdFiesta);
-                            }
-                            catch
-                            {
-                                lote = null;
-                            }
-                            lotesPorFiesta[fiesta.IdFiesta] = lote;
-                        }
-                    }
+                        Cliente = cliente?.Nombre ?? "Desconocido",
+                        Vendedor = vendedor?.Nombre ?? "Desconocido",
+                        Fiesta = evento?.Nombre ?? "Desconocido",
+                        Lugar = lugar?.Nombre ?? "Desconocido",
+                        CantidadCompra = c.CantidadCompra,
+                        FechaHora = c.FechaHora,
+                        Entrada = c.Entrada
+                    });
 
-                    var nombreVendedor = vendedor?.Nombre ?? "Desconocido";
-                    var nombreFiesta = evento?.Nombre ?? "Desconocido";
-                    var nombreLote = lote?.Nombre ?? "Sin lote actual";
-
-                    comprasConNombres.Add((nombreVendedor, nombreFiesta, nombreLote, c.CantidadCompra));
                 }
-
-                // Agrupar por Vendedor, Fiesta y Lote, sumando las cantidades
-                var listaParaMostrar = comprasConNombres
-                    .GroupBy(c => new { c.Vendedor, c.Fiesta, c.Lote })
-                    .Select(g => new
-                    {
-                        Vendedor = g.Key.Vendedor,
-                        Fiesta = g.Key.Fiesta,
-                        Lote = g.Key.Lote,
-                        CantidadEntradas = g.Sum(x => x.CantidadEntradas)
-                    })
-                    .OrderBy(x => x.Vendedor)
-                    .ThenBy(x => x.Fiesta)
-                    .ThenBy(x => x.Lote)
-                    .ToList();
-
+                
                 ventasVendedoresDataGridView.AutoGenerateColumns = true;
-                ventasVendedoresDataGridView.DataSource = listaParaMostrar;
+                ventasVendedoresDataGridView.DataSource = listacompraMostrar;
 
                 if (ventasVendedoresDataGridView.Rows.Count > 0)
                 {
@@ -100,6 +71,16 @@ namespace WinForms
                 MessageBox.Show($"Error al cargar las ventas de vendedores: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    }
+    public class CompraParaMostrarDTO
+    {
+        public string Cliente { get; set; }
+        public string Vendedor { get; set; }
+        public string Fiesta { get; set; }
+        public string Lugar { get; set; }
+        public int CantidadCompra { get; set; }
+        public DateTime FechaHora { get; set; }
+        public string Entrada { get; set; }
     }
 }
 

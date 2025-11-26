@@ -60,26 +60,8 @@ namespace Application.Services
         public IEnumerable<CompraDTO> GetAllByJefe(int idJefe)
         {
             var compraRepository = new CompraRepository();
-            var compras = compraRepository.GetAllByJefe(idJefe);
-            var entradasRepository = new EntradaRepository();
 
-            return compras.Select(compra =>
-            {
-                // Obtener las entradas asociadas a esta compra
-                var entradas = entradasRepository.GetByCompra(compra.IdCliente, compra.FechaHora, compra.IdFiesta);
-                var idsEntradas = string.Join(", ", entradas.Select(e => e.IdEntrada));
-                var cantidad = entradas.Count();
-
-                return new CompraDTO
-                {
-                    FechaHora = compra.FechaHora,
-                    IdVendedor = compra.IdVendedor,
-                    IdCliente = compra.IdCliente,
-                    IdFiesta = compra.IdFiesta,
-                    CantidadCompra = cantidad,
-                    Entrada = idsEntradas
-                };
-            }).ToList();
+            return compraRepository.GetAllByJefe(idJefe);
         }
 
         public bool Update(CompraDTO dto)

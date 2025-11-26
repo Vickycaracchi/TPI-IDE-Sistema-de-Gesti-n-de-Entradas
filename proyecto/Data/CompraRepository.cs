@@ -38,14 +38,6 @@ namespace Data
             }
             context.SaveChanges();
         }
-
-        public Compra Get(CompraKeyDTO key)
-        {
-            using var context = CreateContext();
-            return context.Compras
-                .FirstOrDefault(c => c.IdCliente == key.IdCliente && c.FechaHora == key.FechaHora && c.IdFiesta == key.IdFiesta);
-        }
-        
         public IEnumerable<Compra> GetAll(int idVendedor)
         {
             using var context = CreateContext();
@@ -53,17 +45,34 @@ namespace Data
             return query.ToList();
         }
 
-        public IEnumerable<Compra> GetAllByJefe(int idJefe)
+        public IEnumerable<CompraDTO> GetAllByJefe(int idJefe)
         {
             using var context = CreateContext();
-            // Obtener todos los vendedores asignados a este jefe
-            var vendedoresIds = context.Usuarios
-                .Where(u => u.IdJefe == idJefe && u.Tipo.ToLower() == "vendedor")
+
+            var idsVendedores = context.Usuarios
+                .Where(u => u.IdJefe == idJefe)
                 .Select(u => u.Id)
                 .ToList();
+            
+            var query = from c in context.Compras
+                        join e in context.Entradas
+                            on new { c.FechaHora, c.IdCliente, c.IdFiesta } equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
+                        join f in context.Fiestas on c.IdFiesta equals f.IdFiesta
+                        join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
+                        join l in context.Lotes on fl.IdLote equals l.Id
+                        where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora && idsVendedores.Contains(c.IdVendedor)
+                        group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor } into g
+                        orderby g.Max(c => c.FechaHora) descending
+                        select new CompraDTO
+                        {
+                            FechaHora = g.Max(c => c.FechaHora),
+                            IdCliente = g.Key.IdCliente,
+                            IdFiesta = g.Key.IdFiesta,
+                            IdVendedor = g.Key.IdVendedor,
+                            CantidadCompra = g.Count(),
+                            Entrada = string.Join(", ", g.Select(entrada => entrada.IdEntrada))
+                        };
 
-            // Obtener todas las compras de esos vendedores
-            var query = context.Compras.Where(c => vendedoresIds.Contains(c.IdVendedor));
             return query.ToList();
         }
 

@@ -23,22 +23,19 @@ namespace WinForms
             // 
             // ventasVendedoresDataGridView
             // 
-            ventasVendedoresDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ventasVendedoresDataGridView.Dock = DockStyle.Fill;
-            ventasVendedoresDataGridView.Location = new Point(0, 0);
-            ventasVendedoresDataGridView.Margin = new Padding(3, 2, 3, 2);
+            ventasVendedoresDataGridView.ColumnHeadersHeight = 29;
+            ventasVendedoresDataGridView.Location = new Point(117, 55);
             ventasVendedoresDataGridView.Name = "ventasVendedoresDataGridView";
             ventasVendedoresDataGridView.RowHeadersWidth = 51;
-            ventasVendedoresDataGridView.Size = new Size(1209, 464);
+            ventasVendedoresDataGridView.Size = new Size(925, 371);
             ventasVendedoresDataGridView.TabIndex = 0;
             // 
             // VentasVendedores
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1209, 464);
+            ClientSize = new Size(1382, 619);
             Controls.Add(ventasVendedoresDataGridView);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "VentasVendedores";
             Text = "Ventas de tus vendedores";
             Load += VentasVendedores_Load;
