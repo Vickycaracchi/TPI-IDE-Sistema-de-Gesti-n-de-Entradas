@@ -39,12 +39,16 @@ namespace WinForms
 
 
                 var usuarios = await UsuarioApiClient.GetAllAsync();
-                var fiestas = await FiestaApiClient.GetAllAsync();
+                var fiestas = (await FiestaApiClient.GetAllAsync()).ToList();
                 var lugares = await LugarApiClient.GetAllAsync();
                 var eventos = await EventoApiClient.GetAllAsync();
 
 
-                var listaParaMostrar = compras.Select(c =>
+                // Cache de lotes por fiesta
+                var lotesPorFiesta = new Dictionary<int, LoteDTO?>();
+                var listaParaMostrar = new List<object>();
+
+                foreach (var c in compras)
                 {
                     var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
                     var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
@@ -53,18 +57,37 @@ namespace WinForms
                     var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
                     var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
 
-                    return new
+                    // Obtener lote actual de la fiesta (si existe)
+                    LoteDTO? lote = null;
+                    if (fiesta != null)
+                    {
+                        if (!lotesPorFiesta.TryGetValue(fiesta.IdFiesta, out lote))
+                        {
+                            try
+                            {
+                                lote = await LoteApiClient.GetLoteActualAsync(fiesta.IdFiesta);
+                            }
+                            catch
+                            {
+                                lote = null;
+                            }
+                            lotesPorFiesta[fiesta.IdFiesta] = lote;
+                        }
+                    }
+
+                    listaParaMostrar.Add(new
                     {
 
                         Cliente = cliente?.Nombre ?? "Desconocido",
                         Vendedor = vendedor?.Nombre ?? "Desconocido",
                         Fiesta = evento?.Nombre ?? "Desconocido",
                         Lugar = lugar?.Nombre ?? "Desconocido",
+                        Lote = lote?.Nombre ?? "Sin lote actual",
                         c.CantidadCompra,
                         c.FechaHora,
                         c.Entrada,
-                    };
-                }).ToList();
+                    });
+                }
 
 
                 ListarComprasDataGridView.AutoGenerateColumns = true;

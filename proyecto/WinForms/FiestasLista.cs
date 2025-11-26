@@ -101,15 +101,37 @@ namespace WinForms
                 lugares = (await LugarApiClient.GetAllAsync()).ToList();
                 eventos = (await EventoApiClient.GetAllAsync()).ToList();
 
-                var fiestas = await FiestaApiClient.GetAllAsync();
+                var fiestas = (await FiestaApiClient.GetAllAsync()).ToList();
 
-                var listaParaMostrar = fiestas.Select(f => new
+                // Obtener el lote actual por fiesta (si existe)
+                var lotesPorFiesta = new Dictionary<int, LoteDTO>();
+                var listaParaMostrar = new List<object>();
+
+                foreach (var f in fiestas)
                 {
-                    f.IdFiesta,
-                    f.FechaFiesta,
-                    NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
-                    NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido"
-                }).ToList();
+                    LoteDTO? lote = null;
+                    if (!lotesPorFiesta.TryGetValue(f.IdFiesta, out lote))
+                    {
+                        try
+                        {
+                            lote = await LoteApiClient.GetLoteActualAsync(f.IdFiesta);
+                        }
+                        catch
+                        {
+                            lote = null;
+                        }
+                        lotesPorFiesta[f.IdFiesta] = lote;
+                    }
+
+                    listaParaMostrar.Add(new
+                    {
+                        f.IdFiesta,
+                        f.FechaFiesta,
+                        NombreLugar = lugares.FirstOrDefault(l => l.Id == f.IdLugar)?.Nombre ?? "Desconocido",
+                        NombreEvento = eventos.FirstOrDefault(e => e.Id == f.IdEvento)?.Nombre ?? "Desconocido",
+                        Lote = lote?.Nombre ?? "Sin lote actual"
+                    });
+                }
 
                 FiestasDataGridView.DataSource = listaParaMostrar;
 

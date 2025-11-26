@@ -34,16 +34,21 @@ namespace WinForms
         {
             try
             {
-                
+
                 var compras = await CompraApiClient.GetAllVendedorAsync(usuarioIngresado.Id);
-               
+
                 var usuarios = await UsuarioApiClient.GetAllAsync();
-                var fiestas = await FiestaApiClient.GetAllAsync();
+                var fiestas = (await FiestaApiClient.GetAllAsync()).ToList();
                 var lugares = await LugarApiClient.GetAllAsync();
                 var eventos = await EventoApiClient.GetAllAsync();
 
-                
-                var listaParaMostrar = compras.Select(c =>
+                // Cache de lotes por fiesta
+                var lotesPorFiesta = new Dictionary<int, LoteDTO?>();
+
+                // Lista intermedia con IdCliente, Cliente, Fiesta, Lote y cantidad
+                var comprasConDatos = new List<(int IdCliente, string Cliente, string Fiesta, string Lote, string Lugar, string Vendedor, int CantidadEntradas, DateTime FechaHora, string Entrada)>();
+
+                foreach (var c in compras)
                 {
                     var cliente = usuarios.FirstOrDefault(u => u.Id == c.IdCliente);
                     var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
@@ -52,20 +57,54 @@ namespace WinForms
                     var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
                     var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
 
-                    return new
+                    // Obtener lote actual de la fiesta (si existe)
+                    LoteDTO? lote = null;
+                    if (fiesta != null)
                     {
+                        if (!lotesPorFiesta.TryGetValue(fiesta.IdFiesta, out lote))
+                        {
+                            try
+                            {
+                                lote = await LoteApiClient.GetLoteActualAsync(fiesta.IdFiesta);
+                            }
+                            catch
+                            {
+                                lote = null;
+                            }
+                            lotesPorFiesta[fiesta.IdFiesta] = lote;
+                        }
+                    }
 
-                        Cliente = cliente?.Nombre ?? "Desconocido",
-                        Vendedor = vendedor?.Nombre ?? "Desconocido",
-                        Fiesta = evento?.Nombre ?? "Desconocido",
-                        Lugar = lugar?.Nombre ?? "Desconocido",
-                        c.CantidadCompra,
-                        c.FechaHora,
-                        c.Entrada
-                    };
-                }).ToList();
+                    var nombreCliente = cliente?.Nombre ?? "Desconocido";
+                    var nombreFiesta = evento?.Nombre ?? "Desconocido";
+                    var nombreLugar = lugar?.Nombre ?? "Desconocido";
+                    var nombreVendedor = vendedor?.Nombre ?? "Desconocido";
+                    var nombreLote = lote?.Nombre ?? "Sin lote actual";
 
-               
+                    comprasConDatos.Add((c.IdCliente, nombreCliente, nombreFiesta, nombreLote, nombreLugar, nombreVendedor, c.CantidadCompra, c.FechaHora, c.Entrada));
+                }
+
+                // Agrupar por Fiesta, Lote y Cliente, sumando la cantidad
+                var listaParaMostrar = comprasConDatos
+                    .GroupBy(c => new { c.IdCliente, c.Fiesta, c.Lote, c.Lugar, c.Vendedor })
+                    .Select(g => new
+                    {
+                        // el nombre se toma del primer elemento del grupo para mostrarlo
+                        Vendedor = g.Key.Vendedor,
+                        Fiesta = g.Key.Fiesta,
+                        Lugar = g.Key.Lugar,
+                        Lote = g.Key.Lote,
+                        CantidadEntradas = g.Sum(x => x.CantidadEntradas),
+                        // la fecha y las entradas del primer registro del grupo para mostrar
+                        FechaHora = g.First().FechaHora,
+                        Entrada = g.First().Entrada
+                    })
+                    .OrderBy(x => x.Fiesta)
+                    .ThenBy(x => x.Lote)
+                    .ThenBy(x => x.Cliente)
+                    .ToList();
+
+
                 misVentasDataGridView.AutoGenerateColumns = true;
                 misVentasDataGridView.DataSource = listaParaMostrar;
 
