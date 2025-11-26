@@ -1,0 +1,288 @@
+@using DTOs
+@using API.Clients
+@using System.Linq
+@inject NavigationManager Navigation
+@inject LoginState LoginState
+
+@page "/comprar-producto"
+
+<h3>Comprar Producto</h3>
+
+@if (loading)
+{
+    <div class="alert alert-info">Cargando...</div>
+}
+else
+{
+    @if (!string.IsNullOrEmpty(alertMessage))
+    {
+        <div class="alert @alertCss">@alertMessage</div>
+    }
+
+    <div class="row">
+        <div class="col-md-5">
+            <h5>Compras</h5>
+            @if (comprasParaMostrar?.Any() != true)
+            {
+                <div class="text-muted">No hay compras disponibles.</div>
+            }
+            else
+            {
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Vendedor</th>
+                            <th>Evento</th>
+                            <th>Lugar</th>
+                            <th>FechaHora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in comprasParaMostrar)
+                        {
+                            var isSelected = selectedCompraKey != null && selectedCompraKey.IdCliente == item.CompraKey.IdCliente && selectedCompraKey.IdFiesta == item.CompraKey.IdFiesta && selectedCompraKey.FechaHora == item.CompraKey.FechaHora;
+                            <tr class="@(isSelected ? "table-primary" : "")" @onclick="() => SelectCompra(item.CompraKey)">
+                                <td>
+                                    <input type="radio" name="compraSelect" checked="@(isSelected)" />
+                                </td>
+                                <td>@item.Vendedor</td>
+                                <td>@item.Evento</td>
+                                <td>@item.Lugar</td>
+                                <td>@item.FechaHora.ToString("g")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+        <div class="col-md-7">
+            <h5>Productos</h5>
+            @if (productosParaMostrar?.Any() != true)
+            {
+                <div class="text-muted">No hay productos.</div>
+            }
+            else
+            {
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th style="width:120px">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in productosParaMostrar)
+                        {
+                            <tr>
+                                <td>@p.Id</td>
+                                <td>@p.Descripcion</td>
+                                <td>@p.Precio</td>
+                                <td>
+                                    <input class="form-control form-control-sm" type="number" min="0" value="@p.Cantidad"
+                                           @onchange="(e) => OnCantidadChanged(p, e.Value?.ToString())" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="mt-2">
+                <button class="btn btn-primary" @onclick="ComprarAsync" disabled="@isProcessing">Comprar</button>
+                <button class="btn btn-secondary ms-2" @onclick="Volver">Volver</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public UsuarioDTO UsuarioIngresado { get; set; }
+
+    private bool loading = true;
+    private bool isProcessing = false;
+    private string alertMessage;
+    private string alertCss = "alert-danger";
+
+    private List<CompraListItem> comprasParaMostrar = new();
+    private CompraKeyDTO selectedCompraKey;
+    private List<ProdcutoConCantidadDTO> productosParaMostrar = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAllAsync();
+    }
+
+    private async Task LoadAllAsync()
+    {
+        loading = true;
+        alertMessage = null;
+        try
+        {
+            var usuario = LoginState.Usuario;
+
+            if (usuario == null)
+            {
+                LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de compras";
+                Navigation.NavigateTo("/login");
+                return;
+            }
+
+            int id = usuario.Id;
+            // Cargar compras y referencias
+            var compras = await CompraApiClient.GetAllCliAsync(id);
+            var usuarios = await UsuarioApiClient.GetAllAsync();
+            var fiestas = await FiestaApiClient.GetAllAsync();
+            var lugares = await LugarApiClient.GetAllAsync();
+            var eventos = await EventoApiClient.GetAllAsync();
+
+            comprasParaMostrar = compras.Select(c =>
+            {
+                var vendedor = usuarios.FirstOrDefault(u => u.Id == c.IdVendedor);
+                var fiesta = fiestas.FirstOrDefault(f => f.IdFiesta == c.IdFiesta);
+                var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
+                var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
+
+                return new CompraListItem
+                {
+                    Vendedor = vendedor?.Nombre ?? "Desconocido",
+                    Evento = evento?.Nombre ?? "Desconocido",
+                    Lugar = lugar?.Nombre ?? "Desconocido",
+                    FechaHora = c.FechaHora,
+                    CompraKey = new CompraKeyDTO
+                    {
+                        IdCliente = id,
+                        IdFiesta = c.IdFiesta,
+                        FechaHora = c.FechaHora
+                    }
+                };
+            }).ToList();
+
+            if (comprasParaMostrar.Any())
+            {
+                selectedCompraKey = comprasParaMostrar[0].CompraKey;
+            }
+        }
+        catch (Exception ex)
+        {
+            alertCss = "alert-danger";
+            alertMessage = $"Error al cargar las compras: {ex.Message}";
+        }
+
+        try
+        {
+            var productos = await ProductoApiClient.GetAllAsync();
+            productosParaMostrar = productos.Select(p => new ProdcutoConCantidadDTO
+            {
+                Id = p.Id,
+                Descripcion = p.Descripcion,
+                Precio = p.Precio,
+                Cantidad = 0
+            }).ToList();
+        }
+        catch (Exception ex)
+        {
+            alertCss = "alert-danger";
+            alertMessage = $"Error al cargar la lista de productos: {ex.Message}";
+        }
+        finally
+        {
+            loading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void SelectCompra(CompraKeyDTO key)
+    {
+        selectedCompraKey = key;
+        alertMessage = null;
+    }
+
+    private void OnCantidadChanged(ProdcutoConCantidadDTO producto, string newValue)
+    {
+        if (int.TryParse(newValue, out int cantidad))
+        {
+            producto.Cantidad = Math.Max(0, cantidad);
+        }
+        else
+        {
+            producto.Cantidad = 0;
+        }
+    }
+
+    private async Task ComprarAsync()
+    {
+        alertMessage = null;
+
+        if (!ValidarCompra())
+        {
+            return;
+        }
+
+        isProcessing = true;
+        try
+        {
+            var productosSeleccionados = productosParaMostrar.Where(p => p.Cantidad > 0).ToList();
+
+            var compra = new ProductoConCompraDTO
+            {
+                Compra = selectedCompraKey,
+                Producto = productosSeleccionados
+            };
+
+            await ProductoApiClient.AddCompra(compra);
+
+            alertCss = "alert-success";
+            alertMessage = "Compra realizada con éxito.";
+            // refrescar o limpiar cantidades
+            foreach (var p in productosParaMostrar) p.Cantidad = 0;
+        }
+        catch (Exception ex)
+        {
+            alertCss = "alert-danger";
+            alertMessage = $"Error al realizar la compra: {ex.Message}";
+        }
+        finally
+        {
+            isProcessing = false;
+        }
+    }
+
+    private bool ValidarCompra()
+    {
+        if (selectedCompraKey == null)
+        {
+            alertCss = "alert-warning";
+            alertMessage = "Por favor, seleccione una compra de la lista.";
+            return false;
+        }
+
+        var any = productosParaMostrar.Any(p => p.Cantidad > 0);
+        if (!any)
+        {
+            alertCss = "alert-warning";
+            alertMessage = "Por favor, seleccione al menos un producto con cantidad mayor a cero.";
+            return false;
+        }
+
+        return true;
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+    private class CompraListItem
+    {
+        public string Vendedor { get; set; }
+        public string Evento { get; set; }
+        public string Lugar { get; set; }
+        public DateTime FechaHora { get; set; }
+        public CompraKeyDTO CompraKey { get; set; }
+    }
+}
