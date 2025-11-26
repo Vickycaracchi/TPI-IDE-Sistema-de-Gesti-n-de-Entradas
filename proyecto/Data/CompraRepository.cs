@@ -67,16 +67,28 @@ namespace Data
             return query.ToList();
         }
 
-        public IEnumerable<Compra> GetAllCli(int idCliente)
+        public IEnumerable<CompraDTO> GetAllCli(int idCliente)
         {
             using var context = CreateContext();
-            var query = context.Compras.Join(
-                context.Fiestas,
-                compra => compra.IdFiesta,
-                fiesta => fiesta.IdFiesta,
-                (compra, fiesta) => new { compra, fiesta }
-            ).Where(cf => cf.fiesta.FechaFiesta.Date >= DateTime.Today && cf.compra.IdCliente == idCliente)
-             .Select(cf => cf.compra);
+            
+            var query = from c in context.Compras
+                        join e in context.Entradas
+                            on new { c.FechaHora, c.IdCliente, c.IdFiesta } equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
+                        join f in context.Fiestas on c.IdFiesta equals f.IdFiesta
+                        join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
+                        join l in context.Lotes on fl.IdLote equals l.Id
+                        where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora
+                        group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor } into g
+                        select new CompraDTO
+                        {
+                            FechaHora = g.Max(c => c.FechaHora),
+                            IdCliente = g.Key.IdCliente,
+                            IdFiesta = g.Key.IdFiesta,
+                            IdVendedor = g.Key.IdVendedor,
+                            CantidadCompra = g.Count(),
+                            Entrada = string.Join(", ", g.Select(entrada => entrada.IdEntrada))
+                        };
+
             return query.ToList();
         }
 
