@@ -12,7 +12,7 @@ namespace WebAPI
             app.MapGet("/compras/vendedor/{idVendedor}", (int idVendedor) =>
             {
                 CompraService compraService = new CompraService();
-                var dtos = compraService.GetAll(idVendedor);
+                var dtos = compraService.GetAllVendedor(idVendedor);
                 return Results.Ok(dtos);
             })
             .WithName("GetAllComprasVendedor")

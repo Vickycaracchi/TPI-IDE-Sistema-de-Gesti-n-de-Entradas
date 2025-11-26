@@ -25,29 +25,11 @@ namespace Application.Services
             return dto;
         }
 
-        public IEnumerable<CompraDTO> GetAll(int idVendedor)
+        public IEnumerable<CompraDTO> GetAllVendedor(int idVendedor)
         {
             var compraRepository = new CompraRepository();
-            var compras = compraRepository.GetAll(idVendedor);
-            var entradasRepository = new EntradaRepository();
 
-            return compras.Select(compra =>
-            {
-                // Obtener las entradas asociadas a esta compra
-                var entradas = entradasRepository.GetByCompra(compra.IdCliente, compra.FechaHora, compra.IdFiesta);
-                var idsEntradas = string.Join(", ", entradas.Select(e => e.IdEntrada));
-                var cantidad = entradas.Count();
-
-                return new CompraDTO
-                {
-                    FechaHora = compra.FechaHora,
-                    IdVendedor = compra.IdVendedor,
-                    IdCliente = compra.IdCliente,
-                    IdFiesta = compra.IdFiesta,
-                    CantidadCompra = cantidad,
-                    Entrada = idsEntradas
-                };
-            }).ToList();
+            return compraRepository.GetAllVendedor(idVendedor);
         }
         public IEnumerable<CompraDTO> GetAllCli(int idCliente)
         {
@@ -61,7 +43,7 @@ namespace Application.Services
         {
             var compraRepository = new CompraRepository();
 
-            return compraRepository.GetAllByJefe(idJefe);
+            return compraRepository.GetAllJefe(idJefe);
         }
 
         public bool Update(CompraDTO dto)

@@ -38,14 +38,39 @@ namespace Data
             }
             context.SaveChanges();
         }
-        public IEnumerable<Compra> GetAll(int idVendedor)
+        public IEnumerable<CompraDTO> GetAllVendedor(int idVendedor)
         {
             using var context = CreateContext();
-            var query = context.Compras.Where(c => c.IdVendedor == idVendedor);
+
+            var idsVendedores = context.Usuarios
+                .Where(u => u.IdJefe == idVendedor)
+                .Select(u => u.Id)
+                .ToList();
+
+            var query = from c in context.Compras
+                        join e in context.Entradas
+                            on new { c.FechaHora, c.IdCliente, c.IdFiesta } equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
+                        join f in context.Fiestas on c.IdFiesta equals f.IdFiesta
+                        join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
+                        join l in context.Lotes on fl.IdLote equals l.Id
+                        where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora && c.IdVendedor == idVendedor
+                        group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor, l.Nombre } into g
+                        orderby g.Max(c => c.FechaHora) descending
+                        select new CompraDTO
+                        {
+                            FechaHora = g.Max(c => c.FechaHora),
+                            IdCliente = g.Key.IdCliente,
+                            IdFiesta = g.Key.IdFiesta,
+                            IdVendedor = g.Key.IdVendedor,
+                            CantidadCompra = g.Count(),
+                            Entrada = string.Join(", ", g.Select(entrada => entrada.IdEntrada)),
+                            Lote = g.Key.Nombre
+                        };
+
             return query.ToList();
         }
 
-        public IEnumerable<CompraDTO> GetAllByJefe(int idJefe)
+        public IEnumerable<CompraDTO> GetAllJefe(int idJefe)
         {
             using var context = CreateContext();
 
@@ -61,7 +86,7 @@ namespace Data
                         join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
                         join l in context.Lotes on fl.IdLote equals l.Id
                         where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora && idsVendedores.Contains(c.IdVendedor)
-                        group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor } into g
+                        group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor, l.Nombre } into g
                         orderby g.Max(c => c.FechaHora) descending
                         select new CompraDTO
                         {
@@ -70,7 +95,8 @@ namespace Data
                             IdFiesta = g.Key.IdFiesta,
                             IdVendedor = g.Key.IdVendedor,
                             CantidadCompra = g.Count(),
-                            Entrada = string.Join(", ", g.Select(entrada => entrada.IdEntrada))
+                            Entrada = string.Join(", ", g.Select(entrada => entrada.IdEntrada)),
+                            Lote = g.Key.Nombre
                         };
 
             return query.ToList();

@@ -53,7 +53,8 @@ namespace WinForms
                         Lugar = lugar?.Nombre ?? "Desconocido",
                         CantidadCompra = c.CantidadCompra,
                         FechaHora = c.FechaHora,
-                        Entrada = c.Entrada
+                        Entrada = c.Entrada,
+                        Lote = c.Lote
                     });
 
                 }
@@ -71,16 +72,6 @@ namespace WinForms
                 MessageBox.Show($"Error al cargar las ventas de vendedores: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
-    public class CompraParaMostrarDTO
-    {
-        public string Cliente { get; set; }
-        public string Vendedor { get; set; }
-        public string Fiesta { get; set; }
-        public string Lugar { get; set; }
-        public int CantidadCompra { get; set; }
-        public DateTime FechaHora { get; set; }
-        public string Entrada { get; set; }
     }
 }
 
