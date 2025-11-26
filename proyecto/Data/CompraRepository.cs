@@ -77,8 +77,9 @@ namespace Data
                         join f in context.Fiestas on c.IdFiesta equals f.IdFiesta
                         join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
                         join l in context.Lotes on fl.IdLote equals l.Id
-                        where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora
+                        where l.FechaDesde <= c.FechaHora && l.FechaHasta >= c.FechaHora && c.IdCliente == idCliente
                         group e by new { c.IdCliente, c.IdFiesta, c.IdVendedor } into g
+                        orderby g.Max(c => c.FechaHora) descending
                         select new CompraDTO
                         {
                             FechaHora = g.Max(c => c.FechaHora),
