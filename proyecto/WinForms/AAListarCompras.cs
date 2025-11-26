@@ -46,7 +46,7 @@ namespace WinForms
 
                 // Cache de lotes por fiesta
                 var lotesPorFiesta = new Dictionary<int, LoteDTO?>();
-                var listaParaMostrar = new List<object>();
+                var comprasConNombres = new List<(string Vendedor, string Fiesta, string Lote, int CantidadEntradas)>();
 
                 foreach (var c in compras)
                 {
@@ -75,20 +75,27 @@ namespace WinForms
                         }
                     }
 
-                    listaParaMostrar.Add(new
-                    {
+                    var nombreVendedor = vendedor?.Nombre ?? "Desconocido";
+                    var nombreFiesta = evento?.Nombre ?? "Desconocido";
+                    var nombreLote = lote?.Nombre ?? "Sin lote actual";
 
-                        Cliente = cliente?.Nombre ?? "Desconocido",
-                        Vendedor = vendedor?.Nombre ?? "Desconocido",
-                        Fiesta = evento?.Nombre ?? "Desconocido",
-                        Lugar = lugar?.Nombre ?? "Desconocido",
-                        Lote = lote?.Nombre ?? "Sin lote actual",
-                        c.CantidadCompra,
-                        c.FechaHora,
-                        c.Entrada,
-                    });
+                    comprasConNombres.Add((nombreVendedor, nombreFiesta, nombreLote, c.CantidadCompra));
                 }
 
+                // Agrupar por Vendedor, Fiesta y Lote, sumando las cantidades
+                var listaParaMostrar = comprasConNombres
+                    .GroupBy(c => new { c.Vendedor, c.Fiesta, c.Lote })
+                    .Select(g => new
+                    {
+                        Vendedor = g.Key.Vendedor,
+                        Fiesta = g.Key.Fiesta,
+                        Lote = g.Key.Lote,
+                        CantidadEntradas = g.Sum(x => x.CantidadEntradas)
+                    })
+                    .OrderBy(x => x.Vendedor)
+                    .ThenBy(x => x.Fiesta)
+                    .ThenBy(x => x.Lote)
+                    .ToList();
 
                 ListarComprasDataGridView.AutoGenerateColumns = true;
                 ListarComprasDataGridView.DataSource = listaParaMostrar;

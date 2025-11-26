@@ -90,6 +90,7 @@ namespace WinForms
                     .Select(g => new
                     {
                         // el nombre se toma del primer elemento del grupo para mostrarlo
+                        Cliente = g.First().Cliente,
                         Vendedor = g.Key.Vendedor,
                         Fiesta = g.Key.Fiesta,
                         Lugar = g.Key.Lugar,

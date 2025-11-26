@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Model;
+using DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
@@ -37,6 +38,13 @@ namespace Data
             }
             context.SaveChanges();
         }
+
+        public Compra Get(CompraKeyDTO key)
+        {
+            using var context = CreateContext();
+            return context.Compras
+                .FirstOrDefault(c => c.IdCliente == key.IdCliente && c.FechaHora == key.FechaHora && c.IdFiesta == key.IdFiesta);
+        }
         
         public IEnumerable<Compra> GetAll(int idVendedor)
         {
@@ -62,7 +70,13 @@ namespace Data
         public IEnumerable<Compra> GetAllCli(int idCliente)
         {
             using var context = CreateContext();
-            var query = context.Compras.Where(c => c.IdCliente == idCliente);
+            var query = context.Compras.Join(
+                context.Fiestas,
+                compra => compra.IdFiesta,
+                fiesta => fiesta.IdFiesta,
+                (compra, fiesta) => new { compra, fiesta }
+            ).Where(cf => cf.fiesta.FechaFiesta.Date >= DateTime.Today && cf.compra.IdCliente == idCliente)
+             .Select(cf => cf.compra);
             return query.ToList();
         }
 

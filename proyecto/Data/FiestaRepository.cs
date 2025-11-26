@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Model;
+using DTOs;
 
 namespace Data
 {
@@ -79,6 +80,18 @@ namespace Data
                 .Where(f => fiestasConLotes.Contains(f.IdFiesta))
                 .ToList();
         }
-
+        public Lote GetLoteFromCompra(Compra compra)
+        {
+            using var context = CreateContext();
+            var lotes = context.Lotes;
+            var lotesFiesta = context.FiestasLotes;
+            var lote = from l in lotes
+                       join fl in lotesFiesta on l.Id equals fl.IdLote
+                       where fl.IdFiesta == compra.IdFiesta
+                       && l.FechaDesde <= compra.FechaHora
+                       && l.FechaHasta >= compra.FechaHora
+                       select l;
+            return lote.First();
+        }
     }
 }

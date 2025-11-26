@@ -10,16 +10,16 @@
     <Compile Update="AsignarVendedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ComprarProducto.cs">
+    <Compile Update="AAComprarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FiestasLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ListarCompras.cs">
+    <Compile Update="AAListarCompras.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ListarFiestas.cs">
+    <Compile Update="AAListarFiestas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Login.cs">
@@ -31,10 +31,10 @@
     <Compile Update="RegistrarFiesta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ListarEventos.cs">
+    <Compile Update="AAListarEventos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ListarProductos.cs">
+    <Compile Update="AAListarProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LoteDetalle.cs">
@@ -49,10 +49,10 @@
     <Compile Update="LugaresLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="menuCliente.cs">
+    <Compile Update="AAmenuCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="inicio.cs">
+    <Compile Update="AAinicio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MenuVendedor.cs">
@@ -67,7 +67,7 @@
     <Compile Update="ProductosLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="RegistrarVenta.cs">
+    <Compile Update="AARegistrarVenta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="VendedoresLista.cs">
@@ -76,7 +76,7 @@
     <Compile Update="MenuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Pruebas.cs">
+    <Compile Update="AAPruebas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ClientesLista.cs">
