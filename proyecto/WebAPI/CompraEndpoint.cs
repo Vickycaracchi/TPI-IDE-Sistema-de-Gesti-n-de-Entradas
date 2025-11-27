@@ -86,7 +86,7 @@ namespace WebAPI
             .Produces<List<CompraDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
 
-            app.MapGet("/compras/reportes", () =>
+            app.MapGet("/compras/reporte", () =>
             {
                 CompraService compraService = new CompraService();
                 var dtos = compraService.GetComprasParaReporte();

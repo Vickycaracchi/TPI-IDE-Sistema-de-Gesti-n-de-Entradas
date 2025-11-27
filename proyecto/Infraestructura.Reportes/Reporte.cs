@@ -13,6 +13,7 @@ namespace Infraestructura.Reportes
     public class Reporte : IDocument
     {
         List<CompraParaReporteDTO> comprasParaReporte;
+        List<UsuarioDTO> usuarios;
         public ReporteData Model { get; } // Puedes pasar datos aquí si es necesario
 
         public Reporte(ReporteData model)
@@ -24,6 +25,10 @@ namespace Infraestructura.Reportes
                 // Este patrón bloquea la ejecución hasta que la operación asíncrona termine.
                 // Es necesario porque QuestPDF es síncrono.
                 this.comprasParaReporte = CompraApiClient.GetComprasParaReporteAsync()
+                    .GetAwaiter()
+                    .GetResult()
+                    .ToList();
+                this.usuarios = UsuarioApiClient.GetAllAsync()
                     .GetAwaiter()
                     .GetResult()
                     .ToList();
@@ -107,6 +112,7 @@ namespace Infraestructura.Reportes
 
                     table.Header(header =>
                     {
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Id").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Cantidad").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
@@ -115,14 +121,24 @@ namespace Infraestructura.Reportes
 
                     foreach (var compra in comprasParaReporte)
                     {
+                        var vendedor = this.usuarios.FirstOrDefault(u => u.Id == compra.Vendedor);
+                        var jefe = this.usuarios.FirstOrDefault(u => u.Id == vendedor?.IdJefe);
+                        if (jefe == null)
+                        {
+                            jefe = new UsuarioDTO { Nombre = "Es jefe" };
+                        }
+
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Vendedor.ToString());
+                             .Text(vendedor.Id.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(vendedor.Nombre.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
                              .Text(compra.Entradas.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Jefe.ToString());
+                             .Text(jefe.Nombre.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
                              .Text(compra.Monto.ToString("0.00"));
