@@ -26,8 +26,6 @@ namespace Infraestructura.Reportes
             
             try
             {
-                // Este patrón bloquea la ejecución hasta que la operación asíncrona termine.
-                // Es necesario porque QuestPDF es síncrono.
                 this.comprasParaReporte = CompraApiClient.GetComprasParaReporteAsync()
                     .GetAwaiter()
                     .GetResult()
@@ -51,76 +49,41 @@ namespace Infraestructura.Reportes
                     .Take(3)
                     .ToList();
                 var ultimasTresFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet();
-
-                DatosGrafico = this.comprasParaReporte
-                    .Where(c => ultimasTresFechas.Contains(c.FechaFiesta))
-                    .GroupBy(c => c.FechaFiesta)
-                    .Select(g => new
-                    {
-                        Fecha = g.Key,
-                        TotalEntradas = g.Sum(c => c.Entradas) // O g.Sum(c => c.Monto) para el monto total
-                    })
-                    // Mapea la fecha a un nombre de evento y el total a un float
-                    .ToDictionary(
-                        x => this.eventos.FirstOrDefault(e => e.Id == this.fiestas.FirstOrDefault(f => f.FechaFiesta == x.Fecha)?.IdEvento)?.Nombre ?? x.Fecha.ToString("dd/MM"),
-                        x => (float)x.TotalEntradas
-                    );
             }
             catch (Exception ex)
             {
-                // Manejo de errores de obtención de datos
                 Console.WriteLine($"Error al obtener las compras: {ex.Message}");
-                this.comprasParaReporte = new List<CompraParaReporteDTO>(); // Asegura que la lista no sea null
+                this.comprasParaReporte = new List<CompraParaReporteDTO>();
             }
         }
-
-        // Define la configuración global de la página (tamaño, márgenes, etc.)
-        public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
-        public DocumentSettings GetSettings() => DocumentSettings.Default;
-
-
-        /// Define cómo se ve cada página del documento
         public void Compose(IDocumentContainer container)
         {
             container
                 .Page(page =>
                 {
-                    // Configuración de la página (tamaño A4, márgenes de 50 puntos)
                     page.Size(PageSizes.A4);
                     page.Margin(50);
                     page.PageColor(Colors.White);
 
-                    // Define la estructura de cada página (encabezado, contenido, pie de página)
                     page.Header().Element(ComposeHeader);
                     page.Content().Element(ComposeContent);
                 });
         }
-
-        // --- Definición de las Secciones del Documento ---
-
-        // Encabezado
         void ComposeHeader(IContainer container)
         {
             container.Row(row =>
             {
-                // Columna izquierda para el título
                 row.ConstantColumn(400).Text("Reporte sobre las ultimas 3 fiestas").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
 
-                // Columna derecha para una imagen o logo (opcional)
-                row.RelativeColumn().Image(Placeholders.Image(100, 50));
             });
         }
 
-        // Contenido Principal
         private void ComposeContent(IContainer container)
         {
             container.PaddingVertical(40).Column(column =>
             {
-                // Agrega un espaciado entre los elementos
                 column.Spacing(20);
 
-
-                // Sección de tabla (ejemplo)
                 column.Item().PaddingVertical(15).Table(table =>
                 {
                     table.ColumnsDefinition(columns =>
