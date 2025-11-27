@@ -28,7 +28,7 @@ namespace WinForms
             try
             {
 
-                var compras = await CompraApiClient.GetComprasParaReporteAsync();
+                var compras = await CompraApiClient.GetComprasParaReporteFiestasAsync();
 
 
                 MessageBox.Show($"Error al cargar las ventas: {compras}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);

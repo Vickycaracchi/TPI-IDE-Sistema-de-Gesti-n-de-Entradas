@@ -86,13 +86,23 @@ namespace WebAPI
             .Produces<List<CompraDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
 
-            app.MapGet("/compras/reporte", () =>
+            app.MapGet("/compras/reporteFiestas", () =>
             {
                 CompraService compraService = new CompraService();
-                var dtos = compraService.GetComprasParaReporte();
+                var dtos = compraService.GetComprasParaReporteFiestas();
                 return Results.Ok(dtos);
             })
-            .WithName("GetAllComprasReporte")
+            .WithName("GetAllComprasReporteFiestas")
+            .Produces<List<CompraDTO>>(StatusCodes.Status200OK)
+            .WithOpenApi();
+
+            app.MapGet("/compras/reporteClientes", () =>
+            {
+                CompraService compraService = new CompraService();
+                var dtos = compraService.GetComprasParaReporteClientes();
+                return Results.Ok(dtos);
+            })
+            .WithName("GetAllComprasReporteClientes")
             .Produces<List<CompraDTO>>(StatusCodes.Status200OK)
             .WithOpenApi();
         }

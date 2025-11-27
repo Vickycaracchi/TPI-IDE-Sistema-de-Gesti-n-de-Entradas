@@ -80,7 +80,7 @@ namespace Data
                 .Where(u => u.IdJefe == idJefe)
                 .Select(u => u.Id)
                 .ToList();
-            
+
             var query = from c in context.Compras
                         join e in context.Entradas
                             on new { c.FechaHora, c.IdCliente, c.IdFiesta } equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
@@ -107,7 +107,7 @@ namespace Data
         public IEnumerable<CompraDTO> GetAllCli(int idCliente)
         {
             using var context = CreateContext();
-            
+
             var query = from c in context.Compras
                         join e in context.Entradas
                             on new { c.FechaHora, c.IdCliente, c.IdFiesta } equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
@@ -146,7 +146,7 @@ namespace Data
             }
             return false;
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteASPNET()
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteFiestasASPNET()
         {
             var configuration = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -154,7 +154,7 @@ namespace Data
                                 .Build();
 
             string connectionString = configuration.GetConnectionString("DefaultConnection");
-            
+
             List<CompraParaReporteDTO> comprasParaReporte = new List<CompraParaReporteDTO>();
 
             const string sqlQuery = @"
@@ -201,6 +201,11 @@ namespace Data
                 }
             }
             return comprasParaReporte;
+        }
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteClientesASPNET()
+        {
+            var listaRepCli = new List<CompraParaReporteDTO>();
+            return listaRepCli;
         }
     }
 }

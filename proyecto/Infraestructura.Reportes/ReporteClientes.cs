@@ -10,23 +10,22 @@ using System;
 
 namespace Infraestructura.Reportes
 {
-    public class Reporte : IDocument
+    public class ReporteClientes : IDocument
     {
         List<CompraParaReporteDTO> comprasParaReporte;
         List<UsuarioDTO> usuarios;
         List<EventoDTO> eventos;
         List<LugarDTO> lugares;
         List<FiestaDTO> fiestas;
-        public Dictionary<string, float> DatosGrafico { get; private set; }
-        public ReporteData Model { get; }
+        public ReporteDataCli Model { get; }
 
-        public Reporte(ReporteData model)
+        public ReporteClientes(ReporteDataCli model)
         {
             Model = model;
-            
+
             try
             {
-                this.comprasParaReporte = CompraApiClient.GetComprasParaReporteAsync()
+                this.comprasParaReporte = CompraApiClient.GetComprasParaReporteClientesAsync()
                     .GetAwaiter()
                     .GetResult()
                     .ToList();
@@ -147,5 +146,5 @@ namespace Infraestructura.Reportes
             });
         }
     }
-    public class ReporteData { }
+    public class ReporteDataCli { }
 }

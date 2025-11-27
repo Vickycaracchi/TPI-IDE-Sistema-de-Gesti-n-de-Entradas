@@ -45,11 +45,18 @@ namespace Application.Services
 
             return compraRepository.GetAllJefe(idJefe);
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporte()
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteFiestas()
         {
             var compraRepository = new CompraRepository();
 
-            return compraRepository.GetComprasParaReporteASPNET();
+            return compraRepository.GetComprasParaReporteFiestasASPNET();
+        }
+
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteClientes()
+        {
+            var compraRepository = new CompraRepository();
+
+            return compraRepository.GetComprasParaReporteClientesASPNET();
         }
 
         public bool Update(CompraDTO dto)
