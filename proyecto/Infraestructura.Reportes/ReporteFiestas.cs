@@ -12,7 +12,7 @@ namespace Infraestructura.Reportes
 {
     public class ReporteFiestas : IDocument
     {
-        List<CompraParaReporteDTO> comprasParaReporte;
+        List<CompraParaReporteFiestasDTO> comprasParaReporte;
         List<UsuarioDTO> usuarios;
         List<EventoDTO> eventos;
         List<LugarDTO> lugares;
@@ -52,7 +52,7 @@ namespace Infraestructura.Reportes
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al obtener las compras: {ex.Message}");
-                this.comprasParaReporte = new List<CompraParaReporteDTO>();
+                this.comprasParaReporte = new List<CompraParaReporteFiestasDTO>();
             }
         }
         public void Compose(IDocumentContainer container)

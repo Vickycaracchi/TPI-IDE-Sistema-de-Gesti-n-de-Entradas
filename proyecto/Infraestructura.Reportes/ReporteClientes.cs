@@ -45,14 +45,14 @@ namespace Infraestructura.Reportes
                     .GetAwaiter()
                     .GetResult()
                     .OrderByDescending(f => f.FechaFiesta)
-                    .Take(3)
+                    .Take(5)
                     .ToList();
-                var ultimasTresFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet();
+                var ultimasCincoFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al obtener las compras: {ex.Message}");
-                this.comprasParaReporte = new List<CompraParaReporteDTO>();
+                this.comprasParaReporte = new List<CompraParaReporteClientesDTO>();
             }
         }
         public void Compose(IDocumentContainer container)

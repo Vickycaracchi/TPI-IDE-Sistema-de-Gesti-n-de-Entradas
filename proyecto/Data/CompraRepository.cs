@@ -146,7 +146,7 @@ namespace Data
             }
             return false;
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteFiestasASPNET()
+        public IEnumerable<CompraParaReporteFiestasDTO> GetComprasParaReporteFiestasASPNET()
         {
             var configuration = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -155,7 +155,7 @@ namespace Data
 
             string connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            List<CompraParaReporteDTO> comprasParaReporte = new List<CompraParaReporteDTO>();
+            List<CompraParaReporteFiestasDTO> comprasParaReporte = new List<CompraParaReporteFiestasDTO>();
 
             const string sqlQuery = @"
                 select c.IdVendedor, count(e.IdEntrada) as cant_entradas, sum(l.Precio) as monto_total, u.IdJefe, f.FechaFiesta
@@ -181,7 +181,7 @@ namespace Data
                         {
                             while (reader.Read())
                             {
-                                var compraReporte = new CompraParaReporteDTO
+                                var compraReporte = new CompraParaReporteFiestasDTO
                                 {
                                     Vendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
                                     Entradas = reader.GetInt32(reader.GetOrdinal("cant_entradas")),
@@ -202,9 +202,9 @@ namespace Data
             }
             return comprasParaReporte;
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteClientesASPNET()
+        public IEnumerable<CompraParaReporteClientesDTO> GetComprasParaReporteClientesASPNET()
         {
-            var listaRepCli = new List<CompraParaReporteDTO>();
+            var listaRepCli = new List<CompraParaReporteClientesDTO>();
             return listaRepCli;
         }
     }

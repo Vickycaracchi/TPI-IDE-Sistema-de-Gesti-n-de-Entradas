@@ -137,7 +137,7 @@ namespace API.Clients
                 throw new Exception($"Timeout al obtener lista de compras.");
             }
         }
-        public static async Task<IEnumerable<CompraParaReporteDTO>> GetComprasParaReporteFiestasAsync()
+        public static async Task<IEnumerable<CompraParaReporteFiestasDTO>> GetComprasParaReporteFiestasAsync()
         {
             try
             {
@@ -145,7 +145,7 @@ namespace API.Clients
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<IEnumerable<CompraParaReporteDTO>>();
+                    return await response.Content.ReadAsAsync<IEnumerable<CompraParaReporteFiestasDTO>>();
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace API.Clients
                 throw new Exception($"Timeout al obtener lista de compras.");
             }            
         }
-        public static async Task<IEnumerable<CompraParaReporteDTO>> GetComprasParaReporteClientesAsync()
+        public static async Task<IEnumerable<CompraParaReporteClientesDTO>> GetComprasParaReporteClientesAsync()
         {
             try
             {
@@ -170,7 +170,7 @@ namespace API.Clients
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<IEnumerable<CompraParaReporteDTO>>();
+                    return await response.Content.ReadAsAsync<IEnumerable<CompraParaReporteClientesDTO>>();
                 }
                 else
                 {
