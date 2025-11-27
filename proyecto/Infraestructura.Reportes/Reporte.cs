@@ -3,11 +3,14 @@ using QuestPDF.Infrastructure;
 using QuestPDF.Helpers;
 using QuestPDF.Previewer;
 using System;
+using API.Clients;
+using DTOs;
 
 namespace Infraestructura.Reportes
 {
     public class Reporte : IDocument
     {
+        List<CompraParaReporteDTO> comprasParaReporte = new List<CompraParaReporteDTO>();
         public ReporteData Model { get; } // Puedes pasar datos aquí si es necesario
 
         public Reporte(ReporteData model)
@@ -54,8 +57,17 @@ namespace Infraestructura.Reportes
         }
 
         // Contenido Principal
-        void ComposeContent(IContainer container)
+        private async void ComposeContent(IContainer container)
         {
+            try 
+            {
+                comprasParaReporte = (await CompraApiClient.GetComprasParaReporteAsync()).ToList();
+            }
+            catch(Exception ex)
+            {
+                // Manejo de errores
+            }
+
             container.PaddingVertical(40).Column(column =>
             {
                 // Agrega un espaciado entre los elementos
@@ -64,35 +76,43 @@ namespace Infraestructura.Reportes
                 // Sección de texto simple
                 column.Item().Text(text =>
                 {
-                    text.Span("Fecha: ").SemiBold();
-                    text.Span(DateTime.Now.ToShortDateString());
+                    text.Span("Evento: ").SemiBold();
+                    text.Span("EVENTO.NOMBRE + EVENTO.DESCRIPCION");
+                    text.Span("Fiesta: ").SemiBold();
+                    text.Span(DateTime.Now.ToShortDateString() + "LUGAR.NOMBRE + FIESTA.FECHAHORA");
+                    text.Span("Lotes: ").SemiBold();
+                    text.Span("LOTE{i}.NOMBRE + LOTE{i}.PRECIO");
+                    text.Span("Tabla de resumen de ventas").SemiBold();
                 });
 
                 // Sección de tabla (ejemplo)
-                column.Item().PaddingVertical(10).Table(table =>
+                column.Item().PaddingVertical(15).Table(table =>
                 {
                     // Configuración de la tabla
                     table.ColumnsDefinition(columns =>
                     {
-                        columns.ConstantColumn(50);
-                        columns.ConstantColumn(150);
+                        columns.ConstantColumn(70);
+                        columns.ConstantColumn(70);
+                        columns.ConstantColumn(70);
                         columns.RelativeColumn();
                     });
-
+       
                     // Encabezados de la tabla
                     table.Header(header =>
                     {
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("ID").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Producto").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Descripción").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Cantidad").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Monto").SemiBold();
                     });
 
                     // Filas de datos (ejemplo de datos ficticios)
-                    for (int i = 1; i <= 5; i++)
+                    foreach (var compra in comprasParaReporte)
                     {
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(i.ToString());
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text($"Producto {i}");
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(Placeholders.LoremIpsum());
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Vendedor.ToString());
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Entradas.ToString());
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Jefe.ToString());
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Monto.ToString());
                     }
                 });
 

@@ -144,5 +144,36 @@ namespace Data
             }
             return false;
         }
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteAsync()
+        {
+            using var context = CreateContext();
+            var ultimasFiestas = context.Fiestas
+                .OrderByDescending(f => f.FechaFiesta)
+                .Take(3)
+                .ToList();
+
+            var query = (from f in ultimasFiestas
+                         join c in context.Compras on f.IdFiesta equals c.IdFiesta
+                         join e in context.Entradas on new { c.FechaHora, c.IdCliente, c.IdFiesta }
+                                                     equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
+                         join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
+                         join l in context.Lotes on fl.IdLote equals l.Id
+                         where c.FechaHora >= l.FechaDesde && c.FechaHora <= l.FechaHasta
+                         join ev in context.Eventos on f.IdEvento equals ev.Id
+                         group new { c, e, l, ev, f } by new { c.IdVendedor, ev.Nombre, f.FechaFiesta } into g
+                         select new CompraParaReporteDTO
+                         {
+                             Vendedor = g.Key.IdVendedor,
+                             Entradas = g.Count(),
+                             Jefe = g.Key.IdVendedor,
+                             Monto = g.Sum(x => x.l.Precio),
+                             FechaFiesta = g.Key.FechaFiesta
+                         })
+                  .OrderBy(r => r.FechaFiesta)
+                  .ThenByDescending(r => r.Entradas)
+                  .ThenByDescending(r => r.Monto);
+
+            return query.ToList();
+        }
     }
 }

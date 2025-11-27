@@ -33,4 +33,12 @@ namespace DTOs
         public string Entrada { get; set; }
         public string Lote { get; set; }
     }
+    public class CompraParaReporteDTO
+    {
+        public int Vendedor { get; set; }
+        public int Entradas { get; set; }
+        public int Jefe { get; set; }
+        public int Monto { get; set; }
+        public DateTime FechaFiesta { get; set; }
+    }
 }

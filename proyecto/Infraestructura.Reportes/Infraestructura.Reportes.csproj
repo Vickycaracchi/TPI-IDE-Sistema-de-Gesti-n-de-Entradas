@@ -11,4 +11,9 @@
     <PackageReference Include="QuestPDF" Version="2025.7.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\API.Clients\API.Clients.csproj" />
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+  </ItemGroup>
+
 </Project>
