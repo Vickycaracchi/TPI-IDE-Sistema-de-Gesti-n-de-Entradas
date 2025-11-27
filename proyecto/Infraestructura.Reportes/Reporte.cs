@@ -1,21 +1,39 @@
-﻿using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
+﻿using API.Clients;
+using Application.Services;
+using DTOs;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using QuestPDF.Fluent;
 using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using QuestPDF.Previewer;
 using System;
-using API.Clients;
-using DTOs;
 
 namespace Infraestructura.Reportes
 {
     public class Reporte : IDocument
     {
-        List<CompraParaReporteDTO> comprasParaReporte = new List<CompraParaReporteDTO>();
+        List<CompraParaReporteDTO> comprasParaReporte;
         public ReporteData Model { get; } // Puedes pasar datos aquí si es necesario
 
         public Reporte(ReporteData model)
         {
             Model = model;
+         
+            try
+            {
+                // Este patrón bloquea la ejecución hasta que la operación asíncrona termine.
+                // Es necesario porque QuestPDF es síncrono.
+                this.comprasParaReporte = CompraApiClient.GetComprasParaReporteAsync()
+                    .GetAwaiter()
+                    .GetResult()
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores de obtención de datos
+                Console.WriteLine($"Error al obtener las compras: {ex.Message}");
+                this.comprasParaReporte = new List<CompraParaReporteDTO>(); // Asegura que la lista no sea null
+            }
         }
 
         // Define la configuración global de la página (tamaño, márgenes, etc.)
@@ -57,17 +75,8 @@ namespace Infraestructura.Reportes
         }
 
         // Contenido Principal
-        private async void ComposeContent(IContainer container)
+        private void ComposeContent(IContainer container)
         {
-            try 
-            {
-                comprasParaReporte = (await CompraApiClient.GetComprasParaReporteAsync()).ToList();
-            }
-            catch(Exception ex)
-            {
-                // Manejo de errores
-            }
-
             container.PaddingVertical(40).Column(column =>
             {
                 // Agrega un espaciado entre los elementos
@@ -88,7 +97,6 @@ namespace Infraestructura.Reportes
                 // Sección de tabla (ejemplo)
                 column.Item().PaddingVertical(15).Table(table =>
                 {
-                    // Configuración de la tabla
                     table.ColumnsDefinition(columns =>
                     {
                         columns.ConstantColumn(70);
@@ -96,8 +104,7 @@ namespace Infraestructura.Reportes
                         columns.ConstantColumn(70);
                         columns.RelativeColumn();
                     });
-       
-                    // Encabezados de la tabla
+
                     table.Header(header =>
                     {
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
@@ -106,13 +113,19 @@ namespace Infraestructura.Reportes
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Monto").SemiBold();
                     });
 
-                    // Filas de datos (ejemplo de datos ficticios)
                     foreach (var compra in comprasParaReporte)
                     {
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Vendedor.ToString());
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Entradas.ToString());
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Jefe.ToString());
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1).Text(compra.Monto.ToString());
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(compra.Vendedor.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(compra.Entradas.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(compra.Jefe.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(compra.Monto.ToString("0.00"));
                     }
                 });
 

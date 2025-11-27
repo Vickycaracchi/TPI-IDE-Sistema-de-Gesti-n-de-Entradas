@@ -89,7 +89,7 @@ namespace WebAPI
             app.MapGet("/compras/reportes", () =>
             {
                 CompraService compraService = new CompraService();
-                var dtos = compraService.GetComprasParaReporteAsync();
+                var dtos = compraService.GetComprasParaReporte();
                 return Results.Ok(dtos);
             })
             .WithName("GetAllComprasReporte")

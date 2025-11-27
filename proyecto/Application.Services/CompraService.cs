@@ -45,11 +45,11 @@ namespace Application.Services
 
             return compraRepository.GetAllJefe(idJefe);
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteAsync()
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporte()
         {
             var compraRepository = new CompraRepository();
 
-            return compraRepository.GetComprasParaReporteAsync();
+            return compraRepository.GetComprasParaReporte();
         }
 
         public bool Update(CompraDTO dto)

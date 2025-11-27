@@ -32,19 +32,20 @@
             gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
             gestiónFiestasToolStripMenuItem = new ToolStripMenuItem();
             asignarVendedoresToolStripMenuItem = new ToolStripMenuItem();
-            panelContenedor = new Panel();
             generarReporteToolStripMenuItem = new ToolStripMenuItem();
+            panelContenedor = new Panel();
+            verDatosReporteToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem, asignarVendedoresToolStripMenuItem, generarReporteToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem, asignarVendedoresToolStripMenuItem, generarReporteToolStripMenuItem, verDatosReporteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1143, 30);
+            menuStrip1.Size = new Size(1396, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -97,16 +98,6 @@
             asignarVendedoresToolStripMenuItem.Text = "Asignar Vendedores";
             asignarVendedoresToolStripMenuItem.Click += asignarVendedoresToolStripMenuItem_Click;
             // 
-            // panelContenedor
-            // 
-            panelContenedor.AutoSize = true;
-            panelContenedor.Dock = DockStyle.Fill;
-            panelContenedor.Location = new Point(0, 30);
-            panelContenedor.Margin = new Padding(3, 4, 3, 4);
-            panelContenedor.Name = "panelContenedor";
-            panelContenedor.Size = new Size(1143, 770);
-            panelContenedor.TabIndex = 1;
-            // 
             // generarReporteToolStripMenuItem
             // 
             generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
@@ -114,11 +105,28 @@
             generarReporteToolStripMenuItem.Text = "Generar reporte";
             generarReporteToolStripMenuItem.Click += generarReporteToolStripMenuItem_Click;
             // 
+            // panelContenedor
+            // 
+            panelContenedor.AutoSize = true;
+            panelContenedor.Dock = DockStyle.Fill;
+            panelContenedor.Location = new Point(0, 30);
+            panelContenedor.Margin = new Padding(3, 4, 3, 4);
+            panelContenedor.Name = "panelContenedor";
+            panelContenedor.Size = new Size(1396, 770);
+            panelContenedor.TabIndex = 1;
+            // 
+            // verDatosReporteToolStripMenuItem
+            // 
+            verDatosReporteToolStripMenuItem.Name = "verDatosReporteToolStripMenuItem";
+            verDatosReporteToolStripMenuItem.Size = new Size(138, 24);
+            verDatosReporteToolStripMenuItem.Text = "Ver datos reporte";
+            verDatosReporteToolStripMenuItem.Click += verDatosReporteToolStripMenuItem_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1143, 800);
+            ClientSize = new Size(1396, 800);
             Controls.Add(panelContenedor);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -146,5 +154,6 @@
         private ToolStripMenuItem gestiónFiestasToolStripMenuItem;
         private ToolStripMenuItem asignarVendedoresToolStripMenuItem;
         private ToolStripMenuItem generarReporteToolStripMenuItem;
+        private ToolStripMenuItem verDatosReporteToolStripMenuItem;
     }
 }

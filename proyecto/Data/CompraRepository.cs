@@ -144,7 +144,7 @@ namespace Data
             }
             return false;
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteAsync()
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporte()
         {
             using var context = CreateContext();
             var ultimasFiestas = context.Fiestas

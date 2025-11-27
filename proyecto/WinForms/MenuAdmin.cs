@@ -65,23 +65,32 @@ namespace WinForms
             AbrirFormularioEnPanel(new AsignarVendedores());
         }
 
-        private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            generarReporteToolStripMenuItem.Enabled = false;
+
+            string rutaCompleta = null;
+
             try
             {
-                var datos = new ReporteData();
-                var documento = new Reporte(datos);
+                rutaCompleta = await Task.Run(() =>
+                {
+                    var datos = new ReporteData();
+                    var documento = new Reporte(datos);
 
-                string rutaEjecucion = AppDomain.CurrentDomain.BaseDirectory;
-                string rutaSolucion = Path.GetFullPath(Path.Combine(rutaEjecucion, @"..\..\..\.."));
-                
-                string carpetaReportes = Path.Combine(rutaSolucion, "Reportes");
-                Directory.CreateDirectory(carpetaReportes);
+                    string rutaEjecucion = AppDomain.CurrentDomain.BaseDirectory;
+                    string rutaSolucion = Path.GetFullPath(Path.Combine(rutaEjecucion, @"..\..\..\.."));
 
-                var nombreArchivo = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-                var rutaCompleta = Path.Combine(carpetaReportes, nombreArchivo);// 3. Generar el PDF
-                
-                documento.GeneratePdf(rutaCompleta);
+                    string carpetaReportes = Path.Combine(rutaSolucion, "Reportes");
+                    Directory.CreateDirectory(carpetaReportes);
+
+                    var nombreArchivo = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                    var ruta = Path.Combine(carpetaReportes, nombreArchivo);// 3. Generar el PDF
+
+                    documento.GeneratePdf(ruta);
+
+                    return ruta;
+                });
 
                 // 4. Mostrar Mensaje de Éxito y Abrir el Archivo
                 DialogResult resultado = MessageBox.Show(
@@ -105,6 +114,15 @@ namespace WinForms
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
+            finally
+            {
+                generarReporteToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void verDatosReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioEnPanel(new ReporteDatosVista());
         }
     }
 }
