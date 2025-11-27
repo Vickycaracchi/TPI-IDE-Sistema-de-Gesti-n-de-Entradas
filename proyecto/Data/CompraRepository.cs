@@ -204,8 +204,53 @@ namespace Data
         }
         public IEnumerable<CompraParaReporteClientesDTO> GetComprasParaReporteClientesASPNET()
         {
-            var listaRepCli = new List<CompraParaReporteClientesDTO>();
-            return listaRepCli;
+            var configuration = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                .Build();
+
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            List<CompraParaReporteClientesDTO> comprasParaReporte = new List<CompraParaReporteClientesDTO>();
+
+            const string sqlQuery = @"
+                select top 10 c.IdCliente, f.IdFiesta, count(e.IdEntrada) as cant_entradas
+                from (select top 5 * from fiestas f order by f.FechaFiesta desc) f
+                inner join Compras c on c.IdFiesta = f.IdFiesta
+                inner join Entradas e on e.FechaHora = c.FechaHora and e.IdCliente = c.IdCliente and e.IdFiesta = c.IdFiesta
+                group by c.IdCliente, f.IdFiesta
+                order by f.IdFiesta, cant_entradas desc
+                ";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var compraReporte = new CompraParaReporteClientesDTO
+                                {
+                                    Cliente = reader.GetInt32(reader.GetOrdinal("IdCliente")),
+                                    Entradas = reader.GetInt32(reader.GetOrdinal("cant_entradas")),
+                                    Fiesta = reader.GetInt32(reader.GetOrdinal("IdFiesta")),
+                                };
+                                comprasParaReporte.Add(compraReporte);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al obtener las compras para reporte: {ex.Message}");
+                        throw;
+                    }
+                }
+            }
+            return comprasParaReporte;
         }
     }
 }

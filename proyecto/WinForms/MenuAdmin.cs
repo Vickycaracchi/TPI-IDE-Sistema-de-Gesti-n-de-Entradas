@@ -75,8 +75,8 @@ namespace WinForms
             {
                 rutaCompleta = await Task.Run(() =>
                 {
-                    var datos = new ReporteDataFiestas();
-                    var documento = new ReporteFiestas(datos);
+                    var datos = new ReporteDataCli();
+                    var documento = new ReporteClientes(datos);
 
                     string rutaEjecucion = AppDomain.CurrentDomain.BaseDirectory;
                     string rutaSolucion = Path.GetFullPath(Path.Combine(rutaEjecucion, @"..\..\..\.."));

@@ -12,7 +12,7 @@ namespace Infraestructura.Reportes
 {
     public class ReporteClientes : IDocument
     {
-        List<CompraParaReporteDTO> comprasParaReporte;
+        List<CompraParaReporteClientesDTO> comprasParaReporte;
         List<UsuarioDTO> usuarios;
         List<EventoDTO> eventos;
         List<LugarDTO> lugares;
@@ -72,7 +72,7 @@ namespace Infraestructura.Reportes
         {
             container.Row(row =>
             {
-                row.ConstantColumn(400).Text("Reporte sobre las ultimas 3 fiestas").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
+                row.ConstantColumn(400).Text("Reporte sobre los 10 mejores clientes").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
 
             });
         }
@@ -90,49 +90,50 @@ namespace Infraestructura.Reportes
                         columns.ConstantColumn(40);
                         columns.ConstantColumn(70);
                         columns.ConstantColumn(70);
-                        columns.ConstantColumn(70);
                         columns.ConstantColumn(130);
+                        columns.ConstantColumn(70);
                         columns.RelativeColumn();
                     });
 
                     table.Header(header =>
                     {
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Id").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Cantidad").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Monto").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Nombre").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Apellido").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Email").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Entradas").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Evento").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
                     });
 
+                    int i = 0;
                     foreach (var compra in comprasParaReporte)
                     {
-                        var fiesta = this.fiestas.FirstOrDefault(f => f.FechaFiesta == compra.FechaFiesta);
+                        var cliente = this.usuarios.FirstOrDefault(u => u.Id == compra.Cliente);
+                        var fiesta = this.fiestas.FirstOrDefault(f => f.IdFiesta == compra.Fiesta);
                         var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
-                        var vendedor = this.usuarios.FirstOrDefault(u => u.Id == compra.Vendedor);
-                        var jefe = this.usuarios.FirstOrDefault(u => u.Id == vendedor?.IdJefe);
-                        if (jefe == null)
-                        {
-                            jefe = new UsuarioDTO { Nombre = "Es jefe" };
-                        }
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(vendedor.Id.ToString());
+                             .Text(cliente.Id.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(vendedor.Nombre.ToString());
+                             .Text(cliente.Nombre.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(cliente.Apellido.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(cliente.Email.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
                              .Text(compra.Entradas.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Monto.ToString("0.00"));
-
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
                              .Text(evento.Nombre.ToString());
-
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(jefe.Nombre.ToString());
+                        i++;
+                        if (i %4 == 0)
+                        {
+                            table.Cell().ColumnSpan(6).Height(20).Background(Colors.Grey.Lighten4).BorderBottom(0);
+                        }
                     }
                 });
                 foreach (var fiesta in fiestas)

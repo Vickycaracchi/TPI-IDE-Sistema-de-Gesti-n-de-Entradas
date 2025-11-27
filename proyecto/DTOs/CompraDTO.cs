@@ -45,6 +45,6 @@ namespace DTOs
     {
         public int Cliente { get; set; }
         public int Entradas { get; set; }
-        public int Monto { get; set; }
+        public int Fiesta { get; set; }
     }
 }
