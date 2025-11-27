@@ -49,7 +49,7 @@ namespace Application.Services
         {
             var compraRepository = new CompraRepository();
 
-            return compraRepository.GetComprasParaReporte();
+            return compraRepository.GetComprasParaReporteASPNET();
         }
 
         public bool Update(CompraDTO dto)

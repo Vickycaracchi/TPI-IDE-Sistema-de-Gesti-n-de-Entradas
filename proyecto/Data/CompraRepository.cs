@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Model;
 using DTOs;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Data
 {
@@ -144,36 +146,61 @@ namespace Data
             }
             return false;
         }
-        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporte()
+        public IEnumerable<CompraParaReporteDTO> GetComprasParaReporteASPNET()
         {
-            using var context = CreateContext();
-            var ultimasFiestas = context.Fiestas
-                .OrderByDescending(f => f.FechaFiesta)
-                .Take(3)
-                .ToList();
+            var configuration = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                .Build();
 
-            var query = (from f in ultimasFiestas
-                         join c in context.Compras on f.IdFiesta equals c.IdFiesta
-                         join e in context.Entradas on new { c.FechaHora, c.IdCliente, c.IdFiesta }
-                                                     equals new { e.FechaHora, e.IdCliente, e.IdFiesta }
-                         join fl in context.FiestasLotes on f.IdFiesta equals fl.IdFiesta
-                         join l in context.Lotes on fl.IdLote equals l.Id
-                         where c.FechaHora >= l.FechaDesde && c.FechaHora <= l.FechaHasta
-                         join ev in context.Eventos on f.IdEvento equals ev.Id
-                         group new { c, e, l, ev, f } by new { c.IdVendedor, ev.Nombre, f.FechaFiesta } into g
-                         select new CompraParaReporteDTO
-                         {
-                             Vendedor = g.Key.IdVendedor,
-                             Entradas = g.Count(),
-                             Jefe = g.Key.IdVendedor,
-                             Monto = g.Sum(x => x.l.Precio),
-                             FechaFiesta = g.Key.FechaFiesta
-                         })
-                  .OrderBy(r => r.FechaFiesta)
-                  .ThenByDescending(r => r.Entradas)
-                  .ThenByDescending(r => r.Monto);
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            
+            List<CompraParaReporteDTO> comprasParaReporte = new List<CompraParaReporteDTO>();
 
-            return query.ToList();
+            const string sqlQuery = @"
+                select c.IdVendedor, count(e.IdEntrada) as cant_entradas, sum(l.Precio) as monto_total, u.IdJefe, f.FechaFiesta
+                from (select top 3 * from fiestas f order by f.FechaFiesta desc) f
+                inner join compras c on c.IdFiesta = f.IdFiesta
+                inner join Entradas e on e.FechaHora = c.FechaHora and e.IdCliente = c.IdCliente and e.IdFiesta = c.IdFiesta
+                inner join FiestasLotes fl on fl.IdFiesta = f.IdFiesta
+                inner join Lotes l on l.Id = fl.IdLote and c.FechaHora between l.FechaDesde and l.FechaHasta
+                inner join Eventos ev on ev.Id = f.IdEvento
+                left join Usuarios u on u.Id = c.IdVendedor
+                group by c.IdVendedor, ev.Nombre, f.FechaFiesta, u.IdJefe
+                order by f.FechaFiesta, cant_entradas desc, monto_total desc
+                ";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                using (var command = new SqlCommand(sqlQuery, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var compraReporte = new CompraParaReporteDTO
+                                {
+                                    Vendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
+                                    Entradas = reader.GetInt32(reader.GetOrdinal("cant_entradas")),
+                                    Monto = reader.GetInt32(reader.GetOrdinal("monto_total")),
+                                    Jefe = reader.IsDBNull(reader.GetOrdinal("IdJefe")) ? 0 : reader.GetInt32(reader.GetOrdinal("IdJefe")),
+                                    FechaFiesta = reader.GetDateTime(reader.GetOrdinal("FechaFiesta"))
+                                };
+                                comprasParaReporte.Add(compraReporte);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error al obtener las compras para reporte: {ex.Message}");
+                        throw;
+                    }
+                }
+            }
+            return comprasParaReporte;
         }
     }
 }
