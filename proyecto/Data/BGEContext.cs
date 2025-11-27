@@ -356,170 +356,152 @@ namespace Data
                 new
                 {
                     Id = 1,
-                    Dni = "123",
-                    Nombre = "Juan",
-                    Apellido = "Perez",
-                    Email = "juan.perez@example.com",
-                    Contrasena = "123", // Usar un hash real aquí
-                    Cvu = "1111222233334444555566",
-                    Tipo = "Cliente",
-                    NumeroTelefono = "600111222",
-                    FechaNac = new DateTime(1990, 5, 15),
-                    Instagram = "@juanperez"
+                    Dni = "100",
+                    Nombre = "Admin",
+                    Apellido = "General",
+                    Email = "admin@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "0000111122223333444455",
+                    Tipo = "Administrador",
+                    NumeroTelefono = "3416000000",
+                    FechaNac = new DateTime(1985, 1, 10),
+                    Instagram = "@adminbge",
+                    IdJefe = (int?)null
                 },
                 new
                 {
                     Id = 2,
-                    Dni = "qwe",
-                    Nombre = "Ana",
-                    Apellido = "Gomez",
-                    Email = "ana.gomez@example.com",
-                    Contrasena = "qwe", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
-                    Tipo = "Vendedor",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(1985, 10, 20),
-                    Instagram = "@anagomez"
-                },
-                new
-                {
-                    Id = 10,
-                    Dni = "zxc",
-                    Nombre = "Martin",
-                    Apellido = "Perez",
-                    Email = "mar.perez@example.com",
-                    Contrasena = "zxc", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
+                    Dni = "201",
+                    Nombre = "Jefe 1",
+                    Apellido = "Demo",
+                    Email = "jefe1@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "1111222233334444555566",
                     Tipo = "Jefe",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(2005, 10, 20),
-                    Instagram = "@anagomez"
+                    NumeroTelefono = "3416000001",
+                    FechaNac = new DateTime(1987, 3, 5),
+                    Instagram = "@jefe1",
+                    IdJefe = (int?)null
                 },
                 new
                 {
                     Id = 3,
-                    Dni = "asd",
-                    Nombre = "Joaquin",
-                    Apellido = "Lopez",
-                    Email = "joaco.lopez@example.com",
-                    Contrasena = "asd", // Usar un hash real aquí
-                    Cvu = "91823918239128319823",
-                    Tipo = "Administrador",
-                    NumeroTelefono = "3211321331",
-                    FechaNac = new DateTime(1980, 3, 4),
-                    Instagram = "@anagomez"
+                    Dni = "202",
+                    Nombre = "Jefe 2",
+                    Apellido = "Demo",
+                    Email = "jefe2@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "2222333344445555666677",
+                    Tipo = "Jefe",
+                    NumeroTelefono = "3416000002",
+                    FechaNac = new DateTime(1988, 6, 12),
+                    Instagram = "@jefe2",
+                    IdJefe = (int?)null
                 },
                 new
                 {
                     Id = 4,
-                    Dni = "1234",
-                    Nombre = "Juan",
-                    Apellido = "Perez",
-                    Email = "juan4.perez@example.com",
-                    Contrasena = "1234", // Usar un hash real aquí
-                    Cvu = "1111222233334444555566",
-                    Tipo = "Cliente",
-                    NumeroTelefono = "600111222",
-                    FechaNac = new DateTime(1990, 5, 15),
-                    Instagram = "@juanperez"
+                    Dni = "203",
+                    Nombre = "Jefe 3",
+                    Apellido = "Demo",
+                    Email = "jefe3@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "3333444455556666777788",
+                    Tipo = "Jefe",
+                    NumeroTelefono = "3416000003",
+                    FechaNac = new DateTime(1989, 9, 21),
+                    Instagram = "@jefe3",
+                    IdJefe = (int?)null
                 },
                 new
                 {
                     Id = 5,
-                    Dni = "1235",
-                    Nombre = "Juan",
-                    Apellido = "Perez",
-                    Email = "juan.perez5@example.com",
-                    Contrasena = "1235", // Usar un hash real aquí
-                    Cvu = "1111222233334444555566",
-                    Tipo = "Cliente",
-                    NumeroTelefono = "600111222",
-                    FechaNac = new DateTime(1990, 5, 15),
-                    Instagram = "@juanperez"
+                    Dni = "301",
+                    Nombre = "Vendedor 1",
+                    Apellido = "Demo",
+                    Email = "vendedor1@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "4444555566667777888899",
+                    Tipo = "Vendedor",
+                    NumeroTelefono = "3416001001",
+                    FechaNac = new DateTime(1993, 2, 14),
+                    Instagram = "@vendedor1",
+                    IdJefe = 2
                 },
                 new
                 {
                     Id = 6,
-                    Dni = "qwe",
-                    Nombre = "Ana",
-                    Apellido = "Gomez",
-                    Email = "ana.gomez6@example.com",
-                    Contrasena = "qwe6", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
+                    Dni = "302",
+                    Nombre = "Vendedor 2",
+                    Apellido = "Demo",
+                    Email = "vendedor2@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "5555666677778888999900",
                     Tipo = "Vendedor",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(1985, 10, 20),
-                    Instagram = "@anagomez"
+                    NumeroTelefono = "3416001002",
+                    FechaNac = new DateTime(1994, 4, 18),
+                    Instagram = "@vendedor2",
+                    IdJefe = 3
                 },
                 new
                 {
                     Id = 7,
-                    Dni = "qwe7",
-                    Nombre = "Ana",
-                    Apellido = "Gomez",
-                    Email = "ana.gomez7@example.com",
-                    Contrasena = "qwe7", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
+                    Dni = "303",
+                    Nombre = "Vendedor 3",
+                    Apellido = "Demo",
+                    Email = "vendedor3@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "6666777788889999000011",
                     Tipo = "Vendedor",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(1985, 10, 20),
-                    Instagram = "@anagomez"
+                    NumeroTelefono = "3416001003",
+                    FechaNac = new DateTime(1995, 7, 22),
+                    Instagram = "@vendedor3",
+                    IdJefe = 4
                 },
                 new
                 {
                     Id = 8,
-                    Dni = "asd8",
-                    Nombre = "Joaquin",
-                    Apellido = "Lopez",
-                    Email = "joaco.lopez8@example.com",
-                    Contrasena = "asd8", // Usar un hash real aquí
-                    Cvu = "91823918239128319823",
-                    Tipo = "Administrador",
-                    NumeroTelefono = "3211321331",
-                    FechaNac = new DateTime(1980, 3, 4),
-                    Instagram = "@anagomez"
+                    Dni = "401",
+                    Nombre = "Cliente 1",
+                    Apellido = "Demo",
+                    Email = "cliente1@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "7777888899990000111122",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "3416002001",
+                    FechaNac = new DateTime(1998, 8, 8),
+                    Instagram = "@cliente1",
+                    IdJefe = (int?)null
                 },
                 new
                 {
                     Id = 9,
-                    Dni = "asd",
-                    Nombre = "Joaquin",
-                    Apellido = "Lopez",
-                    Email = "joaco.lopez9@example.com",
-                    Contrasena = "asd9", // Usar un hash real aquí
-                    Cvu = "91823918239128319823",
-                    Tipo = "Administrador",
-                    NumeroTelefono = "3211321331",
-                    FechaNac = new DateTime(1980, 3, 4),
-                    Instagram = "@anagomez"
+                    Dni = "402",
+                    Nombre = "Cliente 2",
+                    Apellido = "Demo",
+                    Email = "cliente2@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "8888999900001111222233",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "3416002002",
+                    FechaNac = new DateTime(1999, 1, 19),
+                    Instagram = "@cliente2",
+                    IdJefe = (int?)null
                 },
                 new
                 {
-                    Id = 11,
-                    Dni = "zxc2",
-                    Nombre = "Martin",
-                    Apellido = "Perez",
-                    Email = "mar.perez2@example.com",
-                    Contrasena = "zxc2", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
-                    Tipo = "Jefe",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(2005, 10, 20),
-                    Instagram = "@anagomez"
-                },
-                new
-                {
-                    Id = 12,
-                    Dni = "zxc3",
-                    Nombre = "Martin",
-                    Apellido = "Perez",
-                    Email = "mar.perez3@example.com",
-                    Contrasena = "zxc3", // Usar un hash real aquí
-                    Cvu = "9999888877776666555544",
-                    Tipo = "Jefe",
-                    NumeroTelefono = "600333444",
-                    FechaNac = new DateTime(2005, 10, 20),
-                    Instagram = "@anagomez"
+                    Id = 10,
+                    Dni = "403",
+                    Nombre = "Cliente 3",
+                    Apellido = "Demo",
+                    Email = "cliente3@gmail.com",
+                    Contrasena = "123",
+                    Cvu = "9999000011112222333344",
+                    Tipo = "Cliente",
+                    NumeroTelefono = "3416002003",
+                    FechaNac = new DateTime(2000, 12, 2),
+                    Instagram = "@cliente3",
+                    IdJefe = (int?)null
                 }
             );
 
@@ -615,8 +597,8 @@ namespace Data
                     Id = 5,
                     Nombre = "Lote Regular Feria",
                     Precio = 12,
-                    FechaDesde = new DateTime(2025, 9, 1),
-                    FechaHasta = new DateTime(2025, 11, 14),
+                    FechaDesde = new DateTime(2025, 9, 15),
+                    FechaHasta = new DateTime(2025, 11, 30),
                     CantidadLote = 400,
                     LoteActual = true
                 },
@@ -625,8 +607,8 @@ namespace Data
                     Id = 6,
                     Nombre = "Lote Last Minute Feria",
                     Precio = 18,
-                    FechaDesde = new DateTime(2025, 11, 15),
-                    FechaHasta = new DateTime(2025, 11, 15),
+                    FechaDesde = new DateTime(2025, 12, 1),
+                    FechaHasta = new DateTime(2025, 12, 5),
                     CantidadLote = 100,
                     LoteActual = false
                 },
@@ -635,8 +617,8 @@ namespace Data
                     Id = 7,
                     Nombre = "Lote Early Bird Bohemia",
                     Precio = 20,
-                    FechaDesde = new DateTime(2025, 9, 15),
-                    FechaHasta = new DateTime(2025, 10, 10),
+                    FechaDesde = new DateTime(2025, 10, 1),
+                    FechaHasta = new DateTime(2025, 11, 10),
                     CantidadLote = 150,
                     LoteActual = false
                 },
@@ -645,8 +627,8 @@ namespace Data
                     Id = 8,
                     Nombre = "Lote Regular Bohemia",
                     Precio = 30,
-                    FechaDesde = new DateTime(2025, 10, 11),
-                    FechaHasta = new DateTime(2025, 10, 19),
+                    FechaDesde = new DateTime(2025, 11, 11),
+                    FechaHasta = new DateTime(2025, 12, 20),
                     CantidadLote = 250,
                     LoteActual = true
                 },
@@ -655,8 +637,8 @@ namespace Data
                     Id = 9,
                     Nombre = "Lote Last Minute Bohemia",
                     Precio = 40,
-                    FechaDesde = new DateTime(2025, 10, 20),
-                    FechaHasta = new DateTime(2025, 10, 20),
+                    FechaDesde = new DateTime(2025, 12, 21),
+                    FechaHasta = new DateTime(2025, 12, 31),
                     CantidadLote = 80,
                     LoteActual = false
                 }
@@ -665,24 +647,31 @@ namespace Data
             modelBuilder.Entity<Compra>().HasData(
                 new
                 {
-                    IdCliente = 1,
-                    FechaHora = new DateTime(2025, 10, 15, 5, 12, 5),
+                    IdCliente = 8,
+                    FechaHora = new DateTime(2025, 9, 5, 12, 0, 0),
                     IdFiesta = 1,
-                    IdVendedor = 10
+                    IdVendedor = 5
                 },
                 new
                 {
-                    IdCliente = 1,
-                    FechaHora = new DateTime(2025, 10, 15, 5, 13, 5),
-                    IdFiesta = 1,
-                    IdVendedor = 10,
+                    IdCliente = 9,
+                    FechaHora = new DateTime(2025, 9, 10, 15, 30, 0),
+                    IdFiesta = 2,
+                    IdVendedor = 6
                 },
                 new
                 {
-                    IdCliente = 1,
-                    FechaHora = new DateTime(2025, 10, 15, 5, 14, 5),
-                    IdFiesta = 1,
-                    IdVendedor = 10
+                    IdCliente = 10,
+                    FechaHora = new DateTime(2025, 11, 15, 18, 45, 0),
+                    IdFiesta = 3,
+                    IdVendedor = 7
+                },
+                new
+                {
+                    IdCliente = 8,
+                    FechaHora = new DateTime(2025, 9, 15, 20, 0, 0),
+                    IdFiesta = 4,
+                    IdVendedor = 6
                 }
             );
             
@@ -690,23 +679,61 @@ namespace Data
                 new
                 {
                     IdFiesta = 1,
+                    IdLugar = 4,
+                    IdEvento = 5,
+                    FechaFiesta = new DateTime(2025, 10, 20, 23, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 2,
+                    IdLugar = 3,
+                    IdEvento = 2,
+                    FechaFiesta = new DateTime(2025, 11, 15, 14, 0, 0)
+                },
+                new
+                {
+                    IdFiesta = 3,
                     IdLugar = 2,
                     IdEvento = 3,
                     FechaFiesta = new DateTime(2025, 12, 31, 22, 0, 0)
                 },
                 new
                 {
-                    IdFiesta = 2,
+                    IdFiesta = 4,
                     IdLugar = 1,
                     IdEvento = 4,
-                    FechaFiesta = new DateTime(2025, 11, 15, 21, 0, 0)
+                    FechaFiesta = new DateTime(2025, 11, 20, 21, 0, 0)
+                }
+            );
+
+            modelBuilder.Entity<Entrada>().HasData(
+                new
+                {
+                    IdEntrada = 1001,
+                    IdCliente = 8,
+                    IdFiesta = 1,
+                    FechaHora = new DateTime(2025, 9, 5, 12, 0, 0)
                 },
                 new
                 {
+                    IdEntrada = 1002,
+                    IdCliente = 9,
+                    IdFiesta = 2,
+                    FechaHora = new DateTime(2025, 9, 10, 15, 30, 0)
+                },
+                new
+                {
+                    IdEntrada = 1003,
+                    IdCliente = 10,
                     IdFiesta = 3,
-                    IdLugar = 4,
-                    IdEvento = 5,
-                    FechaFiesta = new DateTime(2025, 10, 20, 23, 0, 0)
+                    FechaHora = new DateTime(2025, 11, 15, 18, 45, 0)
+                },
+                new
+                {
+                    IdEntrada = 1004,
+                    IdCliente = 8,
+                    IdFiesta = 4,
+                    FechaHora = new DateTime(2025, 9, 15, 20, 0, 0)
                 }
             );
 
@@ -756,6 +783,56 @@ namespace Data
                 {
                     IdFiesta = 3,
                     IdLote = 9
+                },
+                new
+                {
+                    IdFiesta = 4,
+                    IdLote = 1
+                },
+                new
+                {
+                    IdFiesta = 4,
+                    IdLote = 2
+                },
+                new
+                {
+                    IdFiesta = 4,
+                    IdLote = 3
+                }
+            );
+
+            modelBuilder.Entity<CompraProducto>().HasData(
+                new
+                {
+                    IdCliente = 8,
+                    IdFiesta = 1,
+                    IdProducto = 1,
+                    FechaHora = new DateTime(2025, 9, 5, 12, 0, 0),
+                    Cantidad = 2
+                },
+                new
+                {
+                    IdCliente = 9,
+                    IdFiesta = 2,
+                    IdProducto = 2,
+                    FechaHora = new DateTime(2025, 9, 10, 15, 30, 0),
+                    Cantidad = 1
+                },
+                new
+                {
+                    IdCliente = 10,
+                    IdFiesta = 3,
+                    IdProducto = 1,
+                    FechaHora = new DateTime(2025, 11, 15, 18, 45, 0),
+                    Cantidad = 1
+                },
+                new
+                {
+                    IdCliente = 8,
+                    IdFiesta = 4,
+                    IdProducto = 2,
+                    FechaHora = new DateTime(2025, 9, 15, 20, 0, 0),
+                    Cantidad = 3
                 }
             );
         }
