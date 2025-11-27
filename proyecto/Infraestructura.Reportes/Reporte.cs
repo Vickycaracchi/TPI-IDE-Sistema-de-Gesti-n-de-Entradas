@@ -14,12 +14,16 @@ namespace Infraestructura.Reportes
     {
         List<CompraParaReporteDTO> comprasParaReporte;
         List<UsuarioDTO> usuarios;
-        public ReporteData Model { get; } // Puedes pasar datos aquí si es necesario
+        List<EventoDTO> eventos;
+        List<LugarDTO> lugares;
+        List<FiestaDTO> fiestas;
+        public Dictionary<string, float> DatosGrafico { get; private set; }
+        public ReporteData Model { get; }
 
         public Reporte(ReporteData model)
         {
             Model = model;
-         
+            
             try
             {
                 // Este patrón bloquea la ejecución hasta que la operación asíncrona termine.
@@ -32,6 +36,35 @@ namespace Infraestructura.Reportes
                     .GetAwaiter()
                     .GetResult()
                     .ToList();
+                this.eventos = EventoApiClient.GetAllAsync()
+                    .GetAwaiter()
+                    .GetResult()
+                    .ToList();
+                this.lugares = LugarApiClient.GetAllAsync()
+                    .GetAwaiter()
+                    .GetResult()
+                    .ToList();
+                this.fiestas = FiestaApiClient.GetAllAsync()
+                    .GetAwaiter()
+                    .GetResult()
+                    .OrderByDescending(f => f.FechaFiesta)
+                    .Take(3)
+                    .ToList();
+                var ultimasTresFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet();
+
+                DatosGrafico = this.comprasParaReporte
+                    .Where(c => ultimasTresFechas.Contains(c.FechaFiesta))
+                    .GroupBy(c => c.FechaFiesta)
+                    .Select(g => new
+                    {
+                        Fecha = g.Key,
+                        TotalEntradas = g.Sum(c => c.Entradas) // O g.Sum(c => c.Monto) para el monto total
+                    })
+                    // Mapea la fecha a un nombre de evento y el total a un float
+                    .ToDictionary(
+                        x => this.eventos.FirstOrDefault(e => e.Id == this.fiestas.FirstOrDefault(f => f.FechaFiesta == x.Fecha)?.IdEvento)?.Nombre ?? x.Fecha.ToString("dd/MM"),
+                        x => (float)x.TotalEntradas
+                    );
             }
             catch (Exception ex)
             {
@@ -60,7 +93,6 @@ namespace Infraestructura.Reportes
                     // Define la estructura de cada página (encabezado, contenido, pie de página)
                     page.Header().Element(ComposeHeader);
                     page.Content().Element(ComposeContent);
-                    page.Footer().Element(ComposeFooter);
                 });
         }
 
@@ -72,7 +104,7 @@ namespace Infraestructura.Reportes
             container.Row(row =>
             {
                 // Columna izquierda para el título
-                row.ConstantColumn(400).Text("Reporte de Proyecto .NET").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
+                row.ConstantColumn(400).Text("Reporte sobre las ultimas 3 fiestas").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
 
                 // Columna derecha para una imagen o logo (opcional)
                 row.RelativeColumn().Image(Placeholders.Image(100, 50));
@@ -87,26 +119,17 @@ namespace Infraestructura.Reportes
                 // Agrega un espaciado entre los elementos
                 column.Spacing(20);
 
-                // Sección de texto simple
-                column.Item().Text(text =>
-                {
-                    text.Span("Evento: ").SemiBold();
-                    text.Span("EVENTO.NOMBRE + EVENTO.DESCRIPCION");
-                    text.Span("Fiesta: ").SemiBold();
-                    text.Span(DateTime.Now.ToShortDateString() + "LUGAR.NOMBRE + FIESTA.FECHAHORA");
-                    text.Span("Lotes: ").SemiBold();
-                    text.Span("LOTE{i}.NOMBRE + LOTE{i}.PRECIO");
-                    text.Span("Tabla de resumen de ventas").SemiBold();
-                });
 
                 // Sección de tabla (ejemplo)
                 column.Item().PaddingVertical(15).Table(table =>
                 {
                     table.ColumnsDefinition(columns =>
                     {
+                        columns.ConstantColumn(40);
                         columns.ConstantColumn(70);
                         columns.ConstantColumn(70);
                         columns.ConstantColumn(70);
+                        columns.ConstantColumn(130);
                         columns.RelativeColumn();
                     });
 
@@ -115,12 +138,15 @@ namespace Infraestructura.Reportes
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Id").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Cantidad").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
                         header.Cell().Background(Colors.Grey.Lighten3).Text("Monto").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Evento").SemiBold();
+                        header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
                     });
 
                     foreach (var compra in comprasParaReporte)
                     {
+                        var fiesta = this.fiestas.FirstOrDefault(f => f.FechaFiesta == compra.FechaFiesta);
+                        var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
                         var vendedor = this.usuarios.FirstOrDefault(u => u.Id == compra.Vendedor);
                         var jefe = this.usuarios.FirstOrDefault(u => u.Id == vendedor?.IdJefe);
                         if (jefe == null)
@@ -138,37 +164,25 @@ namespace Infraestructura.Reportes
                              .Text(compra.Entradas.ToString());
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(jefe.Nombre.ToString());
+                             .Text(compra.Monto.ToString("0.00"));
 
                         table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Monto.ToString("0.00"));
+                             .Text(evento.Nombre.ToString());
+
+                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
+                             .Text(jefe.Nombre.ToString());
                     }
                 });
-
-                // Más texto o elementos
-                column.Item().Text(Placeholders.Paragraph());
-            });
-        }
-
-        // Pie de página
-        void ComposeFooter(IContainer container)
-        {
-            container.Row(row =>
-            {
-                // Columna izquierda para información de contacto
-                row.ConstantColumn(300).Text("Contacto: tu.email@ejemplo.com").FontSize(9);
-
-                // Columna derecha para la numeración de página
-                row.RelativeColumn().AlignRight().Text(x =>
+                foreach (var fiesta in fiestas)
                 {
-                    x.CurrentPageNumber().FontSize(9);
-                    x.Span(" / ").FontSize(9);
-                    x.TotalPages().FontSize(9);
-                });
+                    var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta.IdEvento);
+                    var lugar = this.lugares.FirstOrDefault(l => l.Id == fiesta.IdLugar);
+                    column.Item().Text($"Información general del evento: {evento.Nombre} \nLugar: {lugar.Nombre} - Direccion: {lugar.Direccion}\nFecha {fiesta.FechaFiesta}").FontSize(11).FontColor(Colors.Blue.Medium);
+                }
+
+                column.Item().Text($"Reporte generado el {DateTime.Now}").FontSize(9).FontColor(Colors.Grey.Darken1);
             });
         }
     }
-
-    // Clase de modelo de datos simple (si la necesitas)
     public class ReporteData { }
 }
