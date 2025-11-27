@@ -7,6 +7,8 @@
 <Header />
 <br />
 <br />
+<br />
+<br />
 
 @if (LoginState.Usuario is not null)
 {
@@ -24,6 +26,7 @@
     <button class="list-group-item list-group-item-action" @onclick="IrAComprarProducto">Comprar Producto</button>
 </div>
 
+<Footer />
 @code {
 
     protected override void OnInitialized()
