@@ -1,103 +1,133 @@
+@page "/comprar-producto"
 @using DTOs
 @using API.Clients
 @using System.Linq
 @inject NavigationManager Navigation
 @inject LoginState LoginState
 
-@page "/comprar-producto"
+<Header />
+<br />
+<br />
+<br />
+<br />
 
-<h3>Comprar Producto</h3>
-
-@if (loading)
-{
-    <div class="alert alert-info">Cargando...</div>
-}
-else
-{
-    @if (!string.IsNullOrEmpty(alertMessage))
-    {
-        <div class="alert @alertCss">@alertMessage</div>
-    }
-
-    <div class="row">
-        <div class="col-md-5">
-            <h5>Compras</h5>
-            @if (comprasParaMostrar?.Any() != true)
-            {
-                <div class="text-muted">No hay compras disponibles.</div>
-            }
-            else
-            {
-                <table class="table table-sm table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Vendedor</th>
-                            <th>Evento</th>
-                            <th>Lugar</th>
-                            <th>FechaHora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in comprasParaMostrar)
-                        {
-                            var isSelected = selectedCompraKey != null && selectedCompraKey.IdCliente == item.CompraKey.IdCliente && selectedCompraKey.IdFiesta == item.CompraKey.IdFiesta && selectedCompraKey.FechaHora == item.CompraKey.FechaHora;
-                            <tr class="@(isSelected ? "table-primary" : "")" @onclick="() => SelectCompra(item.CompraKey)">
-                                <td>
-                                    <input type="radio" name="compraSelect" checked="@(isSelected)" />
-                                </td>
-                                <td>@item.Vendedor</td>
-                                <td>@item.Evento</td>
-                                <td>@item.Lugar</td>
-                                <td>@item.FechaHora.ToString("g")</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Comprar Producto</h3>
         </div>
 
-        <div class="col-md-7">
-            <h5>Productos</h5>
-            @if (productosParaMostrar?.Any() != true)
+        <div class="card-body">
+
+            @if (loading)
             {
-                <div class="text-muted">No hay productos.</div>
+                <div class="d-flex justify-content-center my-4">
+                    <div class="spinner-border text-primary"></div>
+                </div>
             }
             else
             {
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th style="width:120px">Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var p in productosParaMostrar)
+                @if (!string.IsNullOrEmpty(alertMessage))
+                {
+                    <div class="alert @alertCss">@alertMessage</div>
+                }
+
+                <div class="row">
+                    <div class="col-md-5 mb-4">
+                        <h5 class="text-primary mb-3">Compras</h5>
+
+                        @if (comprasParaMostrar?.Any() != true)
                         {
-                            <tr>
-                                <td>@p.Id</td>
-                                <td>@p.Descripcion</td>
-                                <td>@p.Precio</td>
-                                <td>
-                                    <input class="form-control form-control-sm" type="number" min="0" value="@p.Cantidad"
-                                           @onchange="(e) => OnCantidadChanged(p, e.Value?.ToString())" />
-                                </td>
-                            </tr>
+                            <div class="text-muted fst-italic">No hay compras disponibles.</div>
                         }
-                    </tbody>
-                </table>
+                        else
+                        {
+                            <table class="table table-sm table-hover shadow-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th></th>
+                                        <th>Vendedor</th>
+                                        <th>Evento</th>
+                                        <th>Lugar</th>
+                                        <th>FechaHora</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in comprasParaMostrar)
+                                    {
+                                        var isSelected = selectedCompraKey != null &&
+                                        selectedCompraKey.IdCliente == item.CompraKey.IdCliente &&
+                                        selectedCompraKey.IdFiesta == item.CompraKey.IdFiesta &&
+                                        selectedCompraKey.FechaHora == item.CompraKey.FechaHora;
+
+                                        <tr class="@(isSelected ? "table-primary" : "")"
+                                            style="cursor:pointer"
+                                            @onclick="() => SelectCompra(item.CompraKey)">
+                                            <td>
+                                                <input type="radio" name="compraSelect" checked="@(isSelected)" />
+                                            </td>
+                                            <td>@item.Vendedor</td>
+                                            <td>@item.Evento</td>
+                                            <td>@item.Lugar</td>
+                                            <td>@item.FechaHora.ToString("g")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
+                    <div class="col-md-7">
+                        <h5 class="text-primary mb-3">Productos</h5>
+
+                        @if (productosParaMostrar?.Any() != true)
+                        {
+                            <div class="text-muted fst-italic">No hay productos.</div>
+                        }
+                        else
+                        {
+                            <table class="table table-sm shadow-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Descripción</th>
+                                        <th>Precio</th>
+                                        <th style="width:120px">Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var p in productosParaMostrar)
+                                    {
+                                        <tr>
+                                            <td>@p.Id</td>
+                                            <td>@p.Descripcion</td>
+                                            <td>@p.Precio</td>
+                                            <td>
+                                                <input class="form-control form-control-sm" type="number" min="0" value="@p.Cantidad"
+                                                       @onchange="(e) => OnCantidadChanged(p, e.Value?.ToString())" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                        <div class="mt-3 text-end">
+                            <button class="btn btn-primary me-2" @onclick="ComprarAsync" disabled="@isProcessing">
+                                Comprar
+                            </button>
+                            <button class="btn btn-secondary" @onclick="Volver">
+                                Volver
+                            </button>
+                        </div>
+                    </div>
+                </div>
             }
 
-            <div class="mt-2">
-                <button class="btn btn-primary" @onclick="ComprarAsync" disabled="@isProcessing">Comprar</button>
-                <button class="btn btn-secondary ms-2" @onclick="Volver">Volver</button>
-            </div>
         </div>
     </div>
-}
+</div>
+<Footer />
 
 @code {
     [Parameter]
@@ -148,18 +178,18 @@ else
                 var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
 
                 return new CompraListItem
-                {
-                    Vendedor = vendedor?.Nombre ?? "Desconocido",
-                    Evento = evento?.Nombre ?? "Desconocido",
-                    Lugar = lugar?.Nombre ?? "Desconocido",
-                    FechaHora = c.FechaHora,
-                    CompraKey = new CompraKeyDTO
                     {
-                        IdCliente = id,
-                        IdFiesta = c.IdFiesta,
-                        FechaHora = c.FechaHora
-                    }
-                };
+                        Vendedor = vendedor?.Nombre ?? "Desconocido",
+                        Evento = evento?.Nombre ?? "Desconocido",
+                        Lugar = lugar?.Nombre ?? "Desconocido",
+                        FechaHora = c.FechaHora,
+                        CompraKey = new CompraKeyDTO
+                        {
+                            IdCliente = id,
+                            IdFiesta = c.IdFiesta,
+                            FechaHora = c.FechaHora
+                        }
+                    };
             }).ToList();
 
             if (comprasParaMostrar.Any())
@@ -177,12 +207,12 @@ else
         {
             var productos = await ProductoApiClient.GetAllAsync();
             productosParaMostrar = productos.Select(p => new ProdcutoConCantidadDTO
-            {
-                Id = p.Id,
-                Descripcion = p.Descripcion,
-                Precio = p.Precio,
-                Cantidad = 0
-            }).ToList();
+                {
+                    Id = p.Id,
+                    Descripcion = p.Descripcion,
+                    Precio = p.Precio,
+                    Cantidad = 0
+                }).ToList();
         }
         catch (Exception ex)
         {
@@ -229,10 +259,10 @@ else
             var productosSeleccionados = productosParaMostrar.Where(p => p.Cantidad > 0).ToList();
 
             var compra = new ProductoConCompraDTO
-            {
-                Compra = selectedCompraKey,
-                Producto = productosSeleccionados
-            };
+                {
+                    Compra = selectedCompraKey,
+                    Producto = productosSeleccionados
+                };
 
             await ProductoApiClient.AddCompra(compra);
 
@@ -274,7 +304,7 @@ else
 
     private void Volver()
     {
-        Navigation.NavigateTo("/");
+        Navigation.NavigateTo("/menucliente");
     }
 
     private class CompraListItem
@@ -285,4 +315,4 @@ else
         public DateTime FechaHora { get; set; }
         public CompraKeyDTO CompraKey { get; set; }
     }
-}
+} 

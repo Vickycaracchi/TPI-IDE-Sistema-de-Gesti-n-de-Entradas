@@ -1,0 +1,17 @@
+﻿@namespace BlazorApp.Shared
+@inject NavigationManager Nav
+@inject LoginState LoginState
+
+<footer class="footer bg-light shadow-sm py-3 w-100 fixed-bottom text-center">
+    <span class="text-muted">
+        © @DateTime.Now.Year - Bohemia: Sistema de Gestión de Entradas
+    </span>
+</footer>
+
+@code {
+    private void CerrarSesion()
+    {
+        LoginState.Logout();
+        Nav.NavigateTo("/", true);
+    }
+}
