@@ -18,10 +18,12 @@ namespace WinForms
         public VentasVendedores()
         {
             InitializeComponent();
+            this.Resize += VentasVendedores_Resize;
         }
 
         private void VentasVendedores_Load(object sender, EventArgs e)
         {
+            this.VentasVendedores_Resize(sender, e);
             GetAllAndLoad();
         }
 
@@ -30,7 +32,7 @@ namespace WinForms
             try
             {
                 var compras = await CompraApiClient.GetAllByJefeAsync(usuarioIngresado.Id);
-               
+
                 var usuarios = await UsuarioApiClient.GetAllAsync();
                 var fiestas = (await FiestaApiClient.GetAllAsync()).ToList();
                 var lugares = await LugarApiClient.GetAllAsync();
@@ -45,7 +47,7 @@ namespace WinForms
                     var fiesta = fiestas.FirstOrDefault(f => f.IdFiesta == c.IdFiesta);
                     var lugar = lugares.FirstOrDefault(l => l.Id == fiesta?.IdLugar);
                     var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
-                    listacompraMostrar.Add( new CompraParaMostrarDTO
+                    listacompraMostrar.Add(new CompraParaMostrarDTO
                     {
                         Cliente = cliente?.Nombre ?? "Desconocido",
                         Vendedor = vendedor?.Nombre ?? "Desconocido",
@@ -58,7 +60,7 @@ namespace WinForms
                     });
 
                 }
-                
+
                 ventasVendedoresDataGridView.AutoGenerateColumns = true;
                 ventasVendedoresDataGridView.DataSource = listacompraMostrar;
 
@@ -71,6 +73,20 @@ namespace WinForms
             {
                 MessageBox.Show($"Error al cargar las ventas de vendedores: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ventasVendedoresDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void VentasVendedores_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
+
         }
     }
 }
