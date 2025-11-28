@@ -119,5 +119,10 @@ namespace WinForms
 
             return isValid;
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

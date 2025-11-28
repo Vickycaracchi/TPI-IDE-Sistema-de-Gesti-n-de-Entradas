@@ -125,7 +125,7 @@ namespace API.Clients
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
                     
-                    // Intentar extraer el mensaje de error del JSON si está disponible
+                   
                     try
                     {
                         var errorObj = await response.Content.ReadFromJsonAsync<JsonElement>();
@@ -136,7 +136,7 @@ namespace API.Clients
                     }
                     catch
                     {
-                        // Si no se puede parsear como JSON, usar el mensaje completo
+                       
                     }
                     
                     throw new Exception($"Error al eliminar usuario con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");

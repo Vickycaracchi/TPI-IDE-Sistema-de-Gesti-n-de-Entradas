@@ -115,6 +115,7 @@
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            Load += Login_Load;
             ((System.ComponentModel.ISupportInitialize)ingresarVendedorErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -34,7 +34,7 @@ namespace Application.Services
             }
             catch (InvalidOperationException)
             {
-                throw; // Propagar la excepción con el mensaje claro
+                throw; 
             }
         }
 
