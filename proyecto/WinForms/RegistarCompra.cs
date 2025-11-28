@@ -20,9 +20,13 @@ namespace WinForms
         public RegistrarCompra()
         {
             InitializeComponent();
+            this.Resize += RegistrarCompra_Resize;
+
+
         }
         private void ClientesLista_Load(object sender, EventArgs e)
         {
+            this.RegistrarCompra_Resize(sender, e);
             this.GetAllAndLoad();
         }
 
@@ -32,13 +36,13 @@ namespace WinForms
             {
                 this.clientesDataGridView.DataSource = null;
                 this.clientesDataGridView.DataSource = await UsuarioApiClient.GetByTipoAsync("Cliente");
-                
+
                 // Ocultar la columna IdJefe en el listado de clientes
                 if (this.clientesDataGridView.Columns["IdJefe"] != null)
                 {
                     this.clientesDataGridView.Columns["IdJefe"].Visible = false;
                 }
-                
+
                 lugares = (await LugarApiClient.GetAllAsync()).ToList();
                 eventos = (await EventoApiClient.GetAllAsync()).ToList();
 
@@ -109,8 +113,8 @@ namespace WinForms
                     compraDTO.FechaHora = fecha;
                     await CompraApiClient.AddAsync(compraDTO);
 
-                   
-                    
+
+
 
                     MessageBox.Show("Compra registrada correctamente.");
                     this.DialogResult = DialogResult.OK;
@@ -142,6 +146,20 @@ namespace WinForms
 
         private void fiestasDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void RegistrarCompra_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

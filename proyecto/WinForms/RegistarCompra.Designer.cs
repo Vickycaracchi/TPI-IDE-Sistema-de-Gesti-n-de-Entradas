@@ -37,25 +37,27 @@
             registrarCompraErrorProvider = new ErrorProvider(components);
             label2 = new Label();
             label3 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fiestasDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)registrarCompraErrorProvider).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // clientesDataGridView
             // 
             clientesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            clientesDataGridView.Location = new Point(20, 26);
+            clientesDataGridView.Location = new Point(14, 36);
             clientesDataGridView.Margin = new Padding(3, 2, 3, 2);
             clientesDataGridView.Name = "clientesDataGridView";
             clientesDataGridView.RowHeadersWidth = 51;
-            clientesDataGridView.Size = new Size(1156, 170);
+            clientesDataGridView.Size = new Size(1244, 305);
             clientesDataGridView.TabIndex = 0;
             clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
             // cantidadTextBox
             // 
-            cantidadTextBox.Location = new Point(353, 409);
+            cantidadTextBox.Location = new Point(387, 693);
             cantidadTextBox.Margin = new Padding(3, 2, 3, 2);
             cantidadTextBox.Name = "cantidadTextBox";
             cantidadTextBox.Size = new Size(110, 23);
@@ -64,15 +66,16 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(189, 411);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(223, 695);
             label1.Name = "label1";
-            label1.Size = new Size(119, 15);
+            label1.Size = new Size(157, 21);
             label1.TabIndex = 5;
             label1.Text = "Cantidad de entradas";
             // 
             // enviarRegCompra
             // 
-            enviarRegCompra.Location = new Point(801, 409);
+            enviarRegCompra.Location = new Point(835, 693);
             enviarRegCompra.Margin = new Padding(3, 2, 3, 2);
             enviarRegCompra.Name = "enviarRegCompra";
             enviarRegCompra.Size = new Size(130, 49);
@@ -84,11 +87,11 @@
             // fiestasDataGridView
             // 
             fiestasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            fiestasDataGridView.Location = new Point(20, 216);
+            fiestasDataGridView.Location = new Point(14, 370);
             fiestasDataGridView.Margin = new Padding(3, 2, 3, 2);
             fiestasDataGridView.Name = "fiestasDataGridView";
             fiestasDataGridView.RowHeadersWidth = 51;
-            fiestasDataGridView.Size = new Size(1156, 189);
+            fiestasDataGridView.Size = new Size(1244, 305);
             fiestasDataGridView.TabIndex = 7;
             fiestasDataGridView.CellContentClick += fiestasDataGridView_CellContentClick;
             // 
@@ -99,33 +102,44 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(20, 199);
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(14, 346);
             label2.Name = "label2";
-            label2.Size = new Size(37, 15);
+            label2.Size = new Size(112, 21);
             label2.TabIndex = 8;
-            label2.Text = "Fiesta";
+            label2.Text = "Elija una fiesta:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 9);
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.Location = new Point(14, 13);
             label3.Name = "label3";
-            label3.Size = new Size(44, 15);
+            label3.Size = new Size(112, 21);
             label3.TabIndex = 9;
-            label3.Text = "Cliente";
+            label3.Text = "Elija un cliente:";
+            label3.Click += label3_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(fiestasDataGridView);
+            panel1.Controls.Add(enviarRegCompra);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(cantidadTextBox);
+            panel1.Controls.Add(clientesDataGridView);
+            panel1.Location = new Point(9, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1318, 748);
+            panel1.TabIndex = 10;
             // 
             // RegistrarCompra
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1257, 573);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(fiestasDataGridView);
-            Controls.Add(enviarRegCompra);
-            Controls.Add(label1);
-            Controls.Add(cantidadTextBox);
-            Controls.Add(clientesDataGridView);
+            ClientSize = new Size(1362, 776);
+            Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "RegistrarCompra";
             StartPosition = FormStartPosition.CenterScreen;
@@ -134,8 +148,9 @@
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)fiestasDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)registrarCompraErrorProvider).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -148,5 +163,6 @@
         private ErrorProvider registrarCompraErrorProvider;
         private Label label3;
         private Label label2;
+        private Panel panel1;
     }
 }

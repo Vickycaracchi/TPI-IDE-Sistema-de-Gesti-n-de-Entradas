@@ -32,23 +32,26 @@
             eliminarButtonCliente = new Button();
             modificarButtonCliente = new Button();
             agregarButtonCliente = new Button();
+            label1 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // clientesDataGridView
             // 
             clientesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            clientesDataGridView.Location = new Point(20, 18);
+            clientesDataGridView.Location = new Point(15, 53);
             clientesDataGridView.Margin = new Padding(3, 2, 3, 2);
             clientesDataGridView.Name = "clientesDataGridView";
             clientesDataGridView.RowHeadersWidth = 51;
-            clientesDataGridView.Size = new Size(1156, 230);
+            clientesDataGridView.Size = new Size(1156, 305);
             clientesDataGridView.TabIndex = 0;
             clientesDataGridView.CellContentClick += clientesDataGridView_CellContentClick;
             // 
             // eliminarButtonCliente
             // 
-            eliminarButtonCliente.Location = new Point(20, 266);
+            eliminarButtonCliente.Location = new Point(313, 362);
             eliminarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             eliminarButtonCliente.Name = "eliminarButtonCliente";
             eliminarButtonCliente.Size = new Size(143, 38);
@@ -59,7 +62,7 @@
             // 
             // modificarButtonCliente
             // 
-            modificarButtonCliente.Location = new Point(195, 266);
+            modificarButtonCliente.Location = new Point(488, 362);
             modificarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             modificarButtonCliente.Name = "modificarButtonCliente";
             modificarButtonCliente.Size = new Size(143, 38);
@@ -70,7 +73,7 @@
             // 
             // agregarButtonCliente
             // 
-            agregarButtonCliente.Location = new Point(373, 266);
+            agregarButtonCliente.Location = new Point(666, 362);
             agregarButtonCliente.Margin = new Padding(3, 2, 3, 2);
             agregarButtonCliente.Name = "agregarButtonCliente";
             agregarButtonCliente.Size = new Size(143, 38);
@@ -79,21 +82,42 @@
             agregarButtonCliente.UseVisualStyleBackColor = true;
             agregarButtonCliente.Click += agregarButton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20F);
+            label1.Location = new Point(464, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(246, 37);
+            label1.TabIndex = 5;
+            label1.Text = "Gestión de Clientes";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(agregarButtonCliente);
+            panel1.Controls.Add(modificarButtonCliente);
+            panel1.Controls.Add(eliminarButtonCliente);
+            panel1.Controls.Add(clientesDataGridView);
+            panel1.Location = new Point(41, 33);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1188, 453);
+            panel1.TabIndex = 6;
+            // 
             // ClientesLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1257, 338);
-            Controls.Add(agregarButtonCliente);
-            Controls.Add(modificarButtonCliente);
-            Controls.Add(eliminarButtonCliente);
-            Controls.Add(clientesDataGridView);
+            ClientSize = new Size(1329, 583);
+            Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "ClientesLista";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gestión de clientes";
             Load += ClientesLista_Load;
             ((System.ComponentModel.ISupportInitialize)clientesDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -103,5 +127,7 @@
         private Button eliminarButtonCliente;
         private Button modificarButtonCliente;
         private Button agregarButtonCliente;
+        private Label label1;
+        private Panel panel1;
     }
 }

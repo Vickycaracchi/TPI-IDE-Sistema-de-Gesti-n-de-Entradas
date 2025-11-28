@@ -17,6 +17,7 @@ namespace WinForms
         public ClientesLista()
         {
             InitializeComponent();
+            this.Resize += ClienteLista_Resize;
         }
         public FormMode mode;
         public FormMode Mode
@@ -36,6 +37,7 @@ namespace WinForms
         }
         private void ClientesLista_Load(object sender, EventArgs e)
         {
+            this.ClienteLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
         private void agregarButton_Click(object sender, EventArgs e)
@@ -144,6 +146,15 @@ namespace WinForms
         }
         private void clientesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+        private void ClienteLista_Resize(object sender, EventArgs e)
+        {
+
+            
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

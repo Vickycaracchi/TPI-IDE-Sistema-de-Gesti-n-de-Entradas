@@ -24,6 +24,7 @@ namespace WinForms
             if (this.panelContenedorVendedor.Controls.Count > 0)
                 this.panelContenedorVendedor.Controls.RemoveAt(0);
 
+        
             formHijo.TopLevel = false;
             formHijo.FormBorderStyle = FormBorderStyle.None;
             formHijo.Dock = DockStyle.Fill;

@@ -43,7 +43,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(1209, 24);
+            menuStrip1.Size = new Size(1224, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -73,14 +73,15 @@
             panelContenedorVendedor.Location = new Point(0, 23);
             panelContenedorVendedor.Margin = new Padding(3, 2, 3, 2);
             panelContenedorVendedor.Name = "panelContenedorVendedor";
-            panelContenedorVendedor.Size = new Size(1209, 464);
+            panelContenedorVendedor.Size = new Size(1222, 576);
             panelContenedorVendedor.TabIndex = 1;
+            panelContenedorVendedor.Dock = DockStyle.Fill;
             // 
             // MenuVendedor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1209, 486);
+            ClientSize = new Size(1224, 600);
             Controls.Add(panelContenedorVendedor);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;

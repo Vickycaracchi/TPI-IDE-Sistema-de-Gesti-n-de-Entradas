@@ -18,6 +18,7 @@ namespace WinForms
         public MisVentas()
         {
             InitializeComponent();
+            this.Resize += MisVentas_Resize;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -27,6 +28,7 @@ namespace WinForms
 
         private void MisVentas_Load(object sender, EventArgs e)
         {
+            this.MisVentas_Resize(sender, e);
             GetAllAndLoad();
         }
 
@@ -78,6 +80,20 @@ namespace WinForms
             {
                 MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void MisVentas_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

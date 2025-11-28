@@ -83,6 +83,7 @@ namespace WinForms
             panelContenedorJefe.Name = "panelContenedorJefe";
             panelContenedorJefe.Size = new Size(1209, 464);
             panelContenedorJefe.TabIndex = 1;
+            panelContenedorJefe.Dock = DockStyle.Fill;
             // 
             // MenuJefe
             // 
