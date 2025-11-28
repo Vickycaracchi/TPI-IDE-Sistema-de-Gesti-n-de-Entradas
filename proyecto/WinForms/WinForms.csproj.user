@@ -7,9 +7,6 @@
     <ActiveDebugProfile>WinForms</ActiveDebugProfile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="AAReporteDatosVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="AsignarVendedores.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -32,8 +32,8 @@
             gestiónLotesToolStripMenuItem = new ToolStripMenuItem();
             gestiónFiestasToolStripMenuItem = new ToolStripMenuItem();
             asignarVendedoresToolStripMenuItem = new ToolStripMenuItem();
-            generarReporteToolStripMenuItem = new ToolStripMenuItem();
-            verDatosReporteToolStripMenuItem = new ToolStripMenuItem();
+            generarReporteFiestasToolStripMenuItem = new ToolStripMenuItem();
+            generarReporteClientesToolStripMenuItem = new ToolStripMenuItem();
             panelContenedor = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -41,93 +41,96 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem, asignarVendedoresToolStripMenuItem, generarReporteToolStripMenuItem, verDatosReporteToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { listarVendedoresToolStripMenuItem, listarEventosToolStripMenuItem, gestiónProductosToolStripMenuItem, gestiónLugaresToolStripMenuItem, gestiónLotesToolStripMenuItem, gestiónFiestasToolStripMenuItem, asignarVendedoresToolStripMenuItem, generarReporteFiestasToolStripMenuItem, generarReporteClientesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1222, 24);
+            menuStrip1.Padding = new Padding(7, 3, 0, 3);
+            menuStrip1.Size = new Size(1397, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // listarVendedoresToolStripMenuItem
             // 
             listarVendedoresToolStripMenuItem.Name = "listarVendedoresToolStripMenuItem";
-            listarVendedoresToolStripMenuItem.Size = new Size(123, 20);
+            listarVendedoresToolStripMenuItem.Size = new Size(155, 24);
             listarVendedoresToolStripMenuItem.Text = "Gestión Vendedores";
             listarVendedoresToolStripMenuItem.Click += listarVendedoresToolStripMenuItem_Click;
             // 
             // listarEventosToolStripMenuItem
             // 
             listarEventosToolStripMenuItem.Name = "listarEventosToolStripMenuItem";
-            listarEventosToolStripMenuItem.Size = new Size(103, 20);
+            listarEventosToolStripMenuItem.Size = new Size(128, 24);
             listarEventosToolStripMenuItem.Text = "Gestión Eventos";
             listarEventosToolStripMenuItem.Click += listarEventosToolStripMenuItem_Click;
             // 
             // gestiónProductosToolStripMenuItem
             // 
             gestiónProductosToolStripMenuItem.Name = "gestiónProductosToolStripMenuItem";
-            gestiónProductosToolStripMenuItem.Size = new Size(116, 20);
+            gestiónProductosToolStripMenuItem.Size = new Size(143, 24);
             gestiónProductosToolStripMenuItem.Text = "Gestión Productos";
             gestiónProductosToolStripMenuItem.Click += gestiónProductosToolStripMenuItem_Click;
             // 
             // gestiónLugaresToolStripMenuItem
             // 
             gestiónLugaresToolStripMenuItem.Name = "gestiónLugaresToolStripMenuItem";
-            gestiónLugaresToolStripMenuItem.Size = new Size(103, 20);
+            gestiónLugaresToolStripMenuItem.Size = new Size(128, 24);
             gestiónLugaresToolStripMenuItem.Text = "Gestión Lugares";
             gestiónLugaresToolStripMenuItem.Click += gestiónLugaresToolStripMenuItem_Click;
             // 
             // gestiónLotesToolStripMenuItem
             // 
             gestiónLotesToolStripMenuItem.Name = "gestiónLotesToolStripMenuItem";
-            gestiónLotesToolStripMenuItem.Size = new Size(90, 20);
+            gestiónLotesToolStripMenuItem.Size = new Size(112, 24);
             gestiónLotesToolStripMenuItem.Text = "Gestión Lotes";
             gestiónLotesToolStripMenuItem.Click += gestiónLotesToolStripMenuItem_Click;
             // 
             // gestiónFiestasToolStripMenuItem
             // 
             gestiónFiestasToolStripMenuItem.Name = "gestiónFiestasToolStripMenuItem";
-            gestiónFiestasToolStripMenuItem.Size = new Size(97, 20);
+            gestiónFiestasToolStripMenuItem.Size = new Size(121, 24);
             gestiónFiestasToolStripMenuItem.Text = "Gestión Fiestas";
             gestiónFiestasToolStripMenuItem.Click += gestiónFiestasToolStripMenuItem_Click;
             // 
             // asignarVendedoresToolStripMenuItem
             // 
             asignarVendedoresToolStripMenuItem.Name = "asignarVendedoresToolStripMenuItem";
-            asignarVendedoresToolStripMenuItem.Size = new Size(123, 20);
+            asignarVendedoresToolStripMenuItem.Size = new Size(155, 24);
             asignarVendedoresToolStripMenuItem.Text = "Asignar Vendedores";
             asignarVendedoresToolStripMenuItem.Click += asignarVendedoresToolStripMenuItem_Click;
             // 
-            // generarReporteToolStripMenuItem
+            // generarReporteFiestasToolStripMenuItem
             // 
-            generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
-            generarReporteToolStripMenuItem.Size = new Size(101, 20);
-            generarReporteToolStripMenuItem.Text = "Generar reporte";
-            generarReporteToolStripMenuItem.Click += generarReporteToolStripMenuItem_Click;
+            generarReporteFiestasToolStripMenuItem.Name = "generarReporteFiestasToolStripMenuItem";
+            generarReporteFiestasToolStripMenuItem.Size = new Size(174, 24);
+            generarReporteFiestasToolStripMenuItem.Text = "Generar reporte fiestas";
+            generarReporteFiestasToolStripMenuItem.Click += generarReporteFiestasToolStripMenuItem_Click;
             // 
-            // verDatosReporteToolStripMenuItem
+            // generarReporteClientesToolStripMenuItem
             // 
-            verDatosReporteToolStripMenuItem.Name = "verDatosReporteToolStripMenuItem";
-            verDatosReporteToolStripMenuItem.Size = new Size(108, 20);
-            verDatosReporteToolStripMenuItem.Text = "Ver datos reporte";
-            verDatosReporteToolStripMenuItem.Click += verDatosReporteToolStripMenuItem_Click;
+            generarReporteClientesToolStripMenuItem.Name = "generarReporteClientesToolStripMenuItem";
+            generarReporteClientesToolStripMenuItem.Size = new Size(182, 24);
+            generarReporteClientesToolStripMenuItem.Text = "Generar reporte clientes";
+            generarReporteClientesToolStripMenuItem.Click += generarReporteClientesToolStripMenuItem_Click;
             // 
             // panelContenedor
             // 
             panelContenedor.AutoSize = true;
             panelContenedor.Dock = DockStyle.Fill;
-            panelContenedor.Location = new Point(0, 24);
+            panelContenedor.Location = new Point(0, 30);
+            panelContenedor.Margin = new Padding(3, 4, 3, 4);
             panelContenedor.Name = "panelContenedor";
-            panelContenedor.Size = new Size(1222, 576);
+            panelContenedor.Size = new Size(1397, 770);
             panelContenedor.TabIndex = 1;
             // 
             // MenuAdmin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1222, 600);
+            ClientSize = new Size(1397, 800);
             Controls.Add(panelContenedor);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MenuAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menú Administrador";
@@ -151,7 +154,7 @@
         private ToolStripMenuItem gestiónLotesToolStripMenuItem;
         private ToolStripMenuItem gestiónFiestasToolStripMenuItem;
         private ToolStripMenuItem asignarVendedoresToolStripMenuItem;
-        private ToolStripMenuItem generarReporteToolStripMenuItem;
-        private ToolStripMenuItem verDatosReporteToolStripMenuItem;
+        private ToolStripMenuItem generarReporteFiestasToolStripMenuItem;
+        private ToolStripMenuItem generarReporteClientesToolStripMenuItem;
     }
 }

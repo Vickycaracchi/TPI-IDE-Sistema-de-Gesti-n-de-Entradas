@@ -65,9 +65,61 @@ namespace WinForms
             AbrirFormularioEnPanel(new AsignarVendedores());
         }
 
-        private async void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void generarReporteFiestasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            generarReporteToolStripMenuItem.Enabled = false;
+            generarReporteFiestasToolStripMenuItem.Enabled = false;
+
+            string rutaCompleta = null;
+
+            try
+            {
+                rutaCompleta = await Task.Run(() =>
+                {
+                    var datos = new ReporteDataFiestas();
+                    var documento = new ReporteFiestas(datos);
+
+                    string rutaEjecucion = AppDomain.CurrentDomain.BaseDirectory;
+                    string rutaSolucion = Path.GetFullPath(Path.Combine(rutaEjecucion, @"..\..\..\.."));
+
+                    string carpetaReportes = Path.Combine(rutaSolucion, "Reportes");
+                    Directory.CreateDirectory(carpetaReportes);
+
+                    var nombreArchivo = $"Reporte_Fiestas{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                    var ruta = Path.Combine(carpetaReportes, nombreArchivo);
+
+                    documento.GeneratePdf(ruta);
+
+                    return ruta;
+                });
+
+                DialogResult resultado = MessageBox.Show(
+                    $"El reporte se generó exitosamente en:\n{rutaCompleta}\n\n¿Desea abrir el archivo ahora?",
+                    "Reporte Generado",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information
+                );
+
+                if (resultado == DialogResult.Yes)
+                {
+                    Process.Start(new ProcessStartInfo(rutaCompleta) { UseShellExecute = true });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocurrió un error al generar el reporte: {ex.Message}",
+                                "Error de Generación",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            finally
+            {
+                generarReporteFiestasToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private async void generarReporteClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generarReporteFiestasToolStripMenuItem.Enabled = false;
 
             string rutaCompleta = null;
 
@@ -84,15 +136,14 @@ namespace WinForms
                     string carpetaReportes = Path.Combine(rutaSolucion, "Reportes");
                     Directory.CreateDirectory(carpetaReportes);
 
-                    var nombreArchivo = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
-                    var ruta = Path.Combine(carpetaReportes, nombreArchivo);// 3. Generar el PDF
+                    var nombreArchivo = $"Reporte_Clientes{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                    var ruta = Path.Combine(carpetaReportes, nombreArchivo);
 
                     documento.GeneratePdf(ruta);
 
                     return ruta;
                 });
 
-                // 4. Mostrar Mensaje de Éxito y Abrir el Archivo
                 DialogResult resultado = MessageBox.Show(
                     $"El reporte se generó exitosamente en:\n{rutaCompleta}\n\n¿Desea abrir el archivo ahora?",
                     "Reporte Generado",
@@ -102,8 +153,6 @@ namespace WinForms
 
                 if (resultado == DialogResult.Yes)
                 {
-                    // Intenta abrir el PDF con el programa predeterminado del sistema
-                    // Usamos Process.Start para lanzar la aplicación.
                     Process.Start(new ProcessStartInfo(rutaCompleta) { UseShellExecute = true });
                 }
             }
@@ -116,13 +165,8 @@ namespace WinForms
             }
             finally
             {
-                generarReporteToolStripMenuItem.Enabled = true;
+                generarReporteFiestasToolStripMenuItem.Enabled = true;
             }
-        }
-
-        private void verDatosReporteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirFormularioEnPanel(new ReporteDatosVista());
         }
 
         private void MenuAdmin_Load(object sender, EventArgs e)
