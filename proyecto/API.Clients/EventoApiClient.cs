@@ -31,7 +31,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener evento con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener evento con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
@@ -56,7 +56,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de eventos. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de eventos.");
                 }
             }
             catch (HttpRequestException ex)
@@ -77,7 +77,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear evento. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear evento.");
                 }
             }
             catch (HttpRequestException ex)
@@ -98,7 +98,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar evento con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar evento con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
@@ -120,16 +120,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar evento con Id {evento.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al actualizar evento con Id {evento.Id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar evento con Id {evento.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar evento con Id {evento.Id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar evento con Id {evento.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar evento con Id {evento.Id}");
             }
         }
     }

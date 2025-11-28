@@ -31,16 +31,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener producto con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener producto con Id {id}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener producto con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener producto con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener producto con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener producto con Id {id}");
             }
         }
         public static async Task<IEnumerable<ProductoDTO>> GetAllAsync()
@@ -56,16 +56,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de productos. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de productos. ");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de productos: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de productos: ");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de productos: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lista de productos");
             }
         }
         public async static Task AddAsync(ProductoDTO producto)
@@ -77,16 +77,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear producto. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear producto.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear producto: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear producto: ");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear producto: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear producto");
             }
         }
         public static async Task DeleteAsync(int id)
@@ -98,16 +98,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar producto con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar producto con Id {id}. ");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al eliminar producto con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar producto con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar producto con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar producto con Id {id}");
             }
         }
         public static async Task UpdateAsync(ProductoDTO producto)
@@ -119,16 +119,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar producto con Id {producto.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al actualizar producto con Id {producto.Id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar producto con Id {producto.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar producto con Id {producto.Id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar producto con Id {producto.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar producto con Id {producto.Id}");
             }
         }
         public static async Task AddCompra(ProductoConCompraDTO producto)

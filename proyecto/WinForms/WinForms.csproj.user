@@ -10,16 +10,7 @@
     <Compile Update="AsignarVendedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AAComprarProducto.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FiestasLista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="AAListarCompras.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="AAListarFiestas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Login.cs">
@@ -29,12 +20,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RegistrarFiesta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="AAListarEventos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="AAListarProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LoteDetalle.cs">
@@ -49,9 +34,6 @@
     <Compile Update="LugaresLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AAmenuCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="MenuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,16 +46,10 @@
     <Compile Update="ProductosLista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AARegistrarVenta.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="VendedoresLista.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MenuAdmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="AAPruebas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ClientesLista.cs">

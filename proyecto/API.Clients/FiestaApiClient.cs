@@ -31,7 +31,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de fiestas. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de fiestas.");
                 }
             }
             catch (HttpRequestException ex)
@@ -54,7 +54,7 @@ namespace API.Clients
             else
             {
                 string errorContent = await response.Content.ReadAsStringAsync();
-                throw new Exception($"Error al obtener fiestas con lotes. Status: {response.StatusCode}, Detalle: {errorContent}");
+                throw new Exception($"Error al obtener fiestas con lotes.");
             }
         }
         public static async Task<FiestaDTO> GetAsync(int idFiesta)
@@ -70,16 +70,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener fiesta con Id {idFiesta}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener fiesta con Id {idFiesta}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener fiesta con Id {idFiesta}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener fiesta con Id {idFiesta}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener producto con Id {idFiesta}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener producto con Id {idFiesta}");
             }
         }
         public async static Task AddAsync(FiestaDTO fiesta)
@@ -91,7 +91,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear fiesta. Status: {response.StatusCode}.");
+                    throw new Exception($"Error al crear fiesta.");
                 }
             }
             catch (HttpRequestException ex)
@@ -112,7 +112,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar fiesta. Status: {response.StatusCode}.");
+                    throw new Exception($"Error al actualizar fiesta.");
                 }
             }
             catch (HttpRequestException ex)
@@ -133,17 +133,17 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar fiesta con Id {idFiesta}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar fiesta con Id {idFiesta}.");
                 }
             }
             catch (HttpRequestException ex)
 
             {
-                throw new Exception($"Error de conexión al eliminar fiesta con Id {idFiesta}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar fiesta con Id {idFiesta}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar fiesta con Id {idFiesta}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar fiesta con Id {idFiesta}");
             }
         }
     }

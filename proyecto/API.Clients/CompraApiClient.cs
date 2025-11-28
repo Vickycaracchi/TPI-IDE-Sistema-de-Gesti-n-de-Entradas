@@ -31,7 +31,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras.");
                 }
             }
             catch (HttpRequestException ex)
@@ -57,7 +57,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras. Status:");
                 }
             }
             catch (HttpRequestException ex)
@@ -78,7 +78,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear compra. Status: {response.StatusCode}.");
+                    throw new Exception($"Error al crear compra.");
                 }
             }
             catch (HttpRequestException ex)
@@ -99,7 +99,7 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar compra. Status: {response.StatusCode}.");
+                    throw new Exception($"Error al actualizar compra.");
                 }
             }
             catch (HttpRequestException ex)
@@ -125,7 +125,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras.");
                 }
             }
             catch (HttpRequestException ex)
@@ -151,7 +151,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras por producto. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras por producto.");
                 }
             }
             catch (HttpRequestException)
@@ -177,7 +177,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras.");
                 }
             }
             catch (HttpRequestException ex)
@@ -202,7 +202,7 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de compras. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de compras.");
                 }
             }
             catch (HttpRequestException ex)

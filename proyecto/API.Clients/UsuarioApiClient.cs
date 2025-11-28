@@ -32,16 +32,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener usuario con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener usuario con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener usuario con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener usuario con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener usuario con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener usuario con Id {id}");
             }
         }
         public static async Task<IEnumerable<UsuarioDTO>> GetAllAsync()
@@ -57,16 +57,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de usuarios. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de usuarios. ");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de usuarios: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de usuarios");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de usuarios: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear producto");
             }
         }
         public static async Task<IEnumerable<UsuarioDTO>> GetByTipoAsync(string tipoBuscado)
@@ -82,16 +82,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de usuarios. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de usuarios. ");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de usuarios: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de usuarios");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de usuarios: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de usuarios");
             }
         }
         public async static Task AddAsync(UsuarioDTO usuario)
@@ -103,16 +103,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear usuario. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear usuario.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear usuario: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear usuario");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear usuario: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de usuarios");
             }
         }
         public static async Task DeleteAsync(int id)
@@ -139,16 +139,16 @@ namespace API.Clients
                        
                     }
                     
-                    throw new Exception($"Error al eliminar usuario con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar usuario con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al eliminar usuario con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar usuario con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar usuario con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar usuario con Id {id}");
             }
         }
         public static async Task UpdateAsync(UsuarioDTO usuario)
@@ -160,16 +160,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar usuario con Id {usuario.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al actualizar usuario con Id {usuario.Id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar usuario con Id {usuario.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar usuario con Id {usuario.Id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar usuario con Id {usuario.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar usuario con Id {usuario.Id}");
             }
         }
         public static async Task<UsuarioDTO?> LoginAsync(LoginDTO loginDto)
@@ -189,16 +189,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error de servidor. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error de servidor.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al intentar iniciar sesión: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al intentar iniciar sesión");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al intentar iniciar sesión: {ex.Message}", ex);
+                throw new Exception($"Timeout al intentar iniciar sesión");
             }
         }
 
@@ -212,16 +212,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al asignar vendedor a jefe. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al asignar vendedor a jefe.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al asignar vendedor a jefe: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al asignar vendedor a jefe");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al asignar vendedor a jefe: {ex.Message}", ex);
+                throw new Exception($"Timeout al asignar vendedor a jefe");
             }
         }
     }

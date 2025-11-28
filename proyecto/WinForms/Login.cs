@@ -39,13 +39,27 @@ namespace WinForms
                         // Guarda datos del usuario logueado
                         TipoUsuario = usuario.Tipo;
                         usuarioIngresado = usuario;
+                        if (TipoUsuario != "Cliente")
+                        {
+                            MessageBox.Show(
+                             $"¡Bienvenido, {TipoUsuario}!",
+                             "Inicio de Sesión Exitoso",
+                             MessageBoxButtons.OK,
+                             MessageBoxIcon.Information);
+                        }
+                        else
+                        {
 
-                        MessageBox.Show(
-                            $"¡Bienvenido, {TipoUsuario}!",
+                            MessageBox.Show(
+                            $"¡Bienvenido, {TipoUsuario}! Su panel esta disponible en la versión web",
                             "Inicio de Sesión Exitoso",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information
-                        );
+                            MessageBoxButtons.OK);
+
+
+
+
+                         }
+
 
                         // Redirección según tipo de usuario
                         if (TipoUsuario == "Administrador")
@@ -66,12 +80,7 @@ namespace WinForms
                             menuJefeForm.usuarioIngresado = usuarioIngresado;
                             menuJefeForm.ShowDialog();
                         }
-                        else if (TipoUsuario == "Cliente")
-                        {
-                            var menuClienteForm = new menuCliente();
-                            menuClienteForm.usuarioIngresado = usuarioIngresado;
-                            menuClienteForm.ShowDialog();
-                        }
+
 
                         // Cierra el Login
                         this.DialogResult = DialogResult.OK;

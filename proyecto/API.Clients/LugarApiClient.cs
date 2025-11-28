@@ -31,16 +31,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lugar con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lugar con Id {id}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lugar con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lugar con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lugar con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lugar con Id {id}");
             }
         }
         public static async Task<IEnumerable<LugarDTO>> GetAllAsync()
@@ -56,16 +56,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de lugares. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de lugares.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de lugares: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de lugares");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de lugares: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lista de lugares");
             }
         }
         public async static Task AddAsync(LugarDTO lugar)
@@ -77,16 +77,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al crear lugar. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al crear lugar. ");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al crear lugar: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al crear lugar: ");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al crear lugar: {ex.Message}", ex);
+                throw new Exception($"Timeout al crear lugar: ");
             }
         }
         public static async Task DeleteAsync(int id)
@@ -98,16 +98,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar lugar con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar lugar con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al eliminar lugar con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar lugar con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar lugar con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar lugar con Id {id}:");
             }
         }
         public static async Task UpdateAsync(LugarDTO lugar)
@@ -119,16 +119,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al actualizar lugar con Id {lugar.Id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al actualizar lugar con Id {lugar.Id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar lugar con Id {lugar.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar lugar con Id {lugar.Id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar lugar con Id {lugar.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar lugar con Id {lugar.Id}");
             }
         }
     }

@@ -31,16 +31,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lote con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lote con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lote con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lote con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lote con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lote con Id {id}");
             }
         }
         public static async Task<IEnumerable<LoteDTO>> GetAllAsync()
@@ -56,16 +56,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de lotes. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de lotes.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de lotes: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de lotes:");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de lotes: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lista de lotes");
             }
         }
         public static async Task<IEnumerable<LoteDTO>> GetByEventoAsync(int idEvento)
@@ -81,16 +81,16 @@ namespace API.Clients
                 else
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al obtener lista de lotes. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al obtener lista de lotes.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al obtener lista de lotes: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al obtener lista de lotes");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al obtener lista de lotes: {ex.Message}", ex);
+                throw new Exception($"Timeout al obtener lista de lotes");
             }
         }
         public async static Task AddAsync(LoteConFiestaDTO lote)
@@ -123,16 +123,16 @@ namespace API.Clients
                 if (!response.IsSuccessStatusCode)
                 {
                     string errorContent = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Error al eliminar lote con Id {id}. Status: {response.StatusCode}, Detalle: {errorContent}");
+                    throw new Exception($"Error al eliminar lote con Id {id}.");
                 }
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al eliminar lote con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al eliminar lote con Id {id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al eliminar lote con Id {id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al eliminar lote con Id {id}");
             }
         }
         public static async Task UpdateAsync(LoteDTO lote)
@@ -149,11 +149,11 @@ namespace API.Clients
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error de conexión al actualizar lote con Id {lote.Id}: {ex.Message}", ex);
+                throw new Exception($"Error de conexión al actualizar lote con Id {lote.Id}");
             }
             catch (TaskCanceledException ex)
             {
-                throw new Exception($"Timeout al actualizar lote con Id {lote.Id}: {ex.Message}", ex);
+                throw new Exception($"Timeout al actualizar lote con Id {lote.Id}");
             }
         }
 
@@ -168,7 +168,7 @@ namespace API.Clients
             else
             {
                 string errorContent = await response.Content.ReadAsStringAsync();
-                throw new Exception($"Error al obtener el lote actual de la fiesta {idFiesta}: {errorContent}");
+                throw new Exception($"Error al obtener el lote actual de la fiesta {idFiesta}");
             }
         }
 
