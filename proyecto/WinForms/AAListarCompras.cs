@@ -18,6 +18,7 @@ namespace WinForms
         public ListarCompras()
         {
             InitializeComponent();
+            this.Resize += comLista_Resize;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -27,6 +28,7 @@ namespace WinForms
 
         private void ListarCompras_Load(object sender, EventArgs e)
         {
+            this.comLista_Resize(sender, e);
             GetAllAndLoad();
         }
 
@@ -61,6 +63,15 @@ namespace WinForms
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+        private void comLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

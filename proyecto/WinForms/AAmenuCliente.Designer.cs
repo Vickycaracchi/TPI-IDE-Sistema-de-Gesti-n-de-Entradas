@@ -92,6 +92,7 @@
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(1773, 822);
             panelContenedor.TabIndex = 1;
+            panelContenedor.Dock = DockStyle.Fill;
             // 
             // menuCliente
             // 

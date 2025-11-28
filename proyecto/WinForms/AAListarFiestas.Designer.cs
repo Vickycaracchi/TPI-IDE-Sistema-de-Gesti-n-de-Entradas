@@ -30,44 +30,57 @@
         {
             label1 = new Label();
             fiestasDataGridView = new DataGridView();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)fiestasDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(88, 52);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(12, 7);
             label1.Name = "label1";
-            label1.Size = new Size(99, 15);
+            label1.Size = new Size(132, 21);
             label1.TabIndex = 3;
             label1.Text = "Listado de Fiestas";
             // 
             // fiestasDataGridView
             // 
             fiestasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            fiestasDataGridView.Location = new Point(88, 90);
+            fiestasDataGridView.Location = new Point(12, 45);
             fiestasDataGridView.Name = "fiestasDataGridView";
-            fiestasDataGridView.Size = new Size(624, 308);
+            fiestasDataGridView.Size = new Size(732, 305);
             fiestasDataGridView.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(fiestasDataGridView);
+            panel1.Location = new Point(60, 44);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(786, 378);
+            panel1.TabIndex = 4;
             // 
             // ListarFiestas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
-            Controls.Add(fiestasDataGridView);
+            ClientSize = new Size(902, 473);
+            Controls.Add(panel1);
             Name = "ListarFiestas";
             Text = "Form1";
             Load += ListarFiestas_Load;
             ((System.ComponentModel.ISupportInitialize)fiestasDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Label label1;
         private DataGridView fiestasDataGridView;
+        private Panel panel1;
     }
 }

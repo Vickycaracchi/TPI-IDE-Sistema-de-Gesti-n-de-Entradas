@@ -35,46 +35,52 @@
             contrasenaTextBox = new TextBox();
             enviarLoginVendedor = new Button();
             ingresarVendedorErrorProvider = new ErrorProvider(components);
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)ingresarVendedorErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // DniLabel
             // 
             DniLabel.AutoSize = true;
-            DniLabel.Location = new Point(267, 121);
+            DniLabel.Font = new Font("Segoe UI", 14F);
+            DniLabel.Location = new Point(207, 102);
             DniLabel.Name = "DniLabel";
-            DniLabel.Size = new Size(32, 20);
+            DniLabel.Size = new Size(41, 25);
             DniLabel.TabIndex = 0;
             DniLabel.Text = "Dni";
             // 
             // DniTextBox
             // 
-            DniTextBox.Location = new Point(441, 114);
+            DniTextBox.Location = new Point(359, 102);
+            DniTextBox.Margin = new Padding(3, 2, 3, 2);
             DniTextBox.Name = "DniTextBox";
-            DniTextBox.Size = new Size(125, 27);
+            DniTextBox.Size = new Size(127, 23);
             DniTextBox.TabIndex = 1;
             // 
             // contrasenaLabel
             // 
             contrasenaLabel.AutoSize = true;
-            contrasenaLabel.Location = new Point(267, 191);
+            contrasenaLabel.Font = new Font("Segoe UI", 14F);
+            contrasenaLabel.Location = new Point(207, 154);
             contrasenaLabel.Name = "contrasenaLabel";
-            contrasenaLabel.Size = new Size(83, 20);
+            contrasenaLabel.Size = new Size(108, 25);
             contrasenaLabel.TabIndex = 4;
             contrasenaLabel.Text = "Contrasena";
             // 
             // contrasenaTextBox
             // 
-            contrasenaTextBox.Location = new Point(441, 184);
+            contrasenaTextBox.Location = new Point(359, 159);
+            contrasenaTextBox.Margin = new Padding(3, 2, 3, 2);
             contrasenaTextBox.Name = "contrasenaTextBox";
-            contrasenaTextBox.Size = new Size(125, 27);
+            contrasenaTextBox.Size = new Size(127, 23);
             contrasenaTextBox.TabIndex = 5;
             // 
             // enviarLoginVendedor
             // 
-            enviarLoginVendedor.Location = new Point(344, 273);
+            enviarLoginVendedor.Location = new Point(274, 216);
+            enviarLoginVendedor.Margin = new Padding(3, 2, 3, 2);
             enviarLoginVendedor.Name = "enviarLoginVendedor";
-            enviarLoginVendedor.Size = new Size(94, 29);
+            enviarLoginVendedor.Size = new Size(143, 38);
             enviarLoginVendedor.TabIndex = 6;
             enviarLoginVendedor.Text = "Enviar";
             enviarLoginVendedor.UseVisualStyleBackColor = true;
@@ -84,16 +90,28 @@
             // 
             ingresarVendedorErrorProvider.ContainerControl = this;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(125, 49);
+            label1.Name = "label1";
+            label1.Size = new Size(434, 25);
+            label1.TabIndex = 7;
+            label1.Text = "Bienvenido! Iniciá Sesión para acceder a tu cuenta";
+            // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 451);
+            ClientSize = new Size(700, 338);
+            Controls.Add(label1);
             Controls.Add(enviarLoginVendedor);
             Controls.Add(contrasenaTextBox);
             Controls.Add(contrasenaLabel);
             Controls.Add(DniTextBox);
             Controls.Add(DniLabel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
@@ -110,5 +128,6 @@
         private TextBox contrasenaTextBox;
         private Button enviarLoginVendedor;
         private ErrorProvider ingresarVendedorErrorProvider;
+        private Label label1;
     }
 }

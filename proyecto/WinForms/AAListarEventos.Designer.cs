@@ -30,44 +30,57 @@
         {
             EventosDataGridView = new DataGridView();
             label1 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)EventosDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // EventosDataGridView
             // 
             EventosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            EventosDataGridView.Location = new Point(76, 76);
+            EventosDataGridView.Location = new Point(36, 47);
             EventosDataGridView.Name = "EventosDataGridView";
-            EventosDataGridView.Size = new Size(624, 308);
+            EventosDataGridView.Size = new Size(732, 305);
             EventosDataGridView.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(76, 38);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(36, 9);
             label1.Name = "label1";
-            label1.Size = new Size(105, 15);
+            label1.Size = new Size(139, 21);
             label1.TabIndex = 1;
             label1.Text = "Listado de Eventos";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(EventosDataGridView);
+            panel1.Location = new Point(56, 30);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(798, 379);
+            panel1.TabIndex = 2;
             // 
             // ListarEventos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
-            Controls.Add(EventosDataGridView);
+            ClientSize = new Size(905, 478);
+            Controls.Add(panel1);
             Name = "ListarEventos";
             Text = "Form1";
             Load += ListarEventos_Load;
             ((System.ComponentModel.ISupportInitialize)EventosDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private DataGridView EventosDataGridView;
         private Label label1;
+        private Panel panel1;
     }
 }

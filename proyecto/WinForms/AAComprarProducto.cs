@@ -19,10 +19,12 @@ namespace WinForms
         public ComprarProducto()
         {
             InitializeComponent();
+            this.Resize += ComprarProductos_Resize;
         }
 
         private void ComprarProducto_Load(object sender, EventArgs e)
         {
+            this.ComprarProductos_Resize(sender, e);
             GetAllAndLoad();
         }
 
@@ -150,6 +152,20 @@ namespace WinForms
                 return false;
             }
             return true;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ComprarProductos_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
+
         }
     }
 }

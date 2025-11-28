@@ -30,47 +30,60 @@
         {
             ListarComprasDataGridView = new DataGridView();
             label1 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)ListarComprasDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // ListarComprasDataGridView
             // 
             ListarComprasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ListarComprasDataGridView.Location = new Point(91, 125);
+            ListarComprasDataGridView.Location = new Point(53, 40);
+            ListarComprasDataGridView.Margin = new Padding(3, 2, 3, 2);
             ListarComprasDataGridView.Name = "ListarComprasDataGridView";
             ListarComprasDataGridView.RowHeadersWidth = 51;
-            ListarComprasDataGridView.Size = new Size(945, 276);
+            ListarComprasDataGridView.Size = new Size(732, 305);
             ListarComprasDataGridView.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(96, 80);
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(57, 6);
             label1.Name = "label1";
-            label1.Size = new Size(93, 20);
+            label1.Size = new Size(263, 21);
             label1.TabIndex = 2;
-            label1.Text = "Mis compras";
+            label1.Text = "Fiestas para las que compro entrada:";
             label1.Click += label1_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(ListarComprasDataGridView);
+            panel1.Location = new Point(51, 56);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(841, 367);
+            panel1.TabIndex = 3;
             // 
             // ListarCompras
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1146, 600);
-            Controls.Add(label1);
-            Controls.Add(ListarComprasDataGridView);
-            Margin = new Padding(3, 4, 3, 4);
+            ClientSize = new Size(1003, 450);
+            Controls.Add(panel1);
             Name = "ListarCompras";
             Text = "ListarCompras";
             Load += ListarCompras_Load;
             ((System.ComponentModel.ISupportInitialize)ListarComprasDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private DataGridView ListarComprasDataGridView;
         private Label label1;
+        private Panel panel1;
     }
 }

@@ -16,6 +16,7 @@ namespace WinForms
         public ListarFiestas()
         {
             InitializeComponent();
+            this.Resize += fiesLista_Resize;
         }
 
         private async void GetAllAndLoad()
@@ -73,7 +74,18 @@ namespace WinForms
 
         private void ListarFiestas_Load(object sender, EventArgs e)
         {
+            this.fiesLista_Resize(sender, e);
             GetAllAndLoad();
+        }
+
+        private void fiesLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
+
         }
     }
 }
