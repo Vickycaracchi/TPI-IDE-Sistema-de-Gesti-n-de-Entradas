@@ -1,4 +1,4 @@
-﻿using API.Clients;
+﻿    using API.Clients;
 using Application.Services;
 using DTOs;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -22,7 +22,7 @@ namespace Infraestructura.Reportes
         public ReporteFiestas(ReporteDataFiestas model)
         {
             Model = model;
-            
+
             try
             {
                 this.comprasParaReporte = CompraApiClient.GetComprasParaReporteFiestasAsync()
@@ -47,104 +47,171 @@ namespace Infraestructura.Reportes
                     .OrderByDescending(f => f.FechaFiesta)
                     .Take(3)
                     .ToList();
-                var ultimasTresFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al obtener las compras: {ex.Message}");
                 this.comprasParaReporte = new List<CompraParaReporteFiestasDTO>();
+                this.usuarios = new List<UsuarioDTO>();
+                this.eventos = new List<EventoDTO>();
+                this.lugares = new List<LugarDTO>();
+                this.fiestas = new List<FiestaDTO>();
             }
         }
+
+        public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
+
         public void Compose(IDocumentContainer container)
         {
             container
                 .Page(page =>
                 {
                     page.Size(PageSizes.A4);
-                    page.Margin(50);
+                    page.Margin(30);
                     page.PageColor(Colors.White);
 
                     page.Header().Element(ComposeHeader);
                     page.Content().Element(ComposeContent);
+                    page.Footer().Element(ComposeFooter);
                 });
         }
+
         void ComposeHeader(IContainer container)
         {
-            container.Row(row =>
-            {
-                row.ConstantColumn(400).Text("Reporte sobre las ultimas 3 fiestas").SemiBold().FontSize(24).FontColor(Colors.Blue.Medium);
+            container
+                .BorderBottom(2).BorderColor(Colors.Blue.Medium)
+                .PaddingBottom(10)
+                .Row(row =>
+                {
+                    row.ConstantColumn(450).Text("Reporte de ventas de las últimas 3 fiestas")
+                        .SemiBold().FontSize(28)
+                        .FontColor(Colors.Blue.Darken2);
 
-            });
+                    row.RelativeColumn().Text(DateTime.Now.ToString("dd/MM/yyyy"))
+                        .SemiBold().FontSize(12)
+                        .FontColor(Colors.Grey.Darken2)
+                        .AlignRight();
+                });
         }
 
         private void ComposeContent(IContainer container)
         {
-            container.PaddingVertical(40).Column(column =>
-            {
-                column.Spacing(20);
-
-                column.Item().PaddingVertical(15).Table(table =>
+            container
+                .PaddingVertical(20)
+                .DefaultTextStyle(TextStyle.Default.FontSize(10))
+                .Column(column =>
                 {
-                    table.ColumnsDefinition(columns =>
-                    {
-                        columns.ConstantColumn(40);
-                        columns.ConstantColumn(70);
-                        columns.ConstantColumn(70);
-                        columns.ConstantColumn(70);
-                        columns.ConstantColumn(130);
-                        columns.RelativeColumn();
-                    });
+                    column.Spacing(25);
 
-                    table.Header(header =>
-                    {
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Id").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Vendedor").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Cantidad").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Monto").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Evento").SemiBold();
-                        header.Cell().Background(Colors.Grey.Lighten3).Text("Jefe").SemiBold();
-                    });
+                    column.Item().Text("Detalle de ventas por vendedor")
+                        .FontSize(18).SemiBold()
+                        .FontColor(Colors.Grey.Darken3).Underline();
 
-                    foreach (var compra in comprasParaReporte)
+                    column.Item().Table(table =>
                     {
-                        var fiesta = this.fiestas.FirstOrDefault(f => f.FechaFiesta == compra.FechaFiesta);
-                        var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
-                        var vendedor = this.usuarios.FirstOrDefault(u => u.Id == compra.Vendedor);
-                        var jefe = this.usuarios.FirstOrDefault(u => u.Id == vendedor?.IdJefe);
-                        if (jefe == null)
+                        table.ColumnsDefinition(columns =>
                         {
-                            jefe = new UsuarioDTO { Nombre = "Es jefe" };
+                            columns.ConstantColumn(40);
+                            columns.RelativeColumn(2);
+                            columns.ConstantColumn(80);
+                            columns.ConstantColumn(100);
+                            columns.RelativeColumn(2);
+                            columns.RelativeColumn(2);
+                        });
+
+                        table.Header(header =>
+                        {
+                            header.Cell().Element(HeaderCellStyle).Text("Id").SemiBold();
+                            header.Cell().Element(HeaderCellStyle).Text("Vendedor").SemiBold();
+                            header.Cell().Element(HeaderCellStyle).Text("Cantidad").SemiBold().AlignRight();
+                            header.Cell().Element(HeaderCellStyle).Text("Monto").SemiBold().AlignRight();
+                            header.Cell().Element(HeaderCellStyle).Text("Evento").SemiBold();
+                            header.Cell().Element(HeaderCellStyle).Text("Jefe").SemiBold();
+
+                            IContainer HeaderCellStyle(IContainer cell) =>
+                                cell
+                                    .Background(Colors.Blue.Lighten4)
+                                    .PaddingVertical(6)
+                                    .PaddingHorizontal(6)
+                                    .BorderBottom(2)
+                                    .BorderColor(Colors.Blue.Medium)
+                                    .AlignLeft();
+                        });
+
+                        int i = 1;
+                        foreach (var compra in comprasParaReporte)
+                        {
+                            var fiesta = this.fiestas.FirstOrDefault(f => f.FechaFiesta == compra.FechaFiesta);
+                            var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
+                            var vendedor = this.usuarios.FirstOrDefault(u => u.Id == compra.Vendedor);
+                            var jefe = this.usuarios.FirstOrDefault(u => u.Id == vendedor?.IdJefe) ?? new UsuarioDTO { Nombre = "Es jefe" };
+
+                            var rowBg = (i % 2 == 0) ? Colors.Grey.Lighten5 : Colors.White;
+
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).Text(vendedor?.Id.ToString() ?? "N/A");
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).Text($"{vendedor?.Nombre} {vendedor?.Apellido}".Trim());
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).AlignRight().Text(compra.Entradas.ToString("N0"));
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).AlignRight().Text(compra.Monto.ToString("N2"));
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).Text(evento?.Nombre ?? "N/A");
+                            table.Cell().Element(c => DataCellStyle(c, rowBg)).Text(jefe?.Nombre ?? "N/A");
+
+                            i++;
                         }
 
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(vendedor.Id.ToString());
+                        IContainer DataCellStyle(IContainer cell, Color background) =>
+                            cell
+                                .Background(background)
+                                .PaddingVertical(6)
+                                .PaddingHorizontal(6)
+                                .BorderBottom(0.5f)
+                                .BorderColor(Colors.Grey.Lighten2)
+                                .AlignLeft();
+                    });
 
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(vendedor.Nombre.ToString());
+                    column.Item().PaddingTop(20).Column(subColumn =>
+                    {
+                        subColumn.Spacing(10);
+                        subColumn.Item().Text("Información de las últimas 3 Fiestas analizadas:")
+                            .FontSize(14).SemiBold()
+                            .FontColor(Colors.Grey.Darken3);
 
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Entradas.ToString());
+                        foreach (var fiesta in fiestas)
+                        {
+                            var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta.IdEvento);
+                            var lugar = this.lugares.FirstOrDefault(l => l.Id == fiesta.IdLugar);
 
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(compra.Monto.ToString("0.00"));
-
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(evento.Nombre.ToString());
-
-                        table.Cell().BorderBottom(1).BorderColor(Colors.Grey.Lighten1)
-                             .Text(jefe.Nombre.ToString());
-                    }
+                            subColumn.Item().Text(text =>
+                            {
+                                text.Span("• ").FontSize(11).FontColor(Colors.Blue.Medium).SemiBold();
+                                text.Span("Evento: ").FontSize(11).SemiBold();
+                                text.Span($"{evento?.Nombre ?? "N/A"}").FontSize(11).FontColor(Colors.Blue.Darken1);
+                                text.Span(" | Lugar: ").FontSize(11).SemiBold();
+                                text.Span($"{lugar?.Nombre ?? "N/A"} - {lugar?.Direccion ?? "N/A"}").FontSize(11);
+                                text.Span(" | Fecha: ").FontSize(11).SemiBold();
+                                text.Span($"{fiesta.FechaFiesta.ToShortDateString()}").FontSize(11);
+                            });
+                        }
+                    });
                 });
-                foreach (var fiesta in fiestas)
-                {
-                    var evento = this.eventos.FirstOrDefault(e => e.Id == fiesta.IdEvento);
-                    var lugar = this.lugares.FirstOrDefault(l => l.Id == fiesta.IdLugar);
-                    column.Item().Text($"Información general del evento: {evento.Nombre} \nLugar: {lugar.Nombre} - Direccion: {lugar.Direccion}\nFecha {fiesta.FechaFiesta}").FontSize(11).FontColor(Colors.Blue.Medium);
-                }
+        }
 
-                column.Item().Text($"Reporte generado el {DateTime.Now}").FontSize(9).FontColor(Colors.Grey.Darken1);
-            });
+        private void ComposeFooter(IContainer container)
+        {
+            container
+                .BorderTop(1).BorderColor(Colors.Grey.Lighten1)
+                .PaddingTop(5)
+                .Row(row =>
+                {
+                    row.ConstantColumn(300).Text($"Reporte generado el {DateTime.Now:dd/MM/yyyy} a las {DateTime.Now:HH:mm:ss}")
+                        .FontSize(8).FontColor(Colors.Grey.Darken1);
+                    row.RelativeItem().AlignRight().Text(text =>
+                    {
+                        text.Span("Página ").FontSize(8).FontColor(Colors.Grey.Darken1);
+                        text.CurrentPageNumber().FontSize(8).FontColor(Colors.Grey.Darken1);
+                    });
+                });
         }
     }
+
     public class ReporteDataFiestas { }
 }

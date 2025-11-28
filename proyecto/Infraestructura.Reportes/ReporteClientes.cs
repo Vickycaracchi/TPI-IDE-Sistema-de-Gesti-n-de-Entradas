@@ -26,8 +26,6 @@ namespace Infraestructura.Reportes
 
             try
             {
-                // Es mejor usar Task.Run().Wait() o ConfigureAwait(false).GetAwaiter().GetResult()
-                // para evitar deadlocks, pero manteniendo la estructura original con GetAwaiter().GetResult():
                 this.comprasParaReporte = CompraApiClient.GetComprasParaReporteClientesAsync()
                     .GetAwaiter()
                     .GetResult()
@@ -50,7 +48,6 @@ namespace Infraestructura.Reportes
                     .OrderByDescending(f => f.FechaFiesta)
                     .Take(5)
                     .ToList();
-                // var ultimasCincoFechas = this.fiestas.Select(f => f.FechaFiesta).ToHashSet(); // Esta línea no se utiliza, se puede eliminar o comentar.
             }
             catch (Exception ex)
             {
@@ -63,45 +60,36 @@ namespace Infraestructura.Reportes
             }
         }
 
-        // --- Implementación de IDocument ---
-        public DocumentMetadata GetMetadata() => DocumentMetadata.Default; // Se puede agregar metadatos
+        public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
 
         public void Compose(IDocumentContainer container)
         {
             container
                 .Page(page =>
                 {
-                    // Mejora en el diseño de la página
                     page.Size(PageSizes.A4);
-                    page.Margin(30); // Márgenes un poco más pequeños para aprovechar el espacio
+                    page.Margin(30);
                     page.PageColor(Colors.White);
 
-                    // Componentes del documento
                     page.Header().Element(ComposeHeader);
                     page.Content().Element(ComposeContent);
-                    page.Footer().Element(ComposeFooter); // Añadimos un pie de página
+                    page.Footer().Element(ComposeFooter);
                 });
         }
-
-        // --- Encabezado del Reporte (Header) ---
         void ComposeHeader(IContainer container)
         {
             container.BorderBottom(2).BorderColor(Colors.Blue.Medium).PaddingBottom(10).Row(row =>
             {
-                // Título más grande y centrado visualmente
-                row.ConstantColumn(450).Text("🏆 Reporte de Clientes VIP (Top 10)")
+                row.ConstantColumn(450).Text("Reporte de los 10 mejores Clientes")
                     .SemiBold().FontSize(28)
                     .FontColor(Colors.Blue.Darken2);
 
-                // Columna para información extra o logo
                 row.RelativeColumn().Text(DateTime.Now.ToString("dd/MM/yyyy"))
                     .SemiBold().FontSize(12)
                     .FontColor(Colors.Grey.Darken2)
                     .AlignRight();
             });
         }
-
-        // --- Contenido Principal del Reporte (Content) ---
         private void ComposeContent(IContainer container)
         {
             container
@@ -117,17 +105,15 @@ namespace Infraestructura.Reportes
 
                     column.Item().Table(table =>
                     {
-                        // Column layout tuned for readability
                         table.ColumnsDefinition(columns =>
                         {
-                            columns.ConstantColumn(36); // No.
-                            columns.RelativeColumn(2);  // Nombre/Apellido
-                            columns.RelativeColumn(3);  // Email
-                            columns.ConstantColumn(80); // Entradas
-                            columns.RelativeColumn(3);  // Evento
+                            columns.ConstantColumn(36);
+                            columns.RelativeColumn(2);
+                            columns.RelativeColumn(3);
+                            columns.ConstantColumn(80);
+                            columns.RelativeColumn(3);
                         });
 
-                        // Header styling
                         table.Header(header =>
                         {
                             header.Cell().Element(HeaderCellStyle).Text("#").SemiBold();
@@ -146,7 +132,6 @@ namespace Infraestructura.Reportes
                                     .AlignLeft();
                         });
 
-                        // Data rows with zebra striping and subtle gridlines
                         int i = 1;
                         foreach (var compra in comprasParaReporte)
                         {
@@ -175,7 +160,6 @@ namespace Infraestructura.Reportes
                                 .AlignLeft();
                     });
 
-                    // 3. Información adicional de eventos (sin cambios)
                     column.Item().PaddingTop(20).Column(subColumn =>
                     {
                         subColumn.Spacing(10);
@@ -202,14 +186,11 @@ namespace Infraestructura.Reportes
                     });
                 });
         }
-
-        // --- Pie de página (Footer) ---
         private void ComposeFooter(IContainer container)
         {
             container.BorderTop(1).BorderColor(Colors.Grey.Lighten1).PaddingTop(5).Row(row =>
             {
                 row.ConstantColumn(300).Text($"Reporte generado el {DateTime.Now:dd/MM/yyyy} a las {DateTime.Now:HH:mm:ss}").FontSize(8).FontColor(Colors.Grey.Darken1);
-                // Fix: Use .Text() to display the page number, since IContainer does not have a PageNumber() method.
                 row.RelativeItem().AlignRight().Text(text =>
                 {
                     text.Span("Página ").FontSize(8).FontColor(Colors.Grey.Darken1);
@@ -218,7 +199,5 @@ namespace Infraestructura.Reportes
             });
         }
     }
-
-    // Mantienes tu clase de modelo de datos
     public class ReporteDataCli { }
 }

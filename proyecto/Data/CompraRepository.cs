@@ -40,7 +40,7 @@ namespace Data
             }
             context.SaveChanges();
         }
-        private IEnumerable<ComprasClienteDTO> GetComprasProductosCliente(int idCliente)
+        public IEnumerable<ComprasClienteDTO> GetComprasProductosCliente(int idCliente)
         {
             using var context = CreateContext();
             var query = from c in context.ComprasProductos

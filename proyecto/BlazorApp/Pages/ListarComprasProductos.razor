@@ -1,0 +1,159 @@
+﻿@page "/listarcomprasProds"
+@using API.Clients
+@using DTOs
+@inject NavigationManager Navigation
+@inject LoginState LoginState
+<Header />
+<br />
+<br />
+<br />
+<br />
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Mis Compras</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (IsLoading)
+            {
+                <div class="d-flex justify-content-center my-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(Error))
+            {
+                <div class="alert alert-danger">@Error</div>
+            }
+            else if (ComprasParaMostrar is not null && ComprasParaMostrar.Any())
+            {
+                <div class="row g-3">
+                    @foreach (var compra in ComprasParaMostrar)
+                    {
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-info me-2">Fiesta</span>
+                                        <strong>@compra.Fiesta</strong>
+                                    </div>
+                                    <div class="text-muted">
+                                        <i class="bi bi-calendar-event me-1"></i>
+                                        @compra.FechaFiesta.ToString("dd/MM/yyyy")
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    @if (compra.Productos is not null && compra.Productos.Any())
+                                    {
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover align-middle mb-0">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th style="width:40%">Producto</th>
+                                                        <th class="text-end" style="width:15%">Precio</th>
+                                                        <th class="text-end" style="width:15%">Cantidad</th>
+                                                        <th class="text-end" style="width:15%">Subtotal</th>
+                                                        <th class="text-muted" style="width:15%">Id</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var prod in compra.Productos)
+                                                    {
+                                                        var subtotal = prod.Precio * prod.Cantidad;
+                                                        <tr>
+                                                            <td>@prod.Descripcion</td>
+                                                            <td class="text-end">@prod.Precio</td>
+                                                            <td class="text-end">@prod.Cantidad</td>
+                                                            <td class="text-end">@subtotal</td>
+                                                            <td class="text-muted">@prod.Id</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="table-light">
+                                                        <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                                        <td class="text-end">
+                                                            <strong>
+                                                                @{
+                                                                    var total = compra.Productos.Sum(p => p.Precio * p.Cantidad);
+                                                                    @total;
+                                                                }
+                                                            </strong>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info mb-0">No hay productos en esta compra.</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">No hay compras para mostrar.</div>
+            }
+
+        </div>
+
+        <div class="card-footer text-end">
+            <button class="btn btn-secondary" @onclick="Volver">
+                Volver al Menú
+            </button>
+        </div>
+    </div>
+</div>
+<Footer />
+@code {
+    [Parameter]
+    public int? IdUsuario { get; set; }
+
+    private bool IsLoading = true;
+    private string Error;
+    private List<ComprasClienteDTO> ComprasParaMostrar;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var usuario = LoginState.Usuario;
+
+            if (usuario == null)
+            {
+                LoginState.MensajeTemporal = "Debe iniciar sesión para acceder al listado de compras";
+                Navigation.NavigateTo("/login");
+                return;
+            }
+
+            int id = usuario.Id;
+
+            var compras = await CompraApiClient.GetComprasProductosClienteAsync(id);
+
+            ComprasParaMostrar = compras.ToList();
+        }
+        catch (Exception ex)
+        {
+            Error = $"Error al cargar las compras: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/menucliente");
+    }
+}

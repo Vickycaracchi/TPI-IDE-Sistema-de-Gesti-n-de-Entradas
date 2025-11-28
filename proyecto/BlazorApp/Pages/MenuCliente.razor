@@ -24,6 +24,7 @@
     <button class="list-group-item list-group-item-action" @onclick="IrAFiestas">Ver Fiestas</button>
     <button class="list-group-item list-group-item-action" @onclick="IrAMisCompras">Ver Mis Compras</button>
     <button class="list-group-item list-group-item-action" @onclick="IrAComprarProducto">Comprar Producto</button>
+    <button class="list-group-item list-group-item-action" @onclick="IrAMisComprasProductos">Mis Productos</button>
 </div>
 
 <Footer />
@@ -61,4 +62,8 @@
     {
         Navigation.NavigateTo("/comprar-producto");
     }
+    private void IrAMisComprasProductos()
+    {
+        Navigation.NavigateTo("/listarcomprasProds");
+	}
 }

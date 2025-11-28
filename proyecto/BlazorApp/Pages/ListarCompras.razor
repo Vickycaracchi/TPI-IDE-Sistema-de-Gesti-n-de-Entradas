@@ -114,15 +114,15 @@
                 var evento = eventos.FirstOrDefault(e => e.Id == fiesta?.IdEvento);
 
                 return new CompraParaMostrarDTO
-                    {
-                        Cliente = cliente?.Nombre ?? "Desconocido",
-                        Vendedor = vendedor?.Nombre ?? "Desconocido",
-                        Fiesta = evento?.Nombre ?? "Desconocido",
-                        Lugar = lugar?.Nombre ?? "Desconocido",
-                        CantidadCompra = c.CantidadCompra,
-                        FechaHora = c.FechaHora,
-                        Entrada = c.Entrada
-                    };
+                {
+                    Cliente = cliente?.Nombre ?? "Desconocido",
+                    Vendedor = vendedor?.Nombre ?? "Desconocido",
+                    Fiesta = evento?.Nombre ?? "Desconocido",
+                    Lugar = lugar?.Nombre ?? "Desconocido",
+                    CantidadCompra = c.CantidadCompra,
+                    FechaHora = c.FechaHora,
+                    Entrada = c.Entrada
+                };
             }).ToList();
         }
         catch (Exception ex)
