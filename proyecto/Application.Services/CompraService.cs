@@ -45,6 +45,14 @@ namespace Application.Services
 
             return compraRepository.GetAllJefe(idJefe);
         }
+
+        public IEnumerable<ComprasClienteDTO> GetComprasProductosCliente(int idCliente)
+        {
+            var compraRepository = new CompraRepository();
+
+            return compraRepository.GetComprasProductosCliente(idCliente);
+        }
+
         public IEnumerable<CompraParaReporteFiestasDTO> GetComprasParaReporteFiestas()
         {
             var compraRepository = new CompraRepository();
