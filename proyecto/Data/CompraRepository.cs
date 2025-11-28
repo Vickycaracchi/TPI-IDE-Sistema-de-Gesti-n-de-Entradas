@@ -40,6 +40,23 @@ namespace Data
             }
             context.SaveChanges();
         }
+        private IEnumerable<CompraDTO> GetComprasProductosCliente(int idCliente)
+        {
+            using var context = CreateContext();
+            var query = from c in context.ComprasProductos
+                        join u in context.Usuarios on idCliente equals u.Id
+                        where c.IdCliente == idCliente
+                        group c by new { c.IdFiesta, c.IdCliente, c.IdProducto} into g
+                        select new ComprasClienteDTO
+                        {
+                            FechaHora = c.FechaHora,
+                            IdCliente = c.IdCliente,
+                            IdFiesta = c.IdFiesta,
+                            IdVendedor = c.IdVendedor,
+                            CantidadCompra = c.CantidadCompra,
+                            Entrada = c.Producto
+                        };
+        }
         public IEnumerable<CompraDTO> GetAllVendedor(int idVendedor)
         {
             using var context = CreateContext();
