@@ -17,6 +17,7 @@ namespace WinForms
         public LotesLista()
         {
             InitializeComponent();
+            this.Resize += LotesLista_Resize;
         }
         public FormMode mode;
         public FormMode Mode
@@ -36,6 +37,7 @@ namespace WinForms
         }
         private void LotesLista_Load(object sender, EventArgs e)
         {
+            this.LotesLista_Resize(sender, e);
             ConfigurarDataGridView();
             this.GetAllAndLoad();
         }
@@ -188,6 +190,15 @@ namespace WinForms
         }
         private void lotesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+        private void LotesLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

@@ -17,9 +17,12 @@ namespace WinForms
         public EventosLista()
         {
             InitializeComponent();
+
+            this.Resize += EventosLista_Resize;
         }
         private void EventosLista_Load(object sender, EventArgs e)
         {
+            this.EventosLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
 
@@ -126,6 +129,20 @@ namespace WinForms
         private void eventosDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void EventosLista_Resize(object sender, EventArgs e)
+        {
+           
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
+        
         }
     }
 }

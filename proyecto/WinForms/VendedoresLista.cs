@@ -10,10 +10,12 @@ namespace WinForms
         public VendedoresLista()
         {
             InitializeComponent();
+            this.Resize += VendedoresLista_Resize;
         }
 
         private void VendedoresLista_Load(object sender, EventArgs e)
         {
+            this.VendedoresLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
 
@@ -124,6 +126,15 @@ namespace WinForms
 
         private void vendedoresDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+        private void VendedoresLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

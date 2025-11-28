@@ -17,9 +17,11 @@ namespace WinForms
         public ProductosLista()
         {
             InitializeComponent();
+            this.Resize += ProductosLista_Resize;
         }
         private void ProductosLista_Load(object sender, EventArgs e)
         {
+            this.ProductosLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
 
@@ -125,6 +127,15 @@ namespace WinForms
         }
         private void productosDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+        private void ProductosLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

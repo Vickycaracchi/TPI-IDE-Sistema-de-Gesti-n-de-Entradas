@@ -17,6 +17,7 @@ namespace WinForms
         public LugaresLista()
         {
             InitializeComponent();
+            this.Resize += LugaresLista_Resize;
         }
         public FormMode mode;
         public FormMode Mode
@@ -36,6 +37,7 @@ namespace WinForms
         }
         private void LugaresLista_Load(object sender, EventArgs e)
         {
+            this.LugaresLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
         private void agregarButton_Click(object sender, EventArgs e)
@@ -138,6 +140,15 @@ namespace WinForms
         }
         private void lugaresDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+        private void LugaresLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }

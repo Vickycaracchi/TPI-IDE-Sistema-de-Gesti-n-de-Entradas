@@ -32,15 +32,18 @@
             modificarButtonFiesta = new Button();
             eliminarButtonFiesta = new Button();
             FiestasDataGridView = new DataGridView();
+            label1 = new Label();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)FiestasDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // agregarButtonFiesta
             // 
-            agregarButtonFiesta.Location = new Point(409, 257);
+            agregarButtonFiesta.Location = new Point(478, 356);
             agregarButtonFiesta.Margin = new Padding(3, 2, 3, 2);
             agregarButtonFiesta.Name = "agregarButtonFiesta";
-            agregarButtonFiesta.Size = new Size(82, 22);
+            agregarButtonFiesta.Size = new Size(143, 38);
             agregarButtonFiesta.TabIndex = 7;
             agregarButtonFiesta.Text = "Agregar";
             agregarButtonFiesta.UseVisualStyleBackColor = true;
@@ -48,10 +51,10 @@
             // 
             // modificarButtonFiesta
             // 
-            modificarButtonFiesta.Location = new Point(245, 257);
+            modificarButtonFiesta.Location = new Point(314, 356);
             modificarButtonFiesta.Margin = new Padding(3, 2, 3, 2);
             modificarButtonFiesta.Name = "modificarButtonFiesta";
-            modificarButtonFiesta.Size = new Size(82, 22);
+            modificarButtonFiesta.Size = new Size(143, 38);
             modificarButtonFiesta.TabIndex = 6;
             modificarButtonFiesta.Text = "Modificar";
             modificarButtonFiesta.UseVisualStyleBackColor = true;
@@ -59,10 +62,10 @@
             // 
             // eliminarButtonFiesta
             // 
-            eliminarButtonFiesta.Location = new Point(78, 257);
+            eliminarButtonFiesta.Location = new Point(147, 356);
             eliminarButtonFiesta.Margin = new Padding(3, 2, 3, 2);
             eliminarButtonFiesta.Name = "eliminarButtonFiesta";
-            eliminarButtonFiesta.Size = new Size(82, 22);
+            eliminarButtonFiesta.Size = new Size(143, 38);
             eliminarButtonFiesta.TabIndex = 5;
             eliminarButtonFiesta.Text = "Eliminar";
             eliminarButtonFiesta.UseVisualStyleBackColor = true;
@@ -71,27 +74,49 @@
             // FiestasDataGridView
             // 
             FiestasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            FiestasDataGridView.Location = new Point(29, 25);
+            FiestasDataGridView.Location = new Point(47, 47);
             FiestasDataGridView.Margin = new Padding(3, 2, 3, 2);
             FiestasDataGridView.Name = "FiestasDataGridView";
             FiestasDataGridView.RowHeadersWidth = 51;
-            FiestasDataGridView.Size = new Size(553, 198);
+            FiestasDataGridView.Size = new Size(732, 305);
             FiestasDataGridView.TabIndex = 4;
             FiestasDataGridView.CellContentClick += FiestasDataGridView_CellContentClick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20F);
+            label1.Location = new Point(291, 5);
+            label1.Name = "label1";
+            label1.Size = new Size(231, 37);
+            label1.TabIndex = 8;
+            label1.Text = "Gestión de Fiestas";
+            label1.Click += label1_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(agregarButtonFiesta);
+            panel1.Controls.Add(modificarButtonFiesta);
+            panel1.Controls.Add(eliminarButtonFiesta);
+            panel1.Controls.Add(FiestasDataGridView);
+            panel1.Location = new Point(9, 18);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(832, 423);
+            panel1.TabIndex = 9;
             // 
             // FiestasLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(618, 306);
-            Controls.Add(agregarButtonFiesta);
-            Controls.Add(modificarButtonFiesta);
-            Controls.Add(eliminarButtonFiesta);
-            Controls.Add(FiestasDataGridView);
+            ClientSize = new Size(893, 462);
+            Controls.Add(panel1);
             Name = "FiestasLista";
             Text = "Form1";
             Load += FiestasLista_Load;
             ((System.ComponentModel.ISupportInitialize)FiestasDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -101,5 +126,7 @@
         private Button modificarButtonFiesta;
         private Button eliminarButtonFiesta;
         private DataGridView FiestasDataGridView;
+        private Label label1;
+        private Panel panel1;
     }
 }

@@ -28,104 +28,116 @@ namespace WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nombreTextBox = new System.Windows.Forms.TextBox();
-            this.direccionTextBox = new System.Windows.Forms.TextBox();
-            this.ciudadTextBox = new System.Windows.Forms.TextBox();
-            this.lugarErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.lugarErrorProvider)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            button1 = new Button();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            nombreTextBox = new TextBox();
+            direccionTextBox = new TextBox();
+            ciudadTextBox = new TextBox();
+            lugarErrorProvider = new ErrorProvider(components);
+            label4 = new Label();
+            ((System.ComponentModel.ISupportInitialize)lugarErrorProvider).BeginInit();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(180, 220);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 35);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(180, 224);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 35);
+            button1.TabIndex = 0;
+            button1.Text = "Guardar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 160);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Ciudad";
+            label3.AutoSize = true;
+            label3.Location = new Point(50, 164);
+            label3.Name = "label3";
+            label3.Size = new Size(45, 15);
+            label3.TabIndex = 1;
+            label3.Text = "Ciudad";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Dirección";
+            label2.AutoSize = true;
+            label2.Location = new Point(50, 114);
+            label2.Name = "label2";
+            label2.Size = new Size(57, 15);
+            label2.TabIndex = 2;
+            label2.Text = "Dirección";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Nombre";
+            label1.AutoSize = true;
+            label1.Location = new Point(50, 64);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Nombre";
             // 
             // nombreTextBox
             // 
-            this.nombreTextBox.Location = new System.Drawing.Point(150, 57);
-            this.nombreTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(250, 23);
-            this.nombreTextBox.TabIndex = 4;
+            nombreTextBox.Location = new Point(150, 61);
+            nombreTextBox.Margin = new Padding(3, 2, 3, 2);
+            nombreTextBox.Name = "nombreTextBox";
+            nombreTextBox.Size = new Size(250, 23);
+            nombreTextBox.TabIndex = 4;
             // 
             // direccionTextBox
             // 
-            this.direccionTextBox.Location = new System.Drawing.Point(150, 107);
-            this.direccionTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.direccionTextBox.Name = "direccionTextBox";
-            this.direccionTextBox.Size = new System.Drawing.Size(250, 23);
-            this.direccionTextBox.TabIndex = 5;
+            direccionTextBox.Location = new Point(150, 111);
+            direccionTextBox.Margin = new Padding(3, 2, 3, 2);
+            direccionTextBox.Name = "direccionTextBox";
+            direccionTextBox.Size = new Size(250, 23);
+            direccionTextBox.TabIndex = 5;
             // 
             // ciudadTextBox
             // 
-            this.ciudadTextBox.Location = new System.Drawing.Point(150, 157);
-            this.ciudadTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ciudadTextBox.Name = "ciudadTextBox";
-            this.ciudadTextBox.Size = new System.Drawing.Size(250, 23);
-            this.ciudadTextBox.TabIndex = 6;
+            ciudadTextBox.Location = new Point(150, 161);
+            ciudadTextBox.Margin = new Padding(3, 2, 3, 2);
+            ciudadTextBox.Name = "ciudadTextBox";
+            ciudadTextBox.Size = new Size(250, 23);
+            ciudadTextBox.TabIndex = 6;
             // 
             // lugarErrorProvider
             // 
-            this.lugarErrorProvider.ContainerControl = this;
+            lugarErrorProvider.ContainerControl = this;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.Location = new Point(50, 21);
+            label4.Name = "label4";
+            label4.Size = new Size(195, 21);
+            label4.TabIndex = 10;
+            label4.Text = "Ingrese los datos del lugar:";
             // 
             // LugarDetalle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 300);
-            this.Controls.Add(this.ciudadTextBox);
-            this.Controls.Add(this.direccionTextBox);
-            this.Controls.Add(this.nombreTextBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "LugarDetalle";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Detalle de Lugar";
-            this.Load += new System.EventHandler(this.LugarDetalle_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.lugarErrorProvider)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(450, 300);
+            Controls.Add(label4);
+            Controls.Add(ciudadTextBox);
+            Controls.Add(direccionTextBox);
+            Controls.Add(nombreTextBox);
+            Controls.Add(label1);
+            Controls.Add(label2);
+            Controls.Add(label3);
+            Controls.Add(button1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "LugarDetalle";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Detalle de Lugar";
+            Load += LugarDetalle_Load;
+            ((System.ComponentModel.ISupportInitialize)lugarErrorProvider).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -139,5 +151,6 @@ namespace WinForms
         private System.Windows.Forms.TextBox direccionTextBox;
         private System.Windows.Forms.TextBox ciudadTextBox;
         private System.Windows.Forms.ErrorProvider lugarErrorProvider;
+        private Label label4;
     }
 }

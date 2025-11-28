@@ -28,73 +28,97 @@ namespace WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.lugaresDataGridView = new System.Windows.Forms.DataGridView();
-            this.eliminarButtonLugar = new System.Windows.Forms.Button();
-            this.modificarButtonLugar = new System.Windows.Forms.Button();
-            this.agregarButtonLugar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.lugaresDataGridView)).BeginInit();
-            this.SuspendLayout();
+            lugaresDataGridView = new DataGridView();
+            eliminarButtonLugar = new Button();
+            modificarButtonLugar = new Button();
+            agregarButtonLugar = new Button();
+            label1 = new Label();
+            panel1 = new Panel();
+            ((System.ComponentModel.ISupportInitialize)lugaresDataGridView).BeginInit();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // lugaresDataGridView
             // 
-            this.lugaresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lugaresDataGridView.Location = new System.Drawing.Point(20, 20);
-            this.lugaresDataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lugaresDataGridView.Name = "lugaresDataGridView";
-            this.lugaresDataGridView.RowHeadersWidth = 51;
-            this.lugaresDataGridView.RowTemplate.Height = 29;
-            this.lugaresDataGridView.Size = new System.Drawing.Size(496, 230);
-            this.lugaresDataGridView.TabIndex = 0;
-            this.lugaresDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lugaresDataGridView_CellContentClick);
+            lugaresDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            lugaresDataGridView.Location = new Point(20, 50);
+            lugaresDataGridView.Margin = new Padding(3, 2, 3, 2);
+            lugaresDataGridView.Name = "lugaresDataGridView";
+            lugaresDataGridView.RowHeadersWidth = 51;
+            lugaresDataGridView.RowTemplate.Height = 29;
+            lugaresDataGridView.Size = new Size(732, 305);
+            lugaresDataGridView.TabIndex = 0;
+            lugaresDataGridView.CellContentClick += lugaresDataGridView_CellContentClick;
             // 
             // eliminarButtonLugar
             // 
-            this.eliminarButtonLugar.Location = new System.Drawing.Point(20, 266);
-            this.eliminarButtonLugar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.eliminarButtonLugar.Name = "eliminarButtonLugar";
-            this.eliminarButtonLugar.Size = new System.Drawing.Size(143, 38);
-            this.eliminarButtonLugar.TabIndex = 1;
-            this.eliminarButtonLugar.Text = "Eliminar";
-            this.eliminarButtonLugar.UseVisualStyleBackColor = true;
-            this.eliminarButtonLugar.Click += new System.EventHandler(this.eliminarButton_Click);
+            eliminarButtonLugar.Location = new Point(117, 359);
+            eliminarButtonLugar.Margin = new Padding(3, 2, 3, 2);
+            eliminarButtonLugar.Name = "eliminarButtonLugar";
+            eliminarButtonLugar.Size = new Size(143, 38);
+            eliminarButtonLugar.TabIndex = 1;
+            eliminarButtonLugar.Text = "Eliminar";
+            eliminarButtonLugar.UseVisualStyleBackColor = true;
+            eliminarButtonLugar.Click += eliminarButton_Click;
             // 
             // modificarButtonLugar
             // 
-            this.modificarButtonLugar.Location = new System.Drawing.Point(195, 266);
-            this.modificarButtonLugar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.modificarButtonLugar.Name = "modificarButtonLugar";
-            this.modificarButtonLugar.Size = new System.Drawing.Size(143, 38);
-            this.modificarButtonLugar.TabIndex = 2;
-            this.modificarButtonLugar.Text = "Modificar";
-            this.modificarButtonLugar.UseVisualStyleBackColor = true;
-            this.modificarButtonLugar.Click += new System.EventHandler(this.modificarButton_Click);
+            modificarButtonLugar.Location = new Point(292, 359);
+            modificarButtonLugar.Margin = new Padding(3, 2, 3, 2);
+            modificarButtonLugar.Name = "modificarButtonLugar";
+            modificarButtonLugar.Size = new Size(143, 38);
+            modificarButtonLugar.TabIndex = 2;
+            modificarButtonLugar.Text = "Modificar";
+            modificarButtonLugar.UseVisualStyleBackColor = true;
+            modificarButtonLugar.Click += modificarButton_Click;
             // 
             // agregarButtonLugar
             // 
-            this.agregarButtonLugar.Location = new System.Drawing.Point(373, 266);
-            this.agregarButtonLugar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.agregarButtonLugar.Name = "agregarButtonLugar";
-            this.agregarButtonLugar.Size = new System.Drawing.Size(143, 38);
-            this.agregarButtonLugar.TabIndex = 3;
-            this.agregarButtonLugar.Text = "Agregar";
-            this.agregarButtonLugar.UseVisualStyleBackColor = true;
-            this.agregarButtonLugar.Click += new System.EventHandler(this.agregarButton_Click);
+            agregarButtonLugar.Location = new Point(470, 359);
+            agregarButtonLugar.Margin = new Padding(3, 2, 3, 2);
+            agregarButtonLugar.Name = "agregarButtonLugar";
+            agregarButtonLugar.Size = new Size(143, 38);
+            agregarButtonLugar.TabIndex = 3;
+            agregarButtonLugar.Text = "Agregar";
+            agregarButtonLugar.UseVisualStyleBackColor = true;
+            agregarButtonLugar.Click += agregarButton_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20F);
+            label1.Location = new Point(255, 6);
+            label1.Name = "label1";
+            label1.Size = new Size(244, 37);
+            label1.TabIndex = 5;
+            label1.Text = "Gestión de Lugares";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(agregarButtonLugar);
+            panel1.Controls.Add(modificarButtonLugar);
+            panel1.Controls.Add(eliminarButtonLugar);
+            panel1.Controls.Add(lugaresDataGridView);
+            panel1.Location = new Point(10, 35);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(775, 414);
+            panel1.TabIndex = 6;
             // 
             // LugaresLista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 324);
-            this.Controls.Add(this.agregarButtonLugar);
-            this.Controls.Add(this.modificarButtonLugar);
-            this.Controls.Add(this.eliminarButtonLugar);
-            this.Controls.Add(this.lugaresDataGridView);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "LugaresLista";
-            this.Text = "Gestión de Lugares";
-            this.Load += new System.EventHandler(this.LugaresLista_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.lugaresDataGridView)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1174, 490);
+            Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "LugaresLista";
+            Text = "Gestión de Lugares";
+            Load += LugaresLista_Load;
+            ((System.ComponentModel.ISupportInitialize)lugaresDataGridView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
 
         }
 
@@ -104,5 +128,7 @@ namespace WinForms
         private System.Windows.Forms.Button eliminarButtonLugar;
         private System.Windows.Forms.Button modificarButtonLugar;
         private System.Windows.Forms.Button agregarButtonLugar;
+        private Label label1;
+        private Panel panel1;
     }
 }

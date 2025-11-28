@@ -18,11 +18,14 @@ namespace WinForms
         private List<EventoDTO> eventos;
         public FiestasLista()
         {
+            
             InitializeComponent();
+            this.Resize += FiestasLista_Resize;
         }
 
         private void FiestasLista_Load(object sender, EventArgs e)
         {
+            this.FiestasLista_Resize(sender, e);
             this.GetAllAndLoad();
         }
 
@@ -168,6 +171,20 @@ namespace WinForms
 
         private void FiestasDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void FiestasLista_Resize(object sender, EventArgs e)
+        {
+
+
+            panel1.Left = (this.ClientSize.Width - panel1.Width) / 2;
+            panel1.Top = (this.ClientSize.Height - panel1.Height) / 2;
+
 
         }
     }
