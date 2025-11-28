@@ -47,4 +47,10 @@ namespace DTOs
         public int Entradas { get; set; }
         public int Fiesta { get; set; }
     }
+    public class ComprasClienteDTO
+    {
+        public string Fiesta { get; set; }
+        public DateTime FechaHora { get; set; }
+        public List<ProdcutoConCantidadDTO> Productos { get; set; }
+    }
 }

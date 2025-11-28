@@ -34,66 +34,72 @@ namespace WinForms
             gestionDeClientesToolStripMenuItem = new ToolStripMenuItem();
             ventasDeTusVendedoresToolStripMenuItem = new ToolStripMenuItem();
             panelContenedorJefe = new Panel();
+            misVendedoresToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { verMisVentasToolStripMenuItem, resgistrarNuevaVentaToolStripMenuItem, gestionDeClientesToolStripMenuItem, ventasDeTusVendedoresToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { verMisVentasToolStripMenuItem, resgistrarNuevaVentaToolStripMenuItem, gestionDeClientesToolStripMenuItem, ventasDeTusVendedoresToolStripMenuItem, misVendedoresToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(1209, 24);
+            menuStrip1.Padding = new Padding(6, 3, 0, 3);
+            menuStrip1.Size = new Size(1382, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // verMisVentasToolStripMenuItem
             // 
             verMisVentasToolStripMenuItem.Name = "verMisVentasToolStripMenuItem";
-            verMisVentasToolStripMenuItem.Size = new Size(75, 20);
+            verMisVentasToolStripMenuItem.Size = new Size(92, 24);
             verMisVentasToolStripMenuItem.Text = "Mis ventas";
             verMisVentasToolStripMenuItem.Click += verMisVentasToolStripMenuItem_Click;
             // 
             // resgistrarNuevaVentaToolStripMenuItem
             // 
             resgistrarNuevaVentaToolStripMenuItem.Name = "resgistrarNuevaVentaToolStripMenuItem";
-            resgistrarNuevaVentaToolStripMenuItem.Size = new Size(132, 20);
+            resgistrarNuevaVentaToolStripMenuItem.Size = new Size(165, 24);
             resgistrarNuevaVentaToolStripMenuItem.Text = "Registrar nueva venta";
             resgistrarNuevaVentaToolStripMenuItem.Click += resgistrarNuevaVentaToolStripMenuItem_Click;
             // 
             // gestionDeClientesToolStripMenuItem
             // 
             gestionDeClientesToolStripMenuItem.Name = "gestionDeClientesToolStripMenuItem";
-            gestionDeClientesToolStripMenuItem.Size = new Size(118, 20);
+            gestionDeClientesToolStripMenuItem.Size = new Size(148, 24);
             gestionDeClientesToolStripMenuItem.Text = "Gestion de clientes";
             gestionDeClientesToolStripMenuItem.Click += gestionDeClientesToolStripMenuItem_Click;
             // 
             // ventasDeTusVendedoresToolStripMenuItem
             // 
             ventasDeTusVendedoresToolStripMenuItem.Name = "ventasDeTusVendedoresToolStripMenuItem";
-            ventasDeTusVendedoresToolStripMenuItem.Size = new Size(160, 20);
+            ventasDeTusVendedoresToolStripMenuItem.Size = new Size(191, 24);
             ventasDeTusVendedoresToolStripMenuItem.Text = "Ventas de tus vendedores";
             ventasDeTusVendedoresToolStripMenuItem.Click += ventasDeTusVendedoresToolStripMenuItem_Click;
             // 
             // panelContenedorJefe
             // 
-            panelContenedorJefe.Location = new Point(0, 23);
-            panelContenedorJefe.Margin = new Padding(3, 2, 3, 2);
-            panelContenedorJefe.Name = "panelContenedorJefe";
-            panelContenedorJefe.Size = new Size(1209, 464);
-            panelContenedorJefe.TabIndex = 1;
             panelContenedorJefe.Dock = DockStyle.Fill;
+            panelContenedorJefe.Location = new Point(0, 30);
+            panelContenedorJefe.Name = "panelContenedorJefe";
+            panelContenedorJefe.Size = new Size(1382, 618);
+            panelContenedorJefe.TabIndex = 1;
+            // 
+            // misVendedoresToolStripMenuItem
+            // 
+            misVendedoresToolStripMenuItem.Name = "misVendedoresToolStripMenuItem";
+            misVendedoresToolStripMenuItem.Size = new Size(127, 24);
+            misVendedoresToolStripMenuItem.Text = "Mis vendedores";
+            misVendedoresToolStripMenuItem.Click += misVendedoresToolStripMenuItem_Click;
             // 
             // MenuJefe
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1209, 486);
+            ClientSize = new Size(1382, 648);
             Controls.Add(panelContenedorJefe);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "MenuJefe";
             Text = "Menú Jefe";
             WindowState = FormWindowState.Maximized;
@@ -112,6 +118,7 @@ namespace WinForms
         private ToolStripMenuItem gestionDeClientesToolStripMenuItem;
         private ToolStripMenuItem ventasDeTusVendedoresToolStripMenuItem;
         private Panel panelContenedorJefe;
+        private ToolStripMenuItem misVendedoresToolStripMenuItem;
     }
 }
 

@@ -66,6 +66,13 @@ namespace WinForms
         {
 
         }
+
+        private void misVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var misVendedores = new VerMisVendedores();
+            misVendedores.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(misVendedores);
+        }
     }
 }
 

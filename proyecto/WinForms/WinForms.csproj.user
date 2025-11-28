@@ -91,5 +91,8 @@
     <Compile Update="VentasVendedores.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="VerMisVendedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

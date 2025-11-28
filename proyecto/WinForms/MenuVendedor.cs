@@ -58,7 +58,7 @@ namespace WinForms
 
         private void MenuVendedor_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
