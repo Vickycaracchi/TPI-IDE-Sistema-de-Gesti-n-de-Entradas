@@ -90,7 +90,10 @@
     </div>
 </div>
 @code {
-    private UsuarioDTO usuario = new UsuarioDTO();
+    private UsuarioDTO usuario = new UsuarioDTO
+        {
+            FechaNac = new DateTime(2000, 1, 1)  
+        };
     private bool IsLoading = false;
     private string FormError;
     private List<string> tiposUsuarios = new() { "Cliente" };
