@@ -67,8 +67,8 @@ namespace WinForms
 
                 UsuarioDTO usuario = await UsuarioApiClient.GetAsync(selected.Id);
 
-                clienteDetalle.Mode = FormMode.Update;
                 clienteDetalle.usuario = usuario;
+                clienteDetalle.Mode = FormMode.Update;
 
                 clienteDetalle.ShowDialog();
 

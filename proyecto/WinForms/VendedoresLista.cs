@@ -42,12 +42,10 @@ namespace WinForms
                     return;
                 }
 
-                // Traigo el vendedor desde la API
                 UsuarioDTO vendedor = await UsuarioApiClient.GetAsync(selected.Id);
 
                 RegistrarUsuario vendedorDetalle = new RegistrarUsuario(usuarioIngresado);
 
-                // IMPORTANTE: primero asigno el vendedor, después el modo
                 vendedorDetalle.usuario = vendedor;
                 vendedorDetalle.Mode = FormMode.Update;
 
