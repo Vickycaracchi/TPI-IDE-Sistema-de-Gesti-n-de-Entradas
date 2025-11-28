@@ -10,11 +10,12 @@ namespace WinForms
 {
     public partial class RegistrarUsuario : Form
     {
+        public UsuarioDTO usuarioIngresado { get; set; }
         internal UsuarioDTO usuario = new UsuarioDTO();
-        public RegistrarUsuario()
+        public RegistrarUsuario(UsuarioDTO usuario)
         {
             InitializeComponent();
-
+            usuarioIngresado = usuario;
             Mode = FormMode.Add;
             AgregarItems();
         }
@@ -32,13 +33,21 @@ namespace WinForms
         }
         private void AgregarItems()
         {
-            var tiposUsuarios = new List<string> {
-                "Administrador",
-                "Jefe",
-                "Vendedor",
-                "Cliente"
-            };
-            tipoComboBox.DataSource = tiposUsuarios;
+            switch (usuarioIngresado.Tipo)
+            {
+                case "Administrador":
+                    tipoComboBox.Items.Add("Jefe");
+                    tipoComboBox.Items.Add("Vendedor");
+                    break;
+                case "Jefe":
+                    tipoComboBox.Items.Add("Cliente");
+                    break;
+                case "Vendedor":
+                    tipoComboBox.Items.Add("Cliente");
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void SetFormMode(FormMode value)

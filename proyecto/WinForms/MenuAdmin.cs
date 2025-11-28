@@ -1,4 +1,5 @@
-﻿using Infraestructura.Reportes;
+﻿using DTOs;
+using Infraestructura.Reportes;
 using QuestPDF.Fluent;
 using System;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ namespace WinForms
 {
     public partial class MenuAdmin : Form
     {
+        public UsuarioDTO usuarioIngresado { get; set; }
         public MenuAdmin()
         {
             InitializeComponent();
@@ -31,7 +33,9 @@ namespace WinForms
 
         private void listarVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new VendedoresLista());
+            var vendedoresForm = new VendedoresLista();
+            vendedoresForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(vendedoresForm);
         }
 
         private void listarEventosToolStripMenuItem_Click(object sender, EventArgs e)

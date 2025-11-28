@@ -5,6 +5,11 @@ using System.Windows.Forms;
 
 namespace WinForms
 {
+    public enum FormMode
+    {
+        Add,
+        Update
+    }
     public partial class Login : Form
     {
         public Login()
@@ -46,6 +51,7 @@ namespace WinForms
                         if (TipoUsuario == "Administrador")
                         {
                             var menuAdminForm = new MenuAdmin();
+                            menuAdminForm.usuarioIngresado = usuarioIngresado;
                             menuAdminForm.ShowDialog();
                         }
                         else if (TipoUsuario == "Vendedor")

@@ -7,6 +7,7 @@ namespace WinForms
 {
     public partial class VendedoresLista : Form
     {
+        public UsuarioDTO usuarioIngresado { get; set; }
         public VendedoresLista()
         {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace WinForms
 
         private void agregarButtonVendedor_Click(object sender, EventArgs e)
         {
-            RegistrarUsuario vendedorDetalle = new RegistrarUsuario();
+            RegistrarUsuario vendedorDetalle = new RegistrarUsuario(usuarioIngresado);
 
             vendedorDetalle.Mode = FormMode.Add;
 
@@ -44,7 +45,7 @@ namespace WinForms
                 // Traigo el vendedor desde la API
                 UsuarioDTO vendedor = await UsuarioApiClient.GetAsync(selected.Id);
 
-                RegistrarUsuario vendedorDetalle = new RegistrarUsuario();
+                RegistrarUsuario vendedorDetalle = new RegistrarUsuario(usuarioIngresado);
 
                 // IMPORTANTE: primero asigno el vendedor, después el modo
                 vendedorDetalle.usuario = vendedor;

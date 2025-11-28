@@ -52,9 +52,6 @@
     <Compile Update="AAmenuCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="AAinicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="MenuVendedor.cs">
       <SubType>Form</SubType>
     </Compile>

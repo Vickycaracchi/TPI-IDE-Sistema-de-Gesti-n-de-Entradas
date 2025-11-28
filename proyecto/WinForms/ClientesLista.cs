@@ -14,6 +14,7 @@ namespace WinForms
 {
     public partial class ClientesLista : Form
     {
+        public UsuarioDTO usuarioIngresado { get; set; }
         public ClientesLista()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace WinForms
         }
         private void agregarButton_Click(object sender, EventArgs e)
         {
-            RegistrarUsuario registrarCliente = new RegistrarUsuario();
+            RegistrarUsuario registrarCliente = new RegistrarUsuario(usuarioIngresado);
 
             registrarCliente.Mode = FormMode.Add;
 
@@ -62,7 +63,7 @@ namespace WinForms
                     return;
                 }
 
-                RegistrarUsuario clienteDetalle = new RegistrarUsuario();
+                RegistrarUsuario clienteDetalle = new RegistrarUsuario(usuarioIngresado);
 
                 UsuarioDTO usuario = await UsuarioApiClient.GetAsync(selected.Id);
 

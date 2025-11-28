@@ -50,7 +50,9 @@ namespace WinForms
 
         private void gestionDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AbrirFormularioEnPanel(new ClientesLista());
+            var clientesForm = new ClientesLista();
+            clientesForm.usuarioIngresado = usuarioIngresado;
+            AbrirFormularioEnPanel(clientesForm);
         }
 
         private void ventasDeTusVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
