@@ -40,22 +40,29 @@ namespace Data
             }
             context.SaveChanges();
         }
-        private IEnumerable<CompraDTO> GetComprasProductosCliente(int idCliente)
+        private IEnumerable<ComprasClienteDTO> GetComprasProductosCliente(int idCliente)
         {
             using var context = CreateContext();
             var query = from c in context.ComprasProductos
                         join u in context.Usuarios on idCliente equals u.Id
+                        join f in context.Fiestas on c.IdFiesta equals f.IdFiesta
+                        join e in context.Eventos on f.IdEvento equals e.Id
                         where c.IdCliente == idCliente
-                        group c by new { c.IdFiesta, c.IdCliente, c.IdProducto} into g
+                        group c by new { c.IdFiesta, c.IdCliente, c.IdProducto, f.FechaFiesta, e.Nombre } into g
                         select new ComprasClienteDTO
                         {
-                            FechaHora = c.FechaHora,
-                            IdCliente = c.IdCliente,
-                            IdFiesta = c.IdFiesta,
-                            IdVendedor = c.IdVendedor,
-                            CantidadCompra = c.CantidadCompra,
-                            Entrada = c.Producto
+                            FechaFiesta = g.Key.FechaFiesta,
+                            Fiesta = g.Key.Nombre,
+                            Productos = (from cp in g
+                                         select new ProdcutoConCantidadDTO
+                                         {
+                                             Descripcion = context.Productos.Where(p => p.Id == cp.IdProducto).Select(p => p.Descripcion).FirstOrDefault(),
+                                             Cantidad = cp.Cantidad,
+                                             Id = cp.IdProducto,
+                                             Precio = context.Productos.Where(p => p.Id == cp.IdProducto).Select(p => p.Precio).FirstOrDefault()
+                                         }).ToList()
                         };
+            return query.ToList();
         }
         public IEnumerable<CompraDTO> GetAllVendedor(int idVendedor)
         {

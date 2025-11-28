@@ -50,7 +50,7 @@ namespace DTOs
     public class ComprasClienteDTO
     {
         public string Fiesta { get; set; }
-        public DateTime FechaHora { get; set; }
+        public DateTime FechaFiesta { get; set; }
         public List<ProdcutoConCantidadDTO> Productos { get; set; }
     }
 }
